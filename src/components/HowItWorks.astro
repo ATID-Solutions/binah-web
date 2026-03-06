@@ -1,60 +1,77 @@
 ---
 const steps = [
   {
-    number: '01',
-    borderColor: 'border-binah-lavender',
-    glowColor: 'shadow-[0_0_0_4px_#ede9fe]',
-    title: 'Conecta tu tienda',
+    number: "01",
+    borderColor: "border-slate-200",
+    glowColor: "shadow-md bg-white",
+    title: "Conecta tu tienda",
     description:
-      'Vincula tu Shopify o WooCommerce en minutos. Tus pedidos, productos y clientes se sincronizan automáticamente.',
+      "Vincula tu Shopify o WooCommerce en minutos. Tus pedidos, productos y clientes se sincronizan automáticamente.",
   },
   {
-    number: '02',
-    borderColor: 'border-binah-purple',
-    glowColor: 'shadow-[0_0_0_4px_#4d37f6]',
-    title: 'Automatiza la operación',
+    number: "02",
+    borderColor: "border-slate-200",
+    glowColor: "shadow-md bg-white",
+    title: "Automatiza la operación",
     description:
-      'Configura flujos que generan guías de envío, facturan en Siigo y responden por WhatsApp sin intervención manual.',
+      "Configura flujos que generan guías de envío, facturan en Siigo y responden por WhatsApp sin intervención manual.",
   },
   {
-    number: '03',
-    borderColor: 'border-white',
-    glowColor: 'shadow-[0_0_0_4px_#ffffff]',
-    title: 'Escala tu negocio',
+    number: "03",
+    borderColor: "border-slate-200",
+    glowColor: "shadow-md bg-white",
+    title: "Escala tu negocio",
     description:
-      'Con la operación automatizada, enfócate en crecer. Analítica en tiempo real para tomar mejores decisiones.',
+      "Con la operación automatizada, enfócate en crecer. Analítica en tiempo real para tomar mejores decisiones.",
   },
 ];
 ---
 
-<section id="como-funciona" class="bg-binah-charcoal py-20 lg:py-28">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl lg:text-5xl font-extrabold tracking-tighter text-white">
-        Funcionando en <span class="text-binah-lavender">3 pasos</span>
+<section
+  id="como-funciona"
+  class="py-24 lg:py-32 relative overflow-hidden border-y border-slate-200/60"
+>
+  <!-- Subtle background glow -->
+  <div
+    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-binah-purple opacity-[0.05] blur-[120px] rounded-full pointer-events-none"
+  >
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center mb-20 lg:mb-28">
+      <h2
+        class="text-4xl lg:text-5xl font-extrabold tracking-tighter text-slate-900"
+      >
+        Funcionando en <span
+          class="text-transparent bg-clip-text bg-gradient-to-r from-binah-cyan to-binah-purple"
+          >3 pasos</span
+        >
       </h2>
     </div>
 
     <div class="relative max-w-5xl mx-auto">
       <!-- Connecting line (hidden on mobile) -->
       <div
-        class="hidden lg:block absolute top-12 left-[calc(16.67%+1.5rem)] right-[calc(16.67%+1.5rem)] h-0.5 bg-binah-dark"
+        class="hidden lg:block absolute top-12 left-[calc(16.67%+1.5rem)] right-[calc(16.67%+1.5rem)] h-px bg-gradient-to-r from-slate-200 via-slate-300 to-slate-200"
       >
       </div>
 
-      <div class="grid lg:grid-cols-3 gap-12 lg:gap-8">
+      <div class="grid lg:grid-cols-3 gap-16 lg:gap-8">
         {
           steps.map((step) => (
-            <div class="flex flex-col items-center text-center">
+            <div class="flex flex-col items-center text-center group">
               <div
-                class={`w-24 h-24 rounded-full border-2 ${step.borderColor} ${step.glowColor} flex items-center justify-center mb-6 bg-binah-charcoal relative z-10`}
+                class={`w-24 h-24 rounded-full border ${step.borderColor} ${step.glowColor} flex items-center justify-center mb-8 relative z-10 transition-transform duration-500 group-hover:-translate-y-2`}
               >
-                <span class="text-white text-2xl font-extrabold">{step.number}</span>
+                <div class="absolute inset-0 rounded-full border border-slate-300/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <span class="text-slate-900 text-3xl font-extrabold">
+                  {step.number}
+                </span>
               </div>
-              <h3 class="text-2xl font-extrabold tracking-tighter text-white mb-3">
+              <h3 class="text-2xl font-extrabold tracking-tight text-slate-900 mb-4">
                 {step.title}
               </h3>
-              <p class="text-white/60 font-medium leading-relaxed max-w-xs">
+              <p class="text-slate-600 font-medium leading-relaxed max-w-xs text-lg">
                 {step.description}
               </p>
             </div>

@@ -1,34 +1,59 @@
 ---
-const brands = ['ACME', 'GLOBEX', 'INITECH', 'UMBRELLA', 'STARK'];
-const integrations = ['Shopify', 'WooCommerce', 'WhatsApp', 'Coordinadora', 'Siigo', 'Wompi', 'Infobip', '99 Envíos'];
+const brands = ["ACME", "GLOBEX", "INITECH", "UMBRELLA", "STARK"];
+const integrations = [
+  "Shopify",
+  "WooCommerce",
+  "WhatsApp",
+  "Coordinadora",
+  "Siigo",
+  "Wompi",
+  "Infobip",
+  "Envía",
+  "TCC",
+  "Servientrega",
+];
 ---
 
 <section class="relative -mt-16 z-20 pb-8">
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="glass-strong rounded-2xl p-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-0 md:divide-x md:divide-white/10">
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-0 md:divide-x md:divide-white/10"
+      >
         <!-- Trusted by -->
         <div class="md:pr-8">
-          <div class="text-slate-500 text-xs font-medium uppercase tracking-wider mb-4">Confían en nosotros</div>
+          <div
+            class="text-slate-500 text-xs font-medium uppercase tracking-wider mb-4"
+          >
+            Confían en nosotros
+          </div>
           <div class="flex items-center gap-6 flex-wrap">
-            {brands.map((brand) => (
-              <span class="text-slate-400 text-sm font-bold font-display opacity-50 transition-opacity duration-300 hover:opacity-100 cursor-default">
-                {brand}
-              </span>
-            ))}
+            {
+              brands.map((brand) => (
+                <span class="text-slate-400 text-sm font-bold font-display opacity-50 transition-opacity duration-300 hover:opacity-100 cursor-default">
+                  {brand}
+                </span>
+              ))
+            }
           </div>
         </div>
 
         <!-- Integrations marquee -->
         <div class="md:pl-8 overflow-hidden">
-          <div class="text-slate-500 text-xs font-medium uppercase tracking-wider mb-4">Integraciones</div>
+          <div
+            class="text-slate-500 text-xs font-medium uppercase tracking-wider mb-4"
+          >
+            Integraciones
+          </div>
           <div class="relative overflow-hidden">
             <div class="flex animate-marquee whitespace-nowrap">
-              {[...integrations, ...integrations].map((name) => (
-                <span class="text-slate-500 text-xs font-medium mr-8 shrink-0 transition-colors duration-300 hover:text-white cursor-default">
-                  {name}
-                </span>
-              ))}
+              {
+                [...integrations, ...integrations].map((name) => (
+                  <span class="text-slate-500 text-xs font-medium mr-8 shrink-0 transition-colors duration-300 hover:text-white cursor-default">
+                    {name}
+                  </span>
+                ))
+              }
             </div>
           </div>
         </div>

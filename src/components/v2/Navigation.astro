@@ -1,29 +1,32 @@
 ---
 const navLinks = [
-  { label: 'Funcionalidades', href: '#funcionalidades' },
-  { label: 'Testimonios', href: '#testimonios' },
-  { label: 'FAQ', href: '#faq' },
+  { label: "Funcionalidades", href: "#funcionalidades" },
+  { label: "Testimonios", href: "#testimonios" },
+  { label: "FAQ", href: "#faq" },
 ];
 ---
 
-<nav id="v2-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+<nav
+  id="v2-nav"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
     <div class="flex items-center">
       <!-- Logo -->
       <div class="flex-1">
         <a href="/v2" class="flex items-center gap-2 shrink-0 w-fit">
           <img
-            src="/binah-logo-white.png"
+            src="/binah-symbol-wordmark-white.png"
             alt="Binah"
-            class="h-7 w-auto transition-transform duration-500 hover:rotate-180"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+            class="h-7 w-auto"
           />
-          <span class="text-white font-bold text-xl tracking-tight">binah</span>
         </a>
       </div>
 
       <!-- Center pill nav -->
-      <div class="hidden md:flex items-center bg-white/10 backdrop-blur-md rounded-full px-1.5 py-1.5 border border-white/10">
+      <div
+        class="hidden md:flex items-center bg-white/10 backdrop-blur-md rounded-full px-1.5 py-1.5 border border-white/10"
+      >
         {
           navLinks.map((link) => (
             <a
@@ -50,18 +53,22 @@ const navLinks = [
 </nav>
 
 <script>
-  const nav = document.getElementById('v2-nav');
+  const nav = document.getElementById("v2-nav");
   if (nav) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 100) {
-        nav.style.background = 'rgba(23, 30, 25, 0.7)';
-        nav.style.backdropFilter = 'blur(16px)';
-        nav.style.borderBottom = '1px solid rgba(255,255,255,0.1)';
-      } else {
-        nav.style.background = 'transparent';
-        nav.style.backdropFilter = 'none';
-        nav.style.borderBottom = 'none';
-      }
-    }, { passive: true });
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (window.scrollY > 100) {
+          nav.style.background = "rgba(23, 30, 25, 0.7)";
+          nav.style.backdropFilter = "blur(16px)";
+          nav.style.borderBottom = "1px solid rgba(255,255,255,0.1)";
+        } else {
+          nav.style.background = "transparent";
+          nav.style.backdropFilter = "none";
+          nav.style.borderBottom = "none";
+        }
+      },
+      { passive: true }
+    );
   }
 </script>

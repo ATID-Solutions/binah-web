@@ -1,140 +1,258 @@
 ---
-
 ---
 
 <div
-  class="bg-white border-2 border-black rounded-brutal shadow-brutal-lg overflow-hidden w-full max-w-lg mockup-root"
+  class="bg-[#0A0A0A] border border-white/10 rounded-[24px] shadow-2xl overflow-hidden w-full lg:w-[150%] lg:max-w-none mockup-root relative lg:-mr-[15vw]"
   id="dashboard-mockup"
 >
+  <!-- Background glow for the mockup itself -->
+  <div
+    class="absolute inset-0 bg-gradient-to-br from-binah-purple/5 to-transparent pointer-events-none"
+  >
+  </div>
+
   <!-- Browser chrome -->
-  <div class="bg-binah-charcoal px-4 py-3 flex items-center gap-2">
-    <div class="w-3 h-3 rounded-full bg-[#ff5f57]"></div>
-    <div class="w-3 h-3 rounded-full bg-[#febc2e]"></div>
-    <div class="w-3 h-3 rounded-full bg-[#28c840]"></div>
-    <div class="ml-4 flex-1 bg-binah-dark rounded-md h-5 flex items-center px-2">
-      <span class="text-[9px] text-white/40 font-mono">app.binah.co/dashboard</span>
+  <div
+    class="bg-black/80 backdrop-blur-md px-4 py-3 flex items-center gap-2 border-b border-white/5 relative z-10"
+  >
+    <div class="w-3 h-3 rounded-full bg-[#ff5f57]/80"></div>
+    <div class="w-3 h-3 rounded-full bg-[#febc2e]/80"></div>
+    <div class="w-3 h-3 rounded-full bg-[#28c840]/80"></div>
+    <div
+      class="ml-4 flex-1 bg-white/5 border border-white/10 rounded-md h-6 flex items-center px-3"
+    >
+      <span class="text-[10px] text-white/40 font-mono tracking-wide"
+        >app.binah.co/dashboard</span
+      >
     </div>
     <!-- Live indicator -->
-    <div class="flex items-center gap-1.5">
-      <div class="w-2 h-2 rounded-full bg-[#28c840] live-dot"></div>
-      <span class="text-[9px] text-white/50 font-bold">LIVE</span>
+    <div class="flex items-center gap-1.5 ml-2">
+      <div
+        class="w-2 h-2 rounded-full bg-binah-cyan shadow-[0_0_8px_rgba(0,209,255,0.8)] live-dot"
+      >
+      </div>
+      <span class="text-[9px] text-white/50 font-bold tracking-widest"
+        >LIVE</span
+      >
     </div>
   </div>
 
   <!-- Dashboard content -->
-  <div class="relative">
-  <div class="p-4 grid grid-cols-3 gap-3">
+  <div class="relative z-10 p-4 grid grid-cols-3 gap-3">
     <!-- Ventas card -->
-    <div class="col-span-2 bg-binah-lavender border-2 border-black rounded-brutal p-3">
-      <div class="text-xs font-bold text-black/60 mb-1">Ventas del mes</div>
-      <div class="text-xl font-extrabold text-black">
-        $<span class="counter" data-target="12480000" data-format="currency">0</span>
+    <div
+      class="col-span-2 bg-[#111111] border border-white/5 rounded-[24px] p-4 relative overflow-hidden group"
+    >
+      <div
+        class="absolute inset-0 bg-gradient-to-br from-binah-purple/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+      >
       </div>
-      <div class="mt-3 flex items-end gap-1 h-16">
-        <div class="w-full bg-binah-purple/30 rounded-sm bar-animate" data-height="40"></div>
-        <div class="w-full bg-binah-purple/30 rounded-sm bar-animate" data-height="55"></div>
-        <div class="w-full bg-binah-purple/40 rounded-sm bar-animate" data-height="35"></div>
-        <div class="w-full bg-binah-purple/50 rounded-sm bar-animate" data-height="70"></div>
-        <div class="w-full bg-binah-purple/60 rounded-sm bar-animate" data-height="60"></div>
-        <div class="w-full bg-binah-purple rounded-sm bar-animate" data-height="85"></div>
-        <div class="w-full bg-binah-purple rounded-sm bar-animate bar-latest" data-height="100"></div>
+      <div class="text-xs font-semibold text-white/50 mb-1">Ventas del mes</div>
+      <div class="text-2xl font-extrabold text-white">
+        $<span class="counter" data-target="12480000" data-format="currency"
+          >0</span
+        >
+      </div>
+      <div class="mt-4 flex items-end gap-[2px] h-16">
+        <div
+          class="w-full bg-white/5 rounded-t-sm bar-animate"
+          data-height="40"
+        >
+        </div>
+        <div
+          class="w-full bg-white/10 rounded-t-sm bar-animate"
+          data-height="55"
+        >
+        </div>
+        <div
+          class="w-full bg-white/10 rounded-t-sm bar-animate"
+          data-height="35"
+        >
+        </div>
+        <div
+          class="w-full bg-binah-purple/30 rounded-t-sm bar-animate"
+          data-height="70"
+        >
+        </div>
+        <div
+          class="w-full bg-binah-purple/50 rounded-t-sm bar-animate"
+          data-height="60"
+        >
+        </div>
+        <div
+          class="w-full bg-binah-purple/80 rounded-t-sm bar-animate glow-purple"
+          data-height="85"
+        >
+        </div>
+        <div
+          class="w-full bg-binah-cyan rounded-t-sm bar-animate bar-latest shadow-[0_0_15px_rgba(0,209,255,0.5)]"
+          data-height="100"
+        >
+        </div>
       </div>
     </div>
 
     <!-- Side stats -->
     <div class="flex flex-col gap-3">
-      <div class="bg-binah-charcoal border-2 border-black rounded-brutal p-3 text-white">
-        <div class="text-xs font-bold text-white/60 mb-1">Pedidos</div>
-        <div class="text-lg font-extrabold">
+      <div
+        class="bg-gradient-to-br from-binah-purple/20 to-[#111111] border border-binah-purple/20 rounded-[20px] p-3 text-white flex-1 flex flex-col justify-center"
+      >
+        <div class="text-xs font-semibold text-white/60 mb-1">Pedidos</div>
+        <div class="text-xl font-extrabold">
           <span class="counter" data-target="847">0</span>
         </div>
-        <div class="text-xs text-binah-lavender font-bold mt-1 badge-pulse">+12.5%</div>
+        <div class="text-[10px] text-binah-cyan font-bold mt-1 badge-pulse">
+          +12.5%
+        </div>
       </div>
-      <div class="bg-white border-2 border-black rounded-brutal p-3">
-        <div class="text-xs font-bold text-black/60 mb-1">Envíos</div>
-        <div class="text-lg font-extrabold">
+      <div
+        class="bg-[#111111] border border-white/5 rounded-[20px] p-3 flex-1 flex flex-col justify-center"
+      >
+        <div class="text-xs font-semibold text-white/50 mb-1">Envíos</div>
+        <div class="text-xl font-extrabold text-white">
           <span class="counter" data-target="384">0</span>
         </div>
-        <div class="text-xs text-binah-purple font-bold mt-1 badge-pulse">+8.3%</div>
+        <div class="text-[10px] text-binah-pink font-bold mt-1 badge-pulse">
+          +8.3%
+        </div>
       </div>
     </div>
 
     <!-- Bottom row -->
     <div class="col-span-3 grid grid-cols-2 gap-3">
-      <div class="bg-white border-2 border-black rounded-brutal p-3 relative overflow-hidden">
-        <div class="text-xs font-bold text-black/60 mb-1">Campañas WhatsApp</div>
+      <div
+        class="bg-[#111111] border border-white/5 rounded-[24px] p-4 relative overflow-hidden"
+      >
+        <div class="text-xs font-semibold text-white/50 mb-1">
+          Campaña Activa
+        </div>
         <div class="flex items-center gap-2">
-          <div class="text-lg font-extrabold">
+          <div class="text-lg font-extrabold text-white">
             <span class="counter" data-target="1203" data-format="dots">0</span>
           </div>
           <div
-            class="w-12 h-6 bg-binah-purple rounded-sm flex items-center justify-center text-white text-[10px] font-bold badge-pulse"
+            class="px-2 py-0.5 bg-binah-cyan/20 border border-binah-cyan/30 rounded-full text-binah-cyan text-[9px] font-bold badge-pulse"
           >
             +15%
           </div>
         </div>
-        <!-- Fixed-height chat area: 2 slots, content crossfades -->
-        <div class="mt-2 space-y-1 h-[42px] overflow-hidden">
-          <div class="flex items-center justify-start h-[18px]" id="chat-slot-0">
-            <div class="chat-slot-inner text-[8px] px-2 py-1 rounded-md max-w-[120px] truncate font-medium bg-gray-100 border border-black/10 text-black/70">
+        <!-- Fixed-height chat area -->
+        <div class="mt-3 space-y-1.5 h-[46px] overflow-hidden">
+          <div
+            class="flex items-center justify-start h-[20px]"
+            id="chat-slot-0"
+          >
+            <div
+              class="chat-slot-inner text-[9px] px-2.5 py-1 rounded-r-xl rounded-tl-xl max-w-[130px] truncate font-medium bg-[#1A1A1A] border border-white/10 text-white/80"
+            >
               ¿Disponible?
             </div>
           </div>
-          <div class="flex items-center justify-end h-[18px]" id="chat-slot-1">
-            <div class="chat-slot-inner text-[8px] px-2 py-1 rounded-md max-w-[120px] truncate font-medium bg-binah-purple text-white">
+          <div class="flex items-center justify-end h-[20px]" id="chat-slot-1">
+            <div
+              class="chat-slot-inner text-[9px] px-2.5 py-1 rounded-l-xl rounded-tr-xl max-w-[130px] truncate font-medium bg-gradient-to-r from-binah-purple to-binah-pink text-white shadow-[0_0_10px_rgba(255,46,151,0.3)]"
+            >
               Sí, te envío info
             </div>
           </div>
         </div>
       </div>
-      <div class="bg-binah-lavender border-2 border-black rounded-brutal p-3">
-        <div class="text-xs font-bold text-black/60 mb-1">Inventario</div>
-        <div class="flex items-center gap-2">
-          <div class="text-lg font-extrabold">
+
+      <div
+        class="bg-[#111111] border border-white/5 rounded-[24px] p-4 flex flex-col justify-between"
+      >
+        <div class="text-xs font-semibold text-white/50 mb-1">Inventario</div>
+        <div class="flex items-center justify-between">
+          <div class="text-lg font-extrabold text-white">
             <span class="counter" data-target="2456" data-format="dots">0</span>
           </div>
-          <div class="flex items-end gap-0.5 inventory-bars">
-            <div class="w-2 bg-binah-purple rounded-sm bar-animate" data-height-px="16"></div>
-            <div class="w-2 bg-binah-purple rounded-sm bar-animate" data-height-px="24"></div>
-            <div class="w-2 bg-binah-purple/50 rounded-sm bar-animate" data-height-px="12"></div>
-            <div class="w-2 bg-binah-purple rounded-sm bar-animate" data-height-px="20"></div>
+          <div class="flex items-end gap-[3px] inventory-bars h-8">
+            <div
+              class="w-1.5 bg-white/20 rounded-full bar-animate"
+              data-height-px="16"
+            >
+            </div>
+            <div
+              class="w-1.5 bg-white/30 rounded-full bar-animate"
+              data-height-px="24"
+            >
+            </div>
+            <div
+              class="w-1.5 bg-binah-purple/60 rounded-full bar-animate"
+              data-height-px="12"
+            >
+            </div>
+            <div
+              class="w-1.5 bg-binah-cyan rounded-full bar-animate shadow-[0_0_8px_rgba(0,209,255,0.6)]"
+              data-height-px="28"
+            >
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Live activity feed: 3 fixed slots with locked heights -->
-    <div class="col-span-3 mt-1">
-      <div class="flex items-center gap-1.5 mb-2">
-        <div class="w-1.5 h-1.5 rounded-full bg-binah-purple live-dot"></div>
-        <span class="text-[10px] font-bold text-black/40 uppercase tracking-wider">Actividad en vivo</span>
+    <!-- Live activity feed -->
+    <div class="col-span-3 mt-2">
+      <div class="flex items-center gap-1.5 mb-2.5 px-1">
+        <div
+          class="w-1.5 h-1.5 rounded-full bg-binah-pink shadow-[0_0_5px_rgba(255,46,151,0.8)] live-dot"
+        >
+        </div>
+        <span
+          class="text-[9px] font-bold text-white/40 uppercase tracking-widest"
+          >Actividad Reciente</span
+        >
       </div>
-      <div class="space-y-1.5">
-        <div class="activity-slot flex items-center gap-2 bg-gray-50 border border-black/10 rounded-md px-2.5 h-7 overflow-hidden" id="activity-slot-0">
-          <span class="slot-icon text-xs w-4 text-center shrink-0">🛒</span>
-          <span class="slot-text text-[10px] font-medium text-black/70 flex-1 truncate">Nuevo pedido #1284</span>
-          <span class="slot-tag text-[8px] font-bold text-white px-1.5 py-0.5 rounded bg-binah-purple whitespace-nowrap w-16 text-center shrink-0">Pedido</span>
+      <div class="space-y-2">
+        <div
+          class="activity-slot flex items-center gap-2.5 bg-white/5 border border-white/5 rounded-xl px-3 py-1.5 h-8 overflow-hidden backdrop-blur-sm"
+          id="activity-slot-0"
+        >
+          <span class="slot-icon text-xs w-5 text-center shrink-0 opacity-80"
+            >🛍️</span
+          >
+          <span
+            class="slot-text text-[10px] font-medium text-white/80 flex-1 truncate"
+            >Nuevo pedido #1284</span
+          >
+          <span
+            class="slot-tag text-[8px] font-bold text-white/90 px-2 py-0.5 rounded-full bg-binah-purple border border-binah-purple/50 whitespace-nowrap"
+            >Pedido</span
+          >
         </div>
-        <div class="activity-slot flex items-center gap-2 bg-gray-50 border border-black/10 rounded-md px-2.5 h-7 overflow-hidden" id="activity-slot-1">
-          <span class="slot-icon text-xs w-4 text-center shrink-0">💬</span>
-          <span class="slot-text text-[10px] font-medium text-black/70 flex-1 truncate">María: "¿Tienen talla M?"</span>
-          <span class="slot-tag text-[8px] font-bold text-white px-1.5 py-0.5 rounded bg-[#25d366] whitespace-nowrap w-16 text-center shrink-0">WhatsApp</span>
+        <div
+          class="activity-slot flex items-center gap-2.5 bg-white/5 border border-white/5 rounded-xl px-3 py-1.5 h-8 overflow-hidden backdrop-blur-sm"
+          id="activity-slot-1"
+        >
+          <span class="slot-icon text-xs w-5 text-center shrink-0 opacity-80"
+            >💬</span
+          >
+          <span
+            class="slot-text text-[10px] font-medium text-white/80 flex-1 truncate"
+            >María: "¿Tienen talla M?"</span
+          >
+          <span
+            class="slot-tag text-[8px] font-bold text-white/90 px-2 py-0.5 rounded-full bg-[#25d366]/40 border border-[#25d366]/50 whitespace-nowrap"
+            >WhatsApp</span
+          >
         </div>
-        <div class="activity-slot flex items-center gap-2 bg-gray-50 border border-black/10 rounded-md px-2.5 h-7 overflow-hidden" id="activity-slot-2">
-          <span class="slot-icon text-xs w-4 text-center shrink-0">🤖</span>
-          <span class="slot-text text-[10px] font-medium text-black/70 flex-1 truncate">Bot respondió automáticamente</span>
-          <span class="slot-tag text-[8px] font-bold text-white px-1.5 py-0.5 rounded bg-binah-charcoal whitespace-nowrap w-16 text-center shrink-0">IA</span>
+        <div
+          class="activity-slot flex items-center gap-2.5 bg-white/5 border border-white/5 rounded-xl px-3 py-1.5 h-8 overflow-hidden backdrop-blur-sm"
+          id="activity-slot-2"
+        >
+          <span class="slot-icon text-xs w-5 text-center shrink-0 opacity-80"
+            >✨</span
+          >
+          <span
+            class="slot-text text-[10px] font-medium text-white/80 flex-1 truncate"
+            >Bot respondió automáticamente</span
+          >
+          <span
+            class="slot-tag text-[8px] font-bold text-white/90 px-2 py-0.5 rounded-full bg-white/10 border border-white/20 whitespace-nowrap text-center"
+            >IA</span
+          >
         </div>
-      </div>
-    </div>
-
-  </div>
-    <!-- Animated cursor + ripples overlay (outside grid to prevent layout shifts) -->
-    <div class="absolute inset-0 pointer-events-none overflow-hidden" id="cursor-overlay">
-      <div class="fake-cursor" id="fake-cursor">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg">
-          <path d="M5 3l14 8-6 2 4 8-3 1-4-8-5 4V3z"/>
-        </svg>
       </div>
     </div>
   </div>
@@ -147,8 +265,13 @@
   }
 
   @keyframes live-pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.3;
+    }
   }
 
   /* Badge pulse */
@@ -157,8 +280,13 @@
   }
 
   @keyframes badge-glow {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.6; }
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.6;
+    }
   }
 
   /* Bar chart animation */
@@ -187,8 +315,13 @@
   }
 
   @keyframes bar-pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
   }
 
   /* Crossfade for activity slots and chat slots */
@@ -205,58 +338,19 @@
   .chat-slot-inner.crossfade {
     opacity: 0;
   }
-
-  /* Fake cursor */
-  .fake-cursor {
-    position: absolute;
-    pointer-events: none;
-    z-index: 10;
-    opacity: 0;
-    transition: left 1s cubic-bezier(0.34, 1, 0.64, 1), top 1s cubic-bezier(0.34, 1, 0.64, 1);
-    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.3));
-  }
-
-  .fake-cursor.visible {
-    opacity: 1;
-  }
-
-  .fake-cursor.clicking {
-    animation: cursor-click 0.2s ease-in-out;
-  }
-
-  @keyframes cursor-click {
-    50% { transform: scale(0.8); }
-  }
-
-  /* Click ripple effect */
-  .click-ripple {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: rgba(107, 56, 202, 0.3);
-    animation: ripple 0.6s ease-out forwards;
-    pointer-events: none;
-    z-index: 9;
-  }
-
-  @keyframes ripple {
-    0% { transform: scale(0); opacity: 1; }
-    100% { transform: scale(3); opacity: 0; }
-  }
 </style>
 
 <script>
   function initDashboard() {
-    const mockup = document.getElementById('dashboard-mockup');
+    const mockup = document.getElementById("dashboard-mockup");
     if (!mockup) return;
 
     let started = false;
 
     // --- Number counter animation ---
     function animateCounter(el: HTMLElement) {
-      const target = parseInt(el.dataset.target || '0');
-      const format = el.dataset.format || 'plain';
+      const target = parseInt(el.dataset.target || "0");
+      const format = el.dataset.format || "plain";
       const duration = 1500;
       const start = performance.now();
 
@@ -266,8 +360,8 @@
         const eased = 1 - Math.pow(1 - progress, 3);
         const current = Math.round(eased * target);
 
-        if (format === 'currency' || format === 'dots') {
-          el.textContent = current.toLocaleString('es-CL');
+        if (format === "currency" || format === "dots") {
+          el.textContent = current.toLocaleString("es-CL");
         } else {
           el.textContent = current.toString();
         }
@@ -281,31 +375,91 @@
 
     // --- Bar chart animation ---
     function animateBars() {
-      const bars = mockup!.querySelectorAll<HTMLElement>('.bar-animate');
+      const bars = mockup!.querySelectorAll<HTMLElement>(".bar-animate");
       bars.forEach((bar, i) => {
         const heightPct = bar.dataset.height;
         const heightPx = bar.dataset.heightPx;
-        if (heightPct) bar.style.setProperty('--bar-height', heightPct + '%');
-        if (heightPx) bar.style.setProperty('--bar-height-px', heightPx + 'px');
+        if (heightPct) bar.style.setProperty("--bar-height", heightPct + "%");
+        if (heightPx) bar.style.setProperty("--bar-height-px", heightPx + "px");
         bar.style.transitionDelay = `${i * 80}ms`;
       });
-      mockup!.classList.add('animated');
+      mockup!.classList.add("animated");
     }
 
     // --- Activity feed: crossfade content in fixed slots ---
     const activities = [
-      { icon: '🛒', text: 'Nuevo pedido #1284', tag: 'Pedido', tagColor: 'bg-binah-purple' },
-      { icon: '💬', text: 'María: "¿Tienen talla M?"', tag: 'WhatsApp', tagColor: 'bg-[#25d366]' },
-      { icon: '🤖', text: 'Bot respondió automáticamente', tag: 'IA', tagColor: 'bg-binah-charcoal' },
-      { icon: '📦', text: 'Envío #892 entregado', tag: 'Envío', tagColor: 'bg-blue-500' },
-      { icon: '💬', text: 'Carlos: "Quiero 3 unidades"', tag: 'WhatsApp', tagColor: 'bg-[#25d366]' },
-      { icon: '🧾', text: 'Factura #F-2847 generada', tag: 'Factura', tagColor: 'bg-amber-500' },
-      { icon: '🛒', text: 'Nuevo pedido #1285', tag: 'Pedido', tagColor: 'bg-binah-purple' },
-      { icon: '🤖', text: 'Recordatorio enviado a 12 clientes', tag: 'Auto', tagColor: 'bg-binah-charcoal' },
-      { icon: '📦', text: 'Envío #893 despachado', tag: 'Envío', tagColor: 'bg-blue-500' },
-      { icon: '💬', text: 'Ana: "¿Cuánto cuesta el envío?"', tag: 'WhatsApp', tagColor: 'bg-[#25d366]' },
-      { icon: '🤖', text: 'Bot: cotización enviada a Ana', tag: 'IA', tagColor: 'bg-binah-charcoal' },
-      { icon: '🛒', text: 'Nuevo pedido #1286', tag: 'Pedido', tagColor: 'bg-binah-purple' },
+      {
+        icon: "🛒",
+        text: "Nuevo pedido #1284",
+        tag: "Pedido",
+        tagColor: "bg-binah-purple",
+      },
+      {
+        icon: "💬",
+        text: 'María: "¿Tienen talla M?"',
+        tag: "WhatsApp",
+        tagColor: "bg-[#25d366]",
+      },
+      {
+        icon: "🤖",
+        text: "Bot respondió automáticamente",
+        tag: "IA",
+        tagColor: "bg-binah-charcoal",
+      },
+      {
+        icon: "📦",
+        text: "Envío #892 entregado",
+        tag: "Envío",
+        tagColor: "bg-blue-500",
+      },
+      {
+        icon: "💬",
+        text: 'Carlos: "Quiero 3 unidades"',
+        tag: "WhatsApp",
+        tagColor: "bg-[#25d366]",
+      },
+      {
+        icon: "🧾",
+        text: "Factura #F-2847 generada",
+        tag: "Factura",
+        tagColor: "bg-amber-500",
+      },
+      {
+        icon: "🛒",
+        text: "Nuevo pedido #1285",
+        tag: "Pedido",
+        tagColor: "bg-binah-purple",
+      },
+      {
+        icon: "🤖",
+        text: "Recordatorio enviado a 12 clientes",
+        tag: "Auto",
+        tagColor: "bg-binah-charcoal",
+      },
+      {
+        icon: "📦",
+        text: "Envío #893 despachado",
+        tag: "Envío",
+        tagColor: "bg-blue-500",
+      },
+      {
+        icon: "💬",
+        text: 'Ana: "¿Cuánto cuesta el envío?"',
+        tag: "WhatsApp",
+        tagColor: "bg-[#25d366]",
+      },
+      {
+        icon: "🤖",
+        text: "Bot: cotización enviada a Ana",
+        tag: "IA",
+        tagColor: "bg-binah-charcoal",
+      },
+      {
+        icon: "🛒",
+        text: "Nuevo pedido #1286",
+        tag: "Pedido",
+        tagColor: "bg-binah-purple",
+      },
     ];
 
     // Track which activity index each slot currently shows
@@ -314,12 +468,12 @@
     let nextSlotToUpdate = 0;
 
     const tagColorMap: Record<string, string> = {
-      'Pedido': 'bg-binah-purple',
-      'WhatsApp': 'bg-[#25d366]',
-      'IA': 'bg-binah-charcoal',
-      'Auto': 'bg-binah-charcoal',
-      'Envío': 'bg-blue-500',
-      'Factura': 'bg-amber-500',
+      Pedido: "bg-binah-purple",
+      WhatsApp: "bg-[#25d366]",
+      IA: "bg-binah-charcoal",
+      Auto: "bg-binah-charcoal",
+      Envío: "bg-blue-500",
+      Factura: "bg-amber-500",
     };
 
     function updateActivitySlot() {
@@ -332,117 +486,44 @@
       nextSlotToUpdate = (nextSlotToUpdate + 1) % 3;
 
       // Crossfade out
-      slot.classList.add('crossfade');
+      slot.classList.add("crossfade");
 
       setTimeout(() => {
         // Update content while hidden
-        const icon = slot.querySelector('.slot-icon');
-        const text = slot.querySelector('.slot-text');
-        const tag = slot.querySelector('.slot-tag') as HTMLElement;
+        const icon = slot.querySelector(".slot-icon");
+        const text = slot.querySelector(".slot-text");
+        const tag = slot.querySelector(".slot-tag") as HTMLElement;
         if (icon) icon.textContent = a.icon;
         if (text) text.textContent = a.text;
         if (tag) {
           tag.textContent = a.tag;
           // Update tag color
-          Object.values(tagColorMap).forEach(c => tag.classList.remove(c));
-          tag.classList.add(tagColorMap[a.tag] || 'bg-binah-purple');
+          Object.values(tagColorMap).forEach((c) => tag.classList.remove(c));
+          tag.classList.add(tagColorMap[a.tag] || "bg-binah-purple");
         }
 
         // Crossfade in
-        slot.classList.remove('crossfade');
+        slot.classList.remove("crossfade");
       }, 400);
-    }
-
-    // --- Chat bubbles: crossfade content in 2 fixed slots ---
-    const chatPairs = [
-      { customer: '¿Disponible?', bot: 'Sí, te envío info' },
-      { customer: '¿Precio?', bot: '$25.000 con envío' },
-      { customer: '¡Lo quiero!', bot: 'Pedido creado ✓' },
-      { customer: '¿Tienen talla M?', bot: 'Sí, varias tallas' },
-      { customer: '¿Cuándo llega?', bot: 'Mañana 2-5pm' },
-      { customer: 'Gracias!', bot: '¡Con gusto!' },
-    ];
-
-    let chatPairIndex = 0;
-
-    function updateChatBubbles() {
-      const slot0 = document.querySelector('#chat-slot-0 .chat-slot-inner') as HTMLElement;
-      const slot1 = document.querySelector('#chat-slot-1 .chat-slot-inner') as HTMLElement;
-      if (!slot0 || !slot1) return;
-
-      chatPairIndex = (chatPairIndex + 1) % chatPairs.length;
-      const pair = chatPairs[chatPairIndex];
-
-      // Crossfade out both
-      slot0.classList.add('crossfade');
-      slot1.classList.add('crossfade');
-
-      setTimeout(() => {
-        slot0.textContent = pair.customer;
-        slot1.textContent = pair.bot;
-        slot0.classList.remove('crossfade');
-        slot1.classList.remove('crossfade');
-      }, 400);
-    }
-
-    // --- Fake cursor movement ---
-    const cursor = document.getElementById('fake-cursor');
-    const cursorTargets = [
-      { sel: '.bar-latest', offsetX: 5, offsetY: -5, click: true },
-      { sel: '#activity-slot-1', offsetX: 80, offsetY: 8, click: false },
-      { sel: '#chat-slot-0', offsetX: 30, offsetY: 5, click: true },
-      { sel: '.inventory-bars', offsetX: 10, offsetY: 0, click: true },
-    ];
-    let cursorIndex = 0;
-
-    const cursorOverlay = document.getElementById('cursor-overlay');
-
-    function moveCursor() {
-      if (!cursor || !mockup || !cursorOverlay) return;
-      const target = cursorTargets[cursorIndex % cursorTargets.length];
-      cursorIndex++;
-      const el = mockup.querySelector(target.sel);
-      if (!el) return;
-
-      const overlayRect = cursorOverlay.getBoundingClientRect();
-      const elRect = el.getBoundingClientRect();
-      const x = elRect.left - overlayRect.left + target.offsetX;
-      const y = elRect.top - overlayRect.top + target.offsetY;
-
-      cursor.classList.add('visible');
-      cursor.style.left = x + 'px';
-      cursor.style.top = y + 'px';
-
-      if (target.click) {
-        setTimeout(() => {
-          cursor.classList.add('clicking');
-          const ripple = document.createElement('div');
-          ripple.className = 'click-ripple';
-          ripple.style.left = (x - 10) + 'px';
-          ripple.style.top = (y - 10) + 'px';
-          cursorOverlay.appendChild(ripple);
-          setTimeout(() => {
-            cursor.classList.remove('clicking');
-            ripple.remove();
-          }, 600);
-        }, 1000);
-      }
     }
 
     // --- Counter bump: periodically nudge numbers up ---
-    const counterEls = mockup.querySelectorAll<HTMLElement>('.counter');
+    const counterEls = mockup.querySelectorAll<HTMLElement>(".counter");
     function bumpCounters() {
-      counterEls.forEach(el => {
-        const currentText = el.textContent || '0';
-        const current = parseInt(currentText.replace(/\./g, '').replace(/,/g, ''));
-        const bump = el.dataset.format === 'currency'
-          ? Math.floor(Math.random() * 50000) + 10000
-          : Math.floor(Math.random() * 3) + 1;
+      counterEls.forEach((el) => {
+        const currentText = el.textContent || "0";
+        const current = parseInt(
+          currentText.replace(/\./g, "").replace(/,/g, "")
+        );
+        const bump =
+          el.dataset.format === "currency"
+            ? Math.floor(Math.random() * 50000) + 10000
+            : Math.floor(Math.random() * 3) + 1;
         const newVal = current + bump;
-        const format = el.dataset.format || 'plain';
+        const format = el.dataset.format || "plain";
 
-        if (format === 'currency' || format === 'dots') {
-          el.textContent = newVal.toLocaleString('es-CL');
+        if (format === "currency" || format === "dots") {
+          el.textContent = newVal.toLocaleString("es-CL");
         } else {
           el.textContent = newVal.toString();
         }
@@ -450,34 +531,32 @@
     }
 
     // --- Orchestrate everything with IntersectionObserver ---
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !started) {
-          started = true;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !started) {
+            started = true;
 
-          // 1. Animate bars
-          animateBars();
+            // 1. Animate bars
+            animateBars();
 
-          // 2. Animate counters
-          setTimeout(() => {
-            counterEls.forEach(el => animateCounter(el));
-          }, 300);
+            // 2. Animate counters
+            setTimeout(() => {
+              counterEls.forEach((el) => animateCounter(el));
+            }, 300);
 
-          // 3. Start cursor after initial animations
-          setTimeout(() => moveCursor(), 2500);
-
-          // 4. Ongoing loops — crossfade in place, no layout shifts
-          setInterval(() => updateActivitySlot(), 3500);
-          setInterval(() => updateChatBubbles(), 5000);
-          setInterval(() => moveCursor(), 4500);
-          setInterval(() => bumpCounters(), 6000);
-        }
-      });
-    }, { threshold: 0.3 });
+            // 4. Ongoing loops — crossfade in place, no layout shifts
+            setInterval(() => updateActivitySlot(), 3500);
+            setInterval(() => bumpCounters(), 6000);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
 
     observer.observe(mockup);
   }
 
-  document.addEventListener('DOMContentLoaded', initDashboard);
-  document.addEventListener('astro:page-load', initDashboard);
+  document.addEventListener("DOMContentLoaded", initDashboard);
+  document.addEventListener("astro:page-load", initDashboard);
 </script>

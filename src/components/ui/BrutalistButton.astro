@@ -1,38 +1,47 @@
 ---
 interface Props {
-  variant?: 'primary' | 'secondary' | 'white' | 'outline-white';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: "primary" | "secondary" | "white" | "outline-white";
+  size?: "sm" | "md" | "lg";
   href?: string;
   class?: string;
 }
 
-const { variant = 'primary', size = 'md', href, class: className } = Astro.props;
+const {
+  variant = "primary",
+  size = "md",
+  href,
+  class: className,
+} = Astro.props;
 
 const baseClasses =
-  'inline-flex items-center justify-center font-bold border-2 rounded-brutal transition-all duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black';
+  "inline-flex items-center justify-center font-semibold rounded-full transition-all duration-300 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white overflow-hidden relative group";
 
 const sizeClasses = {
-  sm: 'px-4 py-2 text-sm',
-  md: 'px-6 py-3 text-base',
-  lg: 'px-8 py-4 text-lg',
+  sm: "px-6 py-2 text-sm",
+  md: "px-8 py-3 text-base",
+  lg: "px-10 py-4 text-lg",
 };
 
 const variantClasses = {
   primary:
-    'bg-binah-purple text-white border-black shadow-brutal-md hover:translate-x-1 hover:translate-y-1 hover:shadow-brutal-md-hover',
+    "bg-black text-white hover:scale-105 shadow-xl hover:shadow-2xl hover:bg-slate-900",
   secondary:
-    'bg-white text-black border-black shadow-brutal-sm hover:translate-x-1 hover:translate-y-1 hover:shadow-brutal-sm-hover',
-  white:
-    'bg-white text-black border-black shadow-brutal-md hover:translate-x-1 hover:translate-y-1 hover:shadow-brutal-md-hover',
-  'outline-white':
-    'bg-transparent text-white border-white shadow-brutal-sm hover:translate-x-1 hover:translate-y-1 hover:shadow-brutal-sm-hover',
+    "text-slate-900 bg-white border border-slate-200 hover:border-slate-300 hover:bg-slate-50",
+  white: "bg-white text-black shadow-md hover:shadow-lg hover:-translate-y-0.5",
+  "outline-white":
+    "bg-transparent text-slate-800 border border-slate-300 hover:bg-slate-100 hover:-translate-y-0.5",
 };
 
-const classes = [baseClasses, sizeClasses[size], variantClasses[variant], className]
+const classes = [
+  baseClasses,
+  sizeClasses[size],
+  variantClasses[variant],
+  className,
+]
   .filter(Boolean)
-  .join(' ');
+  .join(" ");
 
-const Tag = href ? 'a' : 'button';
+const Tag = href ? "a" : "button";
 ---
 
 <Tag href={href} class={classes}>

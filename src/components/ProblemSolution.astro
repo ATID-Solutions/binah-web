@@ -1,43 +1,72 @@
 ---
 const problems = [
-  'WhatsApp, Excel, la transportadora, el contador... todo por separado',
-  'Copiar y pegar datos de pedidos entre plataformas',
-  'Sin visibilidad en tiempo real del estado de envíos',
-  'Facturación manual en Siigo pedido por pedido',
-  'Inventario desactualizado entre bodegas y tienda online',
+  "WhatsApp, Excel, la transportadora, el contador... todo por separado",
+  "Copiar y pegar datos de pedidos entre plataformas",
+  "Sin visibilidad en tiempo real del estado de envíos",
+  "Facturación manual en Siigo pedido por pedido",
+  "Inventario desactualizado entre bodegas y tienda online",
 ];
 
 const solutions = [
-  'Una sola plataforma conectada con todo tu ecosistema',
-  'Pedidos de Shopify y WooCommerce llegan automáticamente',
-  'Tracking en vivo con Coordinadora y 99 Envíos',
-  'Facturación automática en Siigo al despachar',
-  'Inventario sincronizado en tiempo real entre todas tus bodegas',
+  "Una sola plataforma conectada con todo tu ecosistema",
+  "Pedidos de Shopify y WooCommerce llegan automáticamente",
+  "Tracking en vivo con Coordinadora, Envía, TCC, Inter Rapidísimo, Servientrega y más",
+  "Facturación automática en Siigo al despachar",
+  "Inventario sincronizado en tiempo real entre todas tus bodegas",
 ];
 ---
 
-<section class="bg-white py-20 lg:py-28">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl lg:text-5xl font-extrabold tracking-tighter">
-        Deja el caos. <span class="text-binah-purple">Automatiza todo.</span>
+<section
+  class="py-24 lg:py-32 relative overflow-hidden border-y border-slate-200/60"
+>
+  <div
+    class="absolute top-0 right-0 w-[600px] h-[600px] bg-binah-purple opacity-[0.05] blur-[120px] rounded-full pointer-events-none"
+  >
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center mb-20">
+      <h2
+        class="text-4xl lg:text-5xl font-extrabold tracking-tighter text-slate-900"
+      >
+        Deja el caos. <span
+          class="text-transparent bg-clip-text bg-gradient-to-r from-binah-cyan to-binah-purple"
+          >Automatiza todo.</span
+        >
       </h2>
     </div>
 
     <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
       <!-- Problem card -->
-      <div class="bg-[#f4f4f5] border-2 border-dashed border-gray-300 rounded-3xl p-8 opacity-70">
-        <div class="flex items-center gap-3 mb-6">
+      <div
+        class="bg-white border border-slate-200/60 rounded-[32px] p-8 lg:p-10 relative overflow-hidden group shadow-sm hover:shadow-md transition-shadow duration-300"
+      >
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-red-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        >
+        </div>
+        <div class="flex items-center gap-4 mb-8 relative z-10">
           <div
-            class="w-10 h-10 bg-red-100 border-2 border-black rounded-brutal flex items-center justify-center"
+            class="w-12 h-12 bg-red-500/10 border border-red-500/20 rounded-2xl flex items-center justify-center shrink-0"
           >
-            <svg class="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            <svg
+              class="w-6 h-6 text-red-500"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"></path>
             </svg>
           </div>
-          <h3 class="text-2xl font-extrabold tracking-tighter">Cómo trabajas hoy</h3>
+          <h3 class="text-2xl font-extrabold tracking-tight text-slate-900">
+            Cómo trabajas hoy
+          </h3>
         </div>
-        <ul class="space-y-4">
+        <ul class="space-y-6 relative z-10">
           {
             problems.map((item) => (
               <li class="flex items-start gap-3">
@@ -48,9 +77,15 @@ const solutions = [
                   stroke="currentColor"
                   stroke-width="2.5"
                 >
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
-                <span class="font-medium text-black/70">{item}</span>
+                <span class="font-medium text-slate-600 text-lg leading-relaxed">
+                  {item}
+                </span>
               </li>
             ))
           }
@@ -59,30 +94,52 @@ const solutions = [
 
       <!-- Solution card -->
       <div
-        class="bg-binah-lavender border-2 border-black rounded-3xl p-8 shadow-brutal-purple"
+        class="bg-gradient-to-br from-[#111111] to-[#1A1A1A] border border-white/10 rounded-[32px] p-8 lg:p-10 shadow-[0_0_40px_rgba(77,55,246,0.15)] relative overflow-hidden group"
       >
-        <div class="flex items-center gap-3 mb-6">
-          <div
-            class="w-10 h-10 bg-binah-purple border-2 border-black rounded-brutal flex items-center justify-center p-1.5"
-          >
-            <img src="/binah-logo-white.png" alt="Binah" class="h-full w-auto object-contain" />
-          </div>
-          <h3 class="text-2xl font-extrabold tracking-tighter">Con Binah</h3>
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-binah-purple/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        >
         </div>
-        <ul class="space-y-4">
+        <!-- Subtle inner glow for the solution box -->
+        <div
+          class="absolute -top-24 -right-24 w-48 h-48 bg-binah-cyan opacity-20 blur-[60px] rounded-full pointer-events-none"
+        >
+        </div>
+
+        <div class="flex items-center gap-4 mb-8 relative z-10">
+          <div
+            class="w-12 h-12 bg-white/10 border border-white/20 rounded-2xl flex items-center justify-center p-2.5 shrink-0 backdrop-blur-sm"
+          >
+            <img
+              src="/symbol-white.png"
+              alt="Binah"
+              class="h-full w-auto object-contain"
+            />
+          </div>
+          <h3 class="text-2xl font-extrabold tracking-tight text-white">
+            Con Binah
+          </h3>
+        </div>
+        <ul class="space-y-6 relative z-10">
           {
             solutions.map((item) => (
               <li class="flex items-start gap-3">
                 <svg
-                  class="w-5 h-5 text-binah-purple mt-0.5 shrink-0"
+                  class="w-5 h-5 text-binah-cyan mt-0.5 shrink-0"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                   stroke-width="2.5"
                 >
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M5 13l4 4L19 7"
+                  />
                 </svg>
-                <span class="font-bold text-black">{item}</span>
+                <span class="font-bold text-white text-lg leading-relaxed">
+                  {item}
+                </span>
               </li>
             ))
           }

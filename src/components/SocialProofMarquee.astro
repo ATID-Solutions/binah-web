@@ -5,58 +5,119 @@
  */
 ---
 
-<section id="integraciones" class="bg-binah-charcoal border-b-2 border-black py-6 overflow-hidden">
+<section
+  id="integraciones"
+  class="bg-black border-y border-white/5 py-8 overflow-hidden relative"
+>
+  <!-- Subtle fade gradients on edges -->
+  <div
+    class="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-black to-transparent z-10"
+  >
+  </div>
+  <div
+    class="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-black to-transparent z-10"
+  >
+  </div>
+
   <div class="relative">
     <div class="flex animate-marquee whitespace-nowrap items-center">
-      {[0, 1].map(() => (
-        <>
-          {/* Shopify */}
-          <span class="inline-flex items-center gap-2.5 mx-12 shrink-0">
-            <svg class="h-7 w-7 text-binah-lavender/50" viewBox="0 0 256 292" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M223.774 57.34c-.201-1.46-1.48-2.268-2.537-2.357-1.055-.088-23.383-1.743-23.383-1.743s-15.507-15.395-17.209-17.099c-1.703-1.703-5.029-1.185-6.32-.834-.19.053-3.386 1.046-8.678 2.68-5.18-14.906-14.322-28.604-30.405-28.604-.444 0-.901.018-1.358.044C129.31 3.407 123.644.779 118.75.779c-37.465 0-55.364 46.835-60.952 70.635-14.558 4.514-24.826 7.7-26.106 8.1-8.116 2.536-8.37 2.79-9.427 10.403C21.27 96.75 0 262.232 0 262.232l166.367 31.265 89.867-19.48S223.977 58.8 223.774 57.34zM156.69 40.848l-13.727 4.243c.005-.312.014-.625.014-.942 0-8.684-1.205-15.69-3.187-21.314 7.867 1.49 13.157 10.122 16.9 18.013zm-27.556-16.853c2.14 5.477 3.497 13.29 3.497 23.928 0 .507-.009 .975-.017 1.456l-28.28 8.76c5.44-20.678 15.588-30.716 24.8-34.144zm-10.644-6.78c1.593 0 3.186.53 4.755 1.586-11.803 5.57-24.476 19.6-29.82 47.655l-22.38 6.927C77.87 49.792 92.093 17.214 118.49 17.214z" />
-              <path d="M221.237 54.983c-1.055-.088-23.383-1.743-23.383-1.743s-15.507-15.395-17.209-17.099a2.327 2.327 0 00-1.38-.638L166.367 293.5l89.867-19.48S223.977 58.8 223.774 57.34c-.201-1.46-1.48-2.268-2.537-2.357z" opacity=".3" />
-              <path d="M128.56 102.69l-11.063 32.877s-9.723-5.182-21.584-5.182c-17.434 0-18.308 10.928-18.308 13.69 0 15.036 39.2 20.8 39.2 56.024 0 27.713-17.577 45.558-41.277 45.558-28.44 0-42.984-17.7-42.984-17.7l7.615-25.16s14.95 12.835 27.565 12.835c8.243 0 11.593-6.49 11.593-11.232 0-19.616-32.16-20.491-32.16-52.724 0-27.129 19.472-53.382 58.778-53.382 15.145 0 22.625 4.396 22.625 4.396z" />
-            </svg>
-            <span class="text-binah-lavender/50 font-extrabold text-xl tracking-tighter">Shopify</span>
-          </span>
+      {
+        [0, 1].map(() => (
+          <>
+            {/* Shopify */}
+            <span class="inline-flex items-center gap-3 mx-14 shrink-0 opacity-50 hover:opacity-100 transition-opacity">
+              <svg
+                class="h-8 w-8 text-white"
+                viewBox="0 0 256 292"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M223.774 57.34c-.201-1.46-1.48-2.268-2.537-2.357-1.055-.088-23.383-1.743-23.383-1.743s-15.507-15.395-17.209-17.099c-1.703-1.703-5.029-1.185-6.32-.834-.19.053-3.386 1.046-8.678 2.68-5.18-14.906-14.322-28.604-30.405-28.604-.444 0-.901.018-1.358.044C129.31 3.407 123.644.779 118.75.779c-37.465 0-55.364 46.835-60.952 70.635-14.558 4.514-24.826 7.7-26.106 8.1-8.116 2.536-8.37 2.79-9.427 10.403C21.27 96.75 0 262.232 0 262.232l166.367 31.265 89.867-19.48S223.977 58.8 223.774 57.34zM156.69 40.848l-13.727 4.243c.005-.312.014-.625.014-.942 0-8.684-1.205-15.69-3.187-21.314 7.867 1.49 13.157 10.122 16.9 18.013zm-27.556-16.853c2.14 5.477 3.497 13.29 3.497 23.928 0 .507-.009 .975-.017 1.456l-28.28 8.76c5.44-20.678 15.588-30.716 24.8-34.144zm-10.644-6.78c1.593 0 3.186.53 4.755 1.586-11.803 5.57-24.476 19.6-29.82 47.655l-22.38 6.927C77.87 49.792 92.093 17.214 118.49 17.214z" />
+                <path
+                  d="M221.237 54.983c-1.055-.088-23.383-1.743-23.383-1.743s-15.507-15.395-17.209-17.099a2.327 2.327 0 00-1.38-.638L166.367 293.5l89.867-19.48S223.977 58.8 223.774 57.34c-.201-1.46-1.48-2.268-2.537-2.357z"
+                  opacity=".3"
+                />
+                <path d="M128.56 102.69l-11.063 32.877s-9.723-5.182-21.584-5.182c-17.434 0-18.308 10.928-18.308 13.69 0 15.036 39.2 20.8 39.2 56.024 0 27.713-17.577 45.558-41.277 45.558-28.44 0-42.984-17.7-42.984-17.7l7.615-25.16s14.95 12.835 27.565 12.835c8.243 0 11.593-6.49 11.593-11.232 0-19.616-32.16-20.491-32.16-52.724 0-27.129 19.472-53.382 58.778-53.382 15.145 0 22.625 4.396 22.625 4.396z" />
+              </svg>
+              <span class="text-white font-semibold text-2xl tracking-tight">
+                Shopify
+              </span>
+            </span>
 
-          {/* WooCommerce */}
-          <span class="inline-flex items-center gap-2.5 mx-12 shrink-0">
-            <img src="/logos/woo.png" alt="WooCommerce" class="h-8 w-8 object-contain opacity-50 brightness-200" />
-            <span class="text-binah-lavender/50 font-extrabold text-xl tracking-tighter">WooCommerce</span>
-          </span>
+            {/* WooCommerce */}
+            <span class="inline-flex items-center gap-3 mx-14 shrink-0 opacity-50 hover:opacity-100 transition-opacity">
+              <img
+                src="/logos/woo.png"
+                alt="WooCommerce"
+                class="h-9 w-9 object-contain brightness-0 invert"
+              />
+              <span class="text-white font-semibold text-2xl tracking-tight">
+                WooCommerce
+              </span>
+            </span>
 
-          {/* WhatsApp */}
-          <span class="inline-flex items-center gap-2.5 mx-12 shrink-0">
-            <svg class="h-7 w-7 text-binah-lavender/50" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-            </svg>
-            <span class="text-binah-lavender/50 font-extrabold text-xl tracking-tighter">WhatsApp</span>
-          </span>
+            {/* WhatsApp */}
+            <span class="inline-flex items-center gap-3 mx-14 shrink-0 opacity-50 hover:opacity-100 transition-opacity">
+              <svg
+                class="h-8 w-8 text-white"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+              <span class="text-white font-semibold text-2xl tracking-tight">
+                WhatsApp
+              </span>
+            </span>
 
-          {/* Coordinadora */}
-          <span class="inline-flex items-center gap-2.5 mx-12 shrink-0">
-            <img src="/logos/coordinadora.avif" alt="Coordinadora" class="h-8 w-8 object-contain opacity-50 brightness-200" />
-            <span class="text-binah-lavender/50 font-extrabold text-xl tracking-tighter">Coordinadora</span>
-          </span>
+            {/* Coordinadora */}
+            <span class="inline-flex items-center gap-3 mx-14 shrink-0 opacity-50 hover:opacity-100 transition-opacity">
+              <img
+                src="/logos/coordinadora.avif"
+                alt="Coordinadora"
+                class="h-9 w-9 object-contain brightness-0 invert"
+              />
+              <span class="text-white font-semibold text-2xl tracking-tight">
+                Coordinadora
+              </span>
+            </span>
 
-          {/* Siigo */}
-          <span class="inline-flex items-center mx-12 shrink-0">
-            <img src="/logos/siigo-white.png" alt="Siigo" class="h-8 object-contain opacity-50" />
-          </span>
+            {/* Siigo */}
+            <span class="inline-flex items-center mx-14 shrink-0 opacity-50 hover:opacity-100 transition-opacity">
+              <img
+                src="/logos/siigo-white.png"
+                alt="Siigo"
+                class="h-9 object-contain"
+              />
+            </span>
 
-          {/* 99 Envíos */}
-          <span class="inline-flex items-center gap-2.5 mx-12 shrink-0">
-            <span class="text-binah-lavender/50 font-extrabold text-[15px] tracking-tighter bg-binah-lavender/10 border border-binah-lavender/20 rounded px-1.5 py-0.5 leading-none">99</span>
-            <span class="text-binah-lavender/50 font-extrabold text-xl tracking-tighter">99 Envíos</span>
-          </span>
+            {/* Wompi */}
+            <span class="inline-flex items-center mx-14 shrink-0 opacity-50 hover:opacity-100 transition-opacity">
+              <img
+                src="/logos/wompi.png"
+                alt="Wompi"
+                class="h-8 object-contain invert"
+              />
+            </span>
 
-          {/* Wompi */}
-          <span class="inline-flex items-center mx-12 shrink-0">
-            <img src="/logos/wompi.png" alt="Wompi" class="h-7 object-contain opacity-50 invert" />
-          </span>
-        </>
-      ))}
+            {/* Instagram */}
+            <span class="inline-flex items-center gap-3 mx-14 shrink-0 opacity-50 hover:opacity-100 transition-opacity">
+              <svg
+                class="h-8 w-8 text-white"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+              </svg>
+              <span class="text-white font-semibold text-2xl tracking-tight">
+                Instagram
+              </span>
+            </span>
+          </>
+        ))
+      }
     </div>
   </div>
 </section>
