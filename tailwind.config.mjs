@@ -1,13 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
-  safelist: [
-    'bg-[#25d366]',
-    'bg-blue-500',
-    'bg-amber-500',
-    'ring-2',
-    'ring-binah-purple/30',
-  ],
   theme: {
     fontFamily: {
       sans: ['Inter', 'system-ui', 'sans-serif'],

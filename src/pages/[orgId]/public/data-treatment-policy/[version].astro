@@ -1,0 +1,253 @@
+---
+import PublicPolicyLayout from "../../../../layouts/PublicPolicyLayout.astro";
+
+export const prerender = false;
+
+interface PolicyPayload {
+  orgId: string;
+  organizationName: string;
+  legalName: string;
+  policyVersion: string;
+  policyPublicUrl?: string;
+  policyText: string;
+  policyComplete?: boolean;
+  contactEmail?: string;
+  contactPhone?: string;
+  website?: string;
+}
+
+type PageState =
+  | {
+      kind: "success";
+      status: 200;
+      data: PolicyPayload;
+    }
+  | {
+      kind: "error";
+      status: 400 | 404 | 500 | 502;
+      eyebrow: string;
+      heading: string;
+      body: string;
+    };
+
+const { orgId, version } = Astro.params;
+
+const invalidLinkState: PageState = {
+  kind: "error",
+  status: 400,
+  eyebrow: "Enlace inválido",
+  heading: "No pudimos procesar este enlace.",
+  body: "Verifica que la organización y la versión de la política sean válidas.",
+};
+
+const notFoundState: PageState = {
+  kind: "error",
+  status: 404,
+  eyebrow: "Política no disponible",
+  heading: "No encontramos una política pública activa para esta organización.",
+  body: "El enlace puede corresponder a una versión antigua o a una organización que todavía no completó la información pública requerida.",
+};
+
+const temporaryErrorState = (status: 500 | 502): PageState => ({
+  kind: "error",
+  status,
+  eyebrow: "Error temporal",
+  heading: "No fue posible cargar la política en este momento.",
+  body: "Intenta nuevamente en unos minutos.",
+});
+
+const actionsBaseUrl = import.meta.env.ACTIONS_BASE_URL;
+
+const buildPageState = async (): Promise<PageState> => {
+  if (!orgId || !version) {
+    return invalidLinkState;
+  }
+
+  if (!actionsBaseUrl) {
+    return temporaryErrorState(500);
+  }
+
+  let upstreamResponse: Response;
+
+  try {
+    const endpoint = new URL("/public/data-treatment-policy", actionsBaseUrl);
+    endpoint.searchParams.set("orgId", orgId);
+    endpoint.searchParams.set("v", version);
+
+    upstreamResponse = await fetch(endpoint, {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+      },
+    });
+  } catch {
+    return temporaryErrorState(502);
+  }
+
+  if (upstreamResponse.status === 400) {
+    return invalidLinkState;
+  }
+
+  if (upstreamResponse.status === 404) {
+    return notFoundState;
+  }
+
+  if (!upstreamResponse.ok) {
+    return temporaryErrorState(upstreamResponse.status >= 500 ? 502 : 500);
+  }
+
+  let payload: PolicyPayload;
+
+  try {
+    payload = await upstreamResponse.json();
+  } catch {
+    return temporaryErrorState(502);
+  }
+
+  if (
+    typeof payload.organizationName !== "string" ||
+    typeof payload.legalName !== "string" ||
+    typeof payload.policyVersion !== "string" ||
+    typeof payload.policyText !== "string"
+  ) {
+    return temporaryErrorState(502);
+  }
+
+  return {
+    kind: "success",
+    status: 200,
+    data: payload,
+  };
+};
+
+const pageState = await buildPageState();
+
+Astro.response.status = pageState.status;
+Astro.response.headers.set("X-Robots-Tag", "noindex, nofollow");
+
+const isValidExternalUrl = (value?: string) => {
+  if (!value) {
+    return false;
+  }
+
+  try {
+    const parsed = new URL(value);
+    return parsed.protocol === "http:" || parsed.protocol === "https:";
+  } catch {
+    return false;
+  }
+};
+
+const pageTitle =
+  pageState.kind === "success"
+    ? `Política de Tratamiento de Datos | ${pageState.data.organizationName}`
+    : "Política de Tratamiento de Datos | Binah";
+
+const websiteHref =
+  pageState.kind === "success" && isValidExternalUrl(pageState.data.website)
+    ? pageState.data.website
+    : undefined;
+---
+
+<PublicPolicyLayout title={pageTitle}>
+  <main class="px-5 py-10 sm:px-8 sm:py-14 lg:px-12 lg:py-20">
+    <section class="mx-auto max-w-6xl border border-stone-300/80 bg-white/90 shadow-[0_24px_80px_rgba(28,25,23,0.08)]">
+      {
+        pageState.kind === "success" ? (
+          <div class="grid gap-0 lg:grid-cols-[18rem_minmax(0,1fr)]">
+            <aside class="border-b border-stone-200 px-6 py-8 sm:px-8 lg:border-b-0 lg:border-r lg:px-8 lg:py-10">
+              <p class="text-xs font-semibold uppercase tracking-[0.28em] text-stone-500">
+                Tratamiento de Datos Personales
+              </p>
+              <h1 class="mt-5 font-['Instrument_Serif'] text-4xl leading-none text-stone-950 sm:text-5xl">
+                {pageState.data.organizationName}
+              </h1>
+              <p class="mt-4 max-w-xs text-sm leading-6 text-stone-600">
+                Documento público sobre tratamiento de datos personales y ejercicio de derechos del titular.
+              </p>
+
+              <dl class="mt-10 space-y-6 border-t border-stone-200 pt-8 text-sm">
+                <div>
+                  <dt class="font-semibold text-stone-500">Responsable</dt>
+                  <dd class="mt-1 leading-6 text-stone-900">{pageState.data.legalName}</dd>
+                </div>
+                <div>
+                  <dt class="font-semibold text-stone-500">Versión</dt>
+                  <dd class="mt-1 leading-6 text-stone-900">{pageState.data.policyVersion}</dd>
+                </div>
+                {pageState.data.contactEmail && (
+                  <div>
+                    <dt class="font-semibold text-stone-500">Email de contacto</dt>
+                    <dd class="mt-1 break-all leading-6 text-stone-900">
+                      <a class="underline decoration-stone-300 underline-offset-4" href={`mailto:${pageState.data.contactEmail}`}>
+                        {pageState.data.contactEmail}
+                      </a>
+                    </dd>
+                  </div>
+                )}
+                {pageState.data.contactPhone && (
+                  <div>
+                    <dt class="font-semibold text-stone-500">Teléfono de contacto</dt>
+                    <dd class="mt-1 leading-6 text-stone-900">{pageState.data.contactPhone}</dd>
+                  </div>
+                )}
+                {pageState.data.website && (
+                  <div>
+                    <dt class="font-semibold text-stone-500">Sitio web</dt>
+                    <dd class="mt-1 break-all leading-6 text-stone-900">
+                      {websiteHref ? (
+                        <a
+                          class="underline decoration-stone-300 underline-offset-4"
+                          href={websiteHref}
+                          rel="noreferrer"
+                          target="_blank"
+                        >
+                          {pageState.data.website}
+                        </a>
+                      ) : (
+                        pageState.data.website
+                      )}
+                    </dd>
+                  </div>
+                )}
+              </dl>
+            </aside>
+
+            <article class="px-6 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-12">
+              <div class="border-b border-stone-200 pb-8">
+                <p class="text-xs font-semibold uppercase tracking-[0.28em] text-stone-500">
+                  Documento público
+                </p>
+                <p class="mt-4 text-sm leading-7 text-stone-600">
+                  Este contenido corresponde a la versión pública reportada por la organización responsable para consulta de titulares, terceros y autoridades competentes.
+                </p>
+              </div>
+
+              <div class="pt-8">
+                <div class="whitespace-pre-wrap break-words font-sans text-[0.98rem] leading-8 text-stone-800">
+                  {pageState.data.policyText}
+                </div>
+              </div>
+
+              <footer class="mt-12 border-t border-stone-200 pt-6 text-sm leading-6 text-stone-500">
+                Este documento corresponde a la política de tratamiento de datos publicada por la organización responsable identificada arriba.
+              </footer>
+            </article>
+          </div>
+        ) : (
+          <div class="px-6 py-16 text-center sm:px-10 sm:py-24">
+            <p class="text-xs font-semibold uppercase tracking-[0.28em] text-stone-500">
+              {pageState.eyebrow}
+            </p>
+            <h1 class="mx-auto mt-5 max-w-3xl font-['Instrument_Serif'] text-4xl leading-tight text-stone-950 sm:text-5xl">
+              {pageState.heading}
+            </h1>
+            <p class="mx-auto mt-6 max-w-2xl text-base leading-8 text-stone-600">
+              {pageState.body}
+            </p>
+          </div>
+        )
+      }
+    </section>
+  </main>
+</PublicPolicyLayout>

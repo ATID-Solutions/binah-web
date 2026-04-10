@@ -1,8 +1,16 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import node from '@astrojs/node';
 import react from '@astrojs/react';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  integrations: [react(), tailwind({ applyBaseStyles: false })],
+  output: 'server',
+  adapter: node({
+    mode: 'standalone',
+  }),
+  integrations: [react()],
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });
