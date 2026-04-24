@@ -384,29 +384,37 @@ const options = [
     const WA_DISMISSED_KEY = 'binah-wa-dismissed';
     const WA_DISMISSED_DURATION = 24 * 60 * 60 * 1000; // 24 hours
 
-    const dismissedAt = localStorage.getItem(WA_DISMISSED_KEY);
-    if (dismissedAt && Date.now() - parseInt(dismissedAt) < WA_DISMISSED_DURATION) {
-      return;
-    }
-
     let bubbleShown = false;
     let dismissed = false;
+    let autoShowTimer: ReturnType<typeof setTimeout> | null = null;
 
-    // Show the bubble after 10 seconds
-    const timer = setTimeout(() => {
-      if (dismissed) return;
-      showBubble();
-    }, 10000);
+    function recentlyDismissed() {
+      const at = localStorage.getItem(WA_DISMISSED_KEY);
+      return !!at && Date.now() - parseInt(at) < WA_DISMISSED_DURATION;
+    }
+
+    // Auto-show after 10 seconds — but only if the user hasn't dismissed recently.
+    // Clicking the FAB still opens the bubble regardless of this flag.
+    if (!recentlyDismissed()) {
+      autoShowTimer = setTimeout(() => {
+        if (dismissed) return;
+        showBubble();
+      }, 10000);
+    }
 
     function showBubble() {
-      if (bubbleShown || dismissed) return;
+      if (bubbleShown) return;
       bubbleShown = true;
+      dismissed = false;
 
       typing.style.display = '';
       message.classList.remove('wa-message-visible');
       message.classList.add('wa-message-hidden');
       options.classList.remove('wa-options-visible');
       options.classList.add('wa-options-hidden');
+      options.querySelectorAll('.wa-option').forEach((el) => {
+        el.classList.remove('wa-option-animate');
+      });
 
       bubble.classList.remove('wa-bubble-hidden', 'pointer-events-none');
       bubble.classList.add('wa-bubble-visible');
@@ -435,37 +443,39 @@ const options = [
       }, 2000);
     }
 
+    function dismissBubble(persist = true) {
+      dismissed = true;
+      bubbleShown = false;
+      if (autoShowTimer !== null) clearTimeout(autoShowTimer);
+      bubble.classList.remove('wa-bubble-visible');
+      bubble.classList.add('wa-bubble-hidden', 'pointer-events-none');
+      badge.classList.remove('wa-badge-visible');
+      badge.classList.add('wa-badge-hidden');
+      if (persist) {
+        localStorage.setItem(WA_DISMISSED_KEY, Date.now().toString());
+      }
+    }
+
     closeBtn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
       dismissBubble();
     });
 
-    function dismissBubble() {
-      dismissed = true;
-      clearTimeout(timer);
-      bubble.classList.remove('wa-bubble-visible');
-      bubble.classList.add('wa-bubble-hidden', 'pointer-events-none');
-      badge.classList.remove('wa-badge-visible');
-      badge.classList.add('wa-badge-hidden');
-      localStorage.setItem(WA_DISMISSED_KEY, Date.now().toString());
-    }
-
     fab.addEventListener('click', () => {
-      if (bubbleShown && !dismissed) {
-        dismissBubble();
-      } else if (!bubbleShown) {
-        showBubble();
+      if (bubbleShown) {
+        // Closing via the FAB is a transient action — don't silence the widget for 24h.
+        dismissBubble(false);
       } else {
-        dismissed = false;
-        bubbleShown = false;
         showBubble();
       }
     });
 
+    // Clicking a quick-action hides the bubble without writing the long dismissal,
+    // since the user is actively engaging.
     options.querySelectorAll('.wa-option').forEach((el) => {
       el.addEventListener('click', () => {
-        dismissBubble();
+        dismissBubble(false);
       });
     });
   })();
