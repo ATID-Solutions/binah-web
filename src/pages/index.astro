@@ -7,6 +7,9 @@ import HeroLogos from "../components/binah/HeroLogos.tsx";
 import Switcher from "../components/binah/Switcher.tsx";
 import ModuleGrid from "../components/binah/ModuleGrid.tsx";
 import FlowDiagram from "../components/binah/FlowDiagram.tsx";
+import { waUrl, WA_MESSAGES } from "../components/binah/whatsapp";
+
+const heroDemoHref = waUrl(WA_MESSAGES.demo);
 ---
 
 <Layout title="Binah — El sistema operativo de los negocios colombianos" page="index">
@@ -28,7 +31,9 @@ import FlowDiagram from "../components/binah/FlowDiagram.tsx";
           <HeroLogos client:load />
         </div>
         <div class="hero-cta">
-          <a href="#demo" class="btn btn-primary">Agendar demo <span class="arrow">→</span></a>
+          <a href={heroDemoHref} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            Agendar demo <span class="arrow">→</span>
+          </a>
           <a href="/modulos" class="btn btn-outline">Ver módulos</a>
         </div>
         <div class="hero-meta">
@@ -139,7 +144,7 @@ import FlowDiagram from "../components/binah/FlowDiagram.tsx";
         heading={`Una demo.<br />Cero compromisos.<br />Todas las respuestas.`}
         body="Agenda 30 minutos con nuestro equipo. Te mostramos cómo luciría Binah corriendo tu negocio específicamente."
         primaryLabel="Agendar demo"
-        primaryHref="#"
+        primaryHref={waUrl(WA_MESSAGES.demo)}
         secondaryLabel="Ver precios"
         secondaryHref="/precios"
       />

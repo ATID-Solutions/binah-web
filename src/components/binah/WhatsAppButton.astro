@@ -1,27 +1,11 @@
 ---
 // Floating WhatsApp button + interactive chat bubble.
-// Phone number is a placeholder — update with the real Binah Business number.
-const WA_NUMBER = "573000000000";
-
-const waUrl = (msg: string) =>
-  `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+import { waUrl, WA_MESSAGES } from "./whatsapp";
 
 const options = [
-  {
-    label: "Agendar una demo",
-    url: waUrl("Hola Binah, me gustaría agendar una demo para conocer la plataforma."),
-    icon: "calendar",
-  },
-  {
-    label: "Hablar de precios y planes",
-    url: waUrl("Hola, quisiera más información sobre los precios y planes de Binah."),
-    icon: "doc",
-  },
-  {
-    label: "Otra consulta",
-    url: waUrl("Hola, tengo una consulta sobre Binah."),
-    icon: "chat",
-  },
+  { label: "Agendar una demo", url: waUrl(WA_MESSAGES.demo), icon: "calendar" },
+  { label: "Hablar de precios y planes", url: waUrl(WA_MESSAGES.pricingBusiness), icon: "doc" },
+  { label: "Otra consulta", url: waUrl(WA_MESSAGES.general), icon: "chat" },
 ];
 ---
 

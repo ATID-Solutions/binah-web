@@ -5,6 +5,9 @@ import Footer from "../components/binah/Footer.astro";
 import CtaBand from "../components/binah/CtaBand.astro";
 import ModuleMockFrame from "../components/binah/ModuleMockFrame.tsx";
 import ChannelCards from "../components/binah/ChannelCards.tsx";
+import { waUrl, WA_MESSAGES } from "../components/binah/whatsapp";
+
+const crmHref = waUrl(WA_MESSAGES.moduleCrm);
 ---
 
 <Layout title="CRM & Agentes IA — Binah" page="modulos">
@@ -27,7 +30,9 @@ import ChannelCards from "../components/binah/ChannelCards.tsx";
               WhatsApp, Instagram y correo en un solo lugar. Tres agentes IA entrenados para tu negocio responden, califican y cierran mientras tú duermes.
             </p>
             <div class="hero-cta">
-              <a href="#" class="btn btn-primary">Probar CRM <span class="arrow">→</span></a>
+              <a href={crmHref} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                Probar CRM <span class="arrow">→</span>
+              </a>
               <a href="/modulos" class="btn btn-outline">Ver otros módulos</a>
             </div>
           </div>
@@ -124,6 +129,7 @@ import ChannelCards from "../components/binah/ChannelCards.tsx";
         eyebrow="CRM · Módulo 01"
         heading="Activa el CRM en 24 horas."
         body="Migramos tus contactos, entrenamos los agentes y conectamos tus canales."
+        primaryHref={crmHref}
       />
     </div>
   </main>

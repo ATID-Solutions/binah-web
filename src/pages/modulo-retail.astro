@@ -5,6 +5,9 @@ import Footer from "../components/binah/Footer.astro";
 import CtaBand from "../components/binah/CtaBand.astro";
 import ModuleMockFrame from "../components/binah/ModuleMockFrame.tsx";
 import RetailLogos from "../components/binah/RetailLogos.tsx";
+import { waUrl, WA_MESSAGES } from "../components/binah/whatsapp";
+
+const retailHref = waUrl(WA_MESSAGES.moduleRetail);
 ---
 
 <Layout title="Retail — Binah" page="modulos">
@@ -27,7 +30,9 @@ import RetailLogos from "../components/binah/RetailLogos.tsx";
               Despacha, rastrea y vincula cada pedido con su cliente en segundos. Las transportadoras colombianas — ya conectadas.
             </p>
             <div class="hero-cta">
-              <a href="#" class="btn btn-primary">Probar Retail <span class="arrow">→</span></a>
+              <a href={retailHref} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                Probar Retail <span class="arrow">→</span>
+              </a>
               <a href="/modulos" class="btn btn-outline">Ver otros módulos</a>
             </div>
           </div>
@@ -117,6 +122,7 @@ import RetailLogos from "../components/binah/RetailLogos.tsx";
         eyebrow="Retail · Módulo 02"
         heading="Dispara tu operación."
         body="Conectamos tus transportadoras y migramos tu inventario en menos de una semana."
+        primaryHref={retailHref}
       />
     </div>
   </main>

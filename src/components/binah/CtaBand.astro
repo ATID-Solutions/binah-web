@@ -1,4 +1,6 @@
 ---
+import { waUrl, WA_MESSAGES } from "./whatsapp";
+
 interface Props {
   eyebrow?: string;
   heading: string;
@@ -15,11 +17,16 @@ const {
   heading,
   body,
   primaryLabel = "Agendar demo",
-  primaryHref = "#",
+  primaryHref = waUrl(WA_MESSAGES.demo),
   secondaryLabel,
   secondaryHref,
   id,
 } = Astro.props;
+
+// Open external WhatsApp/mailto/tel in a new tab; keep internal links in-page.
+const isExternal = /^(https?:|mailto:|tel:)/i.test(primaryHref);
+const isSecondaryExternal =
+  !!secondaryHref && /^(https?:|mailto:|tel:)/i.test(secondaryHref);
 ---
 
 <div class="cta-band" id={id}>
@@ -29,10 +36,22 @@ const {
   </div>
   <div class="cta-actions">
     {body && <p style="color: #8a8a85; font-size: 15px; max-width: 36ch; margin-bottom: 8px;">{body}</p>}
-    <a href={primaryHref} class="btn btn-primary">{primaryLabel} <span class="arrow">→</span></a>
+    <a
+      href={primaryHref}
+      class="btn btn-primary"
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
+    >
+      {primaryLabel} <span class="arrow">→</span>
+    </a>
     {
       secondaryLabel && secondaryHref && (
-        <a href={secondaryHref} class="btn btn-ghost">
+        <a
+          href={secondaryHref}
+          class="btn btn-ghost"
+          target={isSecondaryExternal ? "_blank" : undefined}
+          rel={isSecondaryExternal ? "noopener noreferrer" : undefined}
+        >
           {secondaryLabel}
         </a>
       )

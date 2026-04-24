@@ -3,6 +3,13 @@ import Layout from "../layouts/Layout.astro";
 import Nav from "../components/binah/Nav.astro";
 import Footer from "../components/binah/Footer.astro";
 import CtaBand from "../components/binah/CtaBand.astro";
+import { waUrl, WA_MESSAGES } from "../components/binah/whatsapp";
+
+const starterHref = waUrl(WA_MESSAGES.pricingStarter);
+const businessHref = waUrl(WA_MESSAGES.pricingBusiness);
+const scaleHref = waUrl(WA_MESSAGES.pricingScale);
+const facturacionHref = waUrl(WA_MESSAGES.pricingFacturacion);
+const demoHref = waUrl(WA_MESSAGES.demo);
 ---
 
 <Layout title="Precios — Binah" page="precios">
@@ -32,7 +39,7 @@ import CtaBand from "../components/binah/CtaBand.astro";
               >
             </div>
             <div class="price-sub">Módulo CRM · hasta 3 usuarios</div>
-            <a href="#" class="btn btn-outline">Empezar</a>
+            <a href={starterHref} target="_blank" rel="noopener noreferrer" class="btn btn-outline">Empezar</a>
             <ul>
               <li>Módulo CRM (inbox unificado)</li>
               <li>WhatsApp, Instagram y email</li>
@@ -68,7 +75,7 @@ import CtaBand from "../components/binah/CtaBand.astro";
               >
             </div>
             <div class="price-sub">Todos los módulos · hasta 6 usuarios</div>
-            <a href="#" class="btn btn-primary">Empezar</a>
+            <a href={businessHref} target="_blank" rel="noopener noreferrer" class="btn btn-primary">Empezar</a>
             <ul>
               <li>Los 9 módulos incluidos</li>
               <li>3 agentes IA (ventas, soporte, reservas)</li>
@@ -83,7 +90,7 @@ import CtaBand from "../components/binah/CtaBand.astro";
             <div class="plan-name">Scale</div>
             <div class="price">Personalizado</div>
             <div class="price-sub">Para equipos de 7+ usuarios</div>
-            <a href="#" class="btn btn-outline">Hablar con ventas</a>
+            <a href={scaleHref} target="_blank" rel="noopener noreferrer" class="btn btn-outline">Hablar con ventas</a>
             <ul>
               <li>Usuarios ilimitados</li>
               <li>SLA dedicado</li>
@@ -165,7 +172,7 @@ import CtaBand from "../components/binah/CtaBand.astro";
               ¿Cómo se cobra el módulo de Facturación Electrónica?
             </h3>
             <p style="color: var(--ink-soft); font-size: 14px;">
-              El módulo de Facturación Electrónica se cobra por paquetes de facturas, separado del plan. Tenemos paquetes para distintos volúmenes mensuales — <a href="mailto:hola@binah.co" style="color: var(--ink); text-decoration: underline; text-underline-offset: 3px;">contáctanos</a> y te armamos el paquete que se ajuste a tu negocio.
+              El módulo de Facturación Electrónica se cobra por paquetes de facturas, separado del plan. Tenemos paquetes para distintos volúmenes mensuales — <a href={facturacionHref} target="_blank" rel="noopener noreferrer" style="color: var(--ink); text-decoration: underline; text-underline-offset: 3px;">contáctanos</a> y te armamos el paquete que se ajuste a tu negocio.
             </p>
           </div>
           <div style="background: var(--bg); padding: 32px;">
@@ -201,7 +208,7 @@ import CtaBand from "../components/binah/CtaBand.astro";
         eyebrow="¿Aún dudando?"
         heading={`La demo es gratis.<br />Y dura 30 minutos.`}
         primaryLabel="Agendar demo"
-        primaryHref="#"
+        primaryHref={demoHref}
         secondaryLabel="Conoce al equipo"
         secondaryHref="/nosotros"
       />

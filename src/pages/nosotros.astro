@@ -3,6 +3,9 @@ import Layout from "../layouts/Layout.astro";
 import Nav from "../components/binah/Nav.astro";
 import Footer from "../components/binah/Footer.astro";
 import CtaBand from "../components/binah/CtaBand.astro";
+import { waUrl, WA_MESSAGES } from "../components/binah/whatsapp";
+
+const careersHref = waUrl(WA_MESSAGES.careers);
 ---
 
 <Layout title="Nosotros — Binah" page="nosotros">
@@ -106,8 +109,8 @@ import CtaBand from "../components/binah/CtaBand.astro";
         eyebrow="Únete"
         heading={`¿Quieres construir<br />esto con nosotros?`}
         body="Buscamos diseñadores, ingenieros y gente de ventas que entienda el problema profundamente."
-        primaryLabel="Ver empleos"
-        primaryHref="#"
+        primaryLabel="Escríbenos"
+        primaryHref={careersHref}
       />
     </div>
   </main>
