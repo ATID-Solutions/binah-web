@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CRM & Agentes IA — Binah</title>
+  <link rel="icon" href="assets/siteicon.jpg" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="crm">
+  <div id="nav-slot"></div>
+  <main>
+    <div class="container">
+      <div class="crumb"><a href="index.html">Binah</a> <span class="sep">/</span> <a href="modulos.html">Módulos</a> <span class="sep">/</span> CRM & Agentes</div>
+
+      <section class="no-border" style="padding: 40px 0 56px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">
+          <div>
+            <div class="eyebrow">Módulo 01 / CRM</div>
+            <h1 class="display display-lg" style="margin-top: 20px;">Un inbox.<br />Tres agentes.<br />Cero perdidas.</h1>
+            <p class="lead" style="margin-top: 28px; font-size: 18px;">
+              WhatsApp, Instagram y correo en un solo lugar. Tres agentes IA entrenados para tu negocio responden, califican y cierran mientras tú duermes.
+            </p>
+            <div class="hero-cta">
+              <a href="#" class="btn btn-primary">Probar CRM <span class="arrow">→</span></a>
+              <a href="modulos.html" class="btn btn-outline">Ver otros módulos</a>
+            </div>
+          </div>
+          <div style="aspect-ratio: 4/3; background: linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 40px 40px, linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 40px 40px, var(--bg-alt); border: 1px solid var(--line); border-radius: 16px; position: relative;" id="mock-hero"></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <h2 class="display display-md title">Los tres agentes.</h2>
+          <p>Cada uno especializado. Entrenado con tu catálogo, tu tono, tu negocio.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 20px; overflow: hidden;">
+          <div style="background: var(--bg); padding: 40px 32px; display: flex; flex-direction: column; gap: 16px; min-height: 340px;">
+            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">AGENTE A</div>
+            <h3 style="font-family: var(--font-display); font-size: 30px; font-weight: 500; letter-spacing: -0.02em;">Ventas</h3>
+            <p style="color: var(--ink-soft); font-size: 14px;">Saluda, califica, recomienda, cotiza y cierra. Envía link de pago cuando el prospecto está listo. No duerme, no pierde el tono, no se olvida de hacer seguimiento.</p>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--ink-soft); margin-top: auto;">
+              <li>— Conversión promedio 34%</li>
+              <li>— Responde en &lt; 3 segundos</li>
+              <li>— Escala a humano si es necesario</li>
+            </ul>
+          </div>
+          <div style="background: var(--bg); padding: 40px 32px; display: flex; flex-direction: column; gap: 16px; min-height: 340px;">
+            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">AGENTE B</div>
+            <h3 style="font-family: var(--font-display); font-size: 30px; font-weight: 500; letter-spacing: -0.02em;">Soporte</h3>
+            <p style="color: var(--ink-soft); font-size: 14px;">Resuelve dudas comunes, rastrea pedidos, procesa cambios y devoluciones. Accede a toda la info del cliente porque vive en la misma base que ventas.</p>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--ink-soft); margin-top: auto;">
+              <li>— Resolución 1er contacto 71%</li>
+              <li>— Integrado con Retail y Pedidos</li>
+              <li>— Aprende de cada conversación</li>
+            </ul>
+          </div>
+          <div style="background: var(--bg); padding: 40px 32px; display: flex; flex-direction: column; gap: 16px; min-height: 340px;">
+            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">AGENTE C</div>
+            <h3 style="font-family: var(--font-display); font-size: 30px; font-weight: 500; letter-spacing: -0.02em;">Reservas</h3>
+            <p style="color: var(--ink-soft); font-size: 14px;">Cuadra citas consultando tu agenda en vivo. Propone horarios, confirma, recuerda, reagenda. Perfecto para servicios y consultorías.</p>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--ink-soft); margin-top: auto;">
+              <li>— Conecta con módulo Operaciones</li>
+              <li>— Recordatorios automáticos</li>
+              <li>— Reduce no-shows 58%</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <h2 class="display display-md title">Todos los canales. Un solo inbox.</h2>
+          <p>Tu equipo responde desde Binah. Tus clientes reciben la respuesta en el canal que eligieron.</p>
+        </div>
+        <div id="crm-channels" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;"></div>
+      </section>
+
+      <div class="cta-band">
+        <div>
+          <div class="eyebrow" style="color: #8a8a85; margin-bottom: 24px;">CRM · Módulo 01</div>
+          <h2>Activa el CRM en 24 horas.</h2>
+        </div>
+        <div class="cta-actions">
+          <p style="color: #8a8a85; font-size: 15px; max-width: 34ch;">Migramos tus contactos, entrenamos los agentes y conectamos tus canales.</p>
+          <a href="#" class="btn btn-primary">Agendar demo <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <div id="footer-slot"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="data.js"></script>
+  <script src="shared.js"></script>
+  <script type="text/babel" src="brands.jsx"></script>
+  <script type="text/babel" src="mocks.jsx"></script>
+  <script type="text/babel">
+    function ChannelCard({ icon, title, desc }) {
+      const Logo = window.BrandLogos[icon];
+      return (
+        <div style={{ border: "1px solid var(--line)", borderRadius: 16, padding: "28px 24px", background: "var(--bg)" }}>
+          <div style={{ height: 32, display: "flex", alignItems: "center" }}>{Logo && <Logo size={26} />}</div>
+          <div style={{ fontFamily: "var(--font-display)", fontSize: 22, fontWeight: 500, letterSpacing: "-0.01em", marginTop: 16 }}>{title}</div>
+          <p style={{ color: "var(--mute)", fontSize: 13, marginTop: 10 }}>{desc}</p>
+        </div>
+      );
+    }
+    function mountCRM() {
+      const mock = document.getElementById("mock-hero");
+      if (mock) { mock.style.padding = "28px"; ReactDOM.createRoot(mock).render(<ModuleMock id="crm" />); }
+      const ch = document.getElementById("crm-channels");
+      if (ch) ReactDOM.createRoot(ch).render(
+        <React.Fragment>
+          <ChannelCard icon="whatsapp" title="WhatsApp Business API" desc="Oficial. Sin apps intermediarias." />
+          <ChannelCard icon="instagram" title="Instagram DM" desc="Conversaciones e historias." />
+          <ChannelCard icon="email" title="Email" desc="Conecta cualquier dominio." />
+          <ChannelCard icon="email" title="Chat web" desc="Widget embebible en tu sitio." />
+        </React.Fragment>
+      );
+    }
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mountCRM);
+    else mountCRM();
+  </script>
+</body>
+</html>

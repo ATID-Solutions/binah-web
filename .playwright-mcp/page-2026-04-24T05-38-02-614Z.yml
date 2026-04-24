@@ -1,0 +1,197 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "Binah" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img "Binah" [ref=e5]
+      - generic [ref=e6]:
+        - link "Inicio" [ref=e7] [cursor=pointer]:
+          - /url: /
+        - link "Módulos" [ref=e8] [cursor=pointer]:
+          - /url: /modulos
+        - link "Precios" [ref=e9] [cursor=pointer]:
+          - /url: /precios
+        - link "Nosotros" [ref=e10] [cursor=pointer]:
+          - /url: /nosotros
+      - generic [ref=e11]:
+        - link "Iniciar sesión" [ref=e12] [cursor=pointer]:
+          - /url: "#"
+        - link "Agendar demo →" [ref=e13] [cursor=pointer]:
+          - /url: "#demo"
+          - text: Agendar demo
+          - generic [ref=e14]: →
+  - main [ref=e15]:
+    - generic [ref=e16]:
+      - generic [ref=e17]:
+        - link "Binah" [ref=e18] [cursor=pointer]:
+          - /url: /
+        - text: /
+        - link "Módulos" [ref=e19] [cursor=pointer]:
+          - /url: /modulos
+        - text: / Retail
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - generic [ref=e23]: Módulo 02 / Retail
+          - heading "Del pedido a la puerta, sin fricción." [level=1] [ref=e24]:
+            - text: Del pedido
+            - text: a la puerta,
+            - text: sin fricción.
+          - paragraph [ref=e25]: Despacha, rastrea y vincula cada pedido con su cliente en segundos. Las transportadoras colombianas — ya conectadas.
+          - generic [ref=e26]:
+            - link "Probar Retail →" [ref=e27] [cursor=pointer]:
+              - /url: "#"
+              - text: Probar Retail
+              - generic [ref=e28]: →
+            - link "Ver otros módulos" [ref=e29] [cursor=pointer]:
+              - /url: /modulos
+        - generic [ref=e32]:
+          - generic [ref=e33]:
+            - generic [ref=e38]: binah.app / pedidos
+            - generic [ref=e39]:
+              - generic [ref=e40]:
+                - generic [ref=e41]: "#4821"
+                - generic [ref=e42]: M. López
+                - generic [ref=e44]: En tránsito
+              - generic [ref=e45]:
+                - generic [ref=e46]: "#4822"
+                - generic [ref=e47]: A. Ruiz
+                - generic [ref=e49]: Despachado
+              - generic [ref=e50]:
+                - generic [ref=e51]: "#4823"
+                - generic [ref=e52]: L. Vega
+                - generic [ref=e54]: Empacando
+          - generic [ref=e55]:
+            - generic [ref=e60]: tracking
+            - generic [ref=e62]:
+              - generic [ref=e65]: Recibido
+              - generic [ref=e69]: Empacado
+              - generic [ref=e73]: Ruta
+              - generic [ref=e77]: Entregado
+          - generic [ref=e78]:
+            - generic [ref=e83]: transportadoras
+            - generic [ref=e84]:
+              - generic [ref=e85]:
+                - generic [ref=e86]: SERVIENTREGA
+                - generic [ref=e87]: "48"
+              - generic [ref=e88]:
+                - generic [ref=e89]: COORDINADORA
+                - generic [ref=e90]: "21"
+      - generic [ref=e91]:
+        - generic [ref=e92]:
+          - heading "Cuatro pasos. Todos automáticos." [level=2] [ref=e93]
+          - paragraph [ref=e94]: Desde que el cliente confirma hasta que el producto toca su puerta.
+        - generic [ref=e95]:
+          - generic [ref=e96]:
+            - generic [ref=e97]: 01 / RECIBIDO
+            - heading "Venta cerrada" [level=3] [ref=e98]
+            - paragraph [ref=e99]: El pedido entra automáticamente desde el CRM, la tienda online, o capturado a mano.
+          - generic [ref=e100]:
+            - generic [ref=e101]: 02 / EMPACADO
+            - heading "Inventario reservado" [level=3] [ref=e102]
+            - paragraph [ref=e103]: Se descuenta del stock, se genera la lista de picking, el equipo de bodega recibe la tarea.
+          - generic [ref=e104]:
+            - generic [ref=e105]: 03 / RUTA
+            - heading "Etiqueta generada" [level=3] [ref=e106]
+            - paragraph [ref=e107]: "Un clic: Servientrega, Coordinadora, Interrapidísimo o la que prefieras. Guía al instante."
+          - generic [ref=e108]:
+            - generic [ref=e109]: 04 / ENTREGADO
+            - heading "Cliente notificado" [level=3] [ref=e110]
+            - paragraph [ref=e111]: El cliente recibe cada actualización en WhatsApp. Tú recibes la factura firmada DIAN.
+      - generic [ref=e112]:
+        - generic [ref=e113]: Integraciones / Plataformas & transportadoras
+        - generic [ref=e115]:
+          - img "shopify" [ref=e117]
+          - img "woocommerce" [ref=e119]
+          - generic [ref=e121]: servientrega
+          - img "coordinadora" [ref=e123]
+          - generic [ref=e125]: interrapidisimo
+          - generic [ref=e126]: + API abierta
+      - generic [ref=e127]:
+        - generic [ref=e128]:
+          - generic [ref=e129]: Retail · Módulo 02
+          - heading "Dispara tu operación." [level=2] [ref=e130]
+        - generic [ref=e131]:
+          - paragraph [ref=e132]: Conectamos tus transportadoras y migramos tu inventario en menos de una semana.
+          - link "Agendar demo →" [ref=e133] [cursor=pointer]:
+            - /url: "#"
+            - text: Agendar demo
+            - generic [ref=e134]: →
+  - contentinfo [ref=e135]:
+    - generic [ref=e136]:
+      - generic [ref=e137]:
+        - generic [ref=e138]:
+          - img "Binah" [ref=e139]
+          - paragraph [ref=e140]: El sistema operativo de los negocios colombianos. Nueve módulos. Una plataforma.
+        - generic [ref=e141]:
+          - heading "Producto" [level=4] [ref=e142]
+          - list [ref=e143]:
+            - listitem [ref=e144]:
+              - link "Módulos" [ref=e145] [cursor=pointer]:
+                - /url: /modulos
+            - listitem [ref=e146]:
+              - link "CRM" [ref=e147] [cursor=pointer]:
+                - /url: /modulo-crm
+            - listitem [ref=e148]:
+              - link "Retail" [ref=e149] [cursor=pointer]:
+                - /url: /modulo-retail
+            - listitem [ref=e150]:
+              - link "Precios" [ref=e151] [cursor=pointer]:
+                - /url: /precios
+        - generic [ref=e152]:
+          - heading "Compañía" [level=4] [ref=e153]
+          - list [ref=e154]:
+            - listitem [ref=e155]:
+              - link "Nosotros" [ref=e156] [cursor=pointer]:
+                - /url: /nosotros
+            - listitem [ref=e157]:
+              - link "Clientes" [ref=e158] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e159]:
+              - link "Empleos" [ref=e160] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e161]:
+              - link "Prensa" [ref=e162] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=e163]:
+          - heading "Recursos" [level=4] [ref=e164]
+          - list [ref=e165]:
+            - listitem [ref=e166]:
+              - link "Documentación" [ref=e167] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e168]:
+              - link "Centro de ayuda" [ref=e169] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e170]:
+              - link "Estado" [ref=e171] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e172]:
+              - link "API" [ref=e173] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=e174]:
+          - heading "Contacto" [level=4] [ref=e175]
+          - list [ref=e176]:
+            - listitem [ref=e177]:
+              - link "hola@binah.co" [ref=e178] [cursor=pointer]:
+                - /url: mailto:hola@binah.co
+            - listitem [ref=e179]:
+              - link "WhatsApp" [ref=e180] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e181]:
+              - link "Barranquilla, Colombia" [ref=e182] [cursor=pointer]:
+                - /url: "#"
+      - generic [ref=e183]:
+        - generic [ref=e184]: © 2026 BINAH S.A.S.
+        - generic [ref=e185]: HECHO EN COLOMBIA ◆ V.2026.04
+  - generic [ref=e188]:
+    - button "Menu" [ref=e189]:
+      - img [ref=e191]
+      - generic: Menu
+    - button "Inspect" [ref=e195]:
+      - img [ref=e197]
+      - generic: Inspect
+    - button "Audit" [ref=e199]:
+      - img [ref=e201]
+      - generic: Audit
+    - button "Settings" [ref=e204]:
+      - img [ref=e206]
+      - generic: Settings

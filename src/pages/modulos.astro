@@ -1,0 +1,32 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/binah/Nav.astro";
+import Footer from "../components/binah/Footer.astro";
+import ModuleList from "../components/binah/ModuleList.tsx";
+---
+
+<Layout title="Módulos — Binah" page="modulos">
+  <Nav />
+  <main>
+    <div class="container-binah">
+      <div class="crumb">
+        <a href="/">Binah</a> <span class="sep">/</span> Módulos
+      </div>
+
+      <section class="binah-section no-border" style="padding: 40px 0 56px;">
+        <div class="eyebrow">Catálogo / 09 módulos</div>
+        <h1 class="display display-lg" style="margin-top: 20px; max-width: 16ch;">
+          Toma solo los que necesitas. O todos.
+        </h1>
+        <p class="lead" style="margin-top: 28px; font-size: 18px;">
+          Cada módulo funciona independiente. Pero cuando los activas todos, Binah se convierte en el único sistema que tu negocio necesita.
+        </p>
+      </section>
+
+      <section class="binah-section no-border" style="padding: 0 0 96px;">
+        <ModuleList client:load />
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Layout>

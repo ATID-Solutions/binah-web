@@ -1,0 +1,124 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/binah/Nav.astro";
+import Footer from "../components/binah/Footer.astro";
+import CtaBand from "../components/binah/CtaBand.astro";
+import ModuleMockFrame from "../components/binah/ModuleMockFrame.tsx";
+import RetailLogos from "../components/binah/RetailLogos.tsx";
+---
+
+<Layout title="Retail — Binah" page="modulos">
+  <Nav />
+  <main>
+    <div class="container-binah">
+      <div class="crumb">
+        <a href="/">Binah</a> <span class="sep">/</span> <a href="/modulos">Módulos</a>
+        <span class="sep">/</span> Retail
+      </div>
+
+      <section class="binah-section no-border" style="padding: 40px 0 56px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">
+          <div>
+            <div class="eyebrow">Módulo 02 / Retail</div>
+            <h1 class="display display-lg" style="margin-top: 20px;">
+              Del pedido<br />a la puerta,<br />sin fricción.
+            </h1>
+            <p class="lead" style="margin-top: 28px; font-size: 18px;">
+              Despacha, rastrea y vincula cada pedido con su cliente en segundos. Las transportadoras colombianas — ya conectadas.
+            </p>
+            <div class="hero-cta">
+              <a href="#" class="btn btn-primary">Probar Retail <span class="arrow">→</span></a>
+              <a href="/modulos" class="btn btn-outline">Ver otros módulos</a>
+            </div>
+          </div>
+          <ModuleMockFrame id="retail" client:load />
+        </div>
+      </section>
+
+      <section class="binah-section">
+        <div class="section-head">
+          <h2 class="display display-md title">Cuatro pasos. Todos automáticos.</h2>
+          <p>Desde que el cliente confirma hasta que el producto toca su puerta.</p>
+        </div>
+        <div
+          style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden;"
+        >
+          <div
+            style="background: var(--bg); padding: 36px 28px; min-height: 280px; display: flex; flex-direction: column; gap: 14px;"
+          >
+            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">
+              01 / RECIBIDO
+            </div>
+            <h3
+              style="font-family: var(--font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.02em;"
+            >
+              Venta cerrada
+            </h3>
+            <p style="color: var(--ink-soft); font-size: 14px;">
+              El pedido entra automáticamente desde el CRM, la tienda online, o capturado a mano.
+            </p>
+          </div>
+          <div
+            style="background: var(--bg); padding: 36px 28px; min-height: 280px; display: flex; flex-direction: column; gap: 14px;"
+          >
+            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">
+              02 / EMPACADO
+            </div>
+            <h3
+              style="font-family: var(--font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.02em;"
+            >
+              Inventario reservado
+            </h3>
+            <p style="color: var(--ink-soft); font-size: 14px;">
+              Se descuenta del stock, se genera la lista de picking, el equipo de bodega recibe la tarea.
+            </p>
+          </div>
+          <div
+            style="background: var(--bg); padding: 36px 28px; min-height: 280px; display: flex; flex-direction: column; gap: 14px;"
+          >
+            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">
+              03 / RUTA
+            </div>
+            <h3
+              style="font-family: var(--font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.02em;"
+            >
+              Etiqueta generada
+            </h3>
+            <p style="color: var(--ink-soft); font-size: 14px;">
+              Un clic: Servientrega, Coordinadora, Interrapidísimo o la que prefieras. Guía al instante.
+            </p>
+          </div>
+          <div
+            style="background: var(--bg); padding: 36px 28px; min-height: 280px; display: flex; flex-direction: column; gap: 14px;"
+          >
+            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">
+              04 / ENTREGADO
+            </div>
+            <h3
+              style="font-family: var(--font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.02em;"
+            >
+              Cliente notificado
+            </h3>
+            <p style="color: var(--ink-soft); font-size: 14px;">
+              El cliente recibe cada actualización en WhatsApp. Tú recibes la factura firmada DIAN.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="binah-section">
+        <div class="eyebrow" style="margin-bottom: 24px;">
+          Integraciones / Plataformas & transportadoras
+        </div>
+        <RetailLogos client:load />
+      </section>
+
+      <CtaBand
+        eyebrow="Retail · Módulo 02"
+        heading="Dispara tu operación."
+        body="Conectamos tus transportadoras y migramos tu inventario en menos de una semana."
+      />
+    </div>
+  </main>
+  <Footer />
+</Layout>

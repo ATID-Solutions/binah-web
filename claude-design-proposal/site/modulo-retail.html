@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Retail — Binah</title>
+  <link rel="icon" href="assets/siteicon.jpg" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="retail">
+  <div id="nav-slot"></div>
+  <main>
+    <div class="container">
+      <div class="crumb"><a href="index.html">Binah</a> <span class="sep">/</span> <a href="modulos.html">Módulos</a> <span class="sep">/</span> Retail</div>
+
+      <section class="no-border" style="padding: 40px 0 56px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">
+          <div>
+            <div class="eyebrow">Módulo 02 / Retail</div>
+            <h1 class="display display-lg" style="margin-top: 20px;">Del pedido<br />a la puerta,<br />sin fricción.</h1>
+            <p class="lead" style="margin-top: 28px; font-size: 18px;">
+              Despacha, rastrea y vincula cada pedido con su cliente en segundos. Las transportadoras colombianas — ya conectadas.
+            </p>
+            <div class="hero-cta">
+              <a href="#" class="btn btn-primary">Probar Retail <span class="arrow">→</span></a>
+              <a href="modulos.html" class="btn btn-outline">Ver otros módulos</a>
+            </div>
+          </div>
+          <div style="aspect-ratio: 4/3; background: linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 40px 40px, linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 40px 40px, var(--bg-alt); border: 1px solid var(--line); border-radius: 16px; position: relative;" id="mock-hero"></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <h2 class="display display-md title">Cuatro pasos. Todos automáticos.</h2>
+          <p>Desde que el cliente confirma hasta que el producto toca su puerta.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 20px; overflow: hidden;">
+          <div style="background: var(--bg); padding: 36px 28px; min-height: 280px; display: flex; flex-direction: column; gap: 14px;">
+            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">01 / RECIBIDO</div>
+            <h3 style="font-family: var(--font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">Venta cerrada</h3>
+            <p style="color: var(--ink-soft); font-size: 14px;">El pedido entra automáticamente desde el CRM, la tienda online, o capturado a mano.</p>
+          </div>
+          <div style="background: var(--bg); padding: 36px 28px; min-height: 280px; display: flex; flex-direction: column; gap: 14px;">
+            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">02 / EMPACADO</div>
+            <h3 style="font-family: var(--font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">Inventario reservado</h3>
+            <p style="color: var(--ink-soft); font-size: 14px;">Se descuenta del stock, se genera la lista de picking, el equipo de bodega recibe la tarea.</p>
+          </div>
+          <div style="background: var(--bg); padding: 36px 28px; min-height: 280px; display: flex; flex-direction: column; gap: 14px;">
+            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">03 / RUTA</div>
+            <h3 style="font-family: var(--font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">Etiqueta generada</h3>
+            <p style="color: var(--ink-soft); font-size: 14px;">Un clic: Servientrega, Coordinadora, Interrapidísimo o la que prefieras. Guía al instante.</p>
+          </div>
+          <div style="background: var(--bg); padding: 36px 28px; min-height: 280px; display: flex; flex-direction: column; gap: 14px;">
+            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">04 / ENTREGADO</div>
+            <h3 style="font-family: var(--font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">Cliente notificado</h3>
+            <p style="color: var(--ink-soft); font-size: 14px;">El cliente recibe cada actualización en WhatsApp. Tú recibes la factura firmada DIAN.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="eyebrow" style="margin-bottom: 24px;">Integraciones / Plataformas & transportadoras</div>
+        <div id="retail-logos"></div>
+      </section>
+
+      <div class="cta-band">
+        <div>
+          <div class="eyebrow" style="color: #8a8a85; margin-bottom: 24px;">Retail · Módulo 02</div>
+          <h2>Dispara tu operación.</h2>
+        </div>
+        <div class="cta-actions">
+          <p style="color: #8a8a85; font-size: 15px; max-width: 34ch;">Conectamos tus transportadoras y migramos tu inventario en menos de una semana.</p>
+          <a href="#" class="btn btn-primary">Agendar demo <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <div id="footer-slot"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="data.js"></script>
+  <script src="shared.js"></script>
+  <script type="text/babel" src="brands.jsx"></script>
+  <script type="text/babel" src="mocks.jsx"></script>
+  <script type="text/babel">
+    function mountRetail() {
+      const el = document.getElementById("mock-hero");
+      if (el) {
+        el.style.padding = "28px";
+        ReactDOM.createRoot(el).render(<ModuleMock id="retail" />);
+      }
+      const lg = document.getElementById("retail-logos");
+      if (lg) ReactDOM.createRoot(lg).render(
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 10, alignItems: "center" }}>
+          <LogoPill icon="shopify" label="Shopify" />
+          <LogoPill icon="woocommerce" label="WooCommerce" />
+          <LogoPill icon="servientrega" label="" />
+          <LogoPill icon="coordinadora" label="" />
+          <LogoPill icon="interrapidisimo" label="" />
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--mute)", padding: "8px 14px", border: "1px dashed var(--line)", borderRadius: 999 }}>+ API abierta</span>
+        </div>
+      );
+    }
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mountRetail);
+    else mountRetail();
+  </script>
+</body>
+</html>

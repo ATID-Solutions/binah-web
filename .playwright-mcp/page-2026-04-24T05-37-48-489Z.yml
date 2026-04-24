@@ -1,0 +1,193 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "Binah" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img "Binah" [ref=e5]
+      - generic [ref=e6]:
+        - link "Inicio" [ref=e7] [cursor=pointer]:
+          - /url: /
+        - link "Módulos" [ref=e8] [cursor=pointer]:
+          - /url: /modulos
+        - link "Precios" [ref=e9] [cursor=pointer]:
+          - /url: /precios
+        - link "Nosotros" [ref=e10] [cursor=pointer]:
+          - /url: /nosotros
+      - generic [ref=e11]:
+        - link "Iniciar sesión" [ref=e12] [cursor=pointer]:
+          - /url: "#"
+        - link "Agendar demo →" [ref=e13] [cursor=pointer]:
+          - /url: "#demo"
+          - text: Agendar demo
+          - generic [ref=e14]: →
+  - main [ref=e15]:
+    - generic [ref=e16]:
+      - generic [ref=e17]:
+        - link "Binah" [ref=e18] [cursor=pointer]:
+          - /url: /
+        - text: / Módulos
+      - generic [ref=e19]:
+        - generic [ref=e20]: Catálogo / 09 módulos
+        - heading "Toma solo los que necesitas. O todos." [level=1] [ref=e21]
+        - paragraph [ref=e22]: Cada módulo funciona independiente. Pero cuando los activas todos, Binah se convierte en el único sistema que tu negocio necesita.
+      - generic [ref=e25]:
+        - link "01 CRM & Agentes Un solo inbox. Tres agentes entrenados. Cero conversaciones perdidas. Inbox unificado multicanal Agente de ventas que convierte prospectos →" [ref=e26] [cursor=pointer]:
+          - /url: /modulo-crm
+          - generic [ref=e27]: "01"
+          - generic [ref=e28]: CRM & Agentes
+          - generic [ref=e29]: Un solo inbox. Tres agentes entrenados. Cero conversaciones perdidas.
+          - generic [ref=e30]:
+            - generic [ref=e31]: Inbox unificado multicanal
+            - generic [ref=e32]: Agente de ventas que convierte prospectos
+          - generic [ref=e33]: →
+        - link "02 Retail Del pedido a la puerta en segundos, no en llamadas. Despacho con un clic a transportadoras Trazabilidad en tiempo real →" [ref=e34] [cursor=pointer]:
+          - /url: /modulo-retail
+          - generic [ref=e35]: "02"
+          - generic [ref=e36]: Retail
+          - generic [ref=e37]: Del pedido a la puerta en segundos, no en llamadas.
+          - generic [ref=e38]:
+            - generic [ref=e39]: Despacho con un clic a transportadoras
+            - generic [ref=e40]: Trazabilidad en tiempo real
+          - generic [ref=e41]: →
+        - link "03 Facturación Electrónica Cada factura, crédito y nota — emitida a la DIAN sin que levantes un dedo. Factura electrónica DIAN Notas crédito y débito →" [ref=e42] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=e43]: "03"
+          - generic [ref=e44]: Facturación Electrónica
+          - generic [ref=e45]: Cada factura, crédito y nota — emitida a la DIAN sin que levantes un dedo.
+          - generic [ref=e46]:
+            - generic [ref=e47]: Factura electrónica DIAN
+            - generic [ref=e48]: Notas crédito y débito
+          - generic [ref=e49]: →
+        - link "04 Contabilidad Tu contador te va a pedir un aumento (de cariño). Órdenes de compra Gestión de proveedores →" [ref=e50] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=e51]: "04"
+          - generic [ref=e52]: Contabilidad
+          - generic [ref=e53]: Tu contador te va a pedir un aumento (de cariño).
+          - generic [ref=e54]:
+            - generic [ref=e55]: Órdenes de compra
+            - generic [ref=e56]: Gestión de proveedores
+          - generic [ref=e57]: →
+        - link "05 Chat Interno Adiós a los grupos de WhatsApp caóticos. Canales por proyecto o área Hilos y menciones →" [ref=e58] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=e59]: "05"
+          - generic [ref=e60]: Chat Interno
+          - generic [ref=e61]: Adiós a los grupos de WhatsApp caóticos.
+          - generic [ref=e62]:
+            - generic [ref=e63]: Canales por proyecto o área
+            - generic [ref=e64]: Hilos y menciones
+          - generic [ref=e65]: →
+        - link "06 Operaciones Para negocios de servicio que viven de la agenda. Agenda multi-recurso Asignación automática →" [ref=e66] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=e67]: "06"
+          - generic [ref=e68]: Operaciones
+          - generic [ref=e69]: Para negocios de servicio que viven de la agenda.
+          - generic [ref=e70]:
+            - generic [ref=e71]: Agenda multi-recurso
+            - generic [ref=e72]: Asignación automática
+          - generic [ref=e73]: →
+        - link "07 Tareas Todo lo tuyo, hecho. En la misma plataforma. Tableros Kanban Vistas de lista y cronograma →" [ref=e74] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=e75]: "07"
+          - generic [ref=e76]: Tareas
+          - generic [ref=e77]: Todo lo tuyo, hecho. En la misma plataforma.
+          - generic [ref=e78]:
+            - generic [ref=e79]: Tableros Kanban
+            - generic [ref=e80]: Vistas de lista y cronograma
+          - generic [ref=e81]: →
+        - link "08 Pagos Cobra en cinco segundos por cualquier canal. Links de pago por WhatsApp Cobros recurrentes →" [ref=e82] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=e83]: "08"
+          - generic [ref=e84]: Pagos
+          - generic [ref=e85]: Cobra en cinco segundos por cualquier canal.
+          - generic [ref=e86]:
+            - generic [ref=e87]: Links de pago por WhatsApp
+            - generic [ref=e88]: Cobros recurrentes
+          - generic [ref=e89]: →
+        - link "09 Reportes La foto completa. En una sola pantalla. Dashboards personalizables Exportes a Excel / PDF →" [ref=e90] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=e91]: "09"
+          - generic [ref=e92]: Reportes
+          - generic [ref=e93]: La foto completa. En una sola pantalla.
+          - generic [ref=e94]:
+            - generic [ref=e95]: Dashboards personalizables
+            - generic [ref=e96]: Exportes a Excel / PDF
+          - generic [ref=e97]: →
+  - contentinfo [ref=e98]:
+    - generic [ref=e99]:
+      - generic [ref=e100]:
+        - generic [ref=e101]:
+          - img "Binah" [ref=e102]
+          - paragraph [ref=e103]: El sistema operativo de los negocios colombianos. Nueve módulos. Una plataforma.
+        - generic [ref=e104]:
+          - heading "Producto" [level=4] [ref=e105]
+          - list [ref=e106]:
+            - listitem [ref=e107]:
+              - link "Módulos" [ref=e108] [cursor=pointer]:
+                - /url: /modulos
+            - listitem [ref=e109]:
+              - link "CRM" [ref=e110] [cursor=pointer]:
+                - /url: /modulo-crm
+            - listitem [ref=e111]:
+              - link "Retail" [ref=e112] [cursor=pointer]:
+                - /url: /modulo-retail
+            - listitem [ref=e113]:
+              - link "Precios" [ref=e114] [cursor=pointer]:
+                - /url: /precios
+        - generic [ref=e115]:
+          - heading "Compañía" [level=4] [ref=e116]
+          - list [ref=e117]:
+            - listitem [ref=e118]:
+              - link "Nosotros" [ref=e119] [cursor=pointer]:
+                - /url: /nosotros
+            - listitem [ref=e120]:
+              - link "Clientes" [ref=e121] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e122]:
+              - link "Empleos" [ref=e123] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e124]:
+              - link "Prensa" [ref=e125] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=e126]:
+          - heading "Recursos" [level=4] [ref=e127]
+          - list [ref=e128]:
+            - listitem [ref=e129]:
+              - link "Documentación" [ref=e130] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e131]:
+              - link "Centro de ayuda" [ref=e132] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e133]:
+              - link "Estado" [ref=e134] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e135]:
+              - link "API" [ref=e136] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=e137]:
+          - heading "Contacto" [level=4] [ref=e138]
+          - list [ref=e139]:
+            - listitem [ref=e140]:
+              - link "hola@binah.co" [ref=e141] [cursor=pointer]:
+                - /url: mailto:hola@binah.co
+            - listitem [ref=e142]:
+              - link "WhatsApp" [ref=e143] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e144]:
+              - link "Barranquilla, Colombia" [ref=e145] [cursor=pointer]:
+                - /url: "#"
+      - generic [ref=e146]:
+        - generic [ref=e147]: © 2026 BINAH S.A.S.
+        - generic [ref=e148]: HECHO EN COLOMBIA ◆ V.2026.04
+  - generic [ref=e151]:
+    - button "Menu" [ref=e152]:
+      - img [ref=e154]
+      - generic: Menu
+    - button "Inspect" [ref=e158]:
+      - img [ref=e160]
+      - generic: Inspect
+    - button "Audit" [ref=e162]:
+      - img [ref=e164]
+      - generic: Audit
+    - button "Settings" [ref=e167]:
+      - img [ref=e169]
+      - generic: Settings

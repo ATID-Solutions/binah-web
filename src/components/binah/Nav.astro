@@ -1,0 +1,73 @@
+---
+const links = [
+  { href: "/", label: "Inicio", key: "index" },
+  { href: "/modulos", label: "Módulos", key: "modulos" },
+  { href: "/precios", label: "Precios", key: "precios" },
+  { href: "/nosotros", label: "Nosotros", key: "nosotros" },
+] as const;
+---
+
+<nav class="nav" transition:persist="binah-nav">
+  <div class="container-binah nav-inner">
+    <a href="/" class="nav-logo" aria-label="Binah">
+      <img class="logo-light" src="/wordmark-black.png" alt="Binah" width="75" height="24" />
+      <img class="logo-dark" src="/wordmark-white.png" alt="Binah" width="75" height="24" />
+    </a>
+    <div class="nav-links" data-nav-links>
+      <span class="nav-pill" data-nav-pill aria-hidden="true"></span>
+      {
+        links.map((l) => (
+          <a href={l.href} data-key={l.key}>
+            {l.label}
+          </a>
+        ))
+      }
+    </div>
+    <div class="nav-cta">
+      <a href="#" class="btn btn-ghost">Iniciar sesión</a>
+      <a href="#demo" class="btn btn-primary">Agendar demo <span class="arrow">→</span></a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Slides the active-pill behind whichever nav link matches the current page.
+  // Runs on initial load and after each Astro view-transition swap.
+  function positionNavPill() {
+    const container = document.querySelector<HTMLElement>("[data-nav-links]");
+    const pill = container?.querySelector<HTMLElement>("[data-nav-pill]");
+    if (!container || !pill) return;
+
+    const page = document.body.dataset.page ?? "";
+    const active = container.querySelector<HTMLAnchorElement>(`a[data-key="${page}"]`);
+
+    container.querySelectorAll<HTMLAnchorElement>("a[data-key]").forEach((a) => {
+      a.classList.toggle("active", a === active);
+    });
+
+    if (!active) {
+      pill.style.opacity = "0";
+      return;
+    }
+
+    pill.style.opacity = "1";
+    pill.style.width = `${active.offsetWidth}px`;
+    pill.style.height = `${active.offsetHeight}px`;
+    pill.style.transform = `translate(${active.offsetLeft}px, ${active.offsetTop}px)`;
+  }
+
+  // The first paint may need fonts to settle before measurements are accurate.
+  function init() {
+    positionNavPill();
+    if (document.fonts?.ready) document.fonts.ready.then(positionNavPill);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init, { once: true });
+  } else {
+    init();
+  }
+
+  document.addEventListener("astro:after-swap", positionNavPill);
+  window.addEventListener("resize", positionNavPill);
+</script>

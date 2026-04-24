@@ -1,0 +1,203 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "Binah" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img "Binah" [ref=e5]
+      - generic [ref=e6]:
+        - link "Inicio" [ref=e7] [cursor=pointer]:
+          - /url: /
+        - link "Módulos" [ref=e8] [cursor=pointer]:
+          - /url: /modulos
+        - link "Precios" [ref=e9] [cursor=pointer]:
+          - /url: /precios
+        - link "Nosotros" [ref=e10] [cursor=pointer]:
+          - /url: /nosotros
+      - generic [ref=e11]:
+        - link "Iniciar sesión" [ref=e12] [cursor=pointer]:
+          - /url: "#"
+        - link "Agendar demo →" [ref=e13] [cursor=pointer]:
+          - /url: "#demo"
+          - text: Agendar demo
+          - generic [ref=e14]: →
+  - main [ref=e15]:
+    - generic [ref=e16]:
+      - generic [ref=e17]:
+        - link "Binah" [ref=e18] [cursor=pointer]:
+          - /url: /
+        - text: / Precios
+      - generic [ref=e19]:
+        - generic [ref=e20]: Planes / COP
+        - heading "Paga por módulo. O por todo." [level=1] [ref=e21]
+        - paragraph [ref=e22]: Sin contratos anuales forzados. Sin letra pequeña. Activa los módulos que necesites y paga solo por ellos.
+        - generic [ref=e23]:
+          - generic [ref=e24]:
+            - generic [ref=e25]: Starter
+            - generic [ref=e26]: $199K/mes
+            - generic [ref=e27]: Módulo CRM · hasta 3 usuarios
+            - link "Empezar" [ref=e28] [cursor=pointer]:
+              - /url: "#"
+            - list [ref=e29]:
+              - listitem [ref=e30]: ✓ Módulo CRM (inbox unificado)
+              - listitem [ref=e31]: ✓ WhatsApp, Instagram y email
+              - listitem [ref=e32]: ✓ Hasta 3 usuarios
+              - listitem [ref=e33]: ✓ Soporte por email
+              - listitem [ref=e34]: ✓ 500 contactos / 1GB
+            - generic [ref=e35]:
+              - generic [ref=e36]:
+                - strong [ref=e37]: + Agente IA de ventas
+                - text: · desde $200K/mes
+              - generic [ref=e38]: Starter + agente = $399K/mes
+          - generic [ref=e39]:
+            - generic [ref=e41]: Business Popular
+            - generic [ref=e42]: $699K/mes
+            - generic [ref=e43]: Todos los módulos · hasta 15 usuarios
+            - link "Empezar" [ref=e44] [cursor=pointer]:
+              - /url: "#"
+            - list [ref=e45]:
+              - listitem [ref=e46]: ✓ Los 9 módulos incluidos
+              - listitem [ref=e47]: ✓ 3 agentes IA (ventas, soporte, reservas)
+              - listitem [ref=e48]: ✓ Hasta 15 usuarios
+              - listitem [ref=e49]: ✓ Facturación DIAN ilimitada
+              - listitem [ref=e50]: ✓ Soporte prioritario
+              - listitem [ref=e51]: ✓ 10K contactos / 50GB
+          - generic [ref=e52]:
+            - generic [ref=e53]: Scale
+            - generic [ref=e54]: Personalizado
+            - generic [ref=e55]: Para equipos de 15+ usuarios
+            - link "Hablar con ventas" [ref=e56] [cursor=pointer]:
+              - /url: "#"
+            - list [ref=e57]:
+              - listitem [ref=e58]: ✓ Usuarios ilimitados
+              - listitem [ref=e59]: ✓ SLA dedicado
+              - listitem [ref=e60]: ✓ Onboarding guiado
+              - listitem [ref=e61]: ✓ Integraciones a medida
+              - listitem [ref=e62]: ✓ Customer Success dedicado
+              - listitem [ref=e63]: ✓ Contratos empresariales
+        - generic [ref=e64]:
+          - generic [ref=e65]:
+            - generic [ref=e66]: CONSUMO IA
+            - generic [ref=e67]: ~200 mensajes incluidos · luego pay-as-you-go
+            - paragraph [ref=e68]: Todos los planes incluyen alrededor de 200 mensajes de IA por mes. Los adicionales se cobran por uso, sin sorpresas — pagas solo lo que consumes.
+          - generic [ref=e69]:
+            - generic [ref=e70]: CAMPAÑAS DE WHATSAPP
+            - generic [ref=e71]: Cobradas directamente por WhatsApp
+            - paragraph [ref=e72]: Binah no cobra extra por campañas. El costo por conversación lo define y factura Meta/WhatsApp según sus tarifas oficiales.
+        - generic [ref=e73]:
+          - generic [ref=e74]: ◆ Sin tarjeta para probar
+          - generic [ref=e75]: ◆ Cancela cuando quieras
+          - generic [ref=e76]: ◆ 14 días gratis en Business
+          - generic [ref=e77]: ◆ Facturación electrónica incluida
+      - generic [ref=e78]:
+        - generic [ref=e79]:
+          - heading "Preguntas frecuentes." [level=2] [ref=e80]
+          - paragraph [ref=e81]: Las cosas que la gente más nos pregunta antes de decidirse.
+        - generic [ref=e82]:
+          - generic [ref=e83]:
+            - generic [ref=e84]: Q.01
+            - heading "¿El Starter incluye el agente de ventas?" [level=3] [ref=e85]
+            - paragraph [ref=e86]: No. El Starter incluye el módulo CRM con inbox unificado por $199K. Si quieres sumar el agente IA de ventas, el total queda en $399K/mes. El agente está incluido por defecto en Business y Scale.
+          - generic [ref=e87]:
+            - generic [ref=e88]: Q.02
+            - heading "¿La facturación DIAN tiene costo extra?" [level=3] [ref=e89]
+            - paragraph [ref=e90]: No. En el plan Business todas las facturas electrónicas están incluidas, sin límite y sin cobro por documento.
+          - generic [ref=e91]:
+            - generic [ref=e92]: Q.03
+            - heading "¿Migro mis datos desde otra herramienta?" [level=3] [ref=e93]
+            - paragraph [ref=e94]: Sí. Te ayudamos a importar clientes, productos, facturas y conversaciones desde casi cualquier plataforma, sin costo en Business y Scale.
+          - generic [ref=e95]:
+            - generic [ref=e96]: Q.04
+            - heading "¿Cómo funciona el cobro de IA y campañas?" [level=3] [ref=e97]
+            - paragraph [ref=e98]: Todos los planes incluyen alrededor de 200 mensajes de IA; los adicionales se facturan por consumo. Las campañas de WhatsApp las cobra Meta/WhatsApp directamente según sus tarifas — Binah no añade margen.
+      - generic [ref=e99]:
+        - generic [ref=e100]:
+          - generic [ref=e101]: ¿Aún dudando?
+          - heading "La demo es gratis. Y dura 30 minutos." [level=2] [ref=e102]:
+            - text: La demo es gratis.
+            - text: Y dura 30 minutos.
+        - generic [ref=e103]:
+          - link "Agendar demo →" [ref=e104] [cursor=pointer]:
+            - /url: "#"
+            - text: Agendar demo
+            - generic [ref=e105]: →
+          - link "Conoce al equipo" [ref=e106] [cursor=pointer]:
+            - /url: /nosotros
+  - contentinfo [ref=e107]:
+    - generic [ref=e108]:
+      - generic [ref=e109]:
+        - generic [ref=e110]:
+          - img "Binah" [ref=e111]
+          - paragraph [ref=e112]: El sistema operativo de los negocios colombianos. Nueve módulos. Una plataforma.
+        - generic [ref=e113]:
+          - heading "Producto" [level=4] [ref=e114]
+          - list [ref=e115]:
+            - listitem [ref=e116]:
+              - link "Módulos" [ref=e117] [cursor=pointer]:
+                - /url: /modulos
+            - listitem [ref=e118]:
+              - link "CRM" [ref=e119] [cursor=pointer]:
+                - /url: /modulo-crm
+            - listitem [ref=e120]:
+              - link "Retail" [ref=e121] [cursor=pointer]:
+                - /url: /modulo-retail
+            - listitem [ref=e122]:
+              - link "Precios" [ref=e123] [cursor=pointer]:
+                - /url: /precios
+        - generic [ref=e124]:
+          - heading "Compañía" [level=4] [ref=e125]
+          - list [ref=e126]:
+            - listitem [ref=e127]:
+              - link "Nosotros" [ref=e128] [cursor=pointer]:
+                - /url: /nosotros
+            - listitem [ref=e129]:
+              - link "Clientes" [ref=e130] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e131]:
+              - link "Empleos" [ref=e132] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e133]:
+              - link "Prensa" [ref=e134] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=e135]:
+          - heading "Recursos" [level=4] [ref=e136]
+          - list [ref=e137]:
+            - listitem [ref=e138]:
+              - link "Documentación" [ref=e139] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e140]:
+              - link "Centro de ayuda" [ref=e141] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e142]:
+              - link "Estado" [ref=e143] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e144]:
+              - link "API" [ref=e145] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=e146]:
+          - heading "Contacto" [level=4] [ref=e147]
+          - list [ref=e148]:
+            - listitem [ref=e149]:
+              - link "hola@binah.co" [ref=e150] [cursor=pointer]:
+                - /url: mailto:hola@binah.co
+            - listitem [ref=e151]:
+              - link "WhatsApp" [ref=e152] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e153]:
+              - link "Barranquilla, Colombia" [ref=e154] [cursor=pointer]:
+                - /url: "#"
+      - generic [ref=e155]:
+        - generic [ref=e156]: © 2026 BINAH S.A.S.
+        - generic [ref=e157]: HECHO EN COLOMBIA ◆ V.2026.04
+  - generic [ref=e160]:
+    - button "Menu" [ref=e161]:
+      - img [ref=e163]
+      - generic: Menu
+    - button "Inspect" [ref=e167]:
+      - img [ref=e169]
+      - generic: Inspect
+    - button "Audit" [ref=e171]:
+      - img [ref=e173]
+      - generic: Audit
+    - button "Settings" [ref=e176]:
+      - img [ref=e178]
+      - generic: Settings

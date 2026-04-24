@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Módulos — Binah</title>
+  <link rel="icon" href="assets/siteicon.jpg" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="modulos">
+  <div id="nav-slot"></div>
+  <main>
+    <div class="container">
+      <div class="crumb"><a href="index.html">Binah</a> <span class="sep">/</span> Módulos</div>
+      <section class="no-border" style="padding: 40px 0 56px;">
+        <div class="eyebrow">Catálogo / 09 módulos</div>
+        <h1 class="display display-lg" style="margin-top: 20px; max-width: 16ch;">
+          Toma solo los que necesitas. O todos.
+        </h1>
+        <p class="lead" style="margin-top: 28px; font-size: 18px;">
+          Cada módulo funciona independiente. Pero cuando los activas todos, Binah se convierte en el único sistema que tu negocio necesita.
+        </p>
+      </section>
+
+      <section class="no-border" style="padding: 0 0 96px;">
+        <div id="list-root"></div>
+      </section>
+    </div>
+  </main>
+  <div id="footer-slot"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="data.js"></script>
+  <script src="shared.js"></script>
+  <script type="text/babel" src="mocks.jsx"></script>
+  <script type="text/babel">
+    function ModuleList() {
+      return (
+        <div style={{ display: "flex", flexDirection: "column", gap: 0, border: "1px solid var(--line)", borderRadius: 20, overflow: "hidden" }}>
+          {window.BINAH_MODULES.map((m, i) => (
+            <a href={m.href} key={m.id} className="module-row" style={{
+              display: "grid",
+              gridTemplateColumns: "80px 1.2fr 2fr 1.4fr 60px",
+              gap: 28,
+              padding: "36px 40px",
+              borderBottom: i < window.BINAH_MODULES.length - 1 ? "1px solid var(--line)" : "none",
+              alignItems: "center",
+              transition: "background .15s"
+            }}
+            onMouseEnter={e => e.currentTarget.style.background = "var(--bg-alt)"}
+            onMouseLeave={e => e.currentTarget.style.background = "transparent"}
+            >
+              <div className="mono" style={{ fontSize: 11, color: "var(--mute)", letterSpacing: "0.1em" }}>{m.num}</div>
+              <div style={{ fontFamily: "var(--font-display)", fontSize: 32, fontWeight: 500, letterSpacing: "-0.02em", lineHeight: 1.02 }}>{m.name}</div>
+              <div style={{ color: "var(--ink-soft)", fontSize: 15, lineHeight: 1.45, maxWidth: "46ch" }}>{m.tagline}</div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                {m.features.slice(0, 2).map((f, j) => (
+                  <span key={j} className="mock-pill" style={{ fontSize: 10 }}>{f}</span>
+                ))}
+              </div>
+              <div style={{ fontFamily: "var(--font-mono)", fontSize: 22, color: "var(--mute)", textAlign: "right" }}>→</div>
+            </a>
+          ))}
+        </div>
+      );
+    }
+    function mountList() {
+      ReactDOM.createRoot(document.getElementById("list-root")).render(<ModuleList />);
+    }
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mountList);
+    else mountList();
+  </script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/binah/Nav.astro";
+import Footer from "../components/binah/Footer.astro";
+import CtaBand from "../components/binah/CtaBand.astro";
+---
+
+<Layout title="Nosotros — Binah" page="nosotros">
+  <Nav />
+  <main>
+    <div class="container-binah">
+      <div class="crumb">
+        <a href="/">Binah</a> <span class="sep">/</span> Nosotros
+      </div>
+
+      <section class="binah-section no-border" style="padding: 40px 0 64px;">
+        <div class="eyebrow">Manifiesto</div>
+        <h1 class="display display-lg" style="margin-top: 20px; max-width: 14ch;">
+          <em style="font-style: normal; color: var(--mute);">"Binah"</em> es entendimiento profundo.
+        </h1>
+        <p class="lead" style="margin-top: 32px; font-size: 20px; max-width: 62ch;">
+          Los negocios colombianos pagan por ocho herramientas distintas, forzándolas a hablar entre sí con integraciones frágiles. Creemos que eso es absurdo. Un negocio merece un sistema que lo entienda completo — ventas, operaciones, finanzas, equipo — no nueve piezas pegadas con cinta.
+        </p>
+      </section>
+
+      <section class="binah-section">
+        <div class="section-head">
+          <h2 class="display display-md title">Tres principios.</h2>
+          <p>Lo que guía cada decisión de producto que tomamos.</p>
+        </div>
+        <div
+          style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden;"
+        >
+          <div style="background: var(--bg); padding: 40px 32px;">
+            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">
+              01 — UNO
+            </div>
+            <h3
+              style="font-family: var(--font-display); font-size: 28px; letter-spacing: -0.02em; font-weight: 500; margin: 18px 0 14px; line-height: 1.05;"
+            >
+              Una base de datos.
+            </h3>
+            <p style="color: var(--ink-soft); font-size: 14px;">
+              Todo tu negocio vive en la misma estructura. Cero integraciones. Cero Zapier. Los datos fluyen sin pedirte permiso.
+            </p>
+          </div>
+          <div style="background: var(--bg); padding: 40px 32px;">
+            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">
+              02 — CERCA
+            </div>
+            <h3
+              style="font-family: var(--font-display); font-size: 28px; letter-spacing: -0.02em; font-weight: 500; margin: 18px 0 14px; line-height: 1.05;"
+            >
+              Hecho aquí.
+            </h3>
+            <p style="color: var(--ink-soft); font-size: 14px;">
+              Entendemos la DIAN, entendemos el WhatsApp, entendemos que la factura tiene que salir ya. Porque vivimos lo mismo que tú.
+            </p>
+          </div>
+          <div style="background: var(--bg); padding: 40px 32px;">
+            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">
+              03 — HUMANO
+            </div>
+            <h3
+              style="font-family: var(--font-display); font-size: 28px; letter-spacing: -0.02em; font-weight: 500; margin: 18px 0 14px; line-height: 1.05;"
+            >
+              La IA ayuda. No reemplaza.
+            </h3>
+            <p style="color: var(--ink-soft); font-size: 14px;">
+              Nuestros agentes aligeran la carga. Las decisiones importantes siguen siendo tuyas. El tono, tuyo. El negocio, tuyo.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="binah-section">
+        <div class="section-head">
+          <h2 class="display display-md title">Dónde estamos.</h2>
+          <p>Un equipo. Una sede. En el Caribe colombiano.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;">
+          <div>
+            <div
+              style="aspect-ratio: 4/3; background: repeating-linear-gradient(45deg, var(--bg-alt) 0 8px, var(--bg) 8px 16px); border: 1px solid var(--line); border-radius: 8px; display: grid; place-items: center; font-family: var(--font-mono); font-size: 11px; color: var(--mute); letter-spacing: 0.1em;"
+            >
+              FOTO · EQUIPO BINAH
+            </div>
+          </div>
+          <div style="padding-top: 8px;">
+            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em; margin-bottom: 6px;">
+              HQ
+            </div>
+            <div
+              style="font-family: var(--font-display); font-size: 40px; letter-spacing: -0.02em; font-weight: 500; line-height: 1.05;"
+            >
+              Barranquilla,<br />Colombia.
+            </div>
+            <p style="color: var(--ink-soft); font-size: 15px; margin-top: 16px; max-width: 36ch;">
+              Todo el equipo — producto, ingeniería, ventas y soporte — trabaja desde una sola ciudad. Nos gusta verle la cara a la gente con la que construimos.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <CtaBand
+        eyebrow="Únete"
+        heading={`¿Quieres construir<br />esto con nosotros?`}
+        body="Buscamos diseñadores, ingenieros y gente de ventas que entienda el problema profundamente."
+        primaryLabel="Ver empleos"
+        primaryHref="#"
+      />
+    </div>
+  </main>
+  <Footer />
+</Layout>

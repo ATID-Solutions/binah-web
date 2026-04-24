@@ -1,30 +1,150 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navigation from '../components/Navigation.astro';
-import Hero from '../components/Hero.astro';
-import SocialProofMarquee from '../components/SocialProofMarquee.astro';
-import ProblemSolution from '../components/ProblemSolution.astro';
-import FeatureGrid from '../components/FeatureGrid.astro';
-import HowItWorks from '../components/HowItWorks.astro';
-import UseCasePersonas from '../components/UseCasePersonas.astro';
-import Testimonials from '../components/Testimonials.astro';
-import FinalCTA from '../components/FinalCTA.astro';
-import Footer from '../components/Footer.astro';
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/binah/Nav.astro";
+import Footer from "../components/binah/Footer.astro";
+import CtaBand from "../components/binah/CtaBand.astro";
+import HeroLogos from "../components/binah/HeroLogos.tsx";
+import Switcher from "../components/binah/Switcher.tsx";
+import ModuleGrid from "../components/binah/ModuleGrid.tsx";
+import FlowDiagram from "../components/binah/FlowDiagram.tsx";
 ---
 
-<Layout title="Binah — Tu e-commerce, una sola plataforma.">
-  <Navigation />
+<Layout title="Binah — El sistema operativo de los negocios colombianos" page="index">
+  <Nav />
+
   <main>
-    <div class="min-h-screen flex flex-col">
-      <Hero />
-      <SocialProofMarquee />
+    <div class="container-binah">
+      <section class="binah-section hero no-border">
+        <div class="eyebrow">Binah / v. 2026</div>
+        <h1 class="display display-xl" style="margin-top: 24px;">
+          Vende más.<br />
+          <em>Opera mejor.</em><br />
+          1 plataforma.
+        </h1>
+        <p class="hero-sub">
+          CRM, retail, facturación electrónica, contabilidad, operaciones, tareas y más — nueve módulos que trabajan como uno. Deja de pagar por ocho herramientas. Corre tu negocio en una sola.
+        </p>
+        <div style="margin-top: 32px;">
+          <HeroLogos client:load />
+        </div>
+        <div class="hero-cta">
+          <a href="#demo" class="btn btn-primary">Agendar demo <span class="arrow">→</span></a>
+          <a href="/modulos" class="btn btn-outline">Ver módulos</a>
+        </div>
+        <div class="hero-meta">
+          <span><span class="dot"></span>Facturación electrónica DIAN</span>
+          <span><span class="dot"></span>WhatsApp Business API</span>
+          <span><span class="dot"></span>Equipos desde 1 hasta 500+</span>
+        </div>
+
+        <Switcher client:load />
+      </section>
     </div>
-    <ProblemSolution />
-    <FeatureGrid />
-    <HowItWorks />
-    <UseCasePersonas />
-    <Testimonials />
-    <FinalCTA />
+
+    <div class="container-binah">
+      <section class="binah-section">
+        <div class="section-num">
+          <span class="n">01</span><span>Módulos</span><span class="rule"></span><span>9 en 1</span>
+        </div>
+        <div class="section-head">
+          <h2 class="display display-lg title">
+            Nueve módulos.<br />
+            Una sola base de datos.
+          </h2>
+          <p>
+            Cada módulo es útil por sí solo. Juntos son imbatibles: una venta cerrada en el CRM dispara la factura electrónica, reserva inventario en retail, genera la orden de despacho y avisa al equipo por chat interno. Todo automático.
+          </p>
+        </div>
+        <ModuleGrid client:load />
+      </section>
+    </div>
+
+    <section class="binah-section band-dark">
+      <div class="band-inner">
+        <div class="section-num">
+          <span class="n">02</span><span>Impacto</span><span class="rule"></span><span>Datos 2026</span>
+        </div>
+        <h2 class="display display-md" style="max-width: 22ch; color: #fafaf8;">
+          Los números que mueven a los <em>equipos que ya migraron</em>.
+        </h2>
+        <div class="stats-editorial">
+          <div class="stat">
+            <span class="sup">¹ Herramientas</span>
+            <div class="value">8<em>→1</em></div>
+            <div class="label">Consolidadas en Binah por equipo promedio.</div>
+          </div>
+          <div class="stat">
+            <span class="sup">² Tiempo</span>
+            <div class="value">73<em>%</em></div>
+            <div class="label">Menos tiempo en tareas administrativas repetitivas.</div>
+          </div>
+          <div class="stat">
+            <span class="sup">³ Conversión</span>
+            <div class="value">2.4<em>×</em></div>
+            <div class="label">Tasa de cierre con el agente de ventas activado.</div>
+          </div>
+          <div class="stat">
+            <span class="sup">⁴ Despacho</span>
+            <div class="value">12<em>s</em></div>
+            <div class="label">Tiempo promedio desde venta hasta orden de envío.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container-binah">
+      <section class="binah-section">
+        <div class="section-num">
+          <span class="n">03</span><span>Caso real</span><span class="rule"></span><span>Retail / Casa Tejida</span>
+        </div>
+        <div class="quote-wrap">
+          <div>
+            <p class="quote">
+              Pasamos de cinco pestañas abiertas a una. El WhatsApp, las facturas, el despacho, todo en Binah.
+            </p>
+          </div>
+          <div>
+            <div class="quote-meta">
+              <div class="avatar"></div>
+              <div>
+                <div style="color: var(--ink); font-weight: 500;">Daniela Herrera</div>
+                <div>Fundadora · Casa Tejida</div>
+              </div>
+            </div>
+            <p
+              style="margin-top: 32px; color: var(--ink-soft); font-size: 15px; line-height: 1.55; max-width: 40ch;"
+            >
+              Equipo de 14 personas. Tres canales de venta. Facturación DIAN automática desde que migraron a Binah hace 8 meses.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="binah-section">
+        <div class="section-num">
+          <span class="n">04</span><span>Cómo se siente</span><span class="rule"></span><span>Un flujo. Seis pasos.</span>
+        </div>
+        <div class="section-head">
+          <h2 class="display display-lg title">Así se siente.</h2>
+          <p>
+            Un menú lateral. Nueve módulos. Los datos que entran por uno, inmediatamente están disponibles en todos los demás. Sin integraciones, sin Zapier, sin peleas entre equipos.
+          </p>
+        </div>
+        <FlowDiagram client:load />
+      </section>
+
+      <CtaBand
+        id="demo"
+        eyebrow="Empieza hoy"
+        heading={`Una demo.<br />Cero compromisos.<br />Todas las respuestas.`}
+        body="Agenda 30 minutos con nuestro equipo. Te mostramos cómo luciría Binah corriendo tu negocio específicamente."
+        primaryLabel="Agendar demo"
+        primaryHref="#"
+        secondaryLabel="Ver precios"
+        secondaryHref="/precios"
+      />
+    </div>
   </main>
+
   <Footer />
 </Layout>

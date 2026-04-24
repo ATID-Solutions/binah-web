@@ -1,0 +1,131 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/binah/Nav.astro";
+import Footer from "../components/binah/Footer.astro";
+import CtaBand from "../components/binah/CtaBand.astro";
+import ModuleMockFrame from "../components/binah/ModuleMockFrame.tsx";
+import ChannelCards from "../components/binah/ChannelCards.tsx";
+---
+
+<Layout title="CRM & Agentes IA — Binah" page="modulos">
+  <Nav />
+  <main>
+    <div class="container-binah">
+      <div class="crumb">
+        <a href="/">Binah</a> <span class="sep">/</span> <a href="/modulos">Módulos</a>
+        <span class="sep">/</span> CRM & Agentes
+      </div>
+
+      <section class="binah-section no-border" style="padding: 40px 0 56px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">
+          <div>
+            <div class="eyebrow">Módulo 01 / CRM</div>
+            <h1 class="display display-lg" style="margin-top: 20px;">
+              Un inbox.<br />Tres agentes.<br />Cero perdidas.
+            </h1>
+            <p class="lead" style="margin-top: 28px; font-size: 18px;">
+              WhatsApp, Instagram y correo en un solo lugar. Tres agentes IA entrenados para tu negocio responden, califican y cierran mientras tú duermes.
+            </p>
+            <div class="hero-cta">
+              <a href="#" class="btn btn-primary">Probar CRM <span class="arrow">→</span></a>
+              <a href="/modulos" class="btn btn-outline">Ver otros módulos</a>
+            </div>
+          </div>
+          <ModuleMockFrame id="crm" client:load />
+        </div>
+      </section>
+
+      <section class="binah-section">
+        <div class="section-head">
+          <h2 class="display display-md title">Los tres agentes.</h2>
+          <p>Cada uno especializado. Entrenado con tu catálogo, tu tono, tu negocio.</p>
+        </div>
+        <div
+          style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden;"
+        >
+          <div
+            style="background: var(--bg); padding: 40px 32px; display: flex; flex-direction: column; gap: 16px; min-height: 340px;"
+          >
+            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">
+              AGENTE A
+            </div>
+            <h3
+              style="font-family: var(--font-display); font-size: 30px; font-weight: 500; letter-spacing: -0.02em;"
+            >
+              Ventas
+            </h3>
+            <p style="color: var(--ink-soft); font-size: 14px;">
+              Saluda, califica, recomienda, cotiza y cierra. Envía link de pago cuando el prospecto está listo. No duerme, no pierde el tono, no se olvida de hacer seguimiento.
+            </p>
+            <ul
+              style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--ink-soft); margin-top: auto; padding: 0;"
+            >
+              <li>— Conversión promedio 34%</li>
+              <li>— Responde en &lt; 3 segundos</li>
+              <li>— Escala a humano si es necesario</li>
+            </ul>
+          </div>
+          <div
+            style="background: var(--bg); padding: 40px 32px; display: flex; flex-direction: column; gap: 16px; min-height: 340px;"
+          >
+            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">
+              AGENTE B
+            </div>
+            <h3
+              style="font-family: var(--font-display); font-size: 30px; font-weight: 500; letter-spacing: -0.02em;"
+            >
+              Soporte
+            </h3>
+            <p style="color: var(--ink-soft); font-size: 14px;">
+              Resuelve dudas comunes, rastrea pedidos, procesa cambios y devoluciones. Accede a toda la info del cliente porque vive en la misma base que ventas.
+            </p>
+            <ul
+              style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--ink-soft); margin-top: auto; padding: 0;"
+            >
+              <li>— Resolución 1er contacto 71%</li>
+              <li>— Integrado con Retail y Pedidos</li>
+              <li>— Aprende de cada conversación</li>
+            </ul>
+          </div>
+          <div
+            style="background: var(--bg); padding: 40px 32px; display: flex; flex-direction: column; gap: 16px; min-height: 340px;"
+          >
+            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">
+              AGENTE C
+            </div>
+            <h3
+              style="font-family: var(--font-display); font-size: 30px; font-weight: 500; letter-spacing: -0.02em;"
+            >
+              Reservas
+            </h3>
+            <p style="color: var(--ink-soft); font-size: 14px;">
+              Cuadra citas consultando tu agenda en vivo. Propone horarios, confirma, recuerda, reagenda. Perfecto para servicios y consultorías.
+            </p>
+            <ul
+              style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--ink-soft); margin-top: auto; padding: 0;"
+            >
+              <li>— Conecta con módulo Operaciones</li>
+              <li>— Recordatorios automáticos</li>
+              <li>— Reduce no-shows 58%</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="binah-section">
+        <div class="section-head">
+          <h2 class="display display-md title">Todos los canales. Un solo inbox.</h2>
+          <p>Tu equipo responde desde Binah. Tus clientes reciben la respuesta en el canal que eligieron.</p>
+        </div>
+        <ChannelCards client:load />
+      </section>
+
+      <CtaBand
+        eyebrow="CRM · Módulo 01"
+        heading="Activa el CRM en 24 horas."
+        body="Migramos tus contactos, entrenamos los agentes y conectamos tus canales."
+      />
+    </div>
+  </main>
+  <Footer />
+</Layout>

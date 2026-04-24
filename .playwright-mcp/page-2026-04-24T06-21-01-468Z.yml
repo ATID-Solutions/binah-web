@@ -1,0 +1,422 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "Binah" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img "Binah" [ref=e5]
+      - generic [ref=e6]:
+        - link "Inicio" [ref=e7] [cursor=pointer]:
+          - /url: /
+        - link "Módulos" [ref=e8] [cursor=pointer]:
+          - /url: /modulos
+        - link "Precios" [ref=e9] [cursor=pointer]:
+          - /url: /precios
+        - link "Nosotros" [ref=e10] [cursor=pointer]:
+          - /url: /nosotros
+      - generic [ref=e11]:
+        - link "Iniciar sesión" [ref=e12] [cursor=pointer]:
+          - /url: "#"
+        - link "Agendar demo →" [ref=e13] [cursor=pointer]:
+          - /url: "#demo"
+          - text: Agendar demo
+          - generic [ref=e14]: →
+  - main [ref=e15]:
+    - generic [ref=e17]:
+      - generic [ref=e18]: Binah / v. 2026
+      - heading "Vende más. Opera mejor. 1 plataforma." [level=1] [ref=e19]:
+        - text: Vende más.
+        - emphasis [ref=e20]: Opera mejor.
+        - text: 1 plataforma.
+      - paragraph [ref=e21]: CRM, retail, facturación electrónica, contabilidad, operaciones, tareas y más — nueve módulos que trabajan como uno. Deja de pagar por ocho herramientas. Corre tu negocio en una sola.
+      - generic [ref=e24]:
+        - generic [ref=e25]: Conectado con las herramientas que ya usas
+        - generic [ref=e26]:
+          - img "whatsapp" [ref=e28]
+          - img "instagram" [ref=e30]
+          - img "dian" [ref=e32]
+          - img "shopify" [ref=e34]
+          - img "wompi" [ref=e36]
+          - img "nequi" [ref=e38]
+      - generic [ref=e39]:
+        - link "Agendar demo →" [ref=e40] [cursor=pointer]:
+          - /url: "#demo"
+          - text: Agendar demo
+          - generic [ref=e41]: →
+        - link "Ver módulos" [ref=e42] [cursor=pointer]:
+          - /url: /modulos
+      - generic [ref=e43]:
+        - generic [ref=e44]: Facturación electrónica DIAN
+        - generic [ref=e46]: WhatsApp Business API
+        - generic [ref=e48]: Equipos desde 1 hasta 500+
+      - generic [ref=e51]:
+        - generic [ref=e52]:
+          - generic [ref=e53]: ↓ Selecciona un módulo
+          - generic [ref=e54]: 9 disponibles · clic para explorar
+        - tablist [ref=e55]:
+          - tab "01 CRM & Agentes" [selected] [ref=e56] [cursor=pointer]:
+            - generic [ref=e57]: "01"
+            - generic [ref=e58]: CRM & Agentes
+            - generic [ref=e59]: ↗
+          - tab "02 Retail" [ref=e60] [cursor=pointer]:
+            - generic [ref=e61]: "02"
+            - generic [ref=e62]: Retail
+            - generic [ref=e63]: ↗
+          - tab "03 Facturación Electrónica" [ref=e64] [cursor=pointer]:
+            - generic [ref=e65]: "03"
+            - generic [ref=e66]: Facturación Electrónica
+            - generic [ref=e67]: ↗
+          - tab "04 Contabilidad" [ref=e68] [cursor=pointer]:
+            - generic [ref=e69]: "04"
+            - generic [ref=e70]: Contabilidad
+            - generic [ref=e71]: ↗
+          - tab "05 Chat Interno" [ref=e72] [cursor=pointer]:
+            - generic [ref=e73]: "05"
+            - generic [ref=e74]: Chat Interno
+            - generic [ref=e75]: ↗
+          - tab "06 Operaciones" [ref=e76] [cursor=pointer]:
+            - generic [ref=e77]: "06"
+            - generic [ref=e78]: Operaciones
+            - generic [ref=e79]: ↗
+          - tab "07 Tareas" [ref=e80] [cursor=pointer]:
+            - generic [ref=e81]: "07"
+            - generic [ref=e82]: Tareas
+            - generic [ref=e83]: ↗
+          - tab "08 Pagos" [ref=e84] [cursor=pointer]:
+            - generic [ref=e85]: "08"
+            - generic [ref=e86]: Pagos
+            - generic [ref=e87]: ↗
+          - tab "09 Reportes" [ref=e88] [cursor=pointer]:
+            - generic [ref=e89]: "09"
+            - generic [ref=e90]: Reportes
+            - generic [ref=e91]: ↗
+        - generic [ref=e92]:
+          - generic [ref=e93]:
+            - generic [ref=e94]: Módulo 01
+            - heading "Un solo inbox. Tres agentes entrenados. Cero conversaciones perdidas." [level=3] [ref=e95]
+            - paragraph [ref=e96]: WhatsApp, Instagram y correo convergen en un inbox único. Tus agentes de IA — ventas, soporte y reservas — responden, califican y cierran 24/7.
+            - generic [ref=e97]:
+              - img "whatsapp" [ref=e99]
+              - img "instagram" [ref=e101]
+              - img [ref=e103]
+            - list [ref=e106]:
+              - listitem [ref=e107]: — Inbox unificado multicanal
+              - listitem [ref=e108]: — Agente de ventas que convierte prospectos
+              - listitem [ref=e109]: — Agente de soporte entrenado con tu knowledge base
+              - listitem [ref=e110]: — Agente de reservas que cuadra citas solo
+            - link "Ver CRM & Agentes →" [ref=e112] [cursor=pointer]:
+              - /url: /modulo-crm
+              - text: Ver CRM & Agentes
+              - generic [ref=e113]: →
+          - generic [ref=e115]:
+            - generic [ref=e116]:
+              - generic [ref=e121]: binah.app / inbox
+              - generic [ref=e122]:
+                - generic [ref=e123]:
+                  - generic [ref=e125]:
+                    - generic [ref=e126]: María López
+                    - generic [ref=e127]: WhatsApp · hace 2 min
+                  - generic [ref=e128]: WA
+                - generic [ref=e129]:
+                  - generic [ref=e131]:
+                    - generic [ref=e132]: Andrés Ruiz
+                    - generic [ref=e133]: Instagram DM · ahora
+                  - generic [ref=e134]: IG
+                - generic [ref=e135]:
+                  - generic [ref=e137]:
+                    - generic [ref=e138]: compras@acme.co
+                    - generic [ref=e139]: Email · hace 8 min
+                  - generic [ref=e140]: "@"
+                - generic [ref=e141]:
+                  - generic [ref=e143]:
+                    - generic [ref=e144]: Lina Vega
+                    - generic [ref=e145]: WhatsApp · hace 15 min
+                  - generic [ref=e146]: WA
+            - generic [ref=e147]:
+              - generic [ref=e152]: agente · ventas
+              - generic [ref=e153]:
+                - generic [ref=e154]: CONVERSIÓN 7D
+                - generic [ref=e155]: 34.2%
+                - generic [ref=e156]: +12 vs sem. anterior
+            - generic [ref=e162]: agente · reservas
+            - generic [ref=e172]:
+              - generic [ref=e177]: agente · soporte
+              - generic [ref=e179]:
+                - generic [ref=e180]: ✓ resuelto
+                - generic [ref=e181]: Cambio talla — Lina V.
+                - generic [ref=e182]: 3s
+    - generic [ref=e184]:
+      - generic [ref=e185]:
+        - generic [ref=e186]: "01"
+        - generic [ref=e187]: Módulos
+        - generic [ref=e189]: 9 en 1
+      - generic [ref=e190]:
+        - heading "Nueve módulos. Una sola base de datos." [level=2] [ref=e191]:
+          - text: Nueve módulos.
+          - text: Una sola base de datos.
+        - paragraph [ref=e192]: "Cada módulo es útil por sí solo. Juntos son imbatibles: una venta cerrada en el CRM dispara la factura electrónica, reserva inventario en retail, genera la orden de despacho y avisa al equipo por chat interno. Todo automático."
+      - generic [ref=e194]:
+        - link "MÓDULO 01 ↗ CRM & Agentes Inbox unificado + agentes IA. Un solo inbox. Tres agentes entrenados. Cero conversaciones perdidas. whatsapp instagram" [ref=e195] [cursor=pointer]:
+          - /url: /modulo-crm
+          - generic [ref=e196]: MÓDULO 01
+          - generic [ref=e197]: ↗
+          - img [ref=e199]
+          - heading "CRM & Agentes" [level=3] [ref=e205]
+          - paragraph [ref=e206]: Inbox unificado + agentes IA. Un solo inbox. Tres agentes entrenados. Cero conversaciones perdidas.
+          - generic [ref=e207]:
+            - img "whatsapp" [ref=e209]
+            - img "instagram" [ref=e211]
+            - img [ref=e213]
+        - link "MÓDULO 02 ↗ Retail Despacho y trazabilidad. Del pedido a la puerta en segundos, no en llamadas. shopify woocommerce coordinadora" [ref=e216] [cursor=pointer]:
+          - /url: /modulo-retail
+          - generic [ref=e217]: MÓDULO 02
+          - generic [ref=e218]: ↗
+          - img [ref=e220]
+          - heading "Retail" [level=3] [ref=e223]
+          - paragraph [ref=e224]: Despacho y trazabilidad. Del pedido a la puerta en segundos, no en llamadas.
+          - generic [ref=e225]:
+            - img "shopify" [ref=e227]
+            - img "woocommerce" [ref=e229]
+            - img "coordinadora" [ref=e231]
+        - link "MÓDULO 03 ↗ Facturación Electrónica DIAN, automática. Cada factura, crédito y nota — emitida a la DIAN sin que levantes un dedo. dian" [ref=e232] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=e233]: MÓDULO 03
+          - generic [ref=e234]: ↗
+          - img [ref=e236]
+          - heading "Facturación Electrónica" [level=3] [ref=e240]
+          - paragraph [ref=e241]: DIAN, automática. Cada factura, crédito y nota — emitida a la DIAN sin que levantes un dedo.
+          - img "dian" [ref=e244]
+        - link "MÓDULO 04 ↗ Contabilidad Costos, compras, proveedores. Tu contador te va a pedir un aumento (de cariño)." [ref=e245] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=e246]: MÓDULO 04
+          - generic [ref=e247]: ↗
+          - img [ref=e249]
+          - heading "Contabilidad" [level=3] [ref=e252]
+          - paragraph [ref=e253]: Costos, compras, proveedores. Tu contador te va a pedir un aumento (de cariño).
+        - link "MÓDULO 05 ↗ Chat Interno Comunicación del equipo. Adiós a los grupos de WhatsApp caóticos." [ref=e254] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=e255]: MÓDULO 05
+          - generic [ref=e256]: ↗
+          - img [ref=e258]
+          - heading "Chat Interno" [level=3] [ref=e261]
+          - paragraph [ref=e262]: Comunicación del equipo. Adiós a los grupos de WhatsApp caóticos.
+        - link "MÓDULO 06 ↗ Operaciones Agenda & servicios. Para negocios de servicio que viven de la agenda." [ref=e263] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=e264]: MÓDULO 06
+          - generic [ref=e265]: ↗
+          - img [ref=e267]
+          - heading "Operaciones" [level=3] [ref=e272]
+          - paragraph [ref=e273]: Agenda & servicios. Para negocios de servicio que viven de la agenda.
+        - link "MÓDULO 07 ↗ Tareas Proyectos del equipo. Todo lo tuyo, hecho. En la misma plataforma." [ref=e274] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=e275]: MÓDULO 07
+          - generic [ref=e276]: ↗
+          - img [ref=e278]
+          - heading "Tareas" [level=3] [ref=e282]
+          - paragraph [ref=e283]: Proyectos del equipo. Todo lo tuyo, hecho. En la misma plataforma.
+        - link "MÓDULO 08 ↗ Pagos Cobros y links. Cobra en cinco segundos por cualquier canal. wompi epayco nequi" [ref=e284] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=e285]: MÓDULO 08
+          - generic [ref=e286]: ↗
+          - img [ref=e288]
+          - heading "Pagos" [level=3] [ref=e290]
+          - paragraph [ref=e291]: Cobros y links. Cobra en cinco segundos por cualquier canal.
+          - generic [ref=e292]:
+            - img "wompi" [ref=e294]
+            - img "epayco" [ref=e296]
+            - img "nequi" [ref=e298]
+        - link "MÓDULO 09 ↗ Reportes Analítica de todo. La foto completa. En una sola pantalla." [ref=e299] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=e300]: MÓDULO 09
+          - generic [ref=e301]: ↗
+          - img [ref=e303]
+          - heading "Reportes" [level=3] [ref=e307]
+          - paragraph [ref=e308]: Analítica de todo. La foto completa. En una sola pantalla.
+    - generic [ref=e310]:
+      - generic [ref=e311]:
+        - generic [ref=e312]: "02"
+        - generic [ref=e313]: Impacto
+        - generic [ref=e315]: Datos 2026
+      - heading "Los números que mueven a los equipos que ya migraron." [level=2] [ref=e316]:
+        - text: Los números que mueven a los
+        - emphasis [ref=e317]: equipos que ya migraron
+        - text: .
+      - generic [ref=e318]:
+        - generic [ref=e319]:
+          - generic [ref=e320]: ¹ Herramientas
+          - generic [ref=e321]:
+            - text: "8"
+            - emphasis [ref=e322]: →1
+          - generic [ref=e323]: Consolidadas en Binah por equipo promedio.
+        - generic [ref=e324]:
+          - generic [ref=e325]: ² Tiempo
+          - generic [ref=e326]:
+            - text: "73"
+            - emphasis [ref=e327]: "%"
+          - generic [ref=e328]: Menos tiempo en tareas administrativas repetitivas.
+        - generic [ref=e329]:
+          - generic [ref=e330]: ³ Conversión
+          - generic [ref=e331]:
+            - text: "2.4"
+            - emphasis [ref=e332]: ×
+          - generic [ref=e333]: Tasa de cierre con el agente de ventas activado.
+        - generic [ref=e334]:
+          - generic [ref=e335]: ⁴ Despacho
+          - generic [ref=e336]:
+            - text: "12"
+            - emphasis [ref=e337]: s
+          - generic [ref=e338]: Tiempo promedio desde venta hasta orden de envío.
+    - generic [ref=e339]:
+      - generic [ref=e340]:
+        - generic [ref=e341]:
+          - generic [ref=e342]: "03"
+          - generic [ref=e343]: Caso real
+          - generic [ref=e345]: Retail / Casa Tejida
+        - generic [ref=e346]:
+          - paragraph [ref=e348]: “ Pasamos de cinco pestañas abiertas a una. El WhatsApp, las facturas, el despacho, todo en Binah.
+          - generic [ref=e349]:
+            - generic [ref=e352]:
+              - generic [ref=e353]: Daniela Herrera
+              - generic [ref=e354]: Fundadora · Casa Tejida
+            - paragraph [ref=e355]: Equipo de 14 personas. Tres canales de venta. Facturación DIAN automática desde que migraron a Binah hace 8 meses.
+      - generic [ref=e356]:
+        - generic [ref=e357]:
+          - generic [ref=e358]: "04"
+          - generic [ref=e359]: Cómo se siente
+          - generic [ref=e361]: Un flujo. Seis pasos.
+        - generic [ref=e362]:
+          - heading "Así se siente." [level=2] [ref=e363]
+          - paragraph [ref=e364]: Un menú lateral. Nueve módulos. Los datos que entran por uno, inmediatamente están disponibles en todos los demás. Sin integraciones, sin Zapier, sin peleas entre equipos.
+        - generic [ref=e366]:
+          - generic [ref=e367]:
+            - generic [ref=e368]:
+              - generic [ref=e369]: "01"
+              - generic [ref=e370]:
+                - generic [ref=e371]: Cliente escribe
+                - generic [ref=e372]: WhatsApp · Instagram · Email
+              - generic [ref=e373]: →
+            - generic [ref=e374]:
+              - generic [ref=e375]: "02"
+              - generic [ref=e376]:
+                - generic [ref=e377]: Agente responde
+                - generic [ref=e378]: Ventas · Soporte · Reservas
+              - generic [ref=e379]: →
+            - generic [ref=e380]:
+              - generic [ref=e381]: "03"
+              - generic [ref=e382]:
+                - generic [ref=e383]: Pedido creado
+                - generic [ref=e384]: Retail + inventario
+              - generic [ref=e385]: →
+            - generic [ref=e386]:
+              - generic [ref=e387]: "04"
+              - generic [ref=e388]:
+                - generic [ref=e389]: Factura DIAN
+                - generic [ref=e390]: Emitida y firmada
+              - generic [ref=e391]: →
+            - generic [ref=e392]:
+              - generic [ref=e393]: "05"
+              - generic [ref=e394]:
+                - generic [ref=e395]: Despacho
+                - generic [ref=e396]: Etiqueta + tracking
+              - generic [ref=e397]: →
+            - generic [ref=e398]:
+              - generic [ref=e399]: "06"
+              - generic [ref=e400]:
+                - generic [ref=e401]: Contabilidad
+                - generic [ref=e402]: Registrado automático
+          - generic [ref=e403]:
+            - generic [ref=e404]: TIEMPO TOTAL
+            - generic [ref=e405]: ~ 8 SEGUNDOS · 0 INTERVENCIÓN HUMANA
+      - generic [ref=e406]:
+        - generic [ref=e407]:
+          - generic [ref=e408]: Empieza hoy
+          - heading "Una demo. Cero compromisos. Todas las respuestas." [level=2] [ref=e409]:
+            - text: Una demo.
+            - text: Cero compromisos.
+            - text: Todas las respuestas.
+        - generic [ref=e410]:
+          - paragraph [ref=e411]: Agenda 30 minutos con nuestro equipo. Te mostramos cómo luciría Binah corriendo tu negocio específicamente.
+          - link "Agendar demo →" [ref=e412] [cursor=pointer]:
+            - /url: "#"
+            - text: Agendar demo
+            - generic [ref=e413]: →
+          - link "Ver precios" [ref=e414] [cursor=pointer]:
+            - /url: /precios
+  - contentinfo [ref=e415]:
+    - generic [ref=e416]:
+      - generic [ref=e417]:
+        - generic [ref=e418]:
+          - img "Binah" [ref=e419]
+          - paragraph [ref=e420]: El sistema operativo de los negocios colombianos. Nueve módulos. Una plataforma.
+        - generic [ref=e421]:
+          - heading "Producto" [level=4] [ref=e422]
+          - list [ref=e423]:
+            - listitem [ref=e424]:
+              - link "Módulos" [ref=e425] [cursor=pointer]:
+                - /url: /modulos
+            - listitem [ref=e426]:
+              - link "CRM" [ref=e427] [cursor=pointer]:
+                - /url: /modulo-crm
+            - listitem [ref=e428]:
+              - link "Retail" [ref=e429] [cursor=pointer]:
+                - /url: /modulo-retail
+            - listitem [ref=e430]:
+              - link "Precios" [ref=e431] [cursor=pointer]:
+                - /url: /precios
+        - generic [ref=e432]:
+          - heading "Compañía" [level=4] [ref=e433]
+          - list [ref=e434]:
+            - listitem [ref=e435]:
+              - link "Nosotros" [ref=e436] [cursor=pointer]:
+                - /url: /nosotros
+            - listitem [ref=e437]:
+              - link "Clientes" [ref=e438] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e439]:
+              - link "Empleos" [ref=e440] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e441]:
+              - link "Prensa" [ref=e442] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=e443]:
+          - heading "Recursos" [level=4] [ref=e444]
+          - list [ref=e445]:
+            - listitem [ref=e446]:
+              - link "Documentación" [ref=e447] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e448]:
+              - link "Centro de ayuda" [ref=e449] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e450]:
+              - link "Estado" [ref=e451] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e452]:
+              - link "API" [ref=e453] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=e454]:
+          - heading "Contacto" [level=4] [ref=e455]
+          - list [ref=e456]:
+            - listitem [ref=e457]:
+              - link "hola@binah.co" [ref=e458] [cursor=pointer]:
+                - /url: mailto:hola@binah.co
+            - listitem [ref=e459]:
+              - link "WhatsApp" [ref=e460] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e461]:
+              - link "Barranquilla, Colombia" [ref=e462] [cursor=pointer]:
+                - /url: "#"
+      - generic [ref=e463]:
+        - generic [ref=e464]: © 2026 BINAH S.A.S.
+        - generic [ref=e465]: HECHO EN COLOMBIA ◆ V.2026.04
+  - generic [ref=e468]:
+    - button "Menu" [ref=e469]:
+      - img [ref=e471]
+      - generic: Menu
+    - button "Inspect" [ref=e475]:
+      - img [ref=e477]
+      - generic: Inspect
+    - button "Audit" [ref=e479]:
+      - img [ref=e481]
+      - generic: Audit
+    - button "Settings" [ref=e484]:
+      - img [ref=e486]
+      - generic: Settings

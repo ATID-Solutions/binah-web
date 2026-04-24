@@ -1,0 +1,41 @@
+---
+interface Props {
+  eyebrow?: string;
+  heading: string;
+  body?: string;
+  primaryLabel?: string;
+  primaryHref?: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+  id?: string;
+}
+
+const {
+  eyebrow = "Empieza hoy",
+  heading,
+  body,
+  primaryLabel = "Agendar demo",
+  primaryHref = "#",
+  secondaryLabel,
+  secondaryHref,
+  id,
+} = Astro.props;
+---
+
+<div class="cta-band" id={id}>
+  <div>
+    <div class="eyebrow" style="margin-bottom: 24px;">{eyebrow}</div>
+    <h2 set:html={heading} />
+  </div>
+  <div class="cta-actions">
+    {body && <p style="color: #8a8a85; font-size: 15px; max-width: 36ch; margin-bottom: 8px;">{body}</p>}
+    <a href={primaryHref} class="btn btn-primary">{primaryLabel} <span class="arrow">→</span></a>
+    {
+      secondaryLabel && secondaryHref && (
+        <a href={secondaryHref} class="btn btn-ghost">
+          {secondaryLabel}
+        </a>
+      )
+    }
+  </div>
+</div>
