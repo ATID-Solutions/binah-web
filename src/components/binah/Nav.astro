@@ -33,8 +33,44 @@ const demoHref = waUrl(WA_MESSAGES.demo);
         Agendar demo <span class="arrow">→</span>
       </a>
     </div>
+    <button
+      class="nav-menu-toggle"
+      type="button"
+      aria-label="Abrir navegación"
+      aria-expanded="false"
+      data-menu-toggle
+    >
+      <span></span>
+      <span></span>
+    </button>
   </div>
 </nav>
+<div class="nav-menu" data-menu>
+  <div class="nav-menu-panel">
+    <div class="nav-menu-top">
+      <a href="/" class="nav-logo" aria-label="Binah">
+        <img class="logo-light" src="/wordmark-black.png" alt="Binah" width="75" height="24" />
+        <img class="logo-dark" src="/wordmark-white.png" alt="Binah" width="75" height="24" />
+      </a>
+      <button class="nav-menu-close" type="button" aria-label="Cerrar navegación" data-menu-close>&times;</button>
+    </div>
+    <div class="nav-menu-links">
+      {
+        links.map((l) => (
+          <a href={l.href} data-menu-link>
+            {l.label}
+          </a>
+        ))
+      }
+    </div>
+    <div class="nav-menu-actions">
+      <a href="#" class="btn btn-outline" data-menu-link>Iniciar sesión</a>
+      <a href={demoHref} target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-menu-link>
+        Agendar demo <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+</div>
 
 <script>
   // Slides the active-pill behind whichever nav link matches the current page.
@@ -76,4 +112,38 @@ const demoHref = waUrl(WA_MESSAGES.demo);
 
   document.addEventListener("astro:after-swap", positionNavPill);
   window.addEventListener("resize", positionNavPill);
+
+  function initMenu() {
+    const menu = document.querySelector<HTMLElement>("[data-menu]");
+    const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+    const close = document.querySelector<HTMLButtonElement>("[data-menu-close]");
+    const links = document.querySelectorAll<HTMLElement>("[data-menu-link]");
+    if (!menu || !toggle || !close) return;
+    if (menu.dataset.menuReady === "true") return;
+    menu.dataset.menuReady = "true";
+
+    const setOpen = (open: boolean) => {
+      menu.classList.toggle("open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+      document.body.classList.toggle("nav-menu-open", open);
+    };
+
+    toggle.addEventListener("click", () => setOpen(!menu.classList.contains("open")));
+    close.addEventListener("click", () => setOpen(false));
+    menu.addEventListener("click", (event) => {
+      if (event.target === menu) setOpen(false);
+    });
+    links.forEach((link) => link.addEventListener("click", () => setOpen(false)));
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") setOpen(false);
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initMenu, { once: true });
+  } else {
+    initMenu();
+  }
+
+  document.addEventListener("astro:after-swap", initMenu);
 </script>

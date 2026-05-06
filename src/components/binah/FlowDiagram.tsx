@@ -1,3 +1,5 @@
+import { useState, type CSSProperties } from "react";
+
 const STEPS = [
   { label: "Cliente escribe", detail: "WhatsApp · Instagram · Email" },
   { label: "Agente responde", detail: "Ventas · Soporte · Reservas" },
@@ -8,73 +10,47 @@ const STEPS = [
 ];
 
 export default function FlowDiagram() {
+  const [active, setActive] = useState(0);
+  const prev = () => setActive((current) => (current === 0 ? STEPS.length - 1 : current - 1));
+  const next = () => setActive((current) => (current === STEPS.length - 1 ? 0 : current + 1));
+
   return (
-    <div style={{ border: "1px solid var(--line)", borderRadius: 10, padding: 40, background: "var(--bg-alt)" }}>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: 16, alignItems: "stretch" }}>
-        {STEPS.map((s, i) => (
-          <div
-            key={i}
-            style={{
-              background: "var(--bg)",
-              border: "1px solid var(--line)",
-              borderRadius: 6,
-              padding: 20,
-              position: "relative",
-              minHeight: 140,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-            }}
-          >
-            <div className="mono" style={{ fontSize: 10, color: "var(--mute)", letterSpacing: "0.1em" }}>0{i + 1}</div>
-            <div>
-              <div
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: 18,
-                  fontWeight: 500,
-                  letterSpacing: "-0.01em",
-                  lineHeight: 1.1,
-                }}
-              >
-                {s.label}
+    <div className="flow-diagram">
+      <div className="flow-viewport">
+        <div className="flow-track" style={{ "--active-step": active } as CSSProperties}>
+          {STEPS.map((s, i) => (
+            <div key={i} className="flow-step">
+              <div className="mono flow-step-num">0{i + 1}</div>
+              <div>
+                <div className="flow-step-label">{s.label}</div>
+                <div className="flow-step-detail">{s.detail}</div>
               </div>
-              <div style={{ fontSize: 12, color: "var(--mute)", marginTop: 6 }}>{s.detail}</div>
+              {i < STEPS.length - 1 && <div className="flow-arrow">→</div>}
             </div>
-            {i < STEPS.length - 1 && (
-              <div
-                style={{
-                  position: "absolute",
-                  right: -14,
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  zIndex: 2,
-                  background: "var(--bg-alt)",
-                  padding: "2px 4px",
-                  fontFamily: "var(--font-mono)",
-                  fontSize: 14,
-                  color: "var(--mute)",
-                }}
-              >
-                →
-              </div>
-            )}
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-      <div
-        style={{
-          marginTop: 24,
-          paddingTop: 20,
-          borderTop: "1px solid var(--line)",
-          display: "flex",
-          justifyContent: "space-between",
-          fontFamily: "var(--font-mono)",
-          fontSize: 11,
-          color: "var(--mute)",
-          letterSpacing: "0.08em",
-        }}
-      >
+      <div className="flow-controls" aria-label="Controles del flujo">
+        <button type="button" onClick={prev} aria-label="Paso anterior">
+          ←
+        </button>
+        <div className="flow-dots">
+          {STEPS.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              className={active === i ? "active" : ""}
+              onClick={() => setActive(i)}
+              aria-label={`Ver paso ${i + 1}`}
+              aria-current={active === i}
+            />
+          ))}
+        </div>
+        <button type="button" onClick={next} aria-label="Paso siguiente">
+          →
+        </button>
+      </div>
+      <div className="flow-total">
         <span>TIEMPO TOTAL</span>
         <span>~ 8 SEGUNDOS · 0 INTERVENCIÓN HUMANA</span>
       </div>

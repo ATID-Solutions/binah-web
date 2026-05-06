@@ -6,6 +6,7 @@ export default function ModuleList() {
 
   return (
     <div
+      className="module-list"
       style={{
         display: "flex",
         flexDirection: "column",
@@ -30,19 +31,31 @@ export default function ModuleList() {
           <a
             href={m.href}
             key={m.id}
+            className="module-list-row"
             style={rowStyle}
             onMouseEnter={() => setHover(m.id)}
             onMouseLeave={() => setHover(null)}
           >
-            <div className="mono" style={{ fontSize: 11, color: "var(--mute)", letterSpacing: "0.1em" }}>{m.num}</div>
-            <div style={{ fontFamily: "var(--font-display)", fontSize: 32, fontWeight: 500, letterSpacing: "-0.02em", lineHeight: 1.02 }}>{m.name}</div>
-            <div style={{ color: "var(--ink-soft)", fontSize: 15, lineHeight: 1.45, maxWidth: "46ch" }}>{m.tagline}</div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+            <div className="mono module-list-num" style={{ fontSize: 11, color: "var(--mute)", letterSpacing: "0.1em" }}>
+              {m.num}
+            </div>
+            <div
+              className="module-list-name"
+              style={{ fontFamily: "var(--font-display)", fontSize: 32, fontWeight: 500, letterSpacing: "-0.02em", lineHeight: 1.02 }}
+            >
+              {m.name}
+            </div>
+            <div className="module-list-tagline" style={{ color: "var(--ink-soft)", fontSize: 15, lineHeight: 1.45, maxWidth: "46ch" }}>
+              {m.tagline}
+            </div>
+            <div className="module-list-features" style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
               {m.features.slice(0, 2).map((f, j) => (
                 <span key={j} className="mock-pill" style={{ fontSize: 10 }}>{f}</span>
               ))}
             </div>
-            <div style={{ fontFamily: "var(--font-mono)", fontSize: 22, color: "var(--mute)", textAlign: "right" }}>→</div>
+            <div className="module-list-arrow" style={{ fontFamily: "var(--font-mono)", fontSize: 22, color: "var(--mute)", textAlign: "right" }}>
+              →
+            </div>
           </a>
         );
       })}
