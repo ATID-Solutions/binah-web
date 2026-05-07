@@ -5,6 +5,7 @@ import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
+  site: 'https://binah.co',
   output: 'server',
   adapter: node({
     mode: 'standalone',

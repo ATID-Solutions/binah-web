@@ -1,0 +1,13 @@
+import { absoluteUrl } from "../lib/seo";
+
+export const GET = () =>
+  new Response(`User-agent: *
+Allow: /
+Disallow: /*/public/data-treatment-policy/
+
+Sitemap: ${absoluteUrl("/sitemap.xml")}
+`, {
+    headers: {
+      "Content-Type": "text/plain; charset=utf-8",
+    },
+  });

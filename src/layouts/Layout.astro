@@ -3,19 +3,54 @@ import { ClientRouter } from "astro:transitions";
 import GoogleTag from "../components/binah/GoogleTag.astro";
 import MetaPixel from "../components/binah/MetaPixel.astro";
 import WhatsAppButton from "../components/binah/WhatsAppButton.astro";
+import { absoluteUrl, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "../lib/seo";
 import "../styles/globals.css";
 
 interface Props {
   title: string;
   description?: string;
   page?: string;
+  canonicalPath?: string;
+  ogImage?: string;
+  ogType?: "website" | "article";
+  noindex?: boolean;
 }
 
 const {
   title,
   description = "Binah — el sistema operativo de los negocios colombianos. Nueve módulos. Una plataforma.",
   page = "index",
+  canonicalPath = Astro.url.pathname,
+  ogImage = DEFAULT_OG_IMAGE,
+  ogType = "website",
+  noindex = false,
 } = Astro.props;
+
+const canonicalUrl = absoluteUrl(canonicalPath);
+const imageUrl = absoluteUrl(ogImage);
+const robotsContent = noindex ? "noindex, nofollow" : "index, follow";
+const structuredData = JSON.stringify([
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: SITE_NAME,
+    url: SITE_URL,
+    logo: absoluteUrl("/binah-symbol-wordmark.png"),
+    email: "hola@binah.co",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Barranquilla",
+      addressCountry: "CO",
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE_NAME,
+    url: SITE_URL,
+    inLanguage: "es-CO",
+  },
+]);
 ---
 
 <!DOCTYPE html>
@@ -26,6 +61,19 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
+    <meta name="robots" content={robotsContent} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:locale" content="es_CO" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -35,6 +83,7 @@ const {
     <ClientRouter />
     <GoogleTag />
     <MetaPixel />
+    <script type="application/ld+json" set:html={structuredData} />
     <title>{title}</title>
   </head>
   <body class="binah-site" data-page={page}>
