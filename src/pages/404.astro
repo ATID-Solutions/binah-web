@@ -1,0 +1,277 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/binah/Nav.astro";
+import Footer from "../components/binah/Footer.astro";
+import { waUrl, WA_MESSAGES } from "../components/binah/whatsapp";
+
+Astro.response.status = 404;
+
+const demoHref = waUrl(WA_MESSAGES.demo);
+const requestedPath = Astro.url.pathname;
+---
+
+<Layout
+  title="Página no encontrada — Binah"
+  description="La página que buscas no existe o cambió de lugar. Vuelve al inicio, revisa los módulos o agenda una demo de Binah."
+  page="not-found"
+>
+  <Nav />
+  <main>
+    <div class="container-binah">
+      <section class="not-found">
+        <div class="not-found-meta" aria-label="Error 404">
+          <span>404</span>
+          <span>Ruta no encontrada</span>
+          <span>{requestedPath}</span>
+        </div>
+
+        <div class="not-found-grid">
+          <div>
+            <div class="eyebrow">Binah / navegación</div>
+            <h1 class="display display-lg">
+              Esta ruta no existe.<br />
+              <em>Binah sí.</em>
+            </h1>
+          </div>
+
+          <div class="not-found-copy">
+            <p>
+              El enlace pudo cambiar o quedar incompleto. Sigue desde una ruta principal y continúa explorando la plataforma.
+            </p>
+            <div class="not-found-actions">
+              <a href="/" class="btn btn-primary">
+                Ir al inicio <span class="arrow">→</span>
+              </a>
+              <a href="/modulos" class="btn btn-outline">Ver módulos</a>
+              <a href={demoHref} target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+                Agendar demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="not-found-routes" aria-label="Rutas sugeridas">
+          <a href="/modulos">
+            <span>01</span>
+            <strong>Módulos</strong>
+            <em>Los 9 módulos de Binah</em>
+          </a>
+          <a href="/precios">
+            <span>02</span>
+            <strong>Precios</strong>
+            <em>Planes en COP</em>
+          </a>
+          <a href="/modulo-crm">
+            <span>03</span>
+            <strong>CRM</strong>
+            <em>Inbox y agentes de ventas</em>
+          </a>
+          <a href="/modulo-retail">
+            <span>04</span>
+            <strong>Retail</strong>
+            <em>Inventario y punto de venta</em>
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .not-found {
+    min-height: calc(100svh - 68px);
+    padding: 40px 0 96px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 64px;
+  }
+
+  .not-found-meta {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    gap: 16px;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mute);
+  }
+
+  .not-found-meta span:first-child {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .not-found-meta span:last-child {
+    min-width: 0;
+    justify-self: end;
+    max-width: 36vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-transform: none;
+    letter-spacing: 0.02em;
+  }
+
+  .not-found-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
+    gap: 72px;
+    align-items: end;
+  }
+
+  .not-found h1 {
+    margin-top: 24px;
+    max-width: 14ch;
+    text-wrap: balance;
+  }
+
+  .not-found h1 em {
+    color: var(--mute);
+    font-style: normal;
+  }
+
+  .not-found-copy {
+    padding-left: 32px;
+    border-left: 1px solid var(--line);
+  }
+
+  .not-found-copy p {
+    max-width: 34ch;
+    color: var(--ink-soft);
+    font-size: 18px;
+    line-height: 1.45;
+  }
+
+  .not-found-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  .not-found-routes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .not-found-routes a {
+    min-height: 180px;
+    padding: 26px 24px;
+    border-right: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: background 0.18s ease, color 0.18s ease;
+  }
+
+  .not-found-routes a:last-child {
+    border-right: none;
+  }
+
+  .not-found-routes a:hover {
+    background: var(--ink);
+    color: var(--bg);
+  }
+
+  .not-found-routes span {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--mute);
+  }
+
+  .not-found-routes strong {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1;
+  }
+
+  .not-found-routes em {
+    margin-top: auto;
+    max-width: 20ch;
+    color: var(--mute);
+    font-size: 13px;
+    font-style: normal;
+    line-height: 1.35;
+  }
+
+  @media (max-width: 960px) {
+    .not-found {
+      min-height: auto;
+      padding: 40px 0 80px;
+    }
+
+    .not-found-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .not-found-copy {
+      padding-left: 0;
+      border-left: none;
+    }
+
+    .not-found-routes {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .not-found-routes a:nth-child(2) {
+      border-right: none;
+    }
+
+    .not-found-routes a:nth-child(n + 3) {
+      border-top: 1px solid var(--line);
+    }
+  }
+
+  @media (max-width: 620px) {
+    .not-found {
+      gap: 44px;
+      padding: 32px 0 64px;
+    }
+
+    .not-found-meta {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .not-found-meta span:last-child {
+      justify-self: start;
+      max-width: 100%;
+    }
+
+    .not-found-copy p {
+      font-size: 16px;
+    }
+
+    .not-found-actions .btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .not-found-routes {
+      grid-template-columns: 1fr;
+    }
+
+    .not-found-routes a,
+    .not-found-routes a:nth-child(2) {
+      min-height: 146px;
+      border-right: none;
+      border-top: 1px solid var(--line);
+    }
+
+    .not-found-routes a:first-child {
+      border-top: none;
+    }
+  }
+</style>
