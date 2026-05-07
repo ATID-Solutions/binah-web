@@ -1,5 +1,7 @@
 ---
 import { ClientRouter } from "astro:transitions";
+import GoogleTag from "../components/binah/GoogleTag.astro";
+import MetaPixel from "../components/binah/MetaPixel.astro";
 import WhatsAppButton from "../components/binah/WhatsAppButton.astro";
 import "../styles/globals.css";
 
@@ -31,9 +33,12 @@ const {
       rel="stylesheet"
     />
     <ClientRouter />
+    <GoogleTag />
+    <MetaPixel />
     <title>{title}</title>
   </head>
   <body class="binah-site" data-page={page}>
+    <MetaPixel noscript />
     <slot />
     <WhatsAppButton />
   </body>

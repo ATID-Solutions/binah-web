@@ -1,0 +1,37 @@
+---
+const tagId = "G-XBF17SX4H1";
+---
+
+<script async src={`https://www.googletagmanager.com/gtag/js?id=${tagId}`}></script>
+<script is:inline define:vars={{ tagId }}>
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function gtag() {
+    window.dataLayer.push(arguments);
+  };
+
+  if (!window.__binahGoogleTagInitialized) {
+    window.gtag("js", new Date());
+    window.gtag("config", tagId);
+    window.__binahGoogleTagInitialized = true;
+    window.__binahGoogleTagLastPath = window.location.pathname + window.location.search;
+  }
+
+  function trackGooglePageView() {
+    var currentPath = window.location.pathname + window.location.search;
+
+    if (window.__binahGoogleTagLastPath === currentPath) {
+      return;
+    }
+
+    window.gtag("config", tagId, {
+      page_path: currentPath,
+      page_title: document.title,
+    });
+    window.__binahGoogleTagLastPath = currentPath;
+  }
+
+  if (!window.__binahGoogleTagPageLoadListener) {
+    document.addEventListener("astro:page-load", trackGooglePageView);
+    window.__binahGoogleTagPageLoadListener = true;
+  }
+</script>
