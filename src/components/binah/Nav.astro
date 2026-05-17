@@ -9,6 +9,7 @@ const links = [
 ] as const;
 
 const demoHref = waUrl(WA_MESSAGES.demo);
+const appHref = "https://app.binah.co";
 ---
 
 <nav class="nav" transition:persist="binah-nav">
@@ -28,7 +29,7 @@ const demoHref = waUrl(WA_MESSAGES.demo);
       }
     </div>
     <div class="nav-cta">
-      <a href="#" class="btn btn-ghost">Iniciar sesión</a>
+      <a href={appHref} class="btn btn-ghost">Iniciar sesión</a>
       <a href={demoHref} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
         Agendar demo <span class="arrow">→</span>
       </a>
@@ -64,7 +65,7 @@ const demoHref = waUrl(WA_MESSAGES.demo);
       }
     </div>
     <div class="nav-menu-actions">
-      <a href="#" class="btn btn-outline" data-menu-link>Iniciar sesión</a>
+      <a href={appHref} class="btn btn-outline" data-menu-link>Iniciar sesión</a>
       <a href={demoHref} target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-menu-link>
         Agendar demo <span class="arrow">→</span>
       </a>
