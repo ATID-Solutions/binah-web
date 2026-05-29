@@ -4,6 +4,7 @@ export const GET = () =>
   new Response(`User-agent: *
 Allow: /
 Disallow: /*/public/data-treatment-policy/
+Disallow: /p/
 
 Sitemap: ${absoluteUrl("/sitemap.xml")}
 `, {

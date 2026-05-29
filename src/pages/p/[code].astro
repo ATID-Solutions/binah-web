@@ -1,18 +1,17 @@
 ---
-import PublicPolicyPage from "../../../../components/public-policy/PublicPolicyPage.astro";
-import PublicPolicyLayout from "../../../../layouts/PublicPolicyLayout.astro";
+import PublicPolicyPage from "../../components/public-policy/PublicPolicyPage.astro";
+import PublicPolicyLayout from "../../layouts/PublicPolicyLayout.astro";
 import {
   buildPublicPolicyPageState,
   getPublicPolicyPageTitle,
-} from "../../../../lib/publicPolicy";
+} from "../../lib/publicPolicy";
 
 export const prerender = false;
 
-const { orgId, version } = Astro.params;
+const { code } = Astro.params;
 const pageState = await buildPublicPolicyPageState({
   actionsBaseUrl: import.meta.env.ACTIONS_BASE_URL,
-  orgId,
-  version,
+  code,
 });
 
 Astro.response.status = pageState.status;
