@@ -7,8 +7,8 @@ import { waUrl, WA_MESSAGES } from "../components/binah/whatsapp";
 
 const starterHref = waUrl(WA_MESSAGES.pricingStarter);
 const businessHref = waUrl(WA_MESSAGES.pricingBusiness);
+const proHref = waUrl(WA_MESSAGES.pricingPro);
 const scaleHref = waUrl(WA_MESSAGES.pricingScale);
-const facturacionHref = waUrl(WA_MESSAGES.pricingFacturacion);
 const demoHref = waUrl(WA_MESSAGES.demo);
 ---
 
@@ -46,20 +46,13 @@ const demoHref = waUrl(WA_MESSAGES.demo);
             <div class="price-sub">Módulo CRM · hasta 3 usuarios</div>
             <a href={starterHref} target="_blank" rel="noopener noreferrer" class="btn btn-outline">Empezar</a>
             <ul>
-              <li>Módulo CRM (inbox unificado)</li>
-              <li>WhatsApp, Instagram y email</li>
+              <li>Solo módulo CRM (inbox unificado)</li>
+              <li>WhatsApp, Instagram, email y próximamente TikTok</li>
               <li>Hasta 3 usuarios</li>
+              <li>Hasta 500 contactos atendidos al mes</li>
+              <li>Campañas masivas cotizadas aparte: $100K por cada 1.000 contactos</li>
               <li>Soporte por email</li>
-              <li>500 contactos / 1GB</li>
             </ul>
-            <div
-              style="margin-top: 8px; padding-top: 16px; border-top: 1px dashed var(--line); font-size: 12px; color: var(--mute);"
-            >
-              <div>
-                <strong style="color: var(--ink);">+ Agente IA de ventas</strong> · desde $200K/mes
-              </div>
-              <div style="margin-top: 4px;">Starter + agente = $399K/mes</div>
-            </div>
           </div>
 
           <div class="price-card featured">
@@ -79,59 +72,80 @@ const demoHref = waUrl(WA_MESSAGES.demo);
                 >/mes</span
               >
             </div>
-            <div class="price-sub">Todos los módulos · hasta 6 usuarios</div>
+            <div class="price-sub">CRM + IA · hasta 2.000 contactos/mes</div>
             <a href={businessHref} target="_blank" rel="noopener noreferrer" class="btn btn-primary">Empezar</a>
             <ul>
-              <li>Los 9 módulos incluidos</li>
-              <li>3 agentes IA (ventas, soporte, reservas)</li>
+              <li>Módulo CRM incluido</li>
+              <li>IA incluida</li>
+              <li>Configuración de 1 tipo de agente: ventas, soporte o reservas</li>
               <li>Hasta 6 usuarios</li>
-              <li>Facturación DIAN por paquetes de facturas</li>
-              <li>Soporte prioritario</li>
-              <li>10K contactos / 50GB</li>
+              <li>Hasta 2.000 contactos atendidos al mes</li>
+              <li>Campañas masivas de WhatsApp incluidas</li>
+              <li>Soporte en grupo directo de WhatsApp · respuesta máxima 3 horas</li>
             </ul>
           </div>
 
           <div class="price-card">
-            <div class="plan-name">Scale</div>
-            <div class="price">Personalizado</div>
-            <div class="price-sub">Para equipos de 7+ usuarios</div>
+            <div class="plan-name">Pro</div>
+            <div class="price">
+              $1.99M<span
+                style="font-size: 16px; color: var(--mute); font-family: var(--font-sans); font-weight: 400; letter-spacing: 0;"
+                >/mes</span
+              >
+            </div>
+            <div class="price-sub">Todos los módulos · contactos ilimitados</div>
+            <a href={proHref} target="_blank" rel="noopener noreferrer" class="btn btn-outline">Empezar</a>
+            <ul>
+              <li>Todo lo incluido en Business</li>
+              <li>Todos los módulos de Binah incluidos</li>
+              <li>Contactos atendidos ilimitados</li>
+              <li>Soporte prioritario</li>
+              <li>Respuestas en menos de 30 minutos</li>
+              <li>Onboarding guiado</li>
+            </ul>
+          </div>
+
+          <div class="price-card">
+            <div class="plan-name">Personalizado</div>
+            <div class="price price-text">A medida</div>
+            <div class="price-sub">Para empresas con necesidades específicas</div>
             <a href={scaleHref} target="_blank" rel="noopener noreferrer" class="btn btn-outline">Hablar con ventas</a>
             <ul>
-              <li>Usuarios ilimitados</li>
-              <li>SLA dedicado</li>
-              <li>Onboarding guiado</li>
-              <li>Integraciones a medida</li>
-              <li>Customer Success dedicado</li>
+              <li>Todo lo incluido en Pro</li>
+              <li>Construcción de necesidades específicas para tu empresa</li>
+              <li>Integraciones y flujos a medida</li>
+              <li>Acompañamiento dedicado</li>
+              <li>Alcance, tiempos y precio según el proyecto</li>
               <li>Contratos empresariales</li>
             </ul>
           </div>
         </div>
 
-        <div class="pricing-notes" style="margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-          <div style="border: 1px solid var(--line); border-radius: 8px; padding: 20px 22px;">
+        <div class="pricing-notes">
+          <div class="pricing-note">
             <div class="mono" style="font-size: 10px; color: var(--mute); letter-spacing: 0.12em;">
               CONSUMO IA
             </div>
             <div
               style="font-family: var(--font-display); font-size: 20px; font-weight: 500; letter-spacing: -0.01em; margin-top: 6px;"
             >
-              ~200 mensajes incluidos · luego pay-as-you-go
+              Alrededor de USD 80 incluidos
             </div>
             <p style="color: var(--mute); font-size: 13px; margin-top: 8px;">
-              Todos los planes incluyen alrededor de 200 mensajes de IA por mes. Los adicionales se cobran por uso, sin sorpresas — pagas solo lo que consumes.
+              Los planes con IA incluyen consumo mensual de alrededor de USD 80 o su proporcional en pesos colombianos. El consumo adicional se cobra por uso, sin sorpresas.
             </p>
           </div>
-          <div style="border: 1px solid var(--line); border-radius: 8px; padding: 20px 22px;">
+          <div class="pricing-note">
             <div class="mono" style="font-size: 10px; color: var(--mute); letter-spacing: 0.12em;">
               CAMPAÑAS DE WHATSAPP
             </div>
             <div
               style="font-family: var(--font-display); font-size: 20px; font-weight: 500; letter-spacing: -0.01em; margin-top: 6px;"
             >
-              Cobradas directamente por WhatsApp
+              Incluidas desde Business
             </div>
             <p style="color: var(--mute); font-size: 13px; margin-top: 8px;">
-              Binah no cobra extra por campañas. El costo por conversación lo define y factura Meta/WhatsApp según sus tarifas oficiales.
+              En el plan de $699K las campañas masivas por WhatsApp están incluidas. En Starter se cotizan a $100K por cada 1.000 contactos.
             </p>
           </div>
         </div>
@@ -141,8 +155,8 @@ const demoHref = waUrl(WA_MESSAGES.demo);
         >
           <span>◆ Sin tarjeta para probar</span>
           <span>◆ Cancela cuando quieras</span>
-          <span>◆ 14 días gratis en Business</span>
-          <span>◆ Facturación DIAN por paquetes</span>
+          <span>◆ IA incluida desde $699K</span>
+          <span>◆ Campañas incluidas desde Business</span>
         </div>
       </section>
 
@@ -151,10 +165,7 @@ const demoHref = waUrl(WA_MESSAGES.demo);
           <h2 class="display display-md title">Preguntas frecuentes.</h2>
           <p>Las cosas que la gente más nos pregunta antes de decidirse.</p>
         </div>
-        <div
-          class="faq-grid"
-          style="display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden;"
-        >
+        <div class="faq-grid">
           <div style="background: var(--bg); padding: 32px;">
             <div class="mono" style="font-size: 10px; color: var(--mute); letter-spacing: 0.1em; margin-bottom: 12px;">
               Q.01
@@ -162,10 +173,10 @@ const demoHref = waUrl(WA_MESSAGES.demo);
             <h3
               style="font-family: var(--font-display); font-size: 22px; letter-spacing: -0.02em; font-weight: 500; margin-bottom: 12px;"
             >
-              ¿El Starter incluye el agente de ventas?
+              ¿El Starter incluye IA?
             </h3>
             <p style="color: var(--ink-soft); font-size: 14px;">
-              No. El Starter incluye el módulo CRM con inbox unificado por $199K. Si quieres sumar el agente IA de ventas, el total queda en $399K/mes. El agente está incluido por defecto en Business y Scale.
+              No. El Starter de $199K solo incluye el módulo CRM: WhatsApp, Instagram, email y próximamente TikTok. La IA está incluida desde el plan Business de $699K.
             </p>
           </div>
           <div style="background: var(--bg); padding: 32px;">
@@ -175,10 +186,10 @@ const demoHref = waUrl(WA_MESSAGES.demo);
             <h3
               style="font-family: var(--font-display); font-size: 22px; letter-spacing: -0.02em; font-weight: 500; margin-bottom: 12px;"
             >
-              ¿Cómo se cobra el módulo de Facturación Electrónica?
+              ¿Qué incluye el plan Pro de $1.99M?
             </h3>
             <p style="color: var(--ink-soft); font-size: 14px;">
-              El módulo de Facturación Electrónica se cobra por paquetes de facturas, separado del plan. Tenemos paquetes para distintos volúmenes mensuales — <a href={facturacionHref} target="_blank" rel="noopener noreferrer" style="color: var(--ink); text-decoration: underline; text-underline-offset: 3px;">contáctanos</a> y te armamos el paquete que se ajuste a tu negocio.
+              Incluye todos los módulos de Binah, contactos atendidos ilimitados, soporte prioritario y respuestas en menos de 30 minutos.
             </p>
           </div>
           <div style="background: var(--bg); padding: 32px;">
@@ -191,7 +202,7 @@ const demoHref = waUrl(WA_MESSAGES.demo);
               ¿Migro mis datos desde otra herramienta?
             </h3>
             <p style="color: var(--ink-soft); font-size: 14px;">
-              Sí. Te ayudamos a importar clientes, productos, facturas y conversaciones desde casi cualquier plataforma, sin costo en Business y Scale.
+              Sí. Te ayudamos a importar clientes, productos, facturas y conversaciones desde casi cualquier plataforma, según el alcance del plan y la migración.
             </p>
           </div>
           <div style="background: var(--bg); padding: 32px;">
@@ -204,7 +215,20 @@ const demoHref = waUrl(WA_MESSAGES.demo);
               ¿Cómo funciona el cobro de IA y campañas?
             </h3>
             <p style="color: var(--ink-soft); font-size: 14px;">
-              Todos los planes incluyen alrededor de 200 mensajes de IA; los adicionales se facturan por consumo. Las campañas de WhatsApp las cobra Meta/WhatsApp directamente según sus tarifas — Binah no añade margen.
+              Los planes con IA incluyen consumo mensual de alrededor de USD 80 o su proporcional en pesos colombianos; los adicionales se facturan por consumo. Las campañas de WhatsApp están incluidas desde Business y en Starter se cotizan a $100K por cada 1.000 contactos.
+            </p>
+          </div>
+          <div style="background: var(--bg); padding: 32px;">
+            <div class="mono" style="font-size: 10px; color: var(--mute); letter-spacing: 0.1em; margin-bottom: 12px;">
+              Q.05
+            </div>
+            <h3
+              style="font-family: var(--font-display); font-size: 22px; letter-spacing: -0.02em; font-weight: 500; margin-bottom: 12px;"
+            >
+              ¿Puedo pagar una solución personalizada una sola vez y luego usar un plan más bajo?
+            </h3>
+            <p style="color: var(--ink-soft); font-size: 14px;">
+              Sí. Si necesitas que construyamos algo específico pero tu operación no justifica un plan personalizado constante, podemos negociar ese tipo de situaciones.
             </p>
           </div>
         </div>
