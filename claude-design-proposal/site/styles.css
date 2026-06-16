@@ -524,6 +524,12 @@ footer {
   border-radius: 14px;
   padding: 20px 22px;
 }
+.pricing-disclaimer {
+  margin-top: 12px;
+  color: var(--mute);
+  font-size: 12px;
+  line-height: 1.45;
+}
 .faq-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
