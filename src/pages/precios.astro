@@ -34,90 +34,114 @@ const demoHref = waUrl(WA_MESSAGES.demo);
           Sin contratos anuales forzados. Sin letra pequeña. Activa los módulos que necesites y paga solo por ellos.
         </p>
 
-        <div class="pricing-grid">
-          <div class="price-card">
-            <div class="plan-name">Starter</div>
-            <div class="price">
-              $199K<span
-                style="font-size: 16px; color: var(--mute); font-family: var(--font-sans); font-weight: 400; letter-spacing: 0;"
-                >/mes</span
-              >
-            </div>
-            <div class="price-sub">Módulo CRM · hasta 3 usuarios</div>
-            <a href={starterHref} target="_blank" rel="noopener noreferrer" class="btn btn-outline">Empezar</a>
-            <ul>
-              <li>Solo módulo CRM (inbox unificado)</li>
-              <li>WhatsApp, Instagram, email y próximamente TikTok</li>
-              <li>Hasta 3 usuarios</li>
-              <li>Hasta 500 contactos atendidos al mes</li>
-              <li>Campañas masivas cotizadas aparte: $100K por cada 1.000 contactos</li>
-              <li>Soporte por email</li>
-            </ul>
-          </div>
+        <div class="pricing-billing-wrap">
+          <input class="pricing-billing-input" id="billing-annual" type="checkbox" aria-describedby="billing-annual-copy" />
+          <label class="pricing-billing" for="billing-annual">
+            <span class="billing-option billing-option-monthly">Mensual</span>
+            <span class="pricing-toggle" aria-hidden="true"><span></span></span>
+            <span class="billing-option billing-option-annual">Anual <span class="pricing-discount">-20%</span></span>
+          </label>
+          <p class="pricing-billing-copy" id="billing-annual-copy">
+            Paga el año por adelantado y recibe 20% de descuento.
+          </p>
 
-          <div class="price-card featured">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div class="plan-name">
-                Business
-                <span
-                  class="mock-pill"
-                  style="background: #fff; color: #000; border-color: #fff; margin-left: 8px;"
-                  >Popular</span
-                >
+          <div class="pricing-grid">
+            <div class="price-card">
+              <div class="plan-name">Starter</div>
+              <div class="price">
+                <span class="monthly-price">$199K<span class="price-period">/mes</span></span>
+                <span class="annual-price">
+                  <span class="price-before">$199K/mes</span>
+                  <span class="annual-price-line">$159K<span class="price-period">/mes</span></span>
+                </span>
               </div>
+              <div class="price-sub">
+                <span class="monthly-copy">Módulo CRM · hasta 3 usuarios</span>
+                <span class="annual-copy">Módulo CRM · hasta 3 usuarios · $1.91M/año</span>
+              </div>
+              <a href={starterHref} target="_blank" rel="noopener noreferrer" class="btn btn-outline">Empezar</a>
+              <ul>
+                <li>Solo módulo CRM (inbox unificado)</li>
+                <li>WhatsApp, Instagram, email y próximamente TikTok</li>
+                <li>Hasta 3 usuarios</li>
+                <li>Hasta 500 contactos atendidos al mes</li>
+                <li>Campañas masivas cotizadas aparte: $100K por cada 1.000 contactos</li>
+                <li>Soporte por email</li>
+              </ul>
             </div>
-            <div class="price">
-              $699K<span
-                style="font-size: 16px; color: #8a8a85; font-family: var(--font-sans); font-weight: 400; letter-spacing: 0;"
-                >/mes</span
-              >
-            </div>
-            <div class="price-sub">CRM + IA · hasta 2.000 contactos/mes</div>
-            <a href={businessHref} target="_blank" rel="noopener noreferrer" class="btn btn-primary">Empezar</a>
-            <ul>
-              <li>Módulo CRM incluido</li>
-              <li>IA incluida</li>
-              <li>Configuración de 1 tipo de agente: ventas, soporte o reservas</li>
-              <li>Hasta 6 usuarios</li>
-              <li>Hasta 2.000 contactos atendidos al mes</li>
-              <li>1 campaña masiva de WhatsApp al mes incluida*</li>
-              <li>Soporte en grupo directo de WhatsApp · respuesta máxima 3 horas</li>
-            </ul>
-          </div>
 
-          <div class="price-card">
-            <div class="plan-name">Pro</div>
-            <div class="price">
-              $1.99M<span
-                style="font-size: 16px; color: var(--mute); font-family: var(--font-sans); font-weight: 400; letter-spacing: 0;"
-                >/mes</span
-              >
+            <div class="price-card featured">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="plan-name">
+                  Business
+                  <span
+                    class="mock-pill"
+                    style="background: #fff; color: #000; border-color: #fff; margin-left: 8px;"
+                    >Popular</span
+                  >
+                </div>
+              </div>
+              <div class="price">
+                <span class="monthly-price">$699K<span class="price-period">/mes</span></span>
+                <span class="annual-price">
+                  <span class="price-before">$699K/mes</span>
+                  <span class="annual-price-line">$559K<span class="price-period">/mes</span></span>
+                </span>
+              </div>
+              <div class="price-sub">
+                <span class="monthly-copy">CRM + IA · hasta 2.000 contactos/mes</span>
+                <span class="annual-copy">CRM + IA · hasta 2.000 contactos/mes · $6.71M/año</span>
+              </div>
+              <a href={businessHref} target="_blank" rel="noopener noreferrer" class="btn btn-primary">Empezar</a>
+              <ul>
+                <li>Módulo CRM incluido</li>
+                <li>IA incluida</li>
+                <li>Configuración de 1 tipo de agente: ventas, soporte o reservas</li>
+                <li>Hasta 6 usuarios</li>
+                <li>Hasta 2.000 contactos atendidos al mes</li>
+                <li>1 campaña masiva de WhatsApp al mes incluida*</li>
+                <li>Soporte en grupo directo de WhatsApp · respuesta máxima 3 horas</li>
+              </ul>
             </div>
-            <div class="price-sub">Todos los módulos · contactos ilimitados</div>
-            <a href={proHref} target="_blank" rel="noopener noreferrer" class="btn btn-outline">Empezar</a>
-            <ul>
-              <li>Todo lo incluido en Business</li>
-              <li>Todos los módulos de Binah incluidos</li>
-              <li>Contactos atendidos ilimitados</li>
-              <li>Soporte prioritario</li>
-              <li>Respuestas en menos de 30 minutos</li>
-              <li>Onboarding guiado</li>
-            </ul>
-          </div>
 
-          <div class="price-card">
-            <div class="plan-name">Personalizado</div>
-            <div class="price price-text">A medida</div>
-            <div class="price-sub">Para empresas con necesidades específicas</div>
-            <a href={scaleHref} target="_blank" rel="noopener noreferrer" class="btn btn-outline">Hablar con ventas</a>
-            <ul>
-              <li>Todo lo incluido en Pro</li>
-              <li>Construcción de necesidades específicas para tu empresa</li>
-              <li>Integraciones y flujos a medida</li>
-              <li>Acompañamiento dedicado</li>
-              <li>Alcance, tiempos y precio según el proyecto</li>
-              <li>Contratos empresariales</li>
-            </ul>
+            <div class="price-card">
+              <div class="plan-name">Pro</div>
+              <div class="price">
+                <span class="monthly-price">$1.99M<span class="price-period">/mes</span></span>
+                <span class="annual-price">
+                  <span class="price-before">$1.99M/mes</span>
+                  <span class="annual-price-line">$1.59M<span class="price-period">/mes</span></span>
+                </span>
+              </div>
+              <div class="price-sub">
+                <span class="monthly-copy">Todos los módulos · contactos ilimitados</span>
+                <span class="annual-copy">Todos los módulos · contactos ilimitados · $19.1M/año</span>
+              </div>
+              <a href={proHref} target="_blank" rel="noopener noreferrer" class="btn btn-outline">Empezar</a>
+              <ul>
+                <li>Todo lo incluido en Business</li>
+                <li>Todos los módulos de Binah incluidos</li>
+                <li>Contactos atendidos ilimitados</li>
+                <li>Soporte prioritario</li>
+                <li>Respuestas en menos de 30 minutos</li>
+                <li>Onboarding guiado</li>
+              </ul>
+            </div>
+
+            <div class="price-card">
+              <div class="plan-name">Personalizado</div>
+              <div class="price price-text">A medida</div>
+              <div class="price-sub">Para empresas con necesidades específicas</div>
+              <a href={scaleHref} target="_blank" rel="noopener noreferrer" class="btn btn-outline">Hablar con ventas</a>
+              <ul>
+                <li>Todo lo incluido en Pro</li>
+                <li>Construcción de necesidades específicas para tu empresa</li>
+                <li>Integraciones y flujos a medida</li>
+                <li>Acompañamiento dedicado</li>
+                <li>Alcance, tiempos y precio según el proyecto</li>
+                <li>Contratos empresariales</li>
+              </ul>
+            </div>
           </div>
         </div>
 
