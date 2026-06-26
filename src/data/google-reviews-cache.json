@@ -1,0 +1,22 @@
+{
+  "fetchedAt": "2026-06-26T00:25:57Z",
+  "cacheTtlDays": 7,
+  "placeId": "ChIJq-xyaLNpSUUR_NEflMJzr_U",
+  "placeName": "Binah | Sistema ERP/CRM Multi-Canal para Colombia",
+  "googleMapsUri": "https://maps.google.com/?cid=17703495939762672124&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYASAA",
+  "rating": 5,
+  "userRatingCount": 1,
+  "reviews": [
+    {
+      "authorName": "Mariana Jaramillo",
+      "authorUri": "https://www.google.com/maps/contrib/102853053113873729820/reviews",
+      "authorPhotoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVZmWjldK9dIaPJYGMezy2ik5BjxcMY87g1aUJDceQaB381k9M=s128-c0x00000000-cc-rp-mo",
+      "rating": 5,
+      "relativePublishTimeDescription": "Hace 1 mes",
+      "text": "Excelente servicio y atención, la plataforma es muy amigable y fácil de entender. Muy completa y me permite manejar mi empresa desde 1 solo lugar.",
+      "textLanguageCode": "es",
+      "publishTime": "2026-05-21T15:46:56.549531798Z",
+      "googleMapsUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT21GR2NGaExhbUY2ZDI1SE9FRkhNa3RyVld0SmRGRRAB!2m1!1s0x454969b36872ecab:0xf5af73c2941fd1fc"
+    }
+  ]
+}
