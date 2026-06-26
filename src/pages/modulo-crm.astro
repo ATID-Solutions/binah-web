@@ -6,8 +6,10 @@ import CtaBand from "../components/binah/CtaBand.astro";
 import ModuleMockFrame from "../components/binah/ModuleMockFrame.tsx";
 import ChannelCards from "../components/binah/ChannelCards.tsx";
 import { waUrl, WA_MESSAGES } from "../components/binah/whatsapp";
+import { ALL_SEO_FEATURE_PAGES } from "../lib/marketing-pages";
 
 const crmHref = waUrl(WA_MESSAGES.moduleCrm);
+const crmSolutions = ALL_SEO_FEATURE_PAGES.filter((page) => page.moduleId === "crm").slice(0, 6);
 ---
 
 <Layout
@@ -128,6 +130,23 @@ const crmHref = waUrl(WA_MESSAGES.moduleCrm);
           <p>Tu equipo responde desde Binah. Tus clientes reciben la respuesta en el canal que eligieron.</p>
         </div>
         <ChannelCards client:load />
+      </section>
+
+      <section class="binah-section">
+        <div class="section-head">
+          <h2 class="display display-md title">Soluciones CRM.</h2>
+          <p>Casos concretos para equipos que venden, soportan y reservan por WhatsApp, Instagram y email.</p>
+        </div>
+        <div class="related-links-grid">
+          {
+            crmSolutions.map((page) => (
+              <a href={page.path}>
+                <span>{page.title.replace(" — Binah", "")}</span>
+                <strong>→</strong>
+              </a>
+            ))
+          }
+        </div>
       </section>
 
       <CtaBand

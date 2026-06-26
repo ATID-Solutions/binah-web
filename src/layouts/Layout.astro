@@ -14,6 +14,7 @@ interface Props {
   ogImage?: string;
   ogType?: "website" | "article";
   noindex?: boolean;
+  structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
 const {
@@ -24,12 +25,13 @@ const {
   ogImage = DEFAULT_OG_IMAGE,
   ogType = "website",
   noindex = false,
+  structuredData: pageStructuredData,
 } = Astro.props;
 
 const canonicalUrl = absoluteUrl(canonicalPath);
 const imageUrl = absoluteUrl(ogImage);
 const robotsContent = noindex ? "noindex, nofollow" : "index, follow";
-const structuredData = JSON.stringify([
+const baseStructuredData = [
   {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -50,7 +52,13 @@ const structuredData = JSON.stringify([
     url: SITE_URL,
     inLanguage: "es-CO",
   },
-]);
+];
+const extraStructuredData = pageStructuredData
+  ? Array.isArray(pageStructuredData)
+    ? pageStructuredData
+    : [pageStructuredData]
+  : [];
+const structuredData = JSON.stringify([...baseStructuredData, ...extraStructuredData]);
 ---
 
 <!DOCTYPE html>

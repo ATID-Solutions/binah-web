@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Nav from "../components/binah/Nav.astro";
 import Footer from "../components/binah/Footer.astro";
 import ModuleList from "../components/binah/ModuleList.tsx";
+import { FEATURED_SOLUTIONS } from "../lib/marketing-pages";
 ---
 
 <Layout
@@ -30,6 +31,25 @@ import ModuleList from "../components/binah/ModuleList.tsx";
 
       <section class="binah-section no-border" style="padding: 0 0 96px;">
         <ModuleList client:load />
+      </section>
+
+      <section class="binah-section">
+        <div class="section-head">
+          <h2 class="display display-md title">Soluciones por problema.</h2>
+          <p>
+            Los módulos son la estructura. Estas páginas explican búsquedas concretas de operación, ventas, pagos, DIAN y retail en Colombia.
+          </p>
+        </div>
+        <div class="related-links-grid">
+          {
+            FEATURED_SOLUTIONS.map((page) => (
+              <a href={page.path}>
+                <span>{page.title.replace(" — Binah", "")}</span>
+                <strong>→</strong>
+              </a>
+            ))
+          }
+        </div>
       </section>
     </div>
   </main>

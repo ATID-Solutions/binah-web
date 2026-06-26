@@ -67,7 +67,7 @@ export const BINAH_MODULES: BinahModule[] = [
       "Documento soporte equivalente",
       "Firma digital incluida",
     ],
-    href: "#",
+    href: "/modulo-facturacion-electronica",
   },
   {
     id: "contabilidad",
@@ -83,7 +83,7 @@ export const BINAH_MODULES: BinahModule[] = [
       "Costeo por producto y servicio",
       "Reportes financieros en vivo",
     ],
-    href: "#",
+    href: "/modulo-contabilidad",
   },
   {
     id: "chat",
@@ -99,7 +99,7 @@ export const BINAH_MODULES: BinahModule[] = [
       "Archivos compartidos",
       "Huddles de voz",
     ],
-    href: "#",
+    href: "/modulo-chat-interno",
   },
   {
     id: "operaciones",
@@ -115,7 +115,7 @@ export const BINAH_MODULES: BinahModule[] = [
       "Seguimiento de servicios",
       "Checklists operativas",
     ],
-    href: "#",
+    href: "/modulo-operaciones",
   },
   {
     id: "tareas",
@@ -131,7 +131,7 @@ export const BINAH_MODULES: BinahModule[] = [
       "Asignación y prioridades",
       "Integrado con cada módulo",
     ],
-    href: "#",
+    href: "/modulo-tareas",
   },
   {
     id: "invoice",
@@ -147,7 +147,7 @@ export const BINAH_MODULES: BinahModule[] = [
       "Conciliación automática",
       "Integra PSE, tarjetas, Nequi",
     ],
-    href: "#",
+    href: "/modulo-pagos",
   },
   {
     id: "reportes",
@@ -163,7 +163,7 @@ export const BINAH_MODULES: BinahModule[] = [
       "Reportes programados",
       "Data en tiempo real",
     ],
-    href: "#",
+    href: "/modulo-reportes",
   },
 ];
 

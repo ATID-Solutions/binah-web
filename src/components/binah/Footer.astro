@@ -1,5 +1,6 @@
 ---
 import { waUrl, WA_MESSAGES } from "./whatsapp";
+import { FEATURED_SOLUTIONS } from "../../lib/marketing-pages";
 
 const waContactHref = waUrl(WA_MESSAGES.general);
 ---
@@ -31,12 +32,13 @@ const waContactHref = waUrl(WA_MESSAGES.general);
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Recursos</h4>
+        <h4>Soluciones</h4>
         <ul>
-          <li><a href="#">Documentación</a></li>
-          <li><a href="#">Centro de ayuda</a></li>
-          <li><a href="#">Estado</a></li>
-          <li><a href="#">API</a></li>
+          {
+            FEATURED_SOLUTIONS.map((page) => (
+              <li><a href={page.path}>{page.title.replace(" — Binah", "")}</a></li>
+            ))
+          }
         </ul>
       </div>
       <div class="footer-col">

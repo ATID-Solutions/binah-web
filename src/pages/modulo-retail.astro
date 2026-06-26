@@ -6,8 +6,10 @@ import CtaBand from "../components/binah/CtaBand.astro";
 import ModuleMockFrame from "../components/binah/ModuleMockFrame.tsx";
 import RetailLogos from "../components/binah/RetailLogos.tsx";
 import { waUrl, WA_MESSAGES } from "../components/binah/whatsapp";
+import { ALL_SEO_FEATURE_PAGES } from "../lib/marketing-pages";
 
 const retailHref = waUrl(WA_MESSAGES.moduleRetail);
+const retailSolutions = ALL_SEO_FEATURE_PAGES.filter((page) => page.moduleId === "retail").slice(0, 6);
 ---
 
 <Layout
@@ -121,6 +123,23 @@ const retailHref = waUrl(WA_MESSAGES.moduleRetail);
           Integraciones / Plataformas & transportadoras
         </div>
         <RetailLogos client:load />
+      </section>
+
+      <section class="binah-section">
+        <div class="section-head">
+          <h2 class="display display-md title">Soluciones Retail.</h2>
+          <p>Casos concretos para catálogo, EAN, inventario, bodega, despachos y tracking en Colombia.</p>
+        </div>
+        <div class="related-links-grid">
+          {
+            retailSolutions.map((page) => (
+              <a href={page.path}>
+                <span>{page.title.replace(" — Binah", "")}</span>
+                <strong>→</strong>
+              </a>
+            ))
+          }
+        </div>
       </section>
 
       <CtaBand

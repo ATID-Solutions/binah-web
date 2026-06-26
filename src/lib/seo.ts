@@ -1,8 +1,10 @@
+import { ALL_MARKETING_PAGE_DETAILS } from "./marketing-pages";
+
 export const SITE_URL = (import.meta.env.PUBLIC_SITE_URL ?? "https://binah.co").replace(/\/$/, "");
 export const SITE_NAME = "Binah";
 export const DEFAULT_OG_IMAGE = "/binah-symbol-wordmark.png";
 
-export const marketingPages = [
+const baseMarketingPages = [
   {
     path: "/",
     priority: "1.0",
@@ -34,5 +36,22 @@ export const marketingPages = [
     changefreq: "monthly",
   },
 ] as const;
+
+const generatedMarketingPages = [
+  {
+    path: "/soluciones",
+    priority: "0.9",
+    changefreq: "weekly",
+  },
+  ...ALL_MARKETING_PAGE_DETAILS.map((page) => ({
+    path: page.path,
+    priority: page.sitemapPriority,
+    changefreq: page.changefreq,
+  })),
+];
+
+export const marketingPages = Array.from(
+  new Map([...baseMarketingPages, ...generatedMarketingPages].map((page) => [page.path, page])).values(),
+);
 
 export const absoluteUrl = (path: string) => new URL(path, `${SITE_URL}/`).toString();

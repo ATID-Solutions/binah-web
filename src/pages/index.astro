@@ -9,6 +9,7 @@ import Switcher from "../components/binah/Switcher.tsx";
 import ModuleGrid from "../components/binah/ModuleGrid.tsx";
 import FlowDiagram from "../components/binah/FlowDiagram.tsx";
 import { waUrl, WA_MESSAGES } from "../components/binah/whatsapp";
+import { FEATURED_SOLUTIONS } from "../lib/marketing-pages";
 
 const heroDemoHref = waUrl(WA_MESSAGES.demo);
 ---
@@ -67,6 +68,34 @@ const heroDemoHref = waUrl(WA_MESSAGES.demo);
           </p>
         </div>
         <ModuleGrid client:load />
+      </section>
+
+      <section class="binah-section">
+        <div class="section-num">
+          <span class="n">SEO</span><span>Soluciones</span><span class="rule"></span><span>Colombia</span>
+        </div>
+        <div class="section-head">
+          <h2 class="display display-lg title">
+            Páginas para lo que la gente sí busca.
+          </h2>
+          <p>
+            EAN, DIAN, CRM por WhatsApp, agentes IA, despachos y links de pago. Cada página aterriza un problema concreto en operación colombiana.
+          </p>
+        </div>
+        <div class="solution-strip">
+          {
+            FEATURED_SOLUTIONS.map((page) => (
+              <a href={page.path}>
+                <span class="mono">{page.priority}</span>
+                <strong>{page.title.replace(" — Binah", "")}</strong>
+                <p>{page.searchIntent}</p>
+              </a>
+            ))
+          }
+        </div>
+        <div style="margin-top: 28px;">
+          <a href="/soluciones" class="btn btn-outline">Ver todas las soluciones</a>
+        </div>
       </section>
     </div>
 

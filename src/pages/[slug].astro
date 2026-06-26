@@ -1,0 +1,275 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/binah/Nav.astro";
+import Footer from "../components/binah/Footer.astro";
+import CtaBand from "../components/binah/CtaBand.astro";
+import ModuleMockFrame from "../components/binah/ModuleMockFrame.tsx";
+import {
+  getMarketingPageBySlug,
+  getRelatedPages,
+  type MarketingPageDetail,
+} from "../lib/marketing-pages";
+import { absoluteUrl } from "../lib/seo";
+import { waUrl } from "../components/binah/whatsapp";
+
+const slug = Astro.params.slug ?? "";
+const page = getMarketingPageBySlug(slug);
+
+if (!page) {
+  Astro.response.status = 404;
+}
+
+const demoHref = page
+  ? waUrl(`Hola, quiero conocer ${page.h1.replace(/\.$/, "")} en Binah.`)
+  : waUrl("Hola, quisiera más información sobre Binah.");
+
+const pageTitle = page?.title ?? "Página no encontrada — Binah";
+const pageDescription =
+  page?.description ?? "La página que buscas no existe o cambió de lugar.";
+const related = page ? getRelatedPages(page) : [];
+
+const faqSchema =
+  page && page.faqs.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: page.faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+          },
+        })),
+      }
+    : undefined;
+
+const softwareSchema = page
+  ? {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: `Binah - ${page.h1}`,
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web",
+      description: page.description,
+      url: absoluteUrl(page.path),
+      areaServed: {
+        "@type": "Country",
+        name: "Colombia",
+      },
+      offers: {
+        "@type": "Offer",
+        url: absoluteUrl("/precios"),
+      },
+    }
+  : undefined;
+
+const structuredData = [faqSchema, softwareSchema].filter(Boolean) as Array<
+  Record<string, unknown>
+>;
+
+const renderMissingPage = !page;
+const typedPage = page as MarketingPageDetail;
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  page={typedPage?.kind === "solution" ? "soluciones" : "modulos"}
+  canonicalPath={typedPage?.path ?? Astro.url.pathname}
+  structuredData={structuredData}
+  noindex={renderMissingPage}
+>
+  <Nav />
+  <main>
+    {
+      renderMissingPage ? (
+        <div class="container-binah">
+          <section class="binah-section no-border" style="padding: 72px 0 120px;">
+            <div class="eyebrow">404 / Binah</div>
+            <h1 class="display display-lg" style="margin-top: 20px;">No encontramos esa página.</h1>
+            <p class="lead" style="margin-top: 28px;">
+              Puede que la ruta haya cambiado. Vuelve a soluciones o revisa los módulos disponibles.
+            </p>
+            <div class="hero-cta">
+              <a href="/soluciones" class="btn btn-primary">Ver soluciones <span class="arrow">→</span></a>
+              <a href="/modulos" class="btn btn-outline">Ver módulos</a>
+            </div>
+          </section>
+        </div>
+      ) : (
+        <>
+          <div class="container-binah">
+            <div class="crumb">
+              <a href="/">Binah</a> <span class="sep">/</span>{" "}
+              <a href={typedPage.kind === "solution" ? "/soluciones" : "/modulos"}>
+                {typedPage.kind === "solution" ? "Soluciones" : "Módulos"}
+              </a>
+              <span class="sep">/</span> {typedPage.moduleName}
+            </div>
+          </div>
+
+          <section class="marketing-detail-hero">
+            <div class="container-binah marketing-detail-hero-inner">
+              <div class="marketing-detail-copy">
+                <div class="eyebrow">{typedPage.eyebrow}</div>
+                <h1 class="display display-lg">{typedPage.h1}</h1>
+                <p class="lead">{typedPage.lead}</p>
+                <div class="hero-cta">
+                  <a href={demoHref} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    Agendar demo <span class="arrow">→</span>
+                  </a>
+                  <a href={typedPage.kind === "solution" ? "/soluciones" : "/modulos"} class="btn btn-outline">
+                    {typedPage.kind === "solution" ? "Ver soluciones" : "Ver módulos"}
+                  </a>
+                </div>
+              </div>
+              <div class="marketing-detail-visual" aria-label={`Vista operativa de ${typedPage.moduleName}`}>
+                <div class="detail-visual-meta">
+                  <span>{typedPage.heroMetric}</span>
+                  <p>{typedPage.heroMetricLabel}</p>
+                </div>
+                <div class="detail-mock-frame">
+                  <ModuleMockFrame id={typedPage.moduleId} client:load />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div class="container-binah">
+            <section class="binah-section compact-section">
+              <div class="section-num">
+                <span class="n">01</span><span>Caso colombiano</span><span class="rule"></span><span>{typedPage.priority}</span>
+              </div>
+              <div class="solution-statement">
+                <h2 class="display display-md">{typedPage.colombiaUseCase}</h2>
+                <p>{typedPage.proof}</p>
+              </div>
+              {typedPage.disclaimer && <p class="seo-disclaimer">{typedPage.disclaimer}</p>}
+            </section>
+
+            <section class="binah-section">
+              <div class="section-head">
+                <h2 class="display display-md title">Cuando lo necesitas.</h2>
+                <p>
+                  Señales operativas que normalmente aparecen antes de que el equipo busque una herramienta nueva.
+                </p>
+              </div>
+              <div class="editorial-list">
+                {
+                  typedPage.situations.map((item, index) => (
+                    <div class="editorial-row">
+                      <span class="mono">{String(index + 1).padStart(2, "0")}</span>
+                      <p>{item}</p>
+                    </div>
+                  ))
+                }
+              </div>
+            </section>
+
+            <section class="binah-section">
+              <div class="section-head">
+                <h2 class="display display-md title">Cómo fluye en Binah.</h2>
+                <p>
+                  El valor no está en una pantalla aislada. Está en que el dato avance por ventas, operación,
+                  facturación y reportes.
+                </p>
+              </div>
+              <div class="workflow-rail">
+                {
+                  typedPage.workflow.map((step, index) => (
+                    <div class="workflow-node">
+                      <div class="workflow-index">{String(index + 1).padStart(2, "0")}</div>
+                      <h3>{step.label}</h3>
+                      <p>{step.detail}</p>
+                    </div>
+                  ))
+                }
+              </div>
+            </section>
+
+            <section class="binah-section">
+              <div class="section-head">
+                <h2 class="display display-md title">Qué queda conectado.</h2>
+                <p>
+                  Piezas concretas que el equipo puede operar, revisar y mejorar sin reconstruir contexto a mano.
+                </p>
+              </div>
+              <div class="capability-grid">
+                {
+                  typedPage.capabilities.map((capability) => (
+                    <div class="capability-item">
+                      <span></span>
+                      <p>{capability}</p>
+                    </div>
+                  ))
+                }
+              </div>
+            </section>
+
+            <section class="binah-section">
+              <div class="section-head">
+                <h2 class="display display-md title">Preguntas frecuentes.</h2>
+                <p>Respuestas cortas para quien está comparando opciones o armando el caso interno.</p>
+              </div>
+              <div class="faq-editorial">
+                {
+                  typedPage.faqs.map((faq, index) => (
+                    <details open={index === 0}>
+                      <summary>{faq.question}</summary>
+                      <p>{faq.answer}</p>
+                    </details>
+                  ))
+                }
+              </div>
+            </section>
+
+            {
+              typedPage.sources && typedPage.sources.length > 0 && (
+                <section class="binah-section compact-section">
+                  <div class="section-num">
+                    <span class="n">Fuente</span><span>Referencias externas</span><span class="rule"></span><span>Colombia</span>
+                  </div>
+                  <div class="source-links">
+                    {typedPage.sources.map((source) => (
+                      <a href={source.href} target="_blank" rel="noopener noreferrer">
+                        {source.label} <span>↗</span>
+                      </a>
+                    ))}
+                  </div>
+                </section>
+              )
+            }
+
+            <section class="binah-section">
+              <div class="section-head">
+                <h2 class="display display-md title">Sigue el flujo.</h2>
+                <p>Estas páginas completan el recorrido alrededor de {typedPage.moduleName}.</p>
+              </div>
+              <div class="related-links-grid">
+                {
+                  related.map((link) => (
+                    <a href={link.href}>
+                      <span>{link.label}</span>
+                      <strong>→</strong>
+                    </a>
+                  ))
+                }
+              </div>
+            </section>
+
+            <CtaBand
+              eyebrow={typedPage.kind === "solution" ? "Solución Binah" : typedPage.eyebrow}
+              heading={`Activa este flujo<br />con tu operación real.`}
+              body="Te mostramos cómo se vería Binah con tus productos, clientes, canales y reglas actuales."
+              primaryHref={demoHref}
+              secondaryLabel="Ver precios"
+              secondaryHref="/precios"
+            />
+          </div>
+        </>
+      )
+    }
+  </main>
+  <Footer />
+</Layout>
