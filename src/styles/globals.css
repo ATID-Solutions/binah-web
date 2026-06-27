@@ -1078,6 +1078,30 @@
   outline: 2px solid var(--ink);
   outline-offset: 3px;
 }
+.pricing-setup-fee {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 18px 0 0;
+  color: var(--mute);
+  font-size: 13px;
+}
+.pricing-setup-fee span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 3px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--bg-alt);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
 .pricing-billing-input:checked ~ .pricing-controls .pricing-billing .billing-option-monthly {
   color: var(--mute);
 }
@@ -1106,6 +1130,9 @@
   border-radius: var(--radius-lg);
   overflow: hidden;
   margin-top: 48px;
+}
+.pricing-setup-fee + .pricing-grid {
+  margin-top: 28px;
 }
 .price-card {
   background: var(--bg);
@@ -1840,6 +1867,9 @@
   .pricing-currency-control,
   .pricing-currency-select {
     width: 100%;
+  }
+  .pricing-setup-fee {
+    align-items: flex-start;
   }
   .pricing-grid {
     margin-top: 28px;
