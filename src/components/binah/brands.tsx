@@ -10,6 +10,7 @@ export type BrandIcon =
   | "epayco"
   | "dian"
   | "coordinadora"
+  | "phone"
   | "email";
 
 const LOGO_SRC: Partial<Record<BrandIcon, string>> = {
@@ -33,6 +34,19 @@ const EmailGlyph = (
   <svg viewBox="0 0 32 32" width="50%" height="50%" preserveAspectRatio="xMidYMid meet">
     <rect x="3" y="7" width="26" height="18" rx="2" fill="none" stroke="#1a1a1a" strokeWidth="2.2" />
     <path d="M3 9l13 9 13-9" fill="none" stroke="#1a1a1a" strokeWidth="2.2" strokeLinejoin="round" />
+  </svg>
+);
+
+const PhoneGlyph = (
+  <svg viewBox="0 0 32 32" width="50%" height="50%" preserveAspectRatio="xMidYMid meet">
+    <path
+      d="M10.2 5.8 7.6 8.4c-.8.8-1 2-.5 3 3 7 6.5 10.5 13.5 13.5 1 .4 2.2.2 3-.5l2.6-2.6-5.2-5.2-2.7 2.7c-2.5-1.4-4.2-3.1-5.6-5.6l2.7-2.7-5.2-5.2Z"
+      fill="none"
+      stroke="#1a1a1a"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
@@ -67,6 +81,8 @@ export function BrandTile({ icon, size = 44 }: { icon: BrandIcon; size?: number 
         />
       ) : icon === "email" ? (
         EmailGlyph
+      ) : icon === "phone" ? (
+        PhoneGlyph
       ) : null}
     </span>
   );

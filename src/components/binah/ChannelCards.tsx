@@ -10,12 +10,13 @@ const CARDS: Card[] = [
   { icon: "whatsapp", title: "WhatsApp Business API", desc: "Oficial. Sin apps intermediarias." },
   { icon: "instagram", title: "Instagram DM", desc: "Conversaciones e historias." },
   { icon: "email", title: "Email", desc: "Conecta cualquier dominio." },
+  { icon: "phone", title: "Llamadas CRM", desc: "Celulares colombianos desde Binah." },
   { icon: "email", title: "Chat web", desc: "Widget embebible en tu sitio." },
 ];
 
 export default function ChannelCards() {
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 16 }}>
       {CARDS.map((c, i) => (
         <div
           key={i}

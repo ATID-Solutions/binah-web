@@ -28,9 +28,10 @@ export const BINAH_MODULES: BinahModule[] = [
     short: "Inbox unificado + agentes IA",
     tagline: "Un solo inbox. Tres agentes entrenados. Cero conversaciones perdidas.",
     description:
-      "WhatsApp, Instagram y correo convergen en un inbox único. Tus agentes de IA — ventas, soporte y reservas — responden, califican y cierran 24/7.",
+      "WhatsApp, Instagram, correo y llamadas convergen en un inbox único. Tus agentes de IA — ventas, soporte y reservas — responden, califican y cierran 24/7.",
     features: [
       "Inbox unificado multicanal",
+      "Llamadas a celulares colombianos desde CRM",
       "Agente de ventas que convierte prospectos",
       "Agente de soporte entrenado con tu knowledge base",
       "Agente de reservas que cuadra citas solo",

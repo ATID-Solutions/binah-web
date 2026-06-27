@@ -91,7 +91,7 @@ const commonFaqs = (feature: string, moduleName: string): MarketingPageFaq[] => 
 
 export const MODULE_PAGE_DETAILS: MarketingPageDetail[] = BINAH_MODULES.map((module) => {
   const moduleCases: Record<ModuleId, string> = {
-    crm: "Unificar WhatsApp, Instagram, email y agentes IA para equipos comerciales colombianos.",
+    crm: "Unificar WhatsApp, Instagram, email, llamadas y agentes IA para equipos comerciales colombianos.",
     retail: "Operar pedidos, inventario, despachos y tracking en tiendas que venden por canales digitales y físicos.",
     facturacion: "Emitir documentos electrónicos DIAN conectados con ventas, pagos e inventario.",
     contabilidad: "Controlar proveedores, compras, costos, cartera y conciliaciones desde los datos reales del negocio.",
@@ -103,7 +103,7 @@ export const MODULE_PAGE_DETAILS: MarketingPageDetail[] = BINAH_MODULES.map((mod
   };
 
   const moduleSearch: Record<ModuleId, string> = {
-    crm: "crm whatsapp colombia, crm instagram, agentes ia ventas",
+    crm: "crm whatsapp colombia, crm instagram, llamadas desde crm, agentes ia ventas",
     retail: "software retail colombia, inventario y despachos, ecommerce colombia",
     facturacion: "facturación electrónica dian, documento soporte, notas crédito",
     contabilidad: "software contabilidad pymes colombia, proveedores, costos",
@@ -675,6 +675,73 @@ const additionalSolutions: Array<
     related: [
       { label: "CRM WhatsApp", href: "/crm-whatsapp-instagram-colombia" },
       { label: "Agente IA ventas", href: "/agente-ia-ventas-whatsapp" },
+      { label: "Precios", href: "/precios" },
+    ],
+  },
+  {
+    priority: "P1",
+    slug: "llamadas-celulares-colombia-crm",
+    title: "Llamadas a celulares desde CRM en Colombia — Binah",
+    description:
+      "Haz llamadas a celulares colombianos desde el CRM de Binah con historial, contexto del cliente, número activo y minutos controlados por plan.",
+    h1: "Llamadas desde el CRM, con contexto del cliente.",
+    lead:
+      "Tu equipo puede llamar a celulares colombianos desde Binah y dejar la conversación conectada al cliente, al negocio y al seguimiento comercial.",
+    moduleId: "crm",
+    moduleName: "CRM & Agentes",
+    searchIntent: "crm llamadas celulares colombia, llamadas desde crm, call center crm colombia",
+    colombiaUseCase:
+      "Equipos comerciales y de soporte que venden por WhatsApp, Instagram o email pero necesitan cerrar, confirmar o resolver por llamada a celular.",
+    heroMetric: "120 min",
+    heroMetricLabel: "incluidos con número activo",
+    proof:
+      "El consumo queda claro: 2 horas mensuales incluidas, activación del número por $90K COP, mantenimiento de $40K COP/mes y minuto adicional a $100 COP.",
+    disclaimer:
+      "Las llamadas consumen minutos facturables. Todos los planes incluyen 120 minutos mensuales a celulares colombianos desde el CRM; para activar llamadas necesitas un número, con activación de $90K COP y mantenimiento de $40K COP/mes. Cada minuto adicional cuesta $100 COP.",
+    situations: [
+      "Leads que responden mejor cuando el asesor llama después del chat.",
+      "Clientes que necesitan confirmar datos, pagos, agenda o dirección por voz.",
+      "Gerentes que quieren trazabilidad de llamadas sin depender de celulares personales.",
+    ],
+    workflow: [
+      { label: "Cliente", detail: "El asesor abre el contacto o conversación dentro del CRM." },
+      { label: "Llamada", detail: "Marca a un celular colombiano desde el número activo en Binah." },
+      { label: "Registro", detail: "La interacción queda asociada al cliente y al contexto comercial." },
+      { label: "Seguimiento", detail: "El equipo continúa por WhatsApp, tarea, venta, soporte o reporte." },
+    ],
+    capabilities: [
+      "Llamadas salientes a celulares colombianos desde CRM.",
+      "Número para llamadas activable por $90K COP.",
+      "Mantenimiento del número por $40K COP/mes adicionales.",
+      "120 minutos mensuales incluidos con número activo.",
+      "Minuto adicional a $100 COP.",
+      "Historial conectado con cliente, asesor y seguimiento.",
+    ],
+    faqs: [
+      {
+        question: "¿Todos los planes incluyen llamadas desde el CRM?",
+        answer:
+          "Sí. Starter, Pro, Business y Personalizado incluyen 120 minutos mensuales a celulares colombianos, pero para usarlos debes activar un número.",
+      },
+      {
+        question: "¿Cuánto cuesta el minuto adicional?",
+        answer:
+          "Cada minuto adicional cuesta $100 COP. Las llamadas consumen minutos facturables, por eso el consumo se comunica separado del precio base del plan.",
+      },
+      {
+        question: "¿El número para llamar se cobra aparte?",
+        answer:
+          "Sí. Activar el número cuesta $90K COP y mantenerlo activo cuesta $40K COP/mes adicionales. El consumo por encima de las 2 horas incluidas se cobra a $100 COP por minuto.",
+      },
+      {
+        question: "¿Las llamadas reemplazan WhatsApp o Instagram?",
+        answer:
+          "No. Funcionan como un canal más dentro del CRM para cerrar, confirmar o resolver casos cuando la voz ayuda más que el chat.",
+      },
+    ],
+    related: [
+      { label: "CRM WhatsApp", href: "/crm-whatsapp-instagram-colombia" },
+      { label: "Módulo CRM", href: "/modulo-crm" },
       { label: "Precios", href: "/precios" },
     ],
   },
