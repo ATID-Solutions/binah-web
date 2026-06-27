@@ -950,6 +950,16 @@
   position: relative;
   margin-top: 36px;
 }
+.pricing-controls {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px 24px;
+  flex-wrap: wrap;
+}
+.pricing-billing-group {
+  min-width: min(100%, 440px);
+}
 .pricing-billing-input {
   position: absolute;
   width: 1px;
@@ -1021,26 +1031,69 @@
   color: var(--mute);
   font-size: 13px;
 }
-.pricing-billing-input:focus-visible + .pricing-billing {
+.pricing-currency {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  color: var(--mute);
+  font-size: 13px;
+}
+.pricing-currency-label {
+  white-space: nowrap;
+}
+.pricing-currency-control {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.pricing-currency-control::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - 5px);
+  right: 13px;
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  color: var(--mute);
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+.pricing-currency-select {
+  min-height: 46px;
+  padding: 9px 36px 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  appearance: none;
+  background: var(--bg-alt);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+}
+.pricing-currency-select:focus-visible,
+.pricing-billing-input:focus-visible ~ .pricing-controls .pricing-billing {
   outline: 2px solid var(--ink);
   outline-offset: 3px;
 }
-.pricing-billing-input:checked + .pricing-billing .billing-option-monthly {
+.pricing-billing-input:checked ~ .pricing-controls .pricing-billing .billing-option-monthly {
   color: var(--mute);
 }
-.pricing-billing-input:checked + .pricing-billing .billing-option-annual {
+.pricing-billing-input:checked ~ .pricing-controls .pricing-billing .billing-option-annual {
   color: var(--ink);
 }
-.pricing-billing-input:checked + .pricing-billing .pricing-discount {
+.pricing-billing-input:checked ~ .pricing-controls .pricing-billing .pricing-discount {
   background: var(--ink);
   border-color: var(--ink);
   color: var(--bg);
 }
-.pricing-billing-input:checked + .pricing-billing .pricing-toggle {
+.pricing-billing-input:checked ~ .pricing-controls .pricing-billing .pricing-toggle {
   background: var(--ink);
   border-color: var(--ink);
 }
-.pricing-billing-input:checked + .pricing-billing .pricing-toggle span {
+.pricing-billing-input:checked ~ .pricing-controls .pricing-billing .pricing-toggle span {
   background: var(--bg);
   transform: translateX(20px);
 }
@@ -1764,6 +1817,10 @@
     min-width: 0;
     padding: 32px 24px;
   }
+  .pricing-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
   .pricing-billing {
     width: 100%;
     justify-content: space-between;
@@ -1772,6 +1829,17 @@
   .pricing-billing-copy {
     display: block;
     margin: 10px 0 0;
+  }
+  .pricing-currency {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    margin-left: 0;
+  }
+  .pricing-currency-control,
+  .pricing-currency-select {
+    width: 100%;
   }
   .pricing-grid {
     margin-top: 28px;

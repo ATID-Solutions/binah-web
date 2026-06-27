@@ -36,14 +36,27 @@ const demoHref = waUrl(WA_MESSAGES.demo);
 
         <div class="pricing-billing-wrap">
           <input class="pricing-billing-input" id="billing-annual" type="checkbox" aria-describedby="billing-annual-copy" />
-          <label class="pricing-billing" for="billing-annual">
-            <span class="billing-option billing-option-monthly">Mensual</span>
-            <span class="pricing-toggle" aria-hidden="true"><span></span></span>
-            <span class="billing-option billing-option-annual">Anual <span class="pricing-discount">-20%</span></span>
-          </label>
-          <p class="pricing-billing-copy" id="billing-annual-copy">
-            Paga el año por adelantado y recibe 20% de descuento.
-          </p>
+          <div class="pricing-controls">
+            <div class="pricing-billing-group">
+              <label class="pricing-billing" for="billing-annual">
+                <span class="billing-option billing-option-monthly">Mensual</span>
+                <span class="pricing-toggle" aria-hidden="true"><span></span></span>
+                <span class="billing-option billing-option-annual">Anual <span class="pricing-discount">-20%</span></span>
+              </label>
+              <p class="pricing-billing-copy" id="billing-annual-copy">
+                Paga el año por adelantado y recibe 20% de descuento.
+              </p>
+            </div>
+
+            <label class="pricing-currency">
+              <span class="pricing-currency-label">Precios en</span>
+              <span class="pricing-currency-control">
+                <select class="pricing-currency-select" aria-label="Moneda de precios">
+                  <option selected>🇨🇴 COP</option>
+                </select>
+              </span>
+            </label>
+          </div>
 
           <div class="pricing-grid">
             <div class="price-card">
