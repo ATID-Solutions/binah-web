@@ -695,9 +695,9 @@ const additionalSolutions: Array<
     heroMetric: "120/240 min",
     heroMetricLabel: "incluidos con número activo",
     proof:
-      "El consumo queda claro: Starter y Pro incluyen 2 horas mensuales, Business incluye 4 horas mensuales, activación del número por $90K COP, mantenimiento de $40K COP/mes y minuto adicional a $100 COP.",
+      "El consumo queda claro: Starter y Pro incluyen 2 horas por periodo de 28 días, Business incluye 4 horas por periodo, activación del número por $90K COP, mantenimiento de $40K COP por periodo y minuto adicional a $100 COP.",
     disclaimer:
-      "Las llamadas consumen minutos facturables. Starter y Pro incluyen 120 minutos mensuales a celulares colombianos desde el CRM; Business incluye 240 minutos mensuales. Para activar llamadas necesitas un número, con activación de $90K COP y mantenimiento de $40K COP/mes. Cada minuto adicional cuesta $100 COP.",
+      "Las llamadas consumen minutos facturables. Starter y Pro incluyen 120 minutos por periodo de 28 días a celulares colombianos desde el CRM; Business incluye 240 minutos por periodo. Para activar llamadas necesitas un número, con activación de $90K COP y mantenimiento de $40K COP por periodo. Cada minuto adicional cuesta $100 COP.",
     situations: [
       "Leads que responden mejor cuando el asesor llama después del chat.",
       "Clientes que necesitan confirmar datos, pagos, agenda o dirección por voz.",
@@ -712,9 +712,9 @@ const additionalSolutions: Array<
     capabilities: [
       "Llamadas salientes a celulares colombianos desde CRM.",
       "Número para llamadas activable por $90K COP.",
-      "Mantenimiento del número por $40K COP/mes adicionales.",
-      "120 minutos mensuales incluidos en Starter y Pro con número activo.",
-      "240 minutos mensuales incluidos en Business con número activo.",
+      "Mantenimiento del número por $40K COP por periodo.",
+      "120 minutos por periodo incluidos en Starter y Pro con número activo.",
+      "240 minutos por periodo incluidos en Business con número activo.",
       "Minuto adicional a $100 COP.",
       "Historial conectado con cliente, asesor y seguimiento.",
     ],
@@ -722,7 +722,7 @@ const additionalSolutions: Array<
       {
         question: "¿Todos los planes incluyen llamadas desde el CRM?",
         answer:
-          "Sí. Starter y Pro incluyen 120 minutos mensuales a celulares colombianos. Business incluye 240 minutos mensuales. Para usarlos debes activar un número.",
+          "Sí. Starter y Pro incluyen 120 minutos por periodo de 28 días a celulares colombianos. Business incluye 240 minutos por periodo. Para usarlos debes activar un número.",
       },
       {
         question: "¿Cuánto cuesta el minuto adicional?",
@@ -732,7 +732,7 @@ const additionalSolutions: Array<
       {
         question: "¿El número para llamar se cobra aparte?",
         answer:
-          "Sí. Activar el número cuesta $90K COP y mantenerlo activo cuesta $40K COP/mes adicionales. El consumo por encima de los minutos incluidos se cobra a $100 COP por minuto.",
+          "Sí. Activar el número cuesta $90K COP y mantenerlo activo cuesta $40K COP por periodo de 28 días. El consumo por encima de los minutos incluidos se cobra a $100 COP por minuto.",
       },
       {
         question: "¿Las llamadas reemplazan WhatsApp o Instagram?",
