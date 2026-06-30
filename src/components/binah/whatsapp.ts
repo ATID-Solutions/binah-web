@@ -10,14 +10,15 @@ export function waUrl(message: string): string {
 export const WA_MESSAGES = {
   demo: "Hola, me gustaría agendar una demo de Binah.",
   modules: "Hola, quiero conocer los módulos de Binah.",
-  pricingStarter: "Hola, me interesa el plan Starter de $299K por periodo de Binah.",
-  pricingPro: "Hola, me interesa el plan Pro de $699K por periodo de Binah.",
-  pricingBusiness: "Hola, me interesa el plan Business de $2.190M por periodo de Binah.",
+  pricingStarter: "Hola, me interesa el plan Starter de $299K al mes de Binah.",
+  pricingPro: "Hola, me interesa el plan Pro de $699K al mes de Binah.",
+  pricingBusiness: "Hola, me interesa el plan Business de $2.190M al mes de Binah.",
   pricingScale: "Hola, queremos un plan a la medida para nuestro equipo.",
   pricingFacturacion:
     "Hola, tengo dudas sobre los paquetes de Facturación Electrónica de Binah.",
   moduleCrm: "Hola, me interesa el módulo de CRM & Agentes de Binah.",
-  moduleRetail: "Hola, me interesa el módulo de Retail de Binah.",
+  moduleSupport: "Hola, me interesa el módulo de Soporte de Binah.",
+  moduleVentas: "Hola, me interesa el módulo de Ventas de Binah.",
   careers: "Hola, me interesa trabajar en Binah.",
   general: "Hola, quisiera más información sobre Binah.",
 } as const;

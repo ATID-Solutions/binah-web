@@ -48,6 +48,7 @@ export interface MarketingPageDetail {
 
 const modulePathById: Record<ModuleId, string> = {
   crm: "/modulo-crm",
+  soporte: "/modulo-soporte",
   retail: "/modulo-retail",
   facturacion: "/modulo-facturacion-electronica",
   contabilidad: "/modulo-contabilidad",
@@ -92,7 +93,8 @@ const commonFaqs = (feature: string, moduleName: string): MarketingPageFaq[] => 
 export const MODULE_PAGE_DETAILS: MarketingPageDetail[] = BINAH_MODULES.map((module) => {
   const moduleCases: Record<ModuleId, string> = {
     crm: "Unificar WhatsApp, Instagram, email, llamadas y agentes IA para equipos comerciales colombianos.",
-    retail: "Operar pedidos, inventario, despachos y tracking en tiendas que venden por canales digitales y físicos.",
+    soporte: "Gestionar tickets, responsables, prioridades, SLA e historial completo de atención al cliente.",
+    retail: "Centralizar ventas, pedidos, inventario, despachos y tracking en canales digitales y físicos.",
     facturacion: "Emitir documentos electrónicos DIAN conectados con ventas, pagos e inventario.",
     contabilidad: "Controlar proveedores, compras, costos, cartera y conciliaciones desde los datos reales del negocio.",
     chat: "Mover la comunicación interna al mismo lugar donde viven pedidos, clientes y tareas.",
@@ -103,7 +105,8 @@ export const MODULE_PAGE_DETAILS: MarketingPageDetail[] = BINAH_MODULES.map((mod
   };
 
   const moduleSearch: Record<ModuleId, string> = {
-    crm: "crm whatsapp colombia, crm instagram, llamadas desde crm, agentes ia ventas",
+    crm: "crm whatsapp colombia, crm instagram, remarketing whatsapp, llamadas desde crm, agentes ia ventas",
+    soporte: "software tickets soporte clientes colombia, mesa ayuda ecommerce, soporte postventa whatsapp",
     retail: "software retail colombia, inventario y despachos, ecommerce colombia",
     facturacion: "facturación electrónica dian, documento soporte, notas crédito",
     contabilidad: "software contabilidad pymes colombia, proveedores, costos",
@@ -116,6 +119,7 @@ export const MODULE_PAGE_DETAILS: MarketingPageDetail[] = BINAH_MODULES.map((mod
 
   const moduleProof: Record<ModuleId, string> = {
     crm: "El inbox deja de ser una lista de chats y se convierte en pipeline, contexto y seguimiento.",
+    soporte: "Cada solicitud tiene ticket, dueño, prioridad, historial y cierre medible.",
     retail: "La venta, el inventario, la guía y el mensaje al cliente avanzan en el mismo flujo.",
     facturacion: "Cada documento nace desde la operación que lo origina, no desde una digitación posterior.",
     contabilidad: "Compras, proveedores y costos dejan de vivir en hojas sueltas.",
@@ -166,13 +170,13 @@ export const SEO_FEATURE_PAGES: MarketingPageDetail[] = [
     path: "/codigos-ean-productos-colombia",
     title: "Códigos EAN y GTIN para productos en Colombia — Binah",
     description:
-      "Organiza códigos EAN, GTIN, SKU y códigos de barras por producto y variante para vender en retail, marketplaces y POS en Colombia.",
+      "Organiza códigos EAN, GTIN, SKU y códigos de barras por producto y variante para vender en marketplaces, tienda física y POS en Colombia.",
     eyebrow: "Solución SEO / EAN + GTIN",
     h1: "Códigos EAN listos para operar tu catálogo.",
     lead:
       "Binah te ayuda a conservar el código correcto por producto, variante y empaque para que puedas generar el código de barras y vender con menos fricción.",
     moduleId: "retail",
-    moduleName: "Retail",
+    moduleName: "Ventas",
     searchIntent: "codigo ean colombia, gtin productos colombia, codigo de barras productos",
     colombiaUseCase:
       "Preparar productos para canales como Falabella, Éxito, Carulla, Olímpica, Mercado Libre, Rappi y puntos de venta propios.",
@@ -197,7 +201,7 @@ export const SEO_FEATURE_PAGES: MarketingPageDetail[] = [
       "Catálogo con SKU, EAN/GTIN, variantes y empaques.",
       "Datos consistentes para inventario, POS y facturación.",
       "Exportación de catálogo para equipos comerciales y bodegas.",
-      "Conexión con retail, despachos, reportes y páginas de producto.",
+      "Conexión con ventas, despachos, reportes y páginas de producto.",
     ],
     faqs: [
       {
@@ -222,7 +226,7 @@ export const SEO_FEATURE_PAGES: MarketingPageDetail[] = [
       },
     ],
     related: [
-      { label: "Módulo Retail", href: "/modulo-retail" },
+      { label: "Módulo Ventas", href: "/modulo-retail" },
       { label: "Catálogo con variantes", href: "/catalogo-productos-variantes-sku-ean" },
       { label: "POS y documento equivalente", href: "/pos-documento-equivalente-electronico-dian" },
     ],
@@ -267,7 +271,7 @@ export const SEO_FEATURE_PAGES: MarketingPageDetail[] = [
       "La gerencia necesita ver ventas facturadas sin esperar un cierre manual.",
     ],
     workflow: [
-      { label: "Venta", detail: "El pedido nace desde CRM, retail, POS o tienda online." },
+      { label: "Venta", detail: "El pedido nace desde CRM, ventas, POS o tienda online." },
       { label: "Datos", detail: "Binah trae cliente, productos, impuestos, envío y medio de pago." },
       { label: "Documento", detail: "Se emite la factura o ajuste que corresponda al flujo." },
       { label: "Trazabilidad", detail: "El documento queda asociado al pedido, al cliente y a los reportes." },
@@ -345,7 +349,7 @@ export const SEO_FEATURE_PAGES: MarketingPageDetail[] = [
       "Inbox multicanal.",
       "Asignación por agente, equipo o estado.",
       "Historial de cliente y conversaciones.",
-      "Conexión con pagos, retail, facturación y reportes.",
+      "Conexión con pagos, ventas, facturación y reportes.",
     ],
     faqs: commonFaqs("CRM para WhatsApp e Instagram", "CRM & Agentes"),
     related: [
@@ -416,7 +420,7 @@ export const SEO_FEATURE_PAGES: MarketingPageDetail[] = [
     lead:
       "Cuando la venta se confirma, bodega recibe contexto, se prepara el paquete y el cliente queda notificado.",
     moduleId: "retail",
-    moduleName: "Retail",
+    moduleName: "Ventas",
     searchIntent: "software despachos colombia, generar guias servientrega coordinadora",
     colombiaUseCase:
       "Operaciones que despachan con Servientrega, Coordinadora, Interrapidísimo u otras transportadoras y necesitan trazabilidad.",
@@ -441,9 +445,9 @@ export const SEO_FEATURE_PAGES: MarketingPageDetail[] = [
       "Notificaciones por WhatsApp.",
       "Reportes de tiempos, entregas y pendientes.",
     ],
-    faqs: commonFaqs("despachos con transportadoras colombianas", "Retail"),
+    faqs: commonFaqs("despachos con transportadoras colombianas", "Ventas"),
     related: [
-      { label: "Módulo Retail", href: "/modulo-retail" },
+      { label: "Módulo Ventas", href: "/modulo-retail" },
       { label: "Tracking por WhatsApp", href: "/tracking-pedidos-whatsapp-colombia" },
       { label: "Picking y packing", href: "/picking-packing-ecommerce-colombia" },
     ],
@@ -530,7 +534,7 @@ const additionalSolutions: Array<
     h1: "Un catálogo que entiende tallas, colores y empaques.",
     lead: "Cada variante tiene su identidad: SKU interno, código de barras, precio, costo, inventario y reglas de venta.",
     moduleId: "retail",
-    moduleName: "Retail",
+    moduleName: "Ventas",
     searchIntent: "sku vs ean, catalogo productos variantes, inventario por variantes",
     colombiaUseCase: "Tiendas de ropa, alimentos, cosmética o accesorios que venden la misma referencia en varias presentaciones.",
     proof: "El catálogo alimenta ventas, POS, inventario, etiquetas, facturación, reportes y marketplaces.",
@@ -545,7 +549,7 @@ const additionalSolutions: Array<
     related: [
       { label: "Códigos EAN", href: "/codigos-ean-productos-colombia" },
       { label: "Inventario conectado", href: "/inventario-conectado-ventas-whatsapp-tienda-online" },
-      { label: "Módulo Retail", href: "/modulo-retail" },
+      { label: "Módulo Ventas", href: "/modulo-retail" },
     ],
   },
   {
@@ -556,7 +560,7 @@ const additionalSolutions: Array<
     h1: "Inventario que se mueve al ritmo de tus ventas.",
     lead: "Cada pedido reserva stock, actualiza bodega y deja trazabilidad para ventas, despacho y soporte.",
     moduleId: "retail",
-    moduleName: "Retail",
+    moduleName: "Ventas",
     searchIntent: "inventario tienda online whatsapp, control inventario ventas",
     colombiaUseCase: "Tiendas que venden por WhatsApp, Instagram, Shopify, WooCommerce y mostrador al mismo tiempo.",
     proof: "El equipo comercial vende con disponibilidad real y bodega ve qué debe separar.",
@@ -582,7 +586,7 @@ const additionalSolutions: Array<
     h1: "El cliente pregunta menos cuando el pedido habla solo.",
     lead: "Recibido, empacado, en ruta y entregado quedan disponibles para soporte y mensajes al cliente.",
     moduleId: "retail",
-    moduleName: "Retail",
+    moduleName: "Ventas",
     searchIntent: "notificaciones whatsapp pedidos, tracking pedidos whatsapp colombia",
     colombiaUseCase: "E-commerce y marcas D2C que reciben la misma pregunta: ¿dónde está mi pedido?",
     proof: "Soporte ve el estado antes de responder y el cliente recibe actualizaciones claras.",
@@ -597,7 +601,7 @@ const additionalSolutions: Array<
     related: [
       { label: "Despachos", href: "/software-despachos-transportadoras-colombia" },
       { label: "Agente IA de soporte", href: "/agente-ia-soporte-clientes-whatsapp" },
-      { label: "Módulo Retail", href: "/modulo-retail" },
+      { label: "Módulo Ventas", href: "/modulo-retail" },
     ],
   },
   {
@@ -655,27 +659,98 @@ const additionalSolutions: Array<
   {
     priority: "P1",
     slug: "campanas-whatsapp-clientes-colombia",
-    title: "Campañas de WhatsApp para clientes en Colombia — Binah",
-    description: "Segmenta clientes y envía campañas de WhatsApp conectadas al CRM, ventas y reportes.",
-    h1: "Campañas de WhatsApp sin listas sueltas.",
-    lead: "Reactiva clientes, lanza promociones y mide qué conversaciones terminan en venta.",
+    title: "Campañas y remarketing por WhatsApp en Colombia — Binah",
+    description:
+      "Segmenta clientes antiguos, envía campañas de WhatsApp y convierte remarketing en ventas medibles desde el CRM de Binah.",
+    h1: "Remarketing por WhatsApp sin listas sueltas.",
+    lead: "Reactiva clientes antiguos, lanza promociones y mide qué conversaciones vuelven a convertirse en venta.",
     moduleId: "crm",
     moduleName: "CRM & Agentes",
-    searchIntent: "campañas whatsapp colombia, mensajes masivos whatsapp clientes",
-    colombiaUseCase: "Tiendas y servicios que quieren activar bases de clientes sin depender de Excel y pantallazos.",
-    proof: "La campaña se conecta al historial del cliente y al resultado comercial.",
-    situations: ["Promociones de temporada.", "Clientes inactivos.", "Recordatorios y confirmaciones."],
+    searchIntent: "remarketing whatsapp colombia, campañas whatsapp colombia, mensajes masivos whatsapp clientes",
+    colombiaUseCase:
+      "Tiendas y servicios que quieren volver a venderle a clientes antiguos sin depender de Excel, pantallazos ni memoria del asesor.",
+    proof: "La campaña se conecta al historial del cliente, al segmento correcto y al resultado comercial.",
+    situations: ["Promociones de temporada.", "Clientes antiguos sin recompra.", "Recordatorios y confirmaciones."],
     workflow: [
       { label: "Segmento", detail: "Filtras clientes por comportamiento, compra o estado." },
       { label: "Mensaje", detail: "Preparas comunicación alineada al canal." },
       { label: "Conversación", detail: "Las respuestas entran al CRM." },
       { label: "Medición", detail: "Ventas y respuestas quedan en reportes." },
     ],
-    capabilities: ["Segmentación.", "Historial por cliente.", "Seguimiento comercial.", "Reportes de campaña."],
+    capabilities: [
+      "Segmentación por historial.",
+      "Reactivación de clientes antiguos.",
+      "Seguimiento comercial.",
+      "Reportes de campaña y recompra.",
+    ],
     related: [
+      { label: "Remarketing clientes antiguos", href: "/remarketing-clientes-antiguos-whatsapp-colombia" },
       { label: "CRM WhatsApp", href: "/crm-whatsapp-instagram-colombia" },
-      { label: "Agente IA ventas", href: "/agente-ia-ventas-whatsapp" },
       { label: "Precios", href: "/precios" },
+    ],
+  },
+  {
+    priority: "P1",
+    slug: "remarketing-clientes-antiguos-whatsapp-colombia",
+    title: "Remarketing para clientes antiguos por WhatsApp — Binah",
+    description:
+      "Fideliza clientes antiguos, reactiva compradores inactivos y mide recompra con campañas conectadas al CRM, ventas y reportes de Binah.",
+    h1: "¿Qué pasa con tus clientes antiguos?",
+    lead:
+      "Binah siempre los tiene en cuenta: compra, conversación, pedido, soporte y próxima campaña viven en el mismo lugar.",
+    moduleId: "crm",
+    moduleName: "CRM & Agentes",
+    searchIntent: "remarketing whatsapp colombia, fidelizar clientes colombia, clientes antiguos crm",
+    colombiaUseCase:
+      "Marcas colombianas que ya vendieron por WhatsApp, Instagram o tienda online y necesitan que esos clientes vuelvan a comprar.",
+    heroMetric: "CRM",
+    heroMetricLabel: "remarketing conectado",
+    proof:
+      "La plataforma colombiana que también piensa en el remarketing: no sólo atiende el lead nuevo, también cuida el cliente que ya compró.",
+    situations: [
+      "Clientes que compraron una vez y nunca volvieron.",
+      "Bases históricas sin segmento, fecha de recompra ni seguimiento.",
+      "Promociones enviadas a todos sin saber quién tiene intención real.",
+    ],
+    workflow: [
+      { label: "Historial", detail: "Binah conserva compras, conversaciones, pedidos y soporte del cliente." },
+      { label: "Segmento", detail: "Separas clientes antiguos por producto, fecha, estado o comportamiento." },
+      { label: "Campaña", detail: "Envías remarketing por WhatsApp con contexto y oferta relevante." },
+      { label: "Recompra", detail: "La respuesta vuelve al CRM y se mide contra ventas, asesor y reporte." },
+    ],
+    capabilities: [
+      "Remarketing por WhatsApp.",
+      "Fidelización de clientes antiguos.",
+      "Segmentos por historial de compra.",
+      "Campañas conectadas a CRM, ventas y reportes.",
+      "Seguimiento de recompra y respuesta.",
+    ],
+    faqs: [
+      {
+        question: "¿Binah sirve para fidelizar clientes?",
+        answer:
+          "Sí. Binah cruza historial, compras, conversaciones y campañas para que puedas volver a contactar clientes antiguos con contexto.",
+      },
+      {
+        question: "¿Qué pasa con los clientes antiguos?",
+        answer:
+          "No quedan perdidos en una lista. Puedes segmentarlos, activar campañas, medir respuesta y continuar la conversación desde el CRM.",
+      },
+      {
+        question: "¿El remarketing depende de Excel?",
+        answer:
+          "No. La idea es que el segmento salga de los datos reales de Binah: cliente, pedido, canal, asesor, compra y estado.",
+      },
+      {
+        question: "¿Cómo sé si una campaña generó recompra?",
+        answer:
+          "La campaña queda conectada al CRM y a reportes, para ver conversaciones, oportunidades y ventas asociadas.",
+      },
+    ],
+    related: [
+      { label: "Campañas WhatsApp", href: "/campanas-whatsapp-clientes-colombia" },
+      { label: "CRM WhatsApp", href: "/crm-whatsapp-instagram-colombia" },
+      { label: "Reportes", href: "/modulo-reportes" },
     ],
   },
   {
@@ -769,7 +844,7 @@ const additionalSolutions: Array<
     related: [
       { label: "Códigos EAN", href: "/codigos-ean-productos-colombia" },
       { label: "Facturación DIAN", href: "/facturacion-electronica-dian" },
-      { label: "Módulo Retail", href: "/modulo-retail" },
+      { label: "Módulo Ventas", href: "/modulo-retail" },
     ],
     sources: [
       {
@@ -781,7 +856,7 @@ const additionalSolutions: Array<
   {
     priority: "P1",
     slug: "notas-credito-devoluciones-dian-retail",
-    title: "Notas crédito y devoluciones conectadas a retail — Binah",
+    title: "Notas crédito y devoluciones conectadas a ventas — Binah",
     description: "Gestiona devoluciones, cambios, notas crédito e inventario en un solo flujo conectado con DIAN y soporte.",
     h1: "Cada devolución debe ajustar algo más que una factura.",
     lead: "Cuando hay cambio de talla, garantía o reembolso, Binah conecta soporte, inventario, documento y reporte.",
@@ -801,7 +876,7 @@ const additionalSolutions: Array<
     related: [
       { label: "Facturación DIAN", href: "/facturacion-electronica-dian" },
       { label: "Agente IA soporte", href: "/agente-ia-soporte-clientes-whatsapp" },
-      { label: "Módulo Retail", href: "/modulo-retail" },
+      { label: "Módulo Ventas", href: "/modulo-retail" },
     ],
   },
   {
@@ -864,7 +939,7 @@ const additionalSolutions: Array<
     h1: "Etiquetas listas desde el pedido, no desde el caos.",
     lead: "Nombre, dirección, ciudad, producto, peso y estado salen del flujo operativo correcto.",
     moduleId: "retail",
-    moduleName: "Retail",
+    moduleName: "Ventas",
     searchIntent: "generar guias etiquetas envio colombia",
     colombiaUseCase: "Bodegas que preparan pedidos para transportadoras colombianas y necesitan menos digitación manual.",
     proof: "La información de envío queda conectada al pedido y al cliente.",
@@ -879,7 +954,7 @@ const additionalSolutions: Array<
     related: [
       { label: "Despachos", href: "/software-despachos-transportadoras-colombia" },
       { label: "Picking y packing", href: "/picking-packing-ecommerce-colombia" },
-      { label: "Módulo Retail", href: "/modulo-retail" },
+      { label: "Módulo Ventas", href: "/modulo-retail" },
     ],
   },
   {
@@ -890,7 +965,7 @@ const additionalSolutions: Array<
     h1: "Bodega sin adivinar qué debe empacar.",
     lead: "Cada pedido se transforma en una tarea clara de picking, empaque y despacho.",
     moduleId: "retail",
-    moduleName: "Retail",
+    moduleName: "Ventas",
     searchIntent: "picking packing ecommerce colombia, bodega ecommerce",
     colombiaUseCase: "Marcas D2C y tiendas online que pasan de pocos pedidos diarios a operación constante.",
     proof: "Bodega ve prioridades, productos, cantidades, cliente y canal en una sola vista.",
@@ -905,7 +980,7 @@ const additionalSolutions: Array<
     related: [
       { label: "Despachos", href: "/software-despachos-transportadoras-colombia" },
       { label: "Inventario conectado", href: "/inventario-conectado-ventas-whatsapp-tienda-online" },
-      { label: "Módulo Retail", href: "/modulo-retail" },
+      { label: "Módulo Ventas", href: "/modulo-retail" },
     ],
   },
   {
@@ -944,7 +1019,7 @@ const additionalSolutions: Array<
     moduleId: "contabilidad",
     moduleName: "Contabilidad",
     searchIntent: "costeo productos inventario colombia, margen producto pyme",
-    colombiaUseCase: "Moda, alimentos, cosmética, manufactura ligera y retail con costos cambiantes.",
+    colombiaUseCase: "Moda, alimentos, cosmética y manufactura ligera con costos cambiantes.",
     proof: "El margen deja de ser estimación y empieza a salir del flujo de compras y ventas.",
     situations: ["Costos de proveedor cambian.", "Promociones sin margen claro.", "Inventario valorizado a ojo."],
     workflow: [
@@ -971,7 +1046,7 @@ const additionalSolutions: Array<
     moduleName: "Reportes",
     searchIntent: "reportes excel pdf negocio colombia, dashboards pymes",
     colombiaUseCase: "Dueños, contadores y equipos comerciales que necesitan cortes semanales o mensuales confiables.",
-    proof: "La data viene de CRM, retail, pagos, facturación y operación en la misma base.",
+    proof: "La data viene de CRM, ventas, pagos, facturación y operación en la misma base.",
     situations: ["Cierre mensual manual.", "Ventas por canal sin consolidar.", "Contador pidiendo soportes."],
     workflow: [
       { label: "Dato", detail: "Cada módulo alimenta reportes." },
@@ -1020,7 +1095,7 @@ const additionalSolutions: Array<
     h1: "Moda sin perder tallas entre chats.",
     lead: "Ventas por WhatsApp, inventario por variante, cambios de talla y despachos quedan en un solo flujo.",
     moduleId: "retail",
-    moduleName: "Retail",
+    moduleName: "Ventas",
     searchIntent: "crm inventario tienda ropa colombia, software tienda ropa whatsapp",
     colombiaUseCase: "Tiendas de ropa, marcas D2C, boutiques y emprendimientos que venden por Instagram y WhatsApp.",
     proof: "Cada talla y color tiene stock, código, pedido y conversación asociada.",
@@ -1039,6 +1114,230 @@ const additionalSolutions: Array<
     ],
   },
   {
+    priority: "P1",
+    slug: "calculadora-ahorro-operativo-ecommerce",
+    title: "Calculadora de ahorro operativo para e-commerce — Binah",
+    description:
+      "Estima horas liberadas al conectar pedidos, despachos, facturación, WhatsApp e inventario en una operación e-commerce.",
+    h1: "Calcula cuánto tiempo pierde tu operación manual.",
+    lead:
+      "Ajusta pedidos por día y minutos manuales. Binah calcula el ahorro usando ~2 minutos por pedido/despacho y ~10 segundos por factura.",
+    moduleId: "reportes",
+    moduleName: "Reportes",
+    searchIntent: "ahorro operativo ecommerce, automatizar pedidos ecommerce, calcular tiempo pedidos",
+    colombiaUseCase:
+      "Marcas colombianas que ya despachan todos los días y quieren saber cuánto tiempo se va en Excel, guías, rótulos, facturación y WhatsApp.",
+    heroMetric: "28 días",
+    heroMetricLabel: "periodo operativo Binah",
+    proof:
+      "Con 100 pedidos diarios, una diferencia de minutos por pedido se convierte en cientos de horas por periodo de 28 días.",
+    situations: [
+      "El equipo copia pedidos desde Shopify, WhatsApp o Excel.",
+      "Bodega genera guías y rótulos manualmente.",
+      "Contabilidad factura y concilia después de que la operación ya pasó.",
+    ],
+    workflow: [
+      { label: "Volumen", detail: "Ingresas pedidos diarios y periodo operativo." },
+      { label: "Tiempo actual", detail: "Ingresas cuánto tarda hoy el equipo en pedido, guía, rótulo y aviso al cliente." },
+      { label: "Binah", detail: "El cálculo usa ~2 minutos por pedido/despacho y ~10 segundos por factura." },
+      { label: "Ahorro", detail: "Ves horas y jornadas que pueden liberarse cada periodo." },
+    ],
+    capabilities: [
+      "Cálculo por pedidos diarios.",
+      "Estimación por periodo de 28 días.",
+      "Supuesto fijo de Binah: ~2 minutos por pedido/despacho y ~10 segundos por factura.",
+      "Base para comparar costo operativo contra automatización.",
+    ],
+    faqs: [
+      {
+        question: "¿El cálculo es exacto?",
+        answer:
+          "No. Es una estimación operativa para dimensionar el problema. El ahorro real depende del flujo actual, datos disponibles, integraciones y reglas de cada empresa.",
+      },
+      {
+        question: "¿Incluye atención al cliente?",
+        answer:
+          "La calculadora se enfoca en pedidos y facturación. La atención con IA puede liberar tiempo adicional porque recopila datos, responde preguntas repetidas y escala casos al equipo humano.",
+      },
+      {
+        question: "¿Por qué se calcula en 28 días?",
+        answer:
+          "Binah trabaja con periodos de facturación de 28 días, por eso el cálculo usa ese periodo para comparar volumen, horas y jornadas.",
+      },
+    ],
+    related: [
+      { label: "Shopify Colombia", href: "/software-shopify-colombia-crm-inventario" },
+      { label: "Coordinadora", href: "/integracion-coordinadora-ecommerce-colombia" },
+      { label: "SIIGO", href: "/integracion-siigo-facturacion-automatica" },
+    ],
+  },
+  {
+    priority: "P1",
+    slug: "integracion-coordinadora-ecommerce-colombia",
+    title: "Integración con Coordinadora para e-commerce en Colombia — Binah",
+    description:
+      "Conecta pedidos, guías, rótulos, novedades, tracking y notificaciones de Coordinadora con CRM, inventario y WhatsApp.",
+    h1: "Coordinadora conectada al pedido, no a una tarea manual.",
+    lead:
+      "Guías, rótulos, estados, novedades y tracking deben salir del flujo operativo, no de copiar datos entre pantallas.",
+    moduleId: "retail",
+    moduleName: "Ventas",
+    searchIntent: "integracion coordinadora ecommerce, generar guias coordinadora, tracking coordinadora whatsapp",
+    colombiaUseCase:
+      "Tiendas online colombianas que despachan con Coordinadora y necesitan menos digitación, menos novedades y más visibilidad del pedido.",
+    heroMetric: "Guía + tracking",
+    heroMetricLabel: "desde el flujo de pedido",
+    proof:
+      "El estado logístico queda conectado con cliente, pedido, bodega, asesor, soporte y notificaciones por WhatsApp.",
+    situations: [
+      "Bodega genera guías una por una.",
+      "El cliente pide tracking por WhatsApp porque no recibió actualización.",
+      "El equipo no sabe cuántas novedades logísticas tiene por periodo.",
+    ],
+    workflow: [
+      { label: "Pedido", detail: "La venta llega con cliente, dirección, producto, bodega y estado." },
+      { label: "Guía", detail: "El equipo prepara guías y rótulos desde datos limpios." },
+      { label: "Tracking", detail: "Los estados y novedades alimentan soporte y notificaciones." },
+      { label: "Reporte", detail: "La operación ve pendientes, entregas, novedades y tiempos." },
+    ],
+    capabilities: [
+      "Creación masiva de guías.",
+      "Generación masiva de rótulos.",
+      "Tracking y novedades conectadas al pedido.",
+      "Notificaciones por WhatsApp según estado.",
+    ],
+    related: [
+      { label: "Despachos", href: "/software-despachos-transportadoras-colombia" },
+      { label: "Tracking WhatsApp", href: "/tracking-pedidos-whatsapp-colombia" },
+      { label: "Módulo Ventas", href: "/modulo-retail" },
+    ],
+  },
+  {
+    priority: "P1",
+    slug: "integracion-siigo-facturacion-automatica",
+    title: "Integración SIIGO para facturación automática — Binah",
+    description:
+      "Conecta pedidos, clientes, productos, facturas, anulaciones, recibos de caja y conciliación operativa con SIIGO.",
+    h1: "SIIGO sin volver a digitar la venta.",
+    lead:
+      "La venta ya tiene cliente, producto, valor, pago y pedido. Binah organiza esos datos para que facturación no trabaje desde cero.",
+    moduleId: "facturacion",
+    moduleName: "Facturación Electrónica",
+    searchIntent: "integracion siigo ecommerce, facturacion automatica siigo, conciliar facturas siigo",
+    colombiaUseCase:
+      "Equipos contables que facturan pedidos de e-commerce y luego deben conciliar, anular, revisar pagos o generar recibos de caja.",
+    heroMetric: "Factura + pago",
+    heroMetricLabel: "conectados al pedido",
+    proof:
+      "El panel de conciliación permite revisar facturas, pagos, anulaciones y recibos sin perseguir comprobantes por chat.",
+    disclaimer:
+      "El alcance de la integración con SIIGO depende de accesos, permisos, configuración actual y reglas contables de cada empresa.",
+    situations: [
+      "Un auxiliar tarda varios minutos generando cada factura.",
+      "Las anulaciones y recibos se revisan fuera del pedido.",
+      "Contabilidad espera reportes manuales para conciliar.",
+    ],
+    workflow: [
+      { label: "Pedido", detail: "Binah conserva cliente, productos, valores, impuestos y pago." },
+      { label: "Mapeo", detail: "Se configuran campos, reglas y datos necesarios para facturar." },
+      { label: "Factura", detail: "La generación del documento usa la información operativa correcta." },
+      { label: "Conciliación", detail: "Facturas, pagos, anulaciones y recibos quedan en revisión." },
+    ],
+    capabilities: [
+      "Configuración y mapeo de datos para SIIGO.",
+      "Generación de facturas desde pedidos.",
+      "Panel para conciliación de facturas y pagos.",
+      "Revisión de anulaciones y recibos de caja.",
+    ],
+    related: [
+      { label: "Facturación DIAN", href: "/facturacion-electronica-dian" },
+      { label: "Conciliación de pagos", href: "/conciliacion-pagos-facturas-colombia" },
+      { label: "Shopify Colombia", href: "/software-shopify-colombia-crm-inventario" },
+    ],
+  },
+  {
+    priority: "P2",
+    slug: "reportes-ecommerce-ventas-asesores-bodegas",
+    title: "Reportes de ventas, asesores y bodegas para e-commerce — Binah",
+    description:
+      "Mide tiempos de respuesta, pedidos cerrados por asesor, ventas por bodega, rendimiento de productos y atención al cliente.",
+    h1: "Reportes que responden preguntas reales.",
+    lead:
+      "El problema no es hacer otro dashboard. Es saber qué está pasando sin pedirle a alguien que arme un Excel.",
+    moduleId: "reportes",
+    moduleName: "Reportes",
+    searchIntent: "reportes ecommerce ventas asesores bodegas, dashboard ventas whatsapp",
+    colombiaUseCase:
+      "Marcas con asesores, bodegas y canales digitales que necesitan ver rendimiento sin esperar cortes manuales.",
+    heroMetric: "Ventas + atención",
+    heroMetricLabel: "en una vista operativa",
+    proof:
+      "Cada pedido, conversación, producto y movimiento alimenta reportes disponibles para dirección, ventas, soporte y bodega.",
+    situations: [
+      "No sabes cuánto tarda cada asesor en responder WhatsApp.",
+      "No sabes cuántos pedidos cierra cada asesor.",
+      "Los reportes de productos o bodegas se arman manualmente.",
+    ],
+    workflow: [
+      { label: "Dato", detail: "Pedidos, chats, productos, bodegas y usuarios generan eventos." },
+      { label: "Cruce", detail: "Binah conecta cliente, asesor, producto, canal y estado." },
+      { label: "Vista", detail: "El equipo filtra ventas, atención, inventario y operación." },
+      { label: "Decisión", detail: "Gerencia actúa sin esperar un reporte manual." },
+    ],
+    capabilities: [
+      "Tiempos de respuesta por asesor.",
+      "Pedidos cerrados por asesor y canal.",
+      "Ventas por bodega y producto.",
+      "Reportes de atención al cliente y operación.",
+    ],
+    related: [
+      { label: "Módulo Reportes", href: "/modulo-reportes" },
+      { label: "CRM WhatsApp", href: "/crm-whatsapp-instagram-colombia" },
+      { label: "Ahorro operativo", href: "/calculadora-ahorro-operativo-ecommerce" },
+    ],
+  },
+  {
+    priority: "P2",
+    slug: "trazabilidad-operativa-pedidos-ecommerce",
+    title: "Trazabilidad operativa de pedidos para e-commerce — Binah",
+    description:
+      "Registra acciones de usuarios y sistema para entender qué pasó con cada cliente, pedido, factura, despacho y conversación.",
+    h1: "Cada acción deja rastro.",
+    lead:
+      "Cuando una operación crece, el control no puede depender de memoria, pantallazos o buscar responsables en chats.",
+    moduleId: "retail",
+    moduleName: "Ventas",
+    searchIntent: "trazabilidad pedidos ecommerce, auditoria pedidos crm, historial acciones usuarios",
+    colombiaUseCase:
+      "Equipos de ventas, soporte, bodega y administración que necesitan saber quién hizo qué y cuándo en cada pedido.",
+    heroMetric: "Historial",
+    heroMetricLabel: "por pedido, cliente y usuario",
+    proof:
+      "Lo que hace el usuario y lo que hace el sistema queda registrado para revisar errores, entrenar equipos y mejorar procesos.",
+    situations: [
+      "Un pedido cambió de estado y nadie sabe por qué.",
+      "Un cliente recibió información distinta entre asesores.",
+      "La gerencia necesita auditar acciones sin revisar chats manualmente.",
+    ],
+    workflow: [
+      { label: "Acción", detail: "Usuario, IA o sistema ejecuta un cambio." },
+      { label: "Registro", detail: "Binah conserva evento, responsable, fecha y contexto." },
+      { label: "Consulta", detail: "El equipo revisa historial por pedido, cliente o flujo." },
+      { label: "Mejora", detail: "La operación identifica fallas y ajusta reglas." },
+    ],
+    capabilities: [
+      "Historial completo por pedido.",
+      "Registro de acciones de usuarios.",
+      "Eventos automáticos del sistema.",
+      "Base para auditoría operativa y mejora de procesos.",
+    ],
+    related: [
+      { label: "Reportes e-commerce", href: "/reportes-ecommerce-ventas-asesores-bodegas" },
+      { label: "Tracking pedidos", href: "/tracking-pedidos-whatsapp-colombia" },
+      { label: "Módulo Ventas", href: "/modulo-retail" },
+    ],
+  },
+  {
     priority: "P2",
     slug: "software-shopify-colombia-crm-inventario",
     title: "Software para Shopify en Colombia con CRM e inventario — Binah",
@@ -1046,22 +1345,90 @@ const additionalSolutions: Array<
     h1: "Shopify vende. Binah opera lo que pasa después.",
     lead: "Pedidos, clientes, inventario, despacho, soporte y factura necesitan una operación local conectada.",
     moduleId: "retail",
-    moduleName: "Retail",
+    moduleName: "Ventas",
     searchIntent: "software shopify colombia crm inventario",
     colombiaUseCase: "Tiendas Shopify colombianas que venden por web, WhatsApp e Instagram y necesitan backoffice local.",
     proof: "La tienda online se conecta con lo que ocurre en bodega, soporte, pagos y facturación.",
-    situations: ["Pedidos de Shopify y WhatsApp separados.", "Inventario desactualizado.", "Facturación y despacho manual."],
-    workflow: [
-      { label: "Pedido", detail: "La tienda recibe compra." },
-      { label: "Operación", detail: "Binah gestiona cliente, inventario y despacho." },
-      { label: "Soporte", detail: "WhatsApp ve estado y contexto." },
-      { label: "Reporte", detail: "Ventas web y otros canales se consolidan." },
+    situations: [
+      "Pedidos de Shopify y WhatsApp separados.",
+      "Inventario distinto entre tienda online, bodega y asesores.",
+      "Facturación, despacho y notificaciones hechas por fuera del flujo.",
     ],
-    capabilities: ["CRM.", "Inventario.", "Despachos.", "Facturación y reportes."],
+    workflow: [
+      { label: "Tienda", detail: "Shopify recibe pedidos, productos y datos del cliente." },
+      { label: "Operación", detail: "Binah cruza inventario, bodega, asesor, pago y despacho." },
+      { label: "Cliente", detail: "WhatsApp ve estado, tracking, factura y contexto de soporte." },
+      { label: "Reporte", detail: "Ventas web, canales conversacionales y productos se consolidan." },
+    ],
+    capabilities: [
+      "Pedidos, clientes y productos desde Shopify.",
+      "Inventario conectado con bodegas y canales de venta.",
+      "Despachos, guías, rótulos y tracking.",
+      "Facturación, conciliación y reportes operativos.",
+    ],
     related: [
       { label: "Inventario conectado", href: "/inventario-conectado-ventas-whatsapp-tienda-online" },
       { label: "Despachos", href: "/software-despachos-transportadoras-colombia" },
-      { label: "Módulo Retail", href: "/modulo-retail" },
+      { label: "Coordinadora", href: "/integracion-coordinadora-ecommerce-colombia" },
+    ],
+  },
+  {
+    priority: "P1",
+    slug: "operacion-ecommerce-colombia",
+    title: "Operación e-commerce en Colombia — Binah",
+    description:
+      "Conecta Shopify, Coordinadora, SIIGO y WhatsApp para operar pedidos, inventario, despachos, facturación y soporte en Colombia.",
+    h1: "Shopify vende. Binah opera lo que pasa después.",
+    lead:
+      "La venta online funciona mejor cuando bodega, transportadora, factura, cliente y reportes avanzan en el mismo flujo.",
+    moduleId: "retail",
+    moduleName: "Ventas",
+    searchIntent: "operacion ecommerce colombia shopify coordinadora siigo whatsapp",
+    colombiaUseCase:
+      "Marcas colombianas que venden por Shopify, WhatsApp e Instagram y necesitan operar pedidos sin copiar información entre plataformas.",
+    heroMetric: "4",
+    heroMetricLabel: "piezas críticas conectadas",
+    proof:
+      "Shopify, Coordinadora, SIIGO y WhatsApp dejan de ser pasos separados y se convierten en una operación conectada de punta a punta.",
+    situations: [
+      "La tienda vende, pero bodega y facturación reciben la información tarde.",
+      "El equipo genera guías, rótulos, facturas y mensajes al cliente en herramientas separadas.",
+      "La gerencia no ve ventas, despachos, novedades, inventario y soporte en el mismo lugar.",
+    ],
+    workflow: [
+      { label: "Venta", detail: "Shopify, WhatsApp o Instagram generan el pedido con cliente, productos y canal." },
+      { label: "Operación", detail: "Binah cruza inventario, bodega, asesor, factura, pago y despacho." },
+      { label: "Cliente", detail: "WhatsApp recibe tracking, novedades, soporte y contexto del pedido." },
+      { label: "Control", detail: "Reportes y trazabilidad muestran qué pasó y quién lo gestionó." },
+    ],
+    capabilities: [
+      "Pedidos, productos, clientes e inventario conectados desde Shopify.",
+      "Creación masiva de guías, generación masiva de rótulos y tracking con Coordinadora.",
+      "Configuración y mapeo de SIIGO para facturación, anulaciones, recibos y conciliación.",
+      "Notificaciones, atención y remarketing por WhatsApp con datos del pedido.",
+    ],
+    faqs: [
+      {
+        question: "¿Esta página reemplaza el módulo Ventas?",
+        answer:
+          "No. Es una explicación del flujo e-commerce completo dentro de Ventas: tienda online, bodega, transportadora, facturación, WhatsApp y reportes.",
+      },
+      {
+        question: "¿Binah se conecta con Shopify, Coordinadora y SIIGO al mismo tiempo?",
+        answer:
+          "Sí. El alcance depende de accesos, reglas actuales y permisos de cada plataforma, pero el objetivo es que esas piezas trabajen como un solo flujo.",
+      },
+      {
+        question: "¿El cliente recibe información automática del pedido?",
+        answer:
+          "Sí. Binah puede usar eventos del pedido, estados logísticos y reglas internas para enviar notificaciones por WhatsApp y reducir preguntas repetidas.",
+      },
+    ],
+    related: [
+      { label: "Módulo Ventas", href: "/modulo-retail" },
+      { label: "Shopify + Binah", href: "/software-shopify-colombia-crm-inventario" },
+      { label: "Coordinadora", href: "/integracion-coordinadora-ecommerce-colombia" },
+      { label: "SIIGO", href: "/integracion-siigo-facturacion-automatica" },
     ],
   },
   {
@@ -1072,7 +1439,7 @@ const additionalSolutions: Array<
     h1: "WooCommerce conectado al negocio real.",
     lead: "Tu tienda WordPress puede vender, pero Binah ayuda a coordinar pedidos, clientes, factura y despacho.",
     moduleId: "retail",
-    moduleName: "Retail",
+    moduleName: "Ventas",
     searchIntent: "software woocommerce colombia crm facturacion",
     colombiaUseCase: "Pymes colombianas con WooCommerce que necesitan operación, soporte y cumplimiento local.",
     proof: "La venta online queda conectada con CRM, inventario, facturación y reportes.",
@@ -1087,7 +1454,7 @@ const additionalSolutions: Array<
     related: [
       { label: "Facturación DIAN", href: "/facturacion-electronica-dian" },
       { label: "CRM WhatsApp", href: "/crm-whatsapp-instagram-colombia" },
-      { label: "Módulo Retail", href: "/modulo-retail" },
+      { label: "Módulo Ventas", href: "/modulo-retail" },
     ],
   },
   {

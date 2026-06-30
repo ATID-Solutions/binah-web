@@ -5,18 +5,57 @@ import Footer from "../components/binah/Footer.astro";
 import CtaBand from "../components/binah/CtaBand.astro";
 import HeroLogos from "../components/binah/HeroLogos.tsx";
 import GoogleReviews from "../components/binah/GoogleReviews.astro";
-import Switcher from "../components/binah/Switcher.tsx";
 import ModuleGrid from "../components/binah/ModuleGrid.tsx";
-import FlowDiagram from "../components/binah/FlowDiagram.tsx";
+import OperationalSavingsBanner from "../components/binah/OperationalSavingsBanner.tsx";
 import { waUrl, WA_MESSAGES } from "../components/binah/whatsapp";
 import { FEATURED_SOLUTIONS } from "../lib/marketing-pages";
 
 const heroDemoHref = waUrl(WA_MESSAGES.demo);
+const featuredSolutionCopy: Record<string, { kicker: string; title: string; body: string }> = {
+  "codigos-ean-productos-colombia": {
+    kicker: "EAN / GTIN",
+    title: "Códigos que sí cuadran",
+    body: "Productos, variantes y códigos listos para vender en marketplaces, tienda física y bodega.",
+  },
+  "facturacion-electronica-dian": {
+    kicker: "DIAN",
+    title: "Factura sin copiar datos",
+    body: "La venta termina en factura electrónica y conciliación sin abrir otra operación manual.",
+  },
+  "crm-whatsapp-instagram-colombia": {
+    kicker: "CRM",
+    title: "Inbox para vender y atender",
+    body: "WhatsApp, Instagram y email con historial, asesores, estados y seguimiento.",
+  },
+  "agente-ia-ventas-whatsapp": {
+    kicker: "IA",
+    title: "Respuestas con contexto",
+    body: "Automatiza preguntas repetidas, recopila datos y escala solo lo que necesita una persona.",
+  },
+  "software-despachos-transportadoras-colombia": {
+    kicker: "Despachos",
+    title: "Guías, rótulos y tracking",
+    body: "Pedidos conectados a transportadoras, novedades y avisos al cliente desde el mismo flujo.",
+  },
+  "links-de-pago-whatsapp-colombia": {
+    kicker: "Pagos",
+    title: "Cobros desde la conversación",
+    body: "Envía links de pago, confirma recaudo y mantiene el pedido actualizado en tiempo real.",
+  },
+};
+const featuredSolutionCards = FEATURED_SOLUTIONS.map((page) => ({
+  href: page.path,
+  ...(featuredSolutionCopy[page.slug] ?? {
+    kicker: page.moduleName,
+    title: page.title.replace(" — Binah", ""),
+    body: page.lead,
+  }),
+}));
 ---
 
 <Layout
   title="Binah — El sistema operativo de los negocios colombianos"
-  description="Binah reúne CRM, retail, facturación electrónica DIAN, contabilidad, operaciones y agentes IA en una sola plataforma para negocios colombianos."
+  description="Binah reúne CRM, soporte, ventas, facturación electrónica DIAN, contabilidad, operaciones y agentes IA en una sola plataforma para negocios colombianos."
   page="index"
   canonicalPath="/"
 >
@@ -32,7 +71,7 @@ const heroDemoHref = waUrl(WA_MESSAGES.demo);
           1 plataforma.
         </h1>
         <p class="hero-sub">
-          CRM, retail, facturación electrónica, contabilidad, operaciones, tareas y más — nueve módulos que trabajan como uno. Deja de pagar por ocho herramientas. Corre tu negocio en una sola.
+          CRM, soporte, ventas, facturación electrónica, contabilidad, operaciones, tareas y más — diez módulos que trabajan como uno. Deja de pagar por ocho herramientas. Corre tu negocio en una sola.
         </p>
         <div style="margin-top: 32px;">
           <HeroLogos client:load />
@@ -49,131 +88,123 @@ const heroDemoHref = waUrl(WA_MESSAGES.demo);
           <span><span class="dot"></span>Equipos desde 1 hasta 500+</span>
         </div>
 
-        <Switcher client:load />
       </section>
     </div>
 
     <div class="container-binah">
       <section class="binah-section">
         <div class="section-num">
-          <span class="n">01</span><span>Módulos</span><span class="rule"></span><span>9 en 1</span>
+          <span class="n">01</span><span>Módulos</span><span class="rule"></span><span>10 en 1</span>
         </div>
         <div class="section-head">
           <h2 class="display display-lg title">
-            Nueve módulos.<br />
+            Diez módulos.<br />
             Una sola base de datos.
           </h2>
           <p>
-            Cada módulo es útil por sí solo. Juntos son imbatibles: una venta cerrada en el CRM dispara la factura electrónica, reserva inventario en retail, genera la orden de despacho y avisa al equipo por chat interno. Todo automático.
+            Cada módulo es útil por sí solo. Juntos son imbatibles: una venta cerrada en el CRM puede disparar la factura electrónica, reservar inventario, generar despacho, abrir un ticket de soporte y avisar al equipo por chat interno. Todo conectado.
           </p>
         </div>
         <ModuleGrid client:load />
       </section>
 
+      <OperationalSavingsBanner client:load />
+
       <section class="binah-section">
         <div class="section-num">
-          <span class="n">SEO</span><span>Soluciones</span><span class="rule"></span><span>Colombia</span>
+          <span class="n">03</span><span>Datos en vivo</span><span class="rule"></span><span>Sin Excel</span>
         </div>
-        <div class="section-head">
-          <h2 class="display display-lg title">
-            Páginas para lo que la gente sí busca.
+        <div class="solution-statement">
+          <h2 class="display display-md">
+            Preguntas que deberían responderse sin pedir un reporte.
           </h2>
           <p>
-            EAN, DIAN, CRM por WhatsApp, agentes IA, despachos y links de pago. Cada página aterriza un problema concreto en operación colombiana.
+            Binah convierte la operación diaria en datos disponibles: ventas, asesores, productos, bodegas, atención al cliente
+            y trazabilidad de cada acción.
           </p>
         </div>
-        <div class="solution-strip">
+        <div class="editorial-list" style="margin-top: 40px;">
+          <div class="editorial-row">
+            <span class="mono">WhatsApp</span>
+            <p>¿Cuánto se demora cada asesor en responder y qué conversaciones terminan en venta?</p>
+          </div>
+          <div class="editorial-row">
+            <span class="mono">Ventas</span>
+            <p>¿Cuántos pedidos cierra cada asesor, por canal, producto y periodo?</p>
+          </div>
+          <div class="editorial-row">
+            <span class="mono">Soporte</span>
+            <p>¿Qué tickets están abiertos, quién responde, cuánto falta para el SLA y qué motivos se repiten?</p>
+          </div>
+          <div class="editorial-row">
+            <span class="mono">Bodegas</span>
+            <p>¿Qué bodega vende, separa o despacha más, y dónde se queda represado el flujo?</p>
+          </div>
+          <div class="editorial-row">
+            <span class="mono">Productos</span>
+            <p>¿Qué productos se mueven mejor, cuáles se quedan quietos y cómo impactan inventario?</p>
+          </div>
+          <div class="editorial-row">
+            <span class="mono">Auditoría</span>
+            <p>Cada acción queda registrada: lo que hizo el sistema, lo que hizo cada usuario y lo que pasó con cada pedido.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="binah-section">
+        <div class="section-num">
+          <span class="n">04</span><span>Remarketing</span><span class="rule"></span><span>Clientes antiguos</span>
+        </div>
+        <div class="solution-statement">
+          <h2 class="display display-md">
+            La plataforma colombiana que también piensa en el remarketing.
+          </h2>
+          <p>
+            ¿Qué pasa con tus clientes antiguos? Binah los conserva con historial, segmentos y campañas para que la recompra no dependa de memoria ni Excel.
+          </p>
+        </div>
+        <div class="editorial-list" style="margin-top: 40px;">
+          <div class="editorial-row">
+            <span class="mono">01</span>
+            <p>Ventas reactiva clientes que ya compraron, sin perder el contexto de la conversación original.</p>
+          </div>
+          <div class="editorial-row">
+            <span class="mono">02</span>
+            <p>Logística, contador, analista, asesor, gerente, atención al cliente y soporte trabajan sobre la misma verdad.</p>
+          </div>
+          <div class="editorial-row">
+            <span class="mono">03</span>
+            <p>Las campañas dejan de ser envíos masivos sueltos y se convierten en seguimiento medible de recompra.</p>
+          </div>
+        </div>
+        <div style="margin-top: 28px;">
+          <a href="/remarketing-clientes-antiguos-whatsapp-colombia" class="btn btn-outline">Ver remarketing</a>
+        </div>
+      </section>
+
+      <section class="binah-section home-solutions-section">
+        <div class="home-solutions-strip" aria-label="Soluciones Binah">
           {
-            FEATURED_SOLUTIONS.map((page) => (
-              <a href={page.path}>
-                <span class="mono">{page.priority}</span>
-                <strong>{page.title.replace(" — Binah", "")}</strong>
-                <p>{page.searchIntent}</p>
+            featuredSolutionCards.map((solution, index) => (
+              <a href={solution.href} class="home-solution-card">
+                <span class="home-solution-meta">
+                  <span class="mono">{String(index + 1).padStart(2, "0")}</span>
+                  <span>{solution.kicker}</span>
+                </span>
+                <strong>{solution.title}</strong>
+                <p>{solution.body}</p>
+                <span class="home-solution-action">
+                  Ver solución <span aria-hidden="true">→</span>
+                </span>
               </a>
             ))
           }
         </div>
-        <div style="margin-top: 28px;">
-          <a href="/soluciones" class="btn btn-outline">Ver todas las soluciones</a>
-        </div>
       </section>
     </div>
 
-    <section class="binah-section band-dark">
-      <div class="band-inner">
-        <div class="section-num">
-          <span class="n">02</span><span>Impacto</span><span class="rule"></span><span>Datos 2026</span>
-        </div>
-        <h2 class="display display-md" style="max-width: 22ch; color: #fafaf8;">
-          Los números que mueven a los <em>equipos que ya migraron</em>.
-        </h2>
-        <div class="stats-editorial">
-          <div class="stat">
-            <span class="sup">¹ Herramientas</span>
-            <div class="value">8<em>→1</em></div>
-            <div class="label">Consolidadas en Binah por equipo promedio.</div>
-          </div>
-          <div class="stat">
-            <span class="sup">² Tiempo</span>
-            <div class="value">73<em>%</em></div>
-            <div class="label">Menos tiempo en tareas administrativas repetitivas.</div>
-          </div>
-          <div class="stat">
-            <span class="sup">³ Conversión</span>
-            <div class="value">2.4<em>×</em></div>
-            <div class="label">Tasa de cierre con el agente de ventas activado.</div>
-          </div>
-          <div class="stat">
-            <span class="sup">⁴ Despacho</span>
-            <div class="value">12<em>s</em></div>
-            <div class="label">Tiempo promedio desde venta hasta orden de envío.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="container-binah">
+    <div class="container-binah home-after-solutions">
       <GoogleReviews />
-
-      <section class="binah-section">
-        <div class="section-num">
-          <span class="n">04</span><span>Caso real</span><span class="rule"></span><span>Retail / Casa Tejida</span>
-        </div>
-        <div class="quote-wrap">
-          <div>
-            <p class="quote">
-              Pasamos de cinco pestañas abiertas a una. El WhatsApp, las facturas, el despacho, todo en Binah.
-            </p>
-          </div>
-          <div>
-            <div class="quote-meta">
-              <div class="avatar"></div>
-              <div>
-                <div style="color: var(--ink); font-weight: 500;">Daniela Herrera</div>
-                <div>Fundadora · Casa Tejida</div>
-              </div>
-            </div>
-            <p
-              style="margin-top: 32px; color: var(--ink-soft); font-size: 15px; line-height: 1.55; max-width: 40ch;"
-            >
-              Equipo de 14 personas. Tres canales de venta. Facturación DIAN automática desde que migraron a Binah hace 8 meses.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="binah-section">
-        <div class="section-num">
-          <span class="n">05</span><span>Cómo se siente</span><span class="rule"></span><span>Un flujo. Seis pasos.</span>
-        </div>
-        <div class="section-head">
-          <h2 class="display display-lg title">Así se siente.</h2>
-          <p>
-            Un menú lateral. Nueve módulos. Los datos que entran por uno, inmediatamente están disponibles en todos los demás. Sin integraciones, sin Zapier, sin peleas entre equipos.
-          </p>
-        </div>
-        <FlowDiagram client:load />
-      </section>
 
       <CtaBand
         id="demo"

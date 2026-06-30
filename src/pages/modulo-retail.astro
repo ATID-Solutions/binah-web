@@ -8,13 +8,13 @@ import RetailLogos from "../components/binah/RetailLogos.tsx";
 import { waUrl, WA_MESSAGES } from "../components/binah/whatsapp";
 import { ALL_SEO_FEATURE_PAGES } from "../lib/marketing-pages";
 
-const retailHref = waUrl(WA_MESSAGES.moduleRetail);
+const retailHref = waUrl(WA_MESSAGES.moduleVentas);
 const retailSolutions = ALL_SEO_FEATURE_PAGES.filter((page) => page.moduleId === "retail").slice(0, 6);
 ---
 
 <Layout
-  title="Retail — Binah"
-  description="Opera pedidos, inventario, despachos, transportadoras colombianas y notificaciones de clientes desde el módulo Retail de Binah."
+  title="Ventas — Binah"
+  description="Centraliza ventas, pedidos, inventario, despachos, transportadoras colombianas y notificaciones de clientes desde Binah."
   page="modulos"
   canonicalPath="/modulo-retail"
 >
@@ -23,22 +23,22 @@ const retailSolutions = ALL_SEO_FEATURE_PAGES.filter((page) => page.moduleId ===
     <div class="container-binah">
       <div class="crumb">
         <a href="/">Binah</a> <span class="sep">/</span> <a href="/modulos">Módulos</a>
-        <span class="sep">/</span> Retail
+        <span class="sep">/</span> Ventas
       </div>
 
       <section class="binah-section no-border" style="padding: 40px 0 56px;">
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">
           <div>
-            <div class="eyebrow">Módulo 02 / Retail</div>
+            <div class="eyebrow">Módulo 03 / Ventas</div>
             <h1 class="display display-lg" style="margin-top: 20px;">
-              Del pedido<br />a la puerta,<br />sin fricción.
+              Vende por todos<br />tus canales.<br />Opera en uno.
             </h1>
             <p class="lead" style="margin-top: 28px; font-size: 18px;">
-              Despacha, rastrea y vincula cada pedido con su cliente en segundos. Las transportadoras colombianas — ya conectadas.
+              WhatsApp, tienda online, asesores y bodega trabajan sobre el mismo pedido: inventario, despacho, cliente y seguimiento.
             </p>
             <div class="hero-cta">
               <a href={retailHref} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                Probar Retail <span class="arrow">→</span>
+                Probar Ventas <span class="arrow">→</span>
               </a>
               <a href="/modulos" class="btn btn-outline">Ver otros módulos</a>
             </div>
@@ -127,8 +127,30 @@ const retailSolutions = ALL_SEO_FEATURE_PAGES.filter((page) => page.moduleId ===
 
       <section class="binah-section">
         <div class="section-head">
-          <h2 class="display display-md title">Soluciones Retail.</h2>
-          <p>Casos concretos para catálogo, EAN, inventario, bodega, despachos y tracking en Colombia.</p>
+          <h2 class="display display-md title">Ventas e-commerce conectadas.</h2>
+          <p>
+            Shopify, Coordinadora, SIIGO y WhatsApp pueden operar como un solo flujo después de cada venta.
+          </p>
+        </div>
+        <div class="solution-statement">
+          <h2 class="display display-md">Shopify vende. Binah opera lo que pasa después.</h2>
+          <p>
+            Conecta tienda online, bodega, transportadora, facturación, cliente y reportes sin copiar el mismo dato
+            entre sistemas.
+          </p>
+        </div>
+        <div class="hero-cta">
+          <a href="/operacion-ecommerce-colombia" class="btn btn-primary">
+            Ver operación e-commerce <span class="arrow">→</span>
+          </a>
+          <a href="/software-shopify-colombia-crm-inventario" class="btn btn-outline">Ver Shopify + Binah</a>
+        </div>
+      </section>
+
+      <section class="binah-section">
+        <div class="section-head">
+          <h2 class="display display-md title">Soluciones Ventas.</h2>
+          <p>Casos concretos para vender con catálogo, inventario, bodega, despachos y tracking en Colombia.</p>
         </div>
         <div class="related-links-grid">
           {
@@ -143,9 +165,9 @@ const retailSolutions = ALL_SEO_FEATURE_PAGES.filter((page) => page.moduleId ===
       </section>
 
       <CtaBand
-        eyebrow="Retail · Módulo 02"
-        heading="Dispara tu operación."
-        body="Conectamos tus transportadoras y migramos tu inventario en menos de una semana."
+        eyebrow="Ventas · Módulo 03"
+        heading="Conecta tus ventas con la operación."
+        body="Unimos tienda online, asesores, inventario, transportadoras, facturación y WhatsApp para vender sin reconstruir datos."
         primaryHref={retailHref}
       />
     </div>

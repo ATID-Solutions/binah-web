@@ -30,7 +30,8 @@ Objetivo: crear una pagina publica por problema concreto que una empresa colombi
 | P1 | Tracking y notificaciones por WhatsApp | `/tracking-pedidos-whatsapp-colombia` | "notificaciones whatsapp pedidos", "tracking pedidos whatsapp" | Cliente recibe estado de pedido: recibido, empacado, en ruta, entregado. | Retail + CRM | Despachos, CRM, Soporte |
 | P1 | Agente IA de soporte | `/agente-ia-soporte-clientes-whatsapp` | "chatbot soporte whatsapp", "ia soporte clientes colombia" | Resolver "donde esta mi pedido", cambios, devoluciones y preguntas frecuentes sin saturar asesores. | CRM | Tracking, Retail, Knowledge base |
 | P1 | Agente IA de reservas y citas | `/agente-ia-reservas-citas-whatsapp` | "chatbot reservas whatsapp", "agenda citas whatsapp" | Peluquerias, clinicas esteticas, consultorios, talleres y servicios que agendan por WhatsApp. | CRM + Operaciones | Agenda, Operaciones, Precios |
-| P1 | Campanas masivas de WhatsApp | `/campanas-whatsapp-clientes-colombia` | "campanas whatsapp colombia", "mensajes masivos whatsapp clientes" | Reactivar clientes, lanzar promos, confirmar asistencia y segmentar listas sin Excel. | CRM | CRM, Reportes, Precios |
+| P1 | Campanas masivas y remarketing de WhatsApp | `/campanas-whatsapp-clientes-colombia` | "remarketing whatsapp colombia", "campanas whatsapp colombia", "mensajes masivos whatsapp clientes" | Reactivar clientes antiguos, lanzar promos, confirmar asistencia y segmentar listas sin Excel. | CRM | Remarketing, CRM, Precios |
+| P1 | Remarketing para clientes antiguos | `/remarketing-clientes-antiguos-whatsapp-colombia` | "remarketing whatsapp colombia", "fidelizar clientes colombia", "clientes antiguos crm" | Clientes que ya compraron y deben volver a recibir seguimiento, campanas y ofertas con contexto. | CRM + Reportes | Campanas WhatsApp, CRM, Reportes |
 | P1 | Llamadas a celulares desde CRM | `/llamadas-celulares-colombia-crm` | "crm llamadas celulares colombia", "llamadas desde crm" | Equipos comerciales y de soporte que necesitan llamar a celulares colombianos desde el CRM con contexto e historial. | CRM | CRM WhatsApp, Modulo CRM, Precios |
 | P1 | POS y documento equivalente electronico | `/pos-documento-equivalente-electronico-dian` | "pos electronico dian", "documento equivalente electronico colombia" | Comercios que venden en mostrador y necesitan identificar productos, ventas y requisitos del POS electronico. | Facturacion + Retail | Facturacion, EAN, Inventario |
 | P1 | Notas credito y devoluciones | `/notas-credito-devoluciones-dian-retail` | "nota credito dian devolucion", "devoluciones factura electronica" | Cambios de talla, devoluciones de e-commerce y ajustes que impactan inventario y DIAN. | Facturacion + Retail | Facturacion, Retail, Soporte |
@@ -73,7 +74,7 @@ Estas ya existen parcialmente o estan definidas en `src/components/binah/modules
 - Home debe enlazar a 6 paginas P0 bajo una seccion "Soluciones por problema".
 - `/modulos` debe enlazar a todas las paginas de modulo y a las P0/P1 mas relacionadas.
 - `/modulo-retail` debe enlazar a EAN/GTIN, inventario, despachos, tracking, Shopify y WooCommerce.
-- `/modulo-crm` debe enlazar a CRM WhatsApp, agente ventas, agente soporte, agente reservas, campanas y llamadas desde CRM.
+- `/modulo-crm` debe enlazar a CRM WhatsApp, agente ventas, agente soporte, agente reservas, campanas, remarketing y llamadas desde CRM.
 - `/precios` debe enlazar a las P0 desde las FAQ, especialmente CRM, IA, campanas y pagos.
 - Footer debe tener una columna "Soluciones" con 6 enlaces maximos: EAN, Facturacion DIAN, CRM WhatsApp, Agente IA, Despachos, Links de pago.
 - Sitemap debe incluir todas las paginas publicadas desde `src/lib/seo.ts`.

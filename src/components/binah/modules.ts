@@ -1,5 +1,6 @@
 export type ModuleId =
   | "crm"
+  | "soporte"
   | "retail"
   | "facturacion"
   | "contabilidad"
@@ -25,8 +26,8 @@ export const BINAH_MODULES: BinahModule[] = [
     id: "crm",
     num: "01",
     name: "CRM & Agentes",
-    short: "Inbox unificado + agentes IA",
-    tagline: "Un solo inbox. Tres agentes entrenados. Cero conversaciones perdidas.",
+    short: "Inbox unificado + agentes IA + llamadas",
+    tagline: "Un solo inbox. Tres agentes entrenados. Llamadas desde el CRM. Cero conversaciones perdidas.",
     description:
       "WhatsApp, Instagram, correo y llamadas convergen en un inbox único. Tus agentes de IA — ventas, soporte y reservas — responden, califican y cierran 24/7.",
     features: [
@@ -39,24 +40,41 @@ export const BINAH_MODULES: BinahModule[] = [
     href: "/modulo-crm",
   },
   {
-    id: "retail",
+    id: "soporte",
     num: "02",
-    name: "Retail",
-    short: "Despacho y trazabilidad",
-    tagline: "Del pedido a la puerta en segundos, no en llamadas.",
+    name: "Soporte",
+    short: "Tickets, SLA y seguimiento",
+    tagline: "Cada caso tiene dueño, prioridad, historial y cierre.",
     description:
-      "Despacha, rastrea y vincula pedidos con clientes en segundos. Visibilidad total de inventario, transportadoras y entregas.",
+      "Convierte conversaciones, pedidos y solicitudes en tickets con responsable, prioridad, SLA, tiempos límite e historial completo del cliente.",
     features: [
-      "Despacho con un clic a transportadoras",
-      "Trazabilidad en tiempo real",
-      "Vinculación automática con el CRM",
-      "Etiquetas y guías generadas al instante",
+      "Tickets por cliente y pedido",
+      "Responsables, prioridades y SLA",
+      "Estados y etiquetas de soporte",
+      "Historial de conversaciones y acciones",
+      "Reportes de motivos y tiempos de respuesta",
+    ],
+    href: "/modulo-soporte",
+  },
+  {
+    id: "retail",
+    num: "03",
+    name: "Ventas",
+    short: "Pedidos, inventario y despacho",
+    tagline: "Cada venta nace conectada a inventario, bodega, factura y cliente.",
+    description:
+      "Centraliza pedidos de WhatsApp, tienda online y asesores. Reserva inventario, prepara despacho y mantiene cada venta conectada con el cliente.",
+    features: [
+      "Pedidos por canal y asesor",
+      "Inventario reservado por venta",
+      "Despacho conectado a transportadoras",
+      "Guías, rótulos y tracking por pedido",
     ],
     href: "/modulo-retail",
   },
   {
     id: "facturacion",
-    num: "03",
+    num: "04",
     name: "Facturación Electrónica",
     short: "DIAN, automática",
     tagline: "Cada factura, crédito y nota — emitida a la DIAN sin que levantes un dedo.",
@@ -72,7 +90,7 @@ export const BINAH_MODULES: BinahModule[] = [
   },
   {
     id: "contabilidad",
-    num: "04",
+    num: "05",
     name: "Contabilidad",
     short: "Costos, compras, proveedores",
     tagline: "Tu contador te va a pedir un aumento (de cariño).",
@@ -88,7 +106,7 @@ export const BINAH_MODULES: BinahModule[] = [
   },
   {
     id: "chat",
-    num: "05",
+    num: "06",
     name: "Chat Interno",
     short: "Comunicación del equipo",
     tagline: "Adiós a los grupos de WhatsApp caóticos.",
@@ -104,7 +122,7 @@ export const BINAH_MODULES: BinahModule[] = [
   },
   {
     id: "operaciones",
-    num: "06",
+    num: "07",
     name: "Operaciones",
     short: "Agenda & servicios",
     tagline: "Para negocios de servicio que viven de la agenda.",
@@ -120,7 +138,7 @@ export const BINAH_MODULES: BinahModule[] = [
   },
   {
     id: "tareas",
-    num: "07",
+    num: "08",
     name: "Tareas",
     short: "Proyectos del equipo",
     tagline: "Todo lo tuyo, hecho. En la misma plataforma.",
@@ -136,7 +154,7 @@ export const BINAH_MODULES: BinahModule[] = [
   },
   {
     id: "invoice",
-    num: "08",
+    num: "09",
     name: "Pagos",
     short: "Cobros y links",
     tagline: "Cobra en cinco segundos por cualquier canal.",
@@ -152,7 +170,7 @@ export const BINAH_MODULES: BinahModule[] = [
   },
   {
     id: "reportes",
-    num: "09",
+    num: "10",
     name: "Reportes",
     short: "Analítica de todo",
     tagline: "La foto completa. En una sola pantalla.",

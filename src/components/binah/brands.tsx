@@ -121,6 +121,14 @@ export function ModuleGlyph({ id, size = 26 }: { id: string; size?: number }) {
         <circle cx="18" cy="11" r="1.2" fill="currentColor" stroke="none" />
       </svg>
     ),
+    soporte: (
+      <svg viewBox="0 0 28 28" width={s} height={s}>
+        <path style={stroke} d="M5 5h18a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z" />
+        <path style={stroke} d="M8 10h8M8 15h12" />
+        <path style={stroke} d="M8 20h6" />
+        <circle cx="21" cy="10" r="1.3" fill="currentColor" stroke="none" />
+      </svg>
+    ),
     retail: (
       <svg viewBox="0 0 28 28" width={s} height={s}>
         <path style={stroke} d="M6 9h16l-1.5 14a2 2 0 0 1-2 1.8H9.5a2 2 0 0 1-2-1.8L6 9Z" />

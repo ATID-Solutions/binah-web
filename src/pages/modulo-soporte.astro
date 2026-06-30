@@ -1,0 +1,153 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/binah/Nav.astro";
+import Footer from "../components/binah/Footer.astro";
+import CtaBand from "../components/binah/CtaBand.astro";
+import ModuleMockFrame from "../components/binah/ModuleMockFrame.tsx";
+import { waUrl, WA_MESSAGES } from "../components/binah/whatsapp";
+import { ALL_SEO_FEATURE_PAGES } from "../lib/marketing-pages";
+
+const supportHref = waUrl(WA_MESSAGES.moduleSupport);
+const supportRelatedSlugs = new Set([
+  "agente-ia-soporte-clientes-whatsapp",
+  "tracking-pedidos-whatsapp-colombia",
+  "notas-credito-devoluciones-dian-retail",
+  "base-conocimiento-agente-ia-soporte",
+]);
+const supportSolutions = ALL_SEO_FEATURE_PAGES.filter((page) => supportRelatedSlugs.has(page.slug));
+---
+
+<Layout
+  title="Soporte al cliente y tickets — Binah"
+  description="Gestiona tickets de soporte, responsables, prioridades, SLA, historial de cliente y reportes de atención desde Binah."
+  page="modulos"
+  canonicalPath="/modulo-soporte"
+>
+  <Nav />
+  <main>
+    <div class="container-binah">
+      <div class="crumb">
+        <a href="/">Binah</a> <span class="sep">/</span> <a href="/modulos">Módulos</a>
+        <span class="sep">/</span> Soporte
+      </div>
+
+      <section class="binah-section no-border" style="padding: 40px 0 56px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">
+          <div>
+            <div class="eyebrow">Módulo 02 / Soporte</div>
+            <h1 class="display display-lg" style="margin-top: 20px;">
+              Tickets claros.<br />Clientes atendidos.<br />Nada perdido.
+            </h1>
+            <p class="lead" style="margin-top: 28px; font-size: 18px;">
+              Cada solicitud queda como ticket con responsable, prioridad, tiempos límite, historial del cliente y estado de cierre.
+            </p>
+            <div class="hero-cta">
+              <a href={supportHref} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                Ver Soporte <span class="arrow">→</span>
+              </a>
+              <a href="/modulos" class="btn btn-outline">Ver otros módulos</a>
+            </div>
+          </div>
+          <ModuleMockFrame id="soporte" client:load />
+        </div>
+      </section>
+
+      <section class="binah-section">
+        <div class="section-head">
+          <h2 class="display display-md title">Del mensaje al cierre.</h2>
+          <p>Soporte deja de depender de chats sueltos. Cada caso tiene dueño, contexto y siguiente paso.</p>
+        </div>
+        <div
+          style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden;"
+        >
+          <div style="background: var(--bg); padding: 36px 28px; min-height: 280px; display: flex; flex-direction: column; gap: 14px;">
+            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">01 / ENTRA</div>
+            <h3 style="font-family: var(--font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">
+              Solicitud recibida
+            </h3>
+            <p style="color: var(--ink-soft); font-size: 14px;">
+              El caso puede nacer desde WhatsApp, un pedido, una devolución, una llamada o una tarea interna.
+            </p>
+          </div>
+          <div style="background: var(--bg); padding: 36px 28px; min-height: 280px; display: flex; flex-direction: column; gap: 14px;">
+            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">02 / ASIGNA</div>
+            <h3 style="font-family: var(--font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">
+              Ticket con dueño
+            </h3>
+            <p style="color: var(--ink-soft); font-size: 14px;">
+              Responsable, prioridad, estado, etiquetas y tiempos límite quedan visibles para el equipo.
+            </p>
+          </div>
+          <div style="background: var(--bg); padding: 36px 28px; min-height: 280px; display: flex; flex-direction: column; gap: 14px;">
+            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">03 / RESUELVE</div>
+            <h3 style="font-family: var(--font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">
+              Contexto completo
+            </h3>
+            <p style="color: var(--ink-soft); font-size: 14px;">
+              Soporte ve cliente, pedido, tracking, factura, conversación y acciones anteriores antes de responder.
+            </p>
+          </div>
+          <div style="background: var(--bg); padding: 36px 28px; min-height: 280px; display: flex; flex-direction: column; gap: 14px;">
+            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">04 / MIDE</div>
+            <h3 style="font-family: var(--font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">
+              Cierre medible
+            </h3>
+            <p style="color: var(--ink-soft); font-size: 14px;">
+              Motivo, tiempo de respuesta, responsable y resultado quedan listos para reportes.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="binah-section">
+        <div class="section-head">
+          <h2 class="display display-md title">Lo que gerencia puede ver.</h2>
+          <p>Preguntas de soporte que deberían estar disponibles sin pedir un corte manual.</p>
+        </div>
+        <div class="editorial-list">
+          <div class="editorial-row">
+            <span class="mono">Tickets</span>
+            <p>Cuántos casos están abiertos, vencidos, resueltos o esperando respuesta del cliente.</p>
+          </div>
+          <div class="editorial-row">
+            <span class="mono">Equipo</span>
+            <p>Quién responde, cuánto tarda y qué tipo de casos maneja cada persona.</p>
+          </div>
+          <div class="editorial-row">
+            <span class="mono">Motivos</span>
+            <p>Qué se repite: tracking, cambios, garantías, pagos, facturas, tallas o preguntas frecuentes.</p>
+          </div>
+          <div class="editorial-row">
+            <span class="mono">Cliente</span>
+            <p>Todo queda en el historial: conversación, compra, pedido, factura, devolución y cierre.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="binah-section">
+        <div class="section-head">
+          <h2 class="display display-md title">Conectado con la operación.</h2>
+          <p>Soporte no vive aislado: se alimenta de CRM, ventas, facturación, tareas y reportes.</p>
+        </div>
+        <div class="related-links-grid">
+          {
+            supportSolutions.map((page) => (
+              <a href={page.path}>
+                <span>{page.title.replace(" — Binah", "")}</span>
+                <strong>→</strong>
+              </a>
+            ))
+          }
+        </div>
+      </section>
+
+      <CtaBand
+        eyebrow="Soporte · Módulo 02"
+        heading="Soporte deja de ser una bandeja de chats."
+        body="Organiza tickets, responsables, SLA e historial para atender mejor sin perder contexto."
+        primaryHref={supportHref}
+      />
+    </div>
+  </main>
+  <Footer />
+</Layout>

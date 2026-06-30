@@ -14,7 +14,7 @@ const demoHref = waUrl(WA_MESSAGES.demo);
 
 <Layout
   title="Precios — Binah"
-  description="Conoce los planes por periodo de 28 días de Binah para CRM, agentes IA, módulos operativos y equipos en crecimiento."
+  description="Conoce los planes mensuales y anuales de Binah para CRM, agentes IA, módulos operativos y equipos en crecimiento."
   page="precios"
   canonicalPath="/precios"
 >
@@ -31,7 +31,7 @@ const demoHref = waUrl(WA_MESSAGES.demo);
           Paga por módulo. O por todo.
         </h1>
         <p class="lead" style="margin-top: 28px; font-size: 18px;">
-          Sin permanencias forzadas. Sin letra pequeña. Cada periodo dura 28 días: activa los módulos que necesites y paga solo por ellos.
+          Sin permanencias forzadas. Sin letra pequeña. Elige el plan mensual o anual, activa los módulos que necesites y paga solo por ellos.
         </p>
 
         <div class="pricing-billing-wrap">
@@ -39,12 +39,12 @@ const demoHref = waUrl(WA_MESSAGES.demo);
           <div class="pricing-controls">
             <div class="pricing-billing-group">
               <label class="pricing-billing" for="billing-annual">
-                <span class="billing-option billing-option-monthly">Periodo</span>
+                <span class="billing-option billing-option-monthly">Mensual</span>
                 <span class="pricing-toggle" aria-hidden="true"><span></span></span>
-                <span class="billing-option billing-option-annual">12 periodos <span class="pricing-discount">-20%</span></span>
+                <span class="billing-option billing-option-annual">Anual <span class="pricing-discount">-20%</span></span>
               </label>
               <p class="pricing-billing-copy" id="billing-annual-copy">
-                Cada periodo dura 28 días. Paga 12 periodos por adelantado y recibe 20% de descuento.
+                Paga anual y recibe 20% de descuento.
               </p>
             </div>
 
@@ -67,22 +67,22 @@ const demoHref = waUrl(WA_MESSAGES.demo);
             <div class="price-card">
               <div class="plan-name">Starter</div>
               <div class="price">
-                <span class="monthly-price">$299K<span class="price-period">/28 días</span></span>
+                <span class="monthly-price">$299K<span class="price-period">/mes</span></span>
                 <span class="annual-price">
-                  <span class="price-before">$299K/28 días</span>
-                  <span class="annual-price-line">$239K<span class="price-period">/28 días</span></span>
+                  <span class="price-before">$299K/mes</span>
+                  <span class="annual-price-line">$239K<span class="price-period">/mes</span></span>
                 </span>
               </div>
               <div class="price-sub">
                 <span class="monthly-copy">Módulo CRM · hasta 3 usuarios</span>
-                <span class="annual-copy">Módulo CRM · hasta 3 usuarios · $2.87M/12 periodos</span>
+                <span class="annual-copy">Módulo CRM · hasta 3 usuarios · $2.87M/año</span>
               </div>
               <a href={starterHref} target="_blank" rel="noopener noreferrer" class="btn btn-outline">Empezar</a>
               <ul>
                 <li>Solo módulo CRM (inbox unificado)</li>
                 <li>WhatsApp, Instagram, email y próximamente TikTok</li>
                 <li>Hasta 3 usuarios</li>
-                <li>Hasta 500 contactos atendidos por periodo de 28 días</li>
+                <li>Hasta 500 contactos atendidos al mes</li>
                 <li>Llamadas desde CRM disponibles con número activo</li>
                 <li>2 horas de llamadas incluidas con número activo</li>
                 <li>Campañas masivas cotizadas aparte: $100K por cada 1.000 contactos</li>
@@ -102,15 +102,15 @@ const demoHref = waUrl(WA_MESSAGES.demo);
                 </div>
               </div>
               <div class="price">
-                <span class="monthly-price">$699K<span class="price-period">/28 días</span></span>
+                <span class="monthly-price">$699K<span class="price-period">/mes</span></span>
                 <span class="annual-price">
-                  <span class="price-before">$699K/28 días</span>
-                  <span class="annual-price-line">$559K<span class="price-period">/28 días</span></span>
+                  <span class="price-before">$699K/mes</span>
+                  <span class="annual-price-line">$559K<span class="price-period">/mes</span></span>
                 </span>
               </div>
               <div class="price-sub">
-                <span class="monthly-copy">CRM + IA · hasta 2.000 contactos/periodo</span>
-                <span class="annual-copy">CRM + IA · hasta 2.000 contactos/periodo · $6.71M/12 periodos</span>
+                <span class="monthly-copy">CRM + IA · hasta 2.000 contactos/mes</span>
+                <span class="annual-copy">CRM + IA · hasta 2.000 contactos/mes · $6.71M/año</span>
               </div>
               <a href={proHref} target="_blank" rel="noopener noreferrer" class="btn btn-primary">Empezar</a>
               <ul>
@@ -118,10 +118,10 @@ const demoHref = waUrl(WA_MESSAGES.demo);
                 <li>IA incluida</li>
                 <li>Configuración de 1 tipo de agente: ventas, soporte o reservas*</li>
                 <li>Hasta 6 usuarios</li>
-                <li>Hasta 2.000 contactos atendidos por periodo de 28 días</li>
+                <li>Hasta 2.000 contactos atendidos al mes</li>
                 <li>Llamadas desde CRM disponibles con número activo</li>
                 <li>2 horas de llamadas incluidas con número activo</li>
-                <li>1 campaña masiva de WhatsApp por periodo incluida*</li>
+                <li>1 campaña masiva de WhatsApp al mes incluida*</li>
                 <li>Soporte en grupo directo de WhatsApp · respuesta máxima 3 horas</li>
               </ul>
             </div>
@@ -129,15 +129,15 @@ const demoHref = waUrl(WA_MESSAGES.demo);
             <div class="price-card">
               <div class="plan-name">Business</div>
               <div class="price">
-                <span class="monthly-price">$2.190M<span class="price-period">/28 días</span></span>
+                <span class="monthly-price">$2.190M<span class="price-period">/mes</span></span>
                 <span class="annual-price">
-                  <span class="price-before">$2.190M/28 días</span>
-                  <span class="annual-price-line">$1.75M<span class="price-period">/28 días</span></span>
+                  <span class="price-before">$2.190M/mes</span>
+                  <span class="annual-price-line">$1.75M<span class="price-period">/mes</span></span>
                 </span>
               </div>
               <div class="price-sub">
-                <span class="monthly-copy">Todos los módulos · hasta 10 usuarios · hasta 1.000 pedidos/periodo</span>
-                <span class="annual-copy">Todos los módulos · hasta 10 usuarios · hasta 1.000 pedidos/periodo · $21.0M/12 periodos</span>
+                <span class="monthly-copy">Todos los módulos · hasta 10 usuarios · hasta 1.000 pedidos/mes</span>
+                <span class="annual-copy">Todos los módulos · hasta 10 usuarios · hasta 1.000 pedidos/mes · $21.0M/año</span>
               </div>
               <a href={businessHref} target="_blank" rel="noopener noreferrer" class="btn btn-outline">Empezar</a>
               <ul>
@@ -145,11 +145,11 @@ const demoHref = waUrl(WA_MESSAGES.demo);
                 <li>Todos los módulos de Binah incluidos</li>
                 <li>Hasta 10 usuarios</li>
                 <li>Contactos atendidos ilimitados</li>
-                <li>Hasta 1.000 pedidos por periodo de 28 días</li>
+                <li>Hasta 1.000 pedidos al mes</li>
                 <li>Paquete de 20.000 documentos electrónicos al año directamente con nosotros</li>
                 <li>Llamadas desde CRM disponibles con número activo</li>
                 <li>4 horas de llamadas incluidas con número activo</li>
-                <li>3 campañas masivas de WhatsApp por periodo, de 1.000 contactos cada una</li>
+                <li>3 campañas masivas de WhatsApp al mes, de 1.000 contactos cada una</li>
                 <li>Soporte prioritario</li>
                 <li>Respuestas en menos de 30 minutos</li>
                 <li>Onboarding guiado</li>
@@ -163,12 +163,15 @@ const demoHref = waUrl(WA_MESSAGES.demo);
               <a href={scaleHref} target="_blank" rel="noopener noreferrer" class="btn btn-outline">Hablar con ventas</a>
               <ul>
                 <li>Todo lo incluido en Business</li>
-                <li>Construcción de necesidades específicas para tu empresa</li>
-                <li>Empresas con más de 1.000 pedidos por periodo de 28 días</li>
+                <li>Empresas con más de 1.000 pedidos al mes</li>
+                <li>Gerente de cuenta asignado</li>
+                <li>Desarrollos a medida dentro de la plataforma</li>
+                <li>Integraciones profundas con Shopify, Coordinadora, SIIGO u otros sistemas</li>
+                <li>Reportes operativos por ventas, asesores, productos, bodegas y atención</li>
+                <li>Trazabilidad completa de acciones del sistema y usuarios</li>
                 <li>Llamadas desde CRM disponibles con número activo</li>
                 <li>4 horas de llamadas incluidas con número activo</li>
-                <li>3 campañas masivas de WhatsApp por periodo, de 1.000 contactos cada una</li>
-                <li>Integraciones y flujos a medida</li>
+                <li>3 campañas masivas de WhatsApp al mes, de 1.000 contactos cada una</li>
                 <li>Acompañamiento dedicado</li>
                 <li>Alcance, tiempos y precio según el proyecto</li>
                 <li>Contratos empresariales</li>
@@ -188,7 +191,7 @@ const demoHref = waUrl(WA_MESSAGES.demo);
               Alrededor de USD 80 incluidos
             </div>
             <p style="color: var(--mute); font-size: 13px; margin-top: 8px;">
-              Los planes con IA incluyen consumo por periodo de 28 días de alrededor de USD 80 o su proporcional en pesos colombianos. El consumo adicional se cobra por uso, sin sorpresas.
+              Los planes con IA incluyen consumo mensual de alrededor de USD 80 o su proporcional en pesos colombianos. El consumo adicional se cobra por uso, sin sorpresas.
             </p>
           </div>
           <div class="pricing-note">
@@ -201,7 +204,7 @@ const demoHref = waUrl(WA_MESSAGES.demo);
               1 en Pro, 3 en Business*
             </div>
             <p style="color: var(--mute); font-size: 13px; margin-top: 8px;">
-              En Pro se incluye 1 campaña masiva por WhatsApp por periodo. En Business se incluyen 3 campañas de 1.000 contactos cada una. En Starter se cotizan a $100K por cada 1.000 contactos.
+              En Pro se incluye 1 campaña masiva por WhatsApp al mes. En Business se incluyen 3 campañas de 1.000 contactos cada una al mes. En Starter se cotizan a $100K por cada 1.000 contactos.
             </p>
           </div>
           <div class="pricing-note">
@@ -214,12 +217,12 @@ const demoHref = waUrl(WA_MESSAGES.demo);
               Número activo + horas incluidas
             </div>
             <p style="color: var(--mute); font-size: 13px; margin-top: 8px;">
-              Starter y Pro incluyen 2 horas por periodo. Business incluye 4 horas por periodo. Para activar llamadas necesitas un número: activación por $90K COP y mantenimiento por $40K COP por periodo de 28 días. Cada minuto adicional cuesta $100 COP.
+              Starter y Pro incluyen 2 horas al mes. Business incluye 4 horas al mes. Para activar llamadas necesitas un número: activación por $90K COP y mantenimiento por $40K COP al mes. Cada minuto adicional cuesta $100 COP.
             </p>
           </div>
         </div>
         <p class="pricing-disclaimer">
-          * La configuración de 1 tipo de agente aplica solo si se firma contrato de permanencia de 1 año. El plan Pro incluye 1 campaña masiva de WhatsApp por periodo. Business incluye 3 campañas masivas de WhatsApp por periodo, de 1.000 contactos cada una. Las campañas adicionales se cotizan aparte. Starter y Pro incluyen 120 minutos por periodo de llamadas a celulares colombianos desde el CRM; Business incluye 240 minutos por periodo. Para usarlas debes activar un número por $90K COP y pagar $40K COP por periodo de 28 días para mantenerlo activo. Cada minuto adicional cuesta $100 COP.
+          * La configuración de 1 tipo de agente aplica solo si se firma contrato de permanencia de 1 año. Las campañas adicionales se cotizan aparte. Para usar llamadas debes activar un número por $90K COP y pagar $40K COP al mes para mantenerlo activo. Cada minuto adicional cuesta $100 COP. Los meses contemplados en la plataforma consisten en 28 días calendario.
         </p>
 
         <div
@@ -227,8 +230,8 @@ const demoHref = waUrl(WA_MESSAGES.demo);
         >
           <span>◆ Sin tarjeta para probar</span>
           <span>◆ Cancela cuando quieras</span>
-          <span>◆ IA incluida desde $699K por periodo</span>
-          <span>◆ 3 campañas por periodo en Business*</span>
+          <span>◆ IA incluida desde $699K al mes</span>
+          <span>◆ 3 campañas al mes en Business*</span>
           <span>◆ 4 horas de llamadas en Business</span>
         </div>
       </section>
@@ -249,7 +252,7 @@ const demoHref = waUrl(WA_MESSAGES.demo);
               ¿El Starter incluye IA?
             </h3>
             <p style="color: var(--ink-soft); font-size: 14px;">
-              No. El Starter de $299K por periodo solo incluye el módulo CRM: WhatsApp, Instagram, email y próximamente TikTok. La IA está incluida desde el plan Pro de $699K por periodo.
+              No. El Starter de $299K al mes solo incluye el módulo CRM: WhatsApp, Instagram, email y próximamente TikTok. La IA está incluida desde el plan Pro de $699K al mes.
             </p>
           </div>
           <div style="background: var(--bg); padding: 32px;">
@@ -259,10 +262,10 @@ const demoHref = waUrl(WA_MESSAGES.demo);
             <h3
               style="font-family: var(--font-display); font-size: 22px; letter-spacing: -0.02em; font-weight: 500; margin-bottom: 12px;"
             >
-              ¿Qué incluye el plan Business de $2.190M por periodo?
+              ¿Qué incluye el plan Business de $2.190M al mes?
             </h3>
             <p style="color: var(--ink-soft); font-size: 14px;">
-              Incluye todos los módulos de Binah, hasta 10 usuarios, contactos atendidos ilimitados, hasta 1.000 pedidos por periodo de 28 días, paquete de 20.000 documentos electrónicos al año directamente con nosotros, 3 campañas masivas de WhatsApp de 1.000 contactos cada una, 4 horas de llamadas con número activo, soporte prioritario y respuestas en menos de 30 minutos. Para más de 1.000 pedidos por periodo, trabajamos un plan personalizado.
+              Incluye todos los módulos de Binah, hasta 10 usuarios, contactos atendidos ilimitados, hasta 1.000 pedidos al mes, paquete de 20.000 documentos electrónicos al año directamente con nosotros, 3 campañas masivas de WhatsApp de 1.000 contactos cada una al mes, 4 horas de llamadas con número activo, soporte prioritario y respuestas en menos de 30 minutos. Para más de 1.000 pedidos al mes, trabajamos un plan personalizado.
             </p>
           </div>
           <div style="background: var(--bg); padding: 32px;">
@@ -288,7 +291,7 @@ const demoHref = waUrl(WA_MESSAGES.demo);
               ¿Cómo funciona el cobro de IA y campañas?
             </h3>
             <p style="color: var(--ink-soft); font-size: 14px;">
-              Los planes con IA incluyen consumo por periodo de 28 días de alrededor de USD 80 o su proporcional en pesos colombianos; los adicionales se facturan por consumo. Pro incluye 1 campaña masiva de WhatsApp por periodo, Business incluye 3 campañas de 1.000 contactos cada una y en Starter se cotizan a $100K por cada 1.000 contactos.
+              Los planes con IA incluyen consumo mensual de alrededor de USD 80 o su proporcional en pesos colombianos; los adicionales se facturan por consumo. Pro incluye 1 campaña masiva de WhatsApp al mes, Business incluye 3 campañas de 1.000 contactos cada una al mes y en Starter se cotizan a $100K por cada 1.000 contactos.
             </p>
           </div>
           <div style="background: var(--bg); padding: 32px;">
@@ -301,7 +304,7 @@ const demoHref = waUrl(WA_MESSAGES.demo);
               ¿Las llamadas desde el CRM están incluidas?
             </h3>
             <p style="color: var(--ink-soft); font-size: 14px;">
-              Sí. Starter y Pro incluyen 2 horas por periodo de 28 días de llamadas a celulares colombianos. Business incluye 4 horas por periodo. Para activar llamadas debes tener un número: activarlo cuesta $90K COP y mantenerlo activo cuesta $40K COP por periodo de 28 días. Cada minuto adicional cuesta $100 COP.
+              Sí. Starter y Pro incluyen 2 horas al mes de llamadas a celulares colombianos. Business incluye 4 horas al mes. Para activar llamadas debes tener un número: activarlo cuesta $90K COP y mantenerlo activo cuesta $40K COP al mes. Cada minuto adicional cuesta $100 COP.
             </p>
           </div>
           <div style="background: var(--bg); padding: 32px;">
@@ -315,6 +318,32 @@ const demoHref = waUrl(WA_MESSAGES.demo);
             </h3>
             <p style="color: var(--ink-soft); font-size: 14px;">
               Sí. Si necesitas que construyamos algo específico pero tu operación no justifica un plan personalizado constante, podemos negociar ese tipo de situaciones.
+            </p>
+          </div>
+          <div style="background: var(--bg); padding: 32px;">
+            <div class="mono" style="font-size: 10px; color: var(--mute); letter-spacing: 0.1em; margin-bottom: 12px;">
+              Q.07
+            </div>
+            <h3
+              style="font-family: var(--font-display); font-size: 22px; letter-spacing: -0.02em; font-weight: 500; margin-bottom: 12px;"
+            >
+              ¿Cuándo necesito un plan personalizado?
+            </h3>
+            <p style="color: var(--ink-soft); font-size: 14px;">
+              Cuando tu operación supera 1.000 pedidos al mes o necesita integraciones profundas, reportes específicos, acompañamiento dedicado, desarrollos a medida o flujos empresariales con varias áreas.
+            </p>
+          </div>
+          <div style="background: var(--bg); padding: 32px;">
+            <div class="mono" style="font-size: 10px; color: var(--mute); letter-spacing: 0.1em; margin-bottom: 12px;">
+              Q.08
+            </div>
+            <h3
+              style="font-family: var(--font-display); font-size: 22px; letter-spacing: -0.02em; font-weight: 500; margin-bottom: 12px;"
+            >
+              ¿Binah sirve para operaciones con Shopify, Coordinadora y SIIGO?
+            </h3>
+            <p style="color: var(--ink-soft); font-size: 14px;">
+              Sí. Binah puede conectar la tienda, los pedidos, inventario, guías, rótulos, tracking, facturación, conciliación y reportes para que el equipo no tenga que copiar la misma información entre plataformas.
             </p>
           </div>
         </div>

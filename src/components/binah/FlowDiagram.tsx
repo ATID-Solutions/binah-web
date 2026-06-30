@@ -3,7 +3,7 @@ import { useState, type CSSProperties } from "react";
 const STEPS = [
   { label: "Cliente escribe", detail: "WhatsApp · Instagram · Email" },
   { label: "Agente responde", detail: "Ventas · Soporte · Reservas" },
-  { label: "Pedido creado", detail: "Retail + inventario" },
+  { label: "Pedido creado", detail: "Ventas + inventario" },
   { label: "Factura DIAN", detail: "Emitida y firmada" },
   { label: "Despacho", detail: "Etiqueta + tracking" },
   { label: "Contabilidad", detail: "Registrado automático" },
@@ -51,8 +51,8 @@ export default function FlowDiagram() {
         </button>
       </div>
       <div className="flow-total">
-        <span>TIEMPO TOTAL</span>
-        <span>~ 8 SEGUNDOS · 0 INTERVENCIÓN HUMANA</span>
+        <span>FLUJO CONECTADO</span>
+        <span>PEDIDO ~2 MIN · FACTURA ~10 SEG</span>
       </div>
     </div>
   );

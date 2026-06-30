@@ -104,7 +104,45 @@ function MockCRM() {
   );
 }
 
-function MockRetail() {
+function MockSupport() {
+  const tickets = [
+    { n: "#1842", customer: "Laura M.", reason: "Cambio de talla", status: "En proceso", hl: true },
+    { n: "#1843", customer: "Daniel R.", reason: "Tracking pedido", status: "Resuelto", hl: false },
+    { n: "#1844", customer: "Camila P.", reason: "Garantía", status: "Prioridad", hl: false },
+  ];
+
+  return (
+    <div className="mock">
+      <WindowFrame title="binah.app / tickets" style={{ top: 0, left: 0, right: "34%", bottom: 0 }}>
+        {tickets.map((ticket) => (
+          <Row key={ticket.n} highlight={ticket.hl}>
+            <span className="mono" style={{ fontSize: 11, opacity: ticket.hl ? 0.75 : 0.6 }}>{ticket.n}</span>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontWeight: 500 }}>{ticket.customer}</div>
+              <div style={{ color: ticket.hl ? "inherit" : "var(--mute)", fontSize: 11 }}>{ticket.reason}</div>
+            </div>
+            <span className="mock-pill" style={ticket.hl ? { background: "#fff", color: "#000", borderColor: "#fff" } : undefined}>
+              {ticket.status}
+            </span>
+          </Row>
+        ))}
+      </WindowFrame>
+      <WindowFrame title="sla · hoy" style={{ top: 0, right: 0, width: "30%", height: "46%" }}>
+        <div className="mono" style={{ fontSize: 10, color: "var(--mute)", letterSpacing: "0.08em" }}>A TIEMPO</div>
+        <div style={{ fontFamily: "var(--font-display)", fontSize: 34, fontWeight: 500, letterSpacing: "-0.02em", lineHeight: 1 }}>92%</div>
+        <Bar w={92} />
+        <div style={{ fontSize: 11, color: "var(--mute)" }}>18 casos abiertos</div>
+      </WindowFrame>
+      <WindowFrame title="historial cliente" style={{ bottom: 0, right: 0, width: "30%", height: "50%" }}>
+        <Row><span className="mock-pill">Pedido</span><span style={{ flex: 1, fontSize: 11 }}>#4821</span></Row>
+        <Row><span className="mock-pill">WA</span><span style={{ flex: 1, fontSize: 11 }}>Último mensaje</span></Row>
+        <Row><span className="mock-pill ink">✓</span><span style={{ flex: 1, fontSize: 11 }}>Cierre registrado</span></Row>
+      </WindowFrame>
+    </div>
+  );
+}
+
+function MockVentas() {
   const orders = [
     { n: "#4821", name: "M. López", status: "En tránsito", w: 70, hl: false },
     { n: "#4822", name: "A. Ruiz", status: "Despachado", w: 40, hl: true },
@@ -351,7 +389,7 @@ function MockReports() {
             <div style={{ display: "flex", gap: 6, marginTop: 8 }}>
               {[
                 { n: "CRM", w: 85 },
-                { n: "Retail", w: 62 },
+                { n: "Ventas", w: 62 },
                 { n: "Facturación", w: 48 },
                 { n: "Pagos", w: 74 },
               ].map((m, i) => (
@@ -370,7 +408,8 @@ function MockReports() {
 
 const MOCK_MAP: Record<ModuleId, () => ReactNode> = {
   crm: MockCRM,
-  retail: MockRetail,
+  soporte: MockSupport,
+  retail: MockVentas,
   facturacion: MockFact,
   contabilidad: MockContab,
   chat: MockChat,

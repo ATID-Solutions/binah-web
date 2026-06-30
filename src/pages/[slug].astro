@@ -4,6 +4,7 @@ import Nav from "../components/binah/Nav.astro";
 import Footer from "../components/binah/Footer.astro";
 import CtaBand from "../components/binah/CtaBand.astro";
 import ModuleMockFrame from "../components/binah/ModuleMockFrame.tsx";
+import OperationalSavingsCalculator from "../components/binah/OperationalSavingsCalculator.tsx";
 import {
   getMarketingPageBySlug,
   getRelatedPages,
@@ -147,6 +148,63 @@ const typedPage = page as MarketingPageDetail;
               </div>
               {typedPage.disclaimer && <p class="seo-disclaimer">{typedPage.disclaimer}</p>}
             </section>
+
+            {
+              typedPage.slug === "calculadora-ahorro-operativo-ecommerce" && (
+                <section class="binah-section">
+                  <div class="section-head">
+                    <h2 class="display display-md title">Calcula el ahorro con tu volumen.</h2>
+                    <p>
+                      Ajusta los tiempos manuales de tu operación. Binah calcula el ahorro usando ~2 minutos por pedido/despacho y ~10 segundos por factura.
+                    </p>
+                  </div>
+                  <OperationalSavingsCalculator client:load />
+                </section>
+              )
+            }
+
+            {
+              typedPage.slug === "operacion-ecommerce-colombia" && (
+                <section class="binah-section">
+                  <div class="section-head">
+                    <h2 class="display display-md title">Integraciones profundas, no logos sueltos.</h2>
+                    <p>
+                      Cada conexión cumple una función operativa: vender, despachar, facturar, atender y medir sin reconstruir información a mano.
+                    </p>
+                  </div>
+                  <div class="deep-integration-grid">
+                    <a href="/software-shopify-colombia-crm-inventario">
+                      <span class="mono">Shopify</span>
+                      <strong>Pedidos, productos, clientes e inventario conectados.</strong>
+                      <p>
+                        La tienda deja de ser una isla y alimenta CRM, bodega, facturación y reportes.
+                      </p>
+                    </a>
+                    <a href="/integracion-coordinadora-ecommerce-colombia">
+                      <span class="mono">Coordinadora</span>
+                      <strong>Guías, rótulos, novedades y tracking.</strong>
+                      <p>
+                        Menos digitación manual y más visibilidad del estado real del pedido.
+                      </p>
+                    </a>
+                    <a href="/integracion-siigo-facturacion-automatica">
+                      <span class="mono">SIIGO</span>
+                      <strong>Facturas, anulaciones, recibos y conciliación.</strong>
+                      <p>
+                        La venta genera datos listos para facturar y revisar sin volver a copiar.
+                      </p>
+                    </a>
+                    <a href="/campanas-whatsapp-clientes-colombia">
+                      <span class="mono">WhatsApp</span>
+                      <strong>Atención, notificaciones y remarketing.</strong>
+                      <p>
+                        El cliente recibe seguimiento y las campañas vuelven al CRM con medición.
+                      </p>
+                    </a>
+                  </div>
+                </section>
+              )
+            }
 
             <section class="binah-section">
               <div class="section-head">
