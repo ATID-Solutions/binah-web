@@ -1267,21 +1267,25 @@ body[data-page="index"] .binah-section { border-top: 0; }
 }
 .ops-savings-banner-metrics {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1px;
   border: 1px solid #2a2a28;
   border-radius: var(--radius-lg);
   background: #2a2a28;
   overflow: hidden;
 }
-.ops-savings-banner-metrics div {
-  min-height: 190px;
+.ops-savings-banner-metric {
+  min-height: 154px;
   padding: 26px 22px;
   background: #111;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 30px;
+}
+.ops-savings-banner-metric-base {
+  grid-column: 1 / -1;
+  min-height: 146px;
 }
 .ops-savings-banner-metrics span {
   color: #8a8a85;
@@ -2385,10 +2389,13 @@ body[data-page="index"] .binah-section { border-top: 0; }
   .ops-savings-banner .display {
     max-width: 11ch;
   }
-  .ops-savings-banner-metrics div {
+  .ops-savings-banner-metric {
     min-height: 0;
     padding: 22px;
     gap: 22px;
+  }
+  .ops-savings-banner-metric-base {
+    grid-column: auto;
   }
   .shadcn-dialog-content {
     width: calc(100vw - 20px);

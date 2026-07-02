@@ -64,15 +64,15 @@ export default function OperationalSavingsBanner() {
           </div>
 
           <div className="ops-savings-banner-metrics" aria-label="Supuestos de cálculo en Binah">
-            <div>
-              <span>Pedido en Binah</span>
+            <div className="ops-savings-banner-metric">
+              <span>Pedidos</span>
               <strong>~2 min</strong>
             </div>
-            <div>
-              <span>Factura en Binah</span>
+            <div className="ops-savings-banner-metric">
+              <span>Factura</span>
               <strong>~10 seg</strong>
             </div>
-            <div>
+            <div className="ops-savings-banner-metric ops-savings-banner-metric-base">
               <span>Base del cálculo</span>
               <strong>28 días</strong>
             </div>
