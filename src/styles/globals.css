@@ -761,11 +761,10 @@ body[data-page="index"] .binah-section { border-top: 0; }
 }
 .google-review-author a {
   display: block;
-  overflow: hidden;
   color: var(--ink);
   font-weight: 500;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
 }
 .google-review-author a:hover { color: #4285f4; }
 .google-review-author span {

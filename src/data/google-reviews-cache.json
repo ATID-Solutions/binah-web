@@ -1,19 +1,49 @@
 {
-  "fetchedAt": "2026-06-26T00:25:57Z",
+  "fetchedAt": "2026-07-28T19:06:29Z",
   "cacheTtlDays": 7,
   "placeId": "ChIJq-xyaLNpSUUR_NEflMJzr_U",
   "placeName": "Binah | Sistema ERP/CRM Multi-Canal para Colombia",
   "googleMapsUri": "https://maps.google.com/?cid=17703495939762672124&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYASAA",
   "rating": 5,
-  "userRatingCount": 1,
+  "userRatingCount": 4,
   "reviews": [
+    {
+      "authorName": "JD",
+      "authorUri": "https://www.google.com/maps/contrib/102907029531285948625/reviews?hl=es",
+      "authorPhotoUri": "https://lh3.googleusercontent.com/a/ACg8ocKeJdo155QAXbnrI9gjyV51zW4YynMKSSRLgLFcL6wv9i5-Ew=w72-h72-p-rp-mo-br100",
+      "rating": 5,
+      "relativePublishTimeDescription": "Hace 3 semanas",
+      "text": "la plataforma es increiblemente sencilla de usar y poner en marcha. Sirve para cualquier industria que necesite atención al cliente. Además el equipo de desarrolladores es increiblemente bueno. Use muchas plataformas antes y en ninguna la atención al cliente habia sido tan buena.",
+      "textLanguageCode": "es",
+      "googleMapsUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT200NFptNURiM1pUWDFsZk1HOVlhVk5uV0Y5SmNVRRAB!2m1!1s0x454969b36872ecab:0xf5af73c2941fd1fc"
+    },
+    {
+      "authorName": "Maria Ujueta",
+      "authorUri": "https://www.google.com/maps/contrib/112713474629410587526/reviews?hl=es",
+      "authorPhotoUri": "https://lh3.googleusercontent.com/a/ACg8ocKUtBFU0uBERizsDVW05JZMrt-zDJcJT3m-oyIxeOHUCIUL3w=w72-h72-p-rp-mo-br100",
+      "rating": 5,
+      "relativePublishTimeDescription": "Hace 3 semanas",
+      "text": "Ha sido excelente poder tener acceso a esta plataforma, agrupar a tus clientes en un mismo lugar, hacer re marketing, seguimiento, manejar los chats según sean leads calientes o fríos. Tener un agente de IA es una ayuda idonea para ofrecer atención 24/7 a tus clientes y el soporte que te brinda el equipo es excelente, respuestas y soluciones rápidas.",
+      "textLanguageCode": "es",
+      "googleMapsUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT21sWGFqRlJTWEZUZFVnd01ISlBSVkE0YjNSRWNHYxAB!2m1!1s0x454969b36872ecab:0xf5af73c2941fd1fc"
+    },
+    {
+      "authorName": "María Camila Romero Bravo",
+      "authorUri": "https://www.google.com/maps/contrib/108485827761809327971/reviews?hl=es",
+      "authorPhotoUri": "https://lh3.googleusercontent.com/a/ACg8ocIbnBCNEoOzKbqvxl3b0pvsaFuEDHEks6Dn9GFyusEe2WcSaQ=w72-h72-p-rp-mo-br100",
+      "rating": 5,
+      "relativePublishTimeDescription": "Hace 3 semanas",
+      "text": "Binah ha sido una excelente herramienta para nuestra empresa. La plataforma es intuitiva, fácil de usar y nos ha permitido centralizar la gestión de manera mucho más eficiente. Además, el equipo de soporte siempre responde rápido y está dispuesto a ayudar cuando surge alguna duda. Sin duda, ha mejorado nuestros procesos y la recomiendo para cualquier empresa que busque optimizar su operación",
+      "textLanguageCode": "es",
+      "googleMapsUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT2pCVVdISXpjQzFSWjIxckxXNTJiRWhHU0doU0xXYxAB!2m1!1s0x454969b36872ecab:0xf5af73c2941fd1fc"
+    },
     {
       "authorName": "Mariana Jaramillo",
       "authorUri": "https://www.google.com/maps/contrib/102853053113873729820/reviews",
-      "authorPhotoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVZmWjldK9dIaPJYGMezy2ik5BjxcMY87g1aUJDceQaB381k9M=s128-c0x00000000-cc-rp-mo",
+      "authorPhotoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWNlyVR9rmbXtwBU1-PdmIGbTr96s4rvqBx_SjiiR-1poPkk8Q=w72-h72-p-rp-mo-br100",
       "rating": 5,
-      "relativePublishTimeDescription": "Hace 1 mes",
-      "text": "Excelente servicio y atención, la plataforma es muy amigable y fácil de entender. Muy completa y me permite manejar mi empresa desde 1 solo lugar.",
+      "relativePublishTimeDescription": "Hace 2 meses",
+      "text": "Excelente servicio y atención , la plataforma es muy amigable y fácil de entender. Muy completa y me permite manejar mi empresa desde 1 solo lugar",
       "textLanguageCode": "es",
       "publishTime": "2026-05-21T15:46:56.549531798Z",
       "googleMapsUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT21GR2NGaExhbUY2ZDI1SE9FRkhNa3RyVld0SmRGRRAB!2m1!1s0x454969b36872ecab:0xf5af73c2941fd1fc"
