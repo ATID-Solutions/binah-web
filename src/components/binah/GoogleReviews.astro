@@ -81,10 +81,27 @@ function getInitials(name: string) {
       </a>
     </div>
 
-    <div class:list={["google-review-grid", reviews.length === 1 && "single"]}>
-      {
-        reviews.map((review) => (
-          <article class="google-review-card">
+    <google-reviews-carousel
+      class:list={["google-reviews-carousel", reviews.length <= 1 && "is-static"]}
+      data-review-count={reviews.length}
+    >
+      <div
+        class="google-review-viewport"
+        role="region"
+        aria-roledescription="carrusel"
+        aria-label="Reseñas de clientes en Google"
+        tabindex="0"
+      >
+        <div class="google-review-track">
+          {
+            reviews.map((review, index) => (
+              <article
+                class="google-review-card"
+                role="group"
+                aria-roledescription="diapositiva"
+                aria-label={`${index + 1} de ${reviews.length}`}
+                data-review-index={index}
+              >
             <div class="google-review-source">
               <svg viewBox="0 0 24 24" class="google-g-icon" aria-hidden="true">
                 <path
@@ -144,9 +161,363 @@ function getInitials(name: string) {
             >
               Ver en Google <span aria-hidden="true">↗</span>
             </a>
-          </article>
-        ))
+              </article>
+            ))
+          }
+        </div>
+      </div>
+
+      {
+        reviews.length > 1 && (
+          <div class="google-review-controls" aria-label="Controles del carrusel">
+            <button type="button" class="google-review-arrow" data-carousel-prev aria-label="Reseña anterior">
+              <svg viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M16 10H4m5-5-5 5 5 5" />
+              </svg>
+            </button>
+
+            <div class="google-review-dots" role="group" aria-label="Seleccionar reseña">
+              {reviews.map((_, index) => (
+                <button
+                  type="button"
+                  class:list={["google-review-dot", index === 0 && "is-active"]}
+                  data-carousel-dot={index}
+                  aria-label={`Mostrar reseña ${index + 1}`}
+                  aria-current={index === 0 ? "true" : undefined}
+                />
+              ))}
+            </div>
+
+            <button type="button" class="google-review-arrow" data-carousel-next aria-label="Siguiente reseña">
+              <svg viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M4 10h12m-5-5 5 5-5 5" />
+              </svg>
+            </button>
+          </div>
+        )
       }
-    </div>
+
+      <p class="google-review-status" aria-live="polite" data-carousel-status>
+        Mostrando reseña 1 de {reviews.length}
+      </p>
+    </google-reviews-carousel>
   </div>
 </section>
+
+<script>
+  class GoogleReviewsCarousel extends HTMLElement {
+    private track: HTMLElement | null = null;
+    private viewport: HTMLElement | null = null;
+    private originals: HTMLElement[] = [];
+    private dots: HTMLButtonElement[] = [];
+    private status: HTMLElement | null = null;
+    private resizeObserver: ResizeObserver | null = null;
+    private autoplayTimer: ReturnType<typeof setTimeout> | undefined;
+    private physicalIndex = 0;
+    private logicalIndex = 0;
+    private perView = 1;
+    private slideStep = 0;
+    private isAnimating = false;
+    private pointerId: number | null = null;
+    private pointerStart = 0;
+    private dragOffset = 0;
+    private didDrag = false;
+    private isHovered = false;
+    private reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    connectedCallback() {
+      if (this.dataset.carouselInitialized === "true") return;
+
+      this.track = this.querySelector<HTMLElement>(".google-review-track");
+      this.viewport = this.querySelector<HTMLElement>(".google-review-viewport");
+      this.originals = Array.from(this.querySelectorAll<HTMLElement>(".google-review-card"));
+      this.dots = Array.from(this.querySelectorAll<HTMLButtonElement>("[data-carousel-dot]"));
+      this.status = this.querySelector<HTMLElement>("[data-carousel-status]");
+
+      if (!this.track || !this.viewport || this.originals.length <= 1) return;
+
+      this.dataset.carouselInitialized = "true";
+      this.dataset.ready = "true";
+
+      this.querySelector<HTMLButtonElement>("[data-carousel-prev]")?.addEventListener("click", () => {
+        this.move(-1, true);
+      });
+      this.querySelector<HTMLButtonElement>("[data-carousel-next]")?.addEventListener("click", () => {
+        this.move(1, true);
+      });
+      this.dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => this.goTo(index));
+      });
+
+      this.viewport.addEventListener("keydown", this.onKeyDown);
+      this.viewport.addEventListener("pointerdown", this.onPointerDown);
+      this.viewport.addEventListener("pointermove", this.onPointerMove);
+      this.viewport.addEventListener("pointerup", this.onPointerUp);
+      this.viewport.addEventListener("pointercancel", this.onPointerCancel);
+      this.viewport.addEventListener("click", this.onClickCapture, true);
+      this.addEventListener("mouseenter", this.onMouseEnter);
+      this.addEventListener("mouseleave", this.onMouseLeave);
+      this.addEventListener("focusin", this.pauseAutoplay);
+      this.addEventListener("focusout", this.onFocusOut);
+      this.track.addEventListener("transitionend", this.onTransitionEnd);
+      document.addEventListener("visibilitychange", this.onVisibilityChange);
+      this.reduceMotion.addEventListener("change", this.onMotionPreferenceChange);
+
+      this.resizeObserver = new ResizeObserver(this.rebuild);
+      this.resizeObserver.observe(this.viewport);
+      this.rebuild();
+    }
+
+    disconnectedCallback() {
+      this.pauseAutoplay();
+      this.resizeObserver?.disconnect();
+      document.removeEventListener("visibilitychange", this.onVisibilityChange);
+      this.reduceMotion.removeEventListener("change", this.onMotionPreferenceChange);
+    }
+
+    private cloneSlide(slide: HTMLElement) {
+      const clone = slide.cloneNode(true) as HTMLElement;
+      clone.dataset.clone = "true";
+      clone.querySelectorAll<HTMLElement>("a, button").forEach((control) => {
+        control.tabIndex = -1;
+      });
+      return clone;
+    }
+
+    private rebuild = () => {
+      if (!this.track || !this.viewport) return;
+
+      this.pauseAutoplay();
+      const desiredPerView = window.matchMedia("(max-width: 620px)").matches ? 1 : 2;
+      this.perView = Math.min(desiredPerView, this.originals.length);
+      this.track.replaceChildren();
+
+      this.originals
+        .slice(-this.perView)
+        .map((slide) => this.cloneSlide(slide))
+        .forEach((slide) => this.track?.append(slide));
+      this.originals.forEach((slide) => this.track?.append(slide));
+      this.originals
+        .slice(0, this.perView)
+        .map((slide) => this.cloneSlide(slide))
+        .forEach((slide) => this.track?.append(slide));
+
+      this.physicalIndex = this.perView + this.logicalIndex;
+
+      requestAnimationFrame(() => {
+        if (!this.track) return;
+        const slide = this.track.children[this.physicalIndex] as HTMLElement | undefined;
+        const gap = Number.parseFloat(getComputedStyle(this.track).columnGap) || 0;
+        this.slideStep = (slide?.getBoundingClientRect().width ?? 0) + gap;
+        this.position(false);
+        this.updateVisibleSlides();
+        this.scheduleAutoplay();
+      });
+    };
+
+    private position(animate: boolean) {
+      if (!this.track) return;
+      const shouldAnimate = animate && !this.reduceMotion.matches;
+      this.track.classList.toggle("is-jumping", !shouldAnimate);
+      this.track.style.transform = `translate3d(${-this.physicalIndex * this.slideStep + this.dragOffset}px, 0, 0)`;
+
+      if (!shouldAnimate && animate) {
+        requestAnimationFrame(() => this.finishTransition());
+      }
+    }
+
+    private move(delta: -1 | 1, announce: boolean) {
+      if (!this.track) return;
+      if (this.isAnimating) {
+        if (!announce) return;
+        this.finishTransition();
+      }
+
+      this.pauseAutoplay();
+      this.dragOffset = 0;
+      this.physicalIndex += delta;
+      this.logicalIndex = (this.logicalIndex + delta + this.originals.length) % this.originals.length;
+      this.isAnimating = true;
+      this.updateDots(announce);
+      this.updateVisibleSlides();
+      this.position(true);
+    }
+
+    private goTo(index: number) {
+      if (!this.track) return;
+      if (this.isAnimating) this.finishTransition();
+      if (index === this.logicalIndex) return;
+
+      this.pauseAutoplay();
+      this.logicalIndex = index;
+      this.physicalIndex = this.perView + index;
+      this.dragOffset = 0;
+      this.isAnimating = true;
+      this.updateDots(true);
+      this.updateVisibleSlides();
+      this.position(true);
+    }
+
+    private finishTransition() {
+      if (this.physicalIndex >= this.perView + this.originals.length) {
+        this.physicalIndex = this.perView;
+        this.position(false);
+      } else if (this.physicalIndex < this.perView) {
+        this.physicalIndex = this.perView + this.originals.length - 1;
+        this.position(false);
+      }
+
+      this.isAnimating = false;
+      this.updateVisibleSlides();
+      this.scheduleAutoplay();
+    }
+
+    private updateDots(announce: boolean) {
+      this.dots.forEach((dot, index) => {
+        const active = index === this.logicalIndex;
+        dot.classList.toggle("is-active", active);
+        if (active) dot.setAttribute("aria-current", "true");
+        else dot.removeAttribute("aria-current");
+      });
+
+      if (announce && this.status) {
+        this.status.textContent = `Mostrando reseña ${this.logicalIndex + 1} de ${this.originals.length}`;
+      }
+    }
+
+    private updateVisibleSlides() {
+      if (!this.track) return;
+
+      Array.from(this.track.children).forEach((slide, index) => {
+        const element = slide as HTMLElement;
+        const visible = index >= this.physicalIndex && index < this.physicalIndex + this.perView;
+        element.setAttribute("aria-hidden", visible ? "false" : "true");
+        element.querySelectorAll<HTMLElement>("a, button").forEach((control) => {
+          control.tabIndex = visible ? 0 : -1;
+        });
+      });
+    }
+
+    private scheduleAutoplay = () => {
+      this.pauseAutoplay();
+      if (
+        this.reduceMotion.matches ||
+        this.isHovered ||
+        document.hidden ||
+        this.matches(":focus-within")
+      ) {
+        return;
+      }
+
+      this.autoplayTimer = setTimeout(() => this.move(1, false), 5000);
+    };
+
+    private pauseAutoplay = () => {
+      if (this.autoplayTimer !== undefined) {
+        clearTimeout(this.autoplayTimer);
+        this.autoplayTimer = undefined;
+      }
+    };
+
+    private onTransitionEnd = (event: TransitionEvent) => {
+      if (event.target !== this.track || event.propertyName !== "transform") return;
+      this.finishTransition();
+    };
+
+    private onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        this.move(-1, true);
+      } else if (event.key === "ArrowRight") {
+        event.preventDefault();
+        this.move(1, true);
+      }
+    };
+
+    private onPointerDown = (event: PointerEvent) => {
+      if (event.pointerType === "mouse" && event.button !== 0) return;
+      if (!this.viewport || !this.track || this.isAnimating) return;
+
+      this.pauseAutoplay();
+      this.pointerId = event.pointerId;
+      this.pointerStart = event.clientX;
+      this.dragOffset = 0;
+      this.didDrag = false;
+      this.viewport.setPointerCapture(event.pointerId);
+      this.track.classList.add("is-dragging");
+    };
+
+    private onPointerMove = (event: PointerEvent) => {
+      if (event.pointerId !== this.pointerId || !this.track) return;
+
+      this.dragOffset = event.clientX - this.pointerStart;
+      if (Math.abs(this.dragOffset) > 6) {
+        this.didDrag = true;
+        event.preventDefault();
+      }
+      this.position(false);
+    };
+
+    private onPointerUp = (event: PointerEvent) => {
+      if (event.pointerId !== this.pointerId || !this.viewport || !this.track) return;
+
+      const offset = this.dragOffset;
+      const threshold = Math.min(72, this.slideStep * 0.16);
+      this.track.classList.remove("is-dragging");
+      this.viewport.releasePointerCapture(event.pointerId);
+      this.pointerId = null;
+      this.dragOffset = 0;
+
+      if (Math.abs(offset) >= threshold) {
+        this.move(offset < 0 ? 1 : -1, true);
+      } else {
+        this.isAnimating = true;
+        this.position(true);
+      }
+    };
+
+    private onPointerCancel = (event: PointerEvent) => {
+      if (event.pointerId !== this.pointerId || !this.track) return;
+      this.track.classList.remove("is-dragging");
+      this.pointerId = null;
+      this.dragOffset = 0;
+      this.isAnimating = true;
+      this.position(true);
+    };
+
+    private onClickCapture = (event: MouseEvent) => {
+      if (!this.didDrag) return;
+      event.preventDefault();
+      event.stopPropagation();
+      this.didDrag = false;
+    };
+
+    private onMouseEnter = () => {
+      this.isHovered = true;
+      this.pauseAutoplay();
+    };
+
+    private onMouseLeave = () => {
+      this.isHovered = false;
+      this.scheduleAutoplay();
+    };
+
+    private onFocusOut = () => {
+      requestAnimationFrame(() => this.scheduleAutoplay());
+    };
+
+    private onVisibilityChange = () => {
+      if (document.hidden) this.pauseAutoplay();
+      else this.scheduleAutoplay();
+    };
+
+    private onMotionPreferenceChange = () => {
+      if (this.reduceMotion.matches) this.pauseAutoplay();
+      else this.scheduleAutoplay();
+    };
+  }
+
+  if (!customElements.get("google-reviews-carousel")) {
+    customElements.define("google-reviews-carousel", GoogleReviewsCarousel);
+  }
+</script>
