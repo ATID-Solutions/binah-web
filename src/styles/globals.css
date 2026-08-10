@@ -718,7 +718,7 @@ body[data-page="index"] .binah-section { border-top: 0; }
 }
 .google-review-card {
   position: relative;
-  flex: 0 0 calc((100% - 16px) / 2);
+  flex: 0 0 100%;
   min-height: 310px;
   padding: 40px 28px 24px;
   border: 1px solid var(--line);
@@ -798,6 +798,7 @@ body[data-page="index"] .binah-section { border-top: 0; }
 }
 .google-review-card blockquote {
   margin: 28px 0 0;
+  max-width: 44ch;
   color: var(--ink-soft);
   font-size: 18px;
   line-height: 1.55;
@@ -2329,7 +2330,6 @@ body[data-page="index"] .binah-section { border-top: 0; }
     flex-wrap: wrap;
   }
   .google-review-card {
-    flex-basis: 100%;
     min-height: 0;
     padding: 38px 20px 22px;
   }

@@ -288,8 +288,7 @@ function getInitials(name: string) {
       if (!this.track || !this.viewport) return;
 
       this.pauseAutoplay();
-      const desiredPerView = window.matchMedia("(max-width: 620px)").matches ? 1 : 2;
-      this.perView = Math.min(desiredPerView, this.originals.length);
+      this.perView = 1;
       this.track.replaceChildren();
 
       this.originals

@@ -12,7 +12,7 @@ const options = [
 <!-- WhatsApp Button + Interactive Chat Bubble -->
 <div
   id="wa-container"
-  class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3"
+  class="pointer-events-none fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3"
   transition:persist="binah-whatsapp"
 >
   <!-- Chat Bubble (hidden initially) -->
@@ -130,6 +130,7 @@ const options = [
   .wa-fab {
     position: relative;
     display: block;
+    pointer-events: auto;
     background: none;
     border: none;
     padding: 0;
@@ -165,6 +166,7 @@ const options = [
   .wa-ripple {
     position: absolute;
     inset: 0;
+    pointer-events: none;
     border-radius: 50%;
     z-index: 5;
     background: rgba(37, 211, 102, 0.15);
@@ -213,7 +215,7 @@ const options = [
      CHAT BUBBLE CARD
      ================================================ */
   .wa-card {
-    width: 300px;
+    width: min(300px, calc(100vw - 32px));
     border-radius: 10px;
     overflow: hidden;
     background: white;
@@ -339,20 +341,30 @@ const options = [
      BUBBLE SHOW / HIDE
      ================================================ */
   .wa-bubble-hidden {
+    position: absolute;
+    right: 0;
+    bottom: 72px;
+    visibility: hidden;
     opacity: 0;
     transform: translateY(16px) scale(0.88);
     transform-origin: bottom right;
     transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+                transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                visibility 0s linear 0.4s;
   }
 
   .wa-bubble-visible {
+    position: absolute;
+    right: 0;
+    bottom: 72px;
+    visibility: visible;
     opacity: 1;
     transform: translateY(0) scale(1);
     transform-origin: bottom right;
     pointer-events: auto;
     transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+                transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                visibility 0s;
   }
 
   /* Message reveal */
