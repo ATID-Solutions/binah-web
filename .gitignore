@@ -3,3 +3,6 @@ dist/
 .astro/
 .DS_Store
 .firecrawl/
+.data/
+playwright-report/
+test-results/

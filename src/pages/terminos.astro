@@ -1,0 +1,236 @@
+---
+import LegalShell from "../components/legal/LegalShell.astro";
+import {
+  SMS_HELP_MESSAGE,
+  SMS_PROGRAM_NAME,
+  SMS_SUPPORT_EMAIL,
+  SMS_SUPPORT_NUMBER,
+  SMS_TERMS_VERSION,
+  SMS_USE_CASE,
+  SMS_WELCOME_MESSAGE,
+} from "../lib/smsProgram";
+---
+
+<LegalShell
+  title="Términos y Condiciones / Terms and Conditions — Binah"
+  description="Términos bilingües de Binah y condiciones del Binah SMS Marketing Program, operado por Soluciones ALCO S.A.S."
+  eyebrow="Documento legal / Legal document"
+  heading="Términos y Condiciones"
+  headingEnglish="Terms and Conditions"
+  canonicalPath="/terminos"
+  version={SMS_TERMS_VERSION}
+>
+  <article id="espanol" lang="es" aria-labelledby="terms-es-title">
+    <div class="legal-language-heading">
+      <span class="mono">ES</span>
+      <h2 id="terms-es-title">Términos y Condiciones</h2>
+    </div>
+
+    <section>
+      <h3>1. Operador y aceptación</h3>
+      <p>
+        Estos Términos y Condiciones regulan el acceso al sitio web y los servicios públicos de Binah. Binah es una marca y plataforma de software empresarial operada por Soluciones ALCO S.A.S. Al usar el sitio, aceptas cumplir estos Términos y la legislación aplicable. Si celebras un contrato específico de servicios con Soluciones ALCO S.A.S., ese contrato regirá en caso de conflicto respecto del servicio contratado.
+      </p>
+    </section>
+
+    <section>
+      <h3>2. Sitio y servicios</h3>
+      <p>
+        El sitio ofrece información sobre Binah, sus módulos, demostraciones, soporte y canales de contacto. La disponibilidad, características y condiciones comerciales de la plataforma pueden cambiar. La información pública no constituye una garantía de que una característica esté disponible para toda cuenta, país o integración.
+      </p>
+    </section>
+
+    <section>
+      <h3>3. Uso permitido</h3>
+      <p>
+        Debes usar el sitio de forma lícita y no intentar interferir con su seguridad, disponibilidad o funcionamiento; extraer datos de forma abusiva; suplantar a otra persona; introducir código malicioso; ni utilizar formularios o canales de contacto para spam, fraude o actividades ilegales. Podemos limitar acceso para proteger a usuarios, sistemas y terceros.
+      </p>
+    </section>
+
+    <section>
+      <h3>4. Propiedad intelectual y enlaces externos</h3>
+      <p>
+        Binah, su identidad visual, contenido, software y materiales asociados pertenecen a Soluciones ALCO S.A.S. o a sus licenciantes y están protegidos por las normas aplicables. Los enlaces o integraciones de terceros se ofrecen por conveniencia; esos terceros controlan sus propios servicios, términos y prácticas de privacidad.
+      </p>
+    </section>
+
+    <section>
+      <h3>5. Disponibilidad y responsabilidad</h3>
+      <p>
+        Procuramos mantener información y servicios confiables, pero el sitio puede presentar interrupciones, errores o cambios. En la máxima medida permitida por la ley, Soluciones ALCO S.A.S. no responde por daños indirectos derivados del uso del sitio público. Nada en estos Términos limita derechos irrenunciables ni responsabilidades que la ley no permita excluir.
+      </p>
+    </section>
+
+    <section id="programa-sms" class="legal-highlight">
+      <p class="legal-section-kicker">Programa SMS / SMS Program</p>
+      <h3>6. Binah SMS Marketing Program</h3>
+      <dl class="legal-definition-list">
+        <div><dt>Nombre del programa</dt><dd>{SMS_PROGRAM_NAME}</dd></div>
+        <div><dt>Operador</dt><dd>Soluciones ALCO S.A.S., que opera bajo la marca Binah</dd></div>
+        <div><dt>Número del programa</dt><dd>{SMS_SUPPORT_NUMBER}</dd></div>
+        <div><dt>Contacto</dt><dd><a href={`mailto:${SMS_SUPPORT_EMAIL}`}>{SMS_SUPPORT_EMAIL}</a></dd></div>
+      </dl>
+
+      <h4>Descripción del programa</h4>
+      <p>
+        Soluciones ALCO S.A.S., que opera bajo la marca Binah, envía mensajes SMS recurrentes de marketing y promoción a clientes actuales y prospectivos que hayan dado su consentimiento expreso directamente a Binah. Los mensajes pueden incluir noticias de productos Binah, anuncios de funcionalidades, contenido educativo, invitaciones a demostraciones del producto y ofertas especiales relacionadas con la plataforma de software empresarial Binah.
+      </p>
+      <p>
+        Las personas se inscriben en un formulario web de Binah mediante una casilla separada y desmarcada por defecto. Binah no usa listas de leads compradas o de terceros para este programa. El número pertenece al programa propio de Binah y no se presenta como un número compartido para campañas de negocios clientes independientes.
+      </p>
+
+      <h4>Participación y elegibilidad</h4>
+      <p>
+        La participación es opcional y el consentimiento no es condición para comprar o usar Binah. Para participar debes tener la edad legal aplicable, ser titular o usuario autorizado de un número móvil de Estados Unidos compatible y estar autorizado para aceptar posibles cargos de mensajes y datos.
+      </p>
+
+      <h4>Frecuencia, tarifas y entrega</h4>
+      <p>
+        La frecuencia de mensajes varía. Pueden aplicar tarifas de mensajes y datos según tu operador y plan. Los carriers no son responsables por mensajes retrasados o no entregados. La entrega depende de redes y dispositivos que no controlamos.
+      </p>
+
+      <h4>Retiro y ayuda</h4>
+      <p>
+        Responde <strong>STOP</strong> a cualquier mensaje para retirarte. Después de procesar la solicitud, puedes recibir una confirmación final de exclusión y no recibirás más mensajes de marketing salvo que vuelvas a dar tu consentimiento. Responde <strong>HELP</strong> para asistencia o escribe a <a href={`mailto:${SMS_SUPPORT_EMAIL}`}>{SMS_SUPPORT_EMAIL}</a>.
+      </p>
+
+      <h4>Privacidad</h4>
+      <p>
+        Nuestro tratamiento de números móviles y registros de consentimiento se describe en la <a href="/privacidad#sms-privacy">Política de Privacidad</a>. La información móvil y los registros de consentimiento no se venden, alquilan ni entregan a terceros para su propio marketing.
+      </p>
+
+      <h4>Cambios y terminación</h4>
+      <p>
+        Podemos modificar, suspender o terminar el programa o su contenido. Cuando la ley lo exija, informaremos cambios materiales y solicitaremos un nuevo consentimiento. También podemos cancelar una inscripción por abuso, fraude, imposibilidad de entrega o incumplimiento de estos Términos. El envío de mensajes salientes permanecerá deshabilitado hasta que el número gratuito haya sido verificado.
+      </p>
+
+      <h4>Mensajes aprobados del programa</h4>
+      <div class="legal-message-example">
+        <strong>Welcome</strong>
+        <p lang="en">{SMS_WELCOME_MESSAGE}</p>
+      </div>
+      <div class="legal-message-example">
+        <strong>HELP</strong>
+        <p lang="en">{SMS_HELP_MESSAGE}</p>
+      </div>
+    </section>
+
+    <section>
+      <h3>7. Cambios a estos Términos</h3>
+      <p>
+        Podemos actualizar estos Términos para reflejar cambios legales, técnicos u operativos. La versión vigente se publicará en esta URL. La fecha de entrada en vigor está pendiente de confirmación expresa de Soluciones ALCO S.A.S.; no se ha inventado una fecha para este documento.
+      </p>
+    </section>
+
+    <section>
+      <h3>8. Contacto</h3>
+      <p>Preguntas sobre estos Términos o el programa SMS: <a href={`mailto:${SMS_SUPPORT_EMAIL}`}>{SMS_SUPPORT_EMAIL}</a>.</p>
+    </section>
+  </article>
+
+  <article id="english" lang="en" aria-labelledby="terms-en-title">
+    <div class="legal-language-heading">
+      <span class="mono">EN</span>
+      <h2 id="terms-en-title">Terms and Conditions</h2>
+    </div>
+
+    <section>
+      <h3>1. Operator and acceptance</h3>
+      <p>
+        These Terms and Conditions govern access to the Binah website and public services. Binah is a business software brand and platform operated by Soluciones ALCO S.A.S. By using the site, you agree to follow these Terms and applicable law. If you enter into a specific service agreement with Soluciones ALCO S.A.S., that agreement controls in the event of a conflict concerning the contracted service.
+      </p>
+    </section>
+
+    <section>
+      <h3>2. Website and services</h3>
+      <p>
+        The site provides information about Binah, its modules, demonstrations, support, and contact channels. Platform availability, features, and commercial conditions may change. Public information does not guarantee that a feature is available for every account, country, or integration.
+      </p>
+    </section>
+
+    <section>
+      <h3>3. Acceptable use</h3>
+      <p>
+        You must use the site lawfully and must not interfere with its security, availability, or operation; scrape data abusively; impersonate another person; introduce malicious code; or use forms or contact channels for spam, fraud, or illegal activity. We may limit access to protect users, systems, and third parties.
+      </p>
+    </section>
+
+    <section>
+      <h3>4. Intellectual property and third-party links</h3>
+      <p>
+        Binah, its visual identity, content, software, and related materials belong to Soluciones ALCO S.A.S. or its licensors and are protected by applicable law. Third-party links and integrations are provided for convenience; those third parties control their own services, terms, and privacy practices.
+      </p>
+    </section>
+
+    <section>
+      <h3>5. Availability and liability</h3>
+      <p>
+        We work to provide reliable information and services, but the site may experience interruptions, errors, or changes. To the maximum extent permitted by law, Soluciones ALCO S.A.S. is not responsible for indirect damages arising from use of the public site. Nothing in these Terms limits non-waivable rights or liabilities that the law does not allow us to exclude.
+      </p>
+    </section>
+
+    <section id="sms-marketing-program" class="legal-highlight">
+      <p class="legal-section-kicker">SMS Program</p>
+      <h3>6. Binah SMS Marketing Program</h3>
+      <dl class="legal-definition-list">
+        <div><dt>Program name</dt><dd>{SMS_PROGRAM_NAME}</dd></div>
+        <div><dt>Operator</dt><dd>Soluciones ALCO S.A.S., doing business as Binah</dd></div>
+        <div><dt>Program number</dt><dd>{SMS_SUPPORT_NUMBER}</dd></div>
+        <div><dt>Contact</dt><dd><a href={`mailto:${SMS_SUPPORT_EMAIL}`}>{SMS_SUPPORT_EMAIL}</a></dd></div>
+      </dl>
+
+      <h4>Program description</h4>
+      <p>{SMS_USE_CASE}</p>
+      <p>
+        The toll-free number is used for Binah’s own opted-in audience. It is not presented as a shared number for campaigns sent by independent businesses that use Binah.
+      </p>
+
+      <h4>Participation and eligibility</h4>
+      <p>
+        Participation is optional and consent is not a condition of purchase or use of Binah. To participate, you must be of the applicable legal age, be the owner or authorized user of a compatible United States mobile number, and be authorized to accept any message and data charges.
+      </p>
+
+      <h4>Frequency, charges, and delivery</h4>
+      <p>
+        Message frequency varies. Message and data rates may apply under your carrier and plan. Carriers are not responsible for delayed or undelivered messages. Delivery depends on networks and devices outside our control.
+      </p>
+
+      <h4>Opt-out and help</h4>
+      <p>
+        Reply <strong>STOP</strong> to any message to opt out. After the request is processed, you may receive one final confirmation and will receive no further marketing messages unless you opt in again. Reply <strong>HELP</strong> for assistance or email <a href={`mailto:${SMS_SUPPORT_EMAIL}`}>{SMS_SUPPORT_EMAIL}</a>.
+      </p>
+
+      <h4>Privacy</h4>
+      <p>
+        Our handling of mobile numbers and consent records is described in the <a href="/privacidad#sms-privacy-en">Privacy Policy</a>. Mobile information and SMS consent records are not sold, rented, or provided to third parties for their own marketing.
+      </p>
+
+      <h4>Program changes and termination</h4>
+      <p>
+        We may modify, suspend, or terminate the program or its content. Where required by law, we will provide notice of material changes and request renewed consent. We may also cancel participation for abuse, fraud, delivery failure, or violation of these Terms. Outbound SMS delivery will remain disabled until the toll-free number is verified.
+      </p>
+
+      <h4>Approved program messages</h4>
+      <div class="legal-message-example">
+        <strong>Welcome</strong>
+        <p>{SMS_WELCOME_MESSAGE}</p>
+      </div>
+      <div class="legal-message-example">
+        <strong>HELP</strong>
+        <p>{SMS_HELP_MESSAGE}</p>
+      </div>
+    </section>
+
+    <section>
+      <h3>7. Changes to these Terms</h3>
+      <p>
+        We may update these Terms to reflect legal, technical, or operational changes. The current version will be published at this URL. The effective date is awaiting express confirmation from Soluciones ALCO S.A.S.; no date has been invented for this document.
+      </p>
+    </section>
+
+    <section>
+      <h3>8. Contact</h3>
+      <p>Questions about these Terms or the SMS program: <a href={`mailto:${SMS_SUPPORT_EMAIL}`}>{SMS_SUPPORT_EMAIL}</a>.</p>
+    </section>
+  </article>
+</LegalShell>

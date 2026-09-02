@@ -1,0 +1,51 @@
+---
+import Footer from "../binah/Footer.astro";
+import Nav from "../binah/Nav.astro";
+import Layout from "../../layouts/Layout.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  eyebrow: string;
+  heading: string;
+  headingEnglish: string;
+  canonicalPath: string;
+  version: string;
+}
+
+const { title, description, eyebrow, heading, headingEnglish, canonicalPath, version } = Astro.props;
+---
+
+<Layout
+  title={title}
+  description={description}
+  page="legal"
+  canonicalPath={canonicalPath}
+  ogType="article"
+  enableMarketingTracking={false}
+  showContactWidget={false}
+>
+  <Nav />
+  <main class="legal-page">
+    <header class="legal-header container-binah">
+      <div class="eyebrow">{eyebrow}</div>
+      <h1>{heading}<span lang="en">{headingEnglish}</span></h1>
+      <div class="legal-meta">
+        <p>Binah es operado por Soluciones ALCO S.A.S.</p>
+        <p lang="en">Binah is operated by Soluciones ALCO S.A.S.</p>
+        <p class="mono">Versión / Version: {version}</p>
+        <p>Fecha de entrada en vigor / Effective date: pendiente de confirmación del titular / pending owner confirmation</p>
+      </div>
+      <nav class="legal-language-nav" aria-label="Idioma / Language">
+        <a href="#espanol" lang="es">Español</a>
+        <span aria-hidden="true">/</span>
+        <a href="#english" lang="en">English</a>
+      </nav>
+    </header>
+
+    <div class="legal-document container-binah">
+      <slot />
+    </div>
+  </main>
+  <Footer />
+</Layout>
