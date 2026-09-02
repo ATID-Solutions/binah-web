@@ -1,7 +1,7 @@
 export const SMS_PROGRAM_NAME = "Binah SMS Marketing Program";
 export const SMS_BRAND = "Binah";
 export const SMS_LEGAL_ENTITY = "Soluciones ALCO S.A.S.";
-export const SMS_SUPPORT_EMAIL = "soporte@binahcrm.com";
+export const SMS_SUPPORT_EMAIL = "soporte@binah.co";
 export const SMS_SUPPORT_NUMBER = "+1 844 603 1375";
 
 export const PRIVACY_POLICY_VERSION = "binah-privacy-v1";
@@ -21,7 +21,7 @@ export const SMS_WELCOME_MESSAGE =
   "Binah: Welcome! You are subscribed to marketing and product updates. Msg frequency varies. Msg & data rates may apply. Reply STOP to opt out or HELP for help.";
 
 export const SMS_HELP_MESSAGE =
-  "Binah: Marketing and product updates. Help: soporte@binahcrm.com. Msg frequency varies. Msg & data rates may apply. Reply STOP to opt out.";
+  "Binah: Marketing and product updates. Help: soporte@binah.co. Msg frequency varies. Msg & data rates may apply. Reply STOP to opt out.";
 
 export function normalizeUsPhone(value: string): string | null {
   const digits = value.replace(/\D/g, "");

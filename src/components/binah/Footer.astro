@@ -3,50 +3,68 @@ import { waUrl, WA_MESSAGES } from "./whatsapp";
 import { FEATURED_SOLUTIONS } from "../../lib/marketing-pages";
 
 const waContactHref = waUrl(WA_MESSAGES.general);
+
+interface Props {
+  locale?: "es" | "en";
+}
+
+const { locale = "es" } = Astro.props;
+const isEnglish = locale === "en";
+const legalPaths = isEnglish
+  ? { privacy: "/en/privacy", terms: "/en/terms", sms: "/en/sms" }
+  : { privacy: "/privacidad", terms: "/terminos", sms: "/sms" };
+const englishSolutionTitles = [
+  "EAN and GTIN product codes in Colombia",
+  "Automated DIAN e-invoicing",
+  "CRM for WhatsApp, Instagram, and email",
+  "AI sales agent for WhatsApp",
+  "Shipping software for Colombian carriers",
+  "WhatsApp payment links in Colombia",
+];
 ---
 
-<footer class="binah-footer" transition:persist="binah-footer">
+<footer class="binah-footer" transition:persist={`binah-footer-${locale}`}>
   <div class="container-binah">
     <div class="footer-grid">
       <div class="footer-brand">
         <img class="logo-light" src="/wordmark-black.png" alt="Binah" style="height:28px" />
         <img class="logo-dark" src="/wordmark-white.png" alt="Binah" style="height:28px; display:none" />
-        <p>El sistema operativo de los negocios colombianos. Diez módulos. Una plataforma.</p>
+        <p>{isEnglish ? "The operating system for Colombian businesses. Ten modules. One platform." : "El sistema operativo de los negocios colombianos. Diez módulos. Una plataforma."}</p>
       </div>
       <div class="footer-col">
-        <h4>Producto</h4>
+        <h4>{isEnglish ? "Product" : "Producto"}</h4>
         <ul>
-          <li><a href="/modulos">Módulos</a></li>
+          <li><a href="/modulos">{isEnglish ? "Modules" : "Módulos"}</a></li>
           <li><a href="/modulo-crm">CRM</a></li>
-          <li><a href="/modulo-soporte">Soporte</a></li>
-          <li><a href="/modulo-retail">Ventas</a></li>
-          <li><a href="/precios">Precios</a></li>
+          <li><a href="/modulo-soporte">{isEnglish ? "Support" : "Soporte"}</a></li>
+          <li><a href="/modulo-retail">{isEnglish ? "Sales" : "Ventas"}</a></li>
+          <li><a href="/precios">{isEnglish ? "Pricing" : "Precios"}</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Compañía</h4>
+        <h4>{isEnglish ? "Company" : "Compañía"}</h4>
         <ul>
-          <li><a href="/nosotros">Nosotros</a></li>
-          <li><a href="#">Clientes</a></li>
-          <li><a href="#">Empleos</a></li>
-          <li><a href="#">Prensa</a></li>
+          <li><a href="/nosotros">{isEnglish ? "About" : "Nosotros"}</a></li>
+          <li><a href="#">{isEnglish ? "Customers" : "Clientes"}</a></li>
+          <li><a href="#">{isEnglish ? "Careers" : "Empleos"}</a></li>
+          <li><a href="#">{isEnglish ? "Press" : "Prensa"}</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Soluciones</h4>
+        <h4>{isEnglish ? "Solutions" : "Soluciones"}</h4>
         <ul>
           {
-            FEATURED_SOLUTIONS.map((page) => (
-              <li><a href={page.path}>{page.title.replace(" — Binah", "")}</a></li>
+            FEATURED_SOLUTIONS.map((page, index) => (
+              <li><a href={page.path}>{isEnglish ? englishSolutionTitles[index] : page.title.replace(" — Binah", "")}</a></li>
             ))
           }
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Contacto</h4>
+        <h4>{isEnglish ? "Contact" : "Contacto"}</h4>
         <ul>
           <li><a href="mailto:hola@binah.co">hola@binah.co</a></li>
-          <li><a href="mailto:soporte@binahcrm.com">soporte@binahcrm.com</a></li>
+          <li><a href="mailto:soporte@binah.co">soporte@binah.co</a></li>
           <li><a href={waContactHref} target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
           <li>Barranquilla, Colombia</li>
         </ul>
@@ -55,12 +73,12 @@ const waContactHref = waUrl(WA_MESSAGES.general);
     <div class="footer-bottom">
       <div class="footer-operator">
         <span>© 2026 Soluciones ALCO S.A.S.</span>
-        <span>Binah es operado por Soluciones ALCO S.A.S. / Binah is operated by Soluciones ALCO S.A.S.</span>
+        <span>{isEnglish ? "Binah is operated by Soluciones ALCO S.A.S." : "Binah es operado por Soluciones ALCO S.A.S."}</span>
       </div>
-      <nav class="footer-legal" aria-label="Enlaces legales / Legal links">
-        <a href="/privacidad">Privacidad / Privacy</a>
-        <a href="/terminos">Términos / Terms</a>
-        <a href="/sms">Programa SMS / SMS Program</a>
+      <nav class="footer-legal" aria-label={isEnglish ? "Legal links" : "Enlaces legales"}>
+        <a href={legalPaths.privacy}>{isEnglish ? "Privacy" : "Privacidad"}</a>
+        <a href={legalPaths.terms}>{isEnglish ? "Terms" : "Términos"}</a>
+        <a href={legalPaths.sms}>{isEnglish ? "SMS Program" : "Programa SMS"}</a>
       </nav>
     </div>
   </div>

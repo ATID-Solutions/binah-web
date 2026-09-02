@@ -1,0 +1,113 @@
+---
+import LegalShell from "../../components/legal/LegalShell.astro";
+import { PRIVACY_POLICY_VERSION, SMS_SUPPORT_EMAIL } from "../../lib/smsProgram";
+---
+
+<LegalShell
+  title="Privacy Policy — Binah"
+  description="Binah's Privacy Policy, operated by Soluciones ALCO S.A.S., including the handling of mobile numbers and SMS consent records."
+  eyebrow="Legal document"
+  heading="Privacy Policy"
+  canonicalPath="/en/privacy"
+  alternatePath="/privacidad"
+  version={PRIVACY_POLICY_VERSION}
+  locale="en"
+>
+  <article id="english" lang="en" aria-labelledby="privacy-en-title">
+    <div class="legal-language-heading">
+      <span class="mono">EN</span>
+      <h2 id="privacy-en-title">Privacy Policy</h2>
+    </div>
+
+    <section>
+      <h3>1. Controller and identity</h3>
+      <p>
+        Soluciones ALCO S.A.S. is the entity that operates Binah and is responsible for the processing described in this Privacy Policy. Binah is the brand and business software platform through which the services are offered.
+      </p>
+      <p>
+        For privacy questions, requests, or to exercise your rights, email <a href={`mailto:${SMS_SUPPORT_EMAIL}`}>{SMS_SUPPORT_EMAIL}</a>. Website: <a href="https://binah.co">https://binah.co</a>.
+      </p>
+    </section>
+
+    <section>
+      <h3>2. Scope and information we collect</h3>
+      <p>This Policy applies to information collected through the Binah website, its public forms, and related services. Depending on the interaction, we may process:</p>
+      <ul>
+        <li>Identity and contact data, such as name, email address, and telephone number.</li>
+        <li>Commercial and support information provided when requesting a product demonstration, help, or information about Binah.</li>
+        <li>Technical and usage data, such as IP address, browser type, user agent, pages visited, and security logs.</li>
+        <li>For the SMS program, the mobile number, consent status and exact time, accepted text and version, source URL, IP address when technically and legally appropriate, user agent, and any later withdrawal record.</li>
+      </ul>
+      <p>We do not treat a prior customer relationship, uploaded list, email subscription, WhatsApp consent, or general acceptance of a privacy policy as SMS marketing consent.</p>
+    </section>
+
+    <section>
+      <h3>3. How we use information</h3>
+      <p>We may use information to:</p>
+      <ul>
+        <li>Operate, maintain, secure, and improve the Binah website and platform.</li>
+        <li>Respond to requests, provide support, and coordinate product demonstrations.</li>
+        <li>Administer commercial relationships and communicate service-related changes.</li>
+        <li>Prevent fraud, abuse, unauthorized access, and other security incidents.</li>
+        <li>Meet legal, regulatory, and contractual obligations and valid carrier or government requirements.</li>
+        <li>Send Binah SMS Marketing Program messages only to people who provided express, separate consent.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>4. Service providers and limited disclosures</h3>
+      <p>
+        We may allow hosting, security, analytics, support, storage, and communications providers to process information only as service providers or processors and only as needed to serve Soluciones ALCO S.A.S. These providers are subject to applicable confidentiality, security, and purpose-limitation obligations.
+      </p>
+      <p>
+        We may also disclose information when needed to comply with law, respond to a valid order, protect rights and safety, investigate abuse, or manage a business reorganization subject to appropriate safeguards. We do not authorize our processors to use information for their own marketing.
+      </p>
+    </section>
+
+    <section id="sms-privacy">
+      <h3>5. SMS program privacy</h3>
+      <p>
+        Mobile information and SMS consent records are not sold, rented, or provided to third parties for their own marketing or promotional purposes. This includes mobile numbers, subscription status, and records showing when and how consent was given.
+      </p>
+      <p>
+        Limited messaging infrastructure providers, including carriers, aggregators, and technical platforms, may process information solely to deliver messages, process opt-out requests such as STOP, respond to HELP requests, prevent fraud or abuse, maintain compliance records, and satisfy carrier or legal requirements. This processing does not permit those providers to market their own or any third party’s products.
+      </p>
+    </section>
+
+    <section>
+      <h3>6. Retention</h3>
+      <p>
+        We retain information only as long as reasonably necessary for the purposes described, the person’s relationship with us, legal obligations, or dispute resolution. SMS consent and withdrawal records may be retained for the period reasonably needed to demonstrate compliance, including after a person leaves the program. When information is no longer needed, we take reasonable steps to delete or anonymize it.
+      </p>
+    </section>
+
+    <section>
+      <h3>7. Security</h3>
+      <p>
+        We use reasonable administrative, technical, and organizational safeguards against loss, unauthorized access, alteration, or disclosure. These may include access controls, encrypted transport, audit records, and limited provider access. No system is completely secure, so we cannot guarantee absolute security.
+      </p>
+    </section>
+
+    <section>
+      <h3>8. Privacy rights</h3>
+      <p>
+        Subject to applicable law, a person may request to know, access, update, correct, or delete information; request proof of authorization; learn how data has been used; withdraw consent where applicable; or object to or restrict certain processing. Email <a href={`mailto:${SMS_SUPPORT_EMAIL}`}>{SMS_SUPPORT_EMAIL}</a> with the request and information needed to verify your identity. We will respond within applicable time limits.
+      </p>
+      <p>To leave the SMS program, reply STOP to any message. You may also contact support. Withdrawal does not affect processing that was lawful before it was received.</p>
+    </section>
+
+    <section>
+      <h3>9. International processing</h3>
+      <p>
+        Some providers may process information in countries other than the person’s own. Where applicable, we use appropriate contractual and organizational safeguards designed to protect information and require processing consistent with this Policy and applicable law.
+      </p>
+    </section>
+
+    <section>
+      <h3>10. Changes to this Policy</h3>
+      <p>
+        We may update this Policy to reflect operational, legal, or technical changes. We will publish the current version on this page and, where required, provide appropriate notice of material changes. The effective date is awaiting express confirmation from Soluciones ALCO S.A.S.; no date has been invented for this document.
+      </p>
+    </section>
+  </article>
+</LegalShell>

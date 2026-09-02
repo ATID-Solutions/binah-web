@@ -50,6 +50,21 @@ const baseMarketingPages = [
     priority: "0.5",
     changefreq: "monthly",
   },
+  {
+    path: "/en/privacy",
+    priority: "0.4",
+    changefreq: "yearly",
+  },
+  {
+    path: "/en/terms",
+    priority: "0.4",
+    changefreq: "yearly",
+  },
+  {
+    path: "/en/sms",
+    priority: "0.5",
+    changefreq: "monthly",
+  },
 ] as const;
 
 const generatedMarketingPages = [

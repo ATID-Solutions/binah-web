@@ -78,7 +78,7 @@ const getSourceUrl = (request: Request) => {
 
   try {
     const parsed = new URL(referer);
-    if (parsed.origin !== publicOrigin || parsed.pathname !== "/sms") {
+    if (parsed.origin !== publicOrigin || !["/sms", "/en/sms"].includes(parsed.pathname)) {
       return fallback.toString();
     }
 

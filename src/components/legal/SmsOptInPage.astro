@@ -1,0 +1,276 @@
+---
+import Footer from "../binah/Footer.astro";
+import Nav from "../binah/Nav.astro";
+import Layout from "../../layouts/Layout.astro";
+import {
+  SMS_CONSENT_TEXT_VERSION,
+  SMS_PROGRAM_NAME,
+  SMS_SUPPORT_EMAIL,
+  SMS_SUPPORT_NUMBER,
+  SMS_USE_CASE,
+} from "../../lib/smsProgram";
+
+interface Props {
+  locale: "es" | "en";
+}
+
+const { locale } = Astro.props;
+const isEnglish = locale === "en";
+const canonicalPath = isEnglish ? "/en/sms" : "/sms";
+const alternatePath = isEnglish ? "/sms" : "/en/sms";
+const termsPath = isEnglish ? "/en/terms" : "/terminos";
+const privacyPath = isEnglish ? "/en/privacy" : "/privacidad";
+---
+
+<Layout
+  title={isEnglish ? "SMS Marketing Program — Binah" : "Programa de Marketing SMS — Binah"}
+  description={isEnglish
+    ? "Optional enrollment in Binah's marketing and product updates SMS program, operated by Soluciones ALCO S.A.S."
+    : "Inscripción opcional al programa de mensajes de marketing y novedades de producto de Binah, operado por Soluciones ALCO S.A.S."}
+  page="sms"
+  canonicalPath={canonicalPath}
+  enableMarketingTracking={false}
+  showContactWidget={false}
+  lang={locale}
+  alternateLinks={[
+    { hreflang: "es-CO", href: isEnglish ? alternatePath : canonicalPath },
+    { hreflang: "en-US", href: isEnglish ? canonicalPath : alternatePath },
+    { hreflang: "x-default", href: isEnglish ? alternatePath : canonicalPath },
+  ]}
+>
+  <Nav locale={locale} />
+  <main class="sms-page">
+    <header class="sms-header container-binah">
+      <div class="eyebrow">{SMS_PROGRAM_NAME}</div>
+      <nav class="legal-language-nav sms-language-nav" aria-label={isEnglish ? "Language" : "Idioma"}>
+        <a href="/sms" lang="es" aria-current={!isEnglish ? "page" : undefined}>Español</a>
+        <span aria-hidden="true">/</span>
+        <a href="/en/sms" lang="en" aria-current={isEnglish ? "page" : undefined}>English</a>
+      </nav>
+      <div class="sms-header-grid">
+        <div>
+          <h1>{isEnglish ? "Binah updates, sent directly to your phone." : "Actualizaciones de Binah, directo a tu teléfono."}</h1>
+        </div>
+        <div class="sms-program-summary">
+          <p>{isEnglish
+            ? "Receive Binah product news, feature announcements, educational content, product-demo invitations, and special offers."
+            : "Recibe noticias de producto, anuncios de funcionalidades, contenido educativo, invitaciones a demostraciones y ofertas especiales de Binah."}</p>
+          <dl>
+            <div><dt>{isEnglish ? "Operator" : "Operador"}</dt><dd>Soluciones ALCO S.A.S.</dd></div>
+            <div><dt>{isEnglish ? "Number" : "Número"}</dt><dd>{SMS_SUPPORT_NUMBER}</dd></div>
+            <div><dt>{isEnglish ? "Frequency" : "Frecuencia"}</dt><dd>{isEnglish ? "Varies" : "Varía"}</dd></div>
+          </dl>
+        </div>
+      </div>
+    </header>
+
+    <section class="sms-enrollment container-binah" aria-labelledby="sms-form-title">
+      <div class="sms-enrollment-intro">
+        <span class="mono">01 / Opt-in</span>
+        <h2 id="sms-form-title">{isEnglish ? "Opt in voluntarily." : "Inscríbete voluntariamente."}</h2>
+        <p>{isEnglish
+          ? "Your SMS consent is separate, optional, and is not a condition of purchasing or using Binah."
+          : "Tu consentimiento para mensajes SMS es independiente, opcional y no es condición para comprar ni usar Binah."}</p>
+      </div>
+
+      <form
+        class="sms-form"
+        data-sms-form
+        data-consent-version={SMS_CONSENT_TEXT_VERSION}
+        data-saving={isEnglish ? "Recording consent…" : "Guardando consentimiento…"}
+        data-rate-limit={isEnglish ? "Too many attempts. Please wait a few minutes." : "Demasiados intentos. Espera unos minutos."}
+        data-failure={isEnglish ? "We could not record your consent right now. Please try again." : "No pudimos guardar tu consentimiento en este momento. Intenta de nuevo."}
+        novalidate
+      >
+        <div class="sms-form-field">
+          <label for="sms-name">{isEnglish ? "Name" : "Nombre"} <span>{isEnglish ? "Optional" : "Opcional"}</span></label>
+          <input id="sms-name" name="name" type="text" autocomplete="name" maxlength="100" />
+        </div>
+
+        <div class="sms-form-field">
+          <label for="sms-phone">{isEnglish ? "US mobile number" : "Número móvil de Estados Unidos"}</label>
+          <input
+            id="sms-phone"
+            name="phone"
+            type="tel"
+            inputmode="tel"
+            autocomplete="tel-national"
+            placeholder="+1 202 555 0147"
+            aria-describedby="sms-phone-help sms-phone-error"
+            required
+          />
+          <p id="sms-phone-help" class="sms-field-help">{isEnglish ? "Include the area code." : "Incluye el código de área."}</p>
+          <p id="sms-phone-error" class="sms-field-error" role="alert" hidden>
+            {isEnglish ? "Enter a valid US mobile number." : "Ingresa un número móvil válido de Estados Unidos."}
+          </p>
+        </div>
+
+        <div class="sms-honeypot" aria-hidden="true">
+          <label for="sms-website">Website</label>
+          <input id="sms-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div class="sms-consent-row">
+          <input
+            id="sms-consent"
+            name="consent"
+            type="checkbox"
+            aria-describedby="sms-consent-error"
+          />
+          <label for="sms-consent">
+            I agree to receive recurring marketing and promotional text messages from Binah, operated by Soluciones ALCO S.A.S., at the number provided. Consent is not a condition of purchase. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. See our <a href={termsPath}>Terms</a> and <a href={privacyPath}>Privacy Policy</a>.
+          </label>
+        </div>
+        <p id="sms-consent-error" class="sms-field-error" role="alert" hidden>
+          {isEnglish ? "Check the box to provide SMS consent." : "Debes marcar la casilla para dar tu consentimiento SMS."}
+        </p>
+
+        <div class="sms-form-actions">
+          <button type="submit" class="btn btn-primary" disabled data-submit>
+            {isEnglish ? "Opt in" : "Inscribirme"} <span class="arrow" aria-hidden="true">→</span>
+          </button>
+          <p>{isEnglish ? "You can reply STOP at any time." : "Podrás responder STOP en cualquier momento."}</p>
+        </div>
+
+        <div class="sms-form-status" role="status" aria-live="polite" data-status></div>
+      </form>
+
+      <div class="sms-success" data-success hidden tabindex="-1">
+        <span class="mono">{isEnglish ? "Consent recorded" : "Consentimiento registrado"}</span>
+        <h2>{isEnglish ? "Thank you. Your opt-in has been saved." : "Gracias. Guardamos tu inscripción."}</h2>
+        <p>{isEnglish
+          ? "We will not send the welcome message until the toll-free number is verified. Once messaging is enabled, you can reply STOP to opt out or HELP for assistance."
+          : "No enviaremos el mensaje de bienvenida hasta que el número gratuito haya sido verificado. Cuando los envíos estén habilitados, podrás responder STOP para retirarte o HELP para recibir ayuda."}</p>
+      </div>
+    </section>
+
+    <section class="sms-disclosure container-binah" aria-labelledby="sms-details-title">
+      <div>
+        <span class="mono">02 / {isEnglish ? "Program details" : "Detalles del programa"}</span>
+        <h2 id="sms-details-title">{isEnglish ? "How the program works." : "Cómo funciona el programa."}</h2>
+      </div>
+      <div>
+        <p>{isEnglish
+          ? SMS_USE_CASE
+          : "Soluciones ALCO S.A.S., que opera bajo la marca Binah, envía mensajes SMS recurrentes de marketing y promoción a clientes actuales y prospectivos que hayan dado su consentimiento expreso directamente a Binah. Los mensajes pueden incluir noticias de producto, anuncios de funcionalidades, contenido educativo, invitaciones a demostraciones y ofertas especiales relacionadas con la plataforma Binah."}</p>
+        <p>{isEnglish
+          ? "This number is used exclusively for people who opt in directly with Binah. It is not a shared number for campaigns sent by independent customer businesses. Binah does not use purchased or third-party lists."
+          : "Este número se utiliza exclusivamente para la audiencia que se inscribe directamente con Binah. No es un número compartido para campañas enviadas por negocios clientes independientes. Binah no utiliza listas compradas ni listas de terceros."}</p>
+        <p>
+          {isEnglish ? "Help" : "Ayuda"}: <a href={`mailto:${SMS_SUPPORT_EMAIL}`}>{SMS_SUPPORT_EMAIL}</a>. {isEnglish ? "Read the" : "Consulta los"} <a href={`${termsPath}#${isEnglish ? "sms-marketing-program" : "programa-sms"}`}>{isEnglish ? "SMS Program Terms" : "Términos del programa SMS"}</a> {isEnglish ? "and the" : "y la"} <a href={`${privacyPath}#sms-privacy`}>{isEnglish ? "Privacy Policy" : "Política de Privacidad"}</a>.
+        </p>
+      </div>
+    </section>
+  </main>
+  <Footer locale={locale} />
+</Layout>
+
+<script>
+  import { normalizeUsPhone } from "../../lib/smsProgram";
+
+  function initializeSmsForm() {
+    const form = document.querySelector<HTMLFormElement>("[data-sms-form]");
+    if (!form || form.dataset.ready === "true") return;
+    form.dataset.ready = "true";
+
+    const phone = form.elements.namedItem("phone") as HTMLInputElement;
+    const name = form.elements.namedItem("name") as HTMLInputElement;
+    const consent = form.elements.namedItem("consent") as HTMLInputElement;
+    const website = form.elements.namedItem("website") as HTMLInputElement;
+    const submit = form.querySelector<HTMLButtonElement>("[data-submit]");
+    const status = form.querySelector<HTMLElement>("[data-status]");
+    const phoneError = document.querySelector<HTMLElement>("#sms-phone-error");
+    const consentError = document.querySelector<HTMLElement>("#sms-consent-error");
+    const success = document.querySelector<HTMLElement>("[data-success]");
+    const startedAt = Date.now();
+
+    if (!phone || !name || !consent || !website || !submit || !status || !phoneError || !consentError || !success) {
+      return;
+    }
+
+    const isPhoneValid = () => normalizeUsPhone(phone.value) !== null;
+
+    const updateState = () => {
+      const validPhone = isPhoneValid();
+      submit.disabled = !(validPhone && consent.checked);
+      phone.setAttribute("aria-invalid", String(phone.value.length > 0 && !validPhone));
+      consent.setAttribute("aria-invalid", String(!consent.checked && consentError.hidden === false));
+
+      if (validPhone) phoneError.hidden = true;
+      if (consent.checked) consentError.hidden = true;
+    };
+
+    phone.addEventListener("input", updateState);
+    consent.addEventListener("change", updateState);
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      status.textContent = "";
+
+      const validPhone = isPhoneValid();
+      phoneError.hidden = validPhone;
+      consentError.hidden = consent.checked;
+      updateState();
+
+      if (!validPhone) {
+        phone.focus();
+        return;
+      }
+
+      if (!consent.checked) {
+        consent.focus();
+        return;
+      }
+
+      submit.disabled = true;
+      submit.setAttribute("aria-busy", "true");
+      status.textContent = form.dataset.saving ?? "";
+
+      try {
+        const response = await fetch("/api/sms-consent", {
+          method: "POST",
+          headers: {
+            accept: "application/json",
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            name: name.value,
+            phone: phone.value,
+            consent: consent.checked,
+            consentTextVersion: form.dataset.consentVersion,
+            formStartedAt: startedAt,
+            website: website.value,
+          }),
+        });
+
+        const result = await response.json();
+        if (!response.ok || result.ok !== true) {
+          if (result.error === "rate_limited") {
+            throw new Error("rate_limited");
+          }
+          throw new Error("submission_failed");
+        }
+
+        form.hidden = true;
+        success.hidden = false;
+        success.focus();
+      } catch (error) {
+        status.textContent = error instanceof Error && error.message === "rate_limited"
+          ? form.dataset.rateLimit ?? ""
+          : form.dataset.failure ?? "";
+        submit.removeAttribute("aria-busy");
+        updateState();
+      }
+    });
+
+    updateState();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeSmsForm, { once: true });
+  } else {
+    initializeSmsForm();
+  }
+
+  document.addEventListener("astro:page-load", initializeSmsForm);
+</script>

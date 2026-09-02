@@ -2750,6 +2750,11 @@ body[data-page="index"] .binah-section { border-top: 0; }
 .legal-document a:hover,
 .sms-page a:hover { text-decoration-color: currentColor; }
 
+.legal-language-nav a[aria-current="page"] {
+  font-weight: 700;
+  text-decoration-color: currentColor;
+}
+
 .legal-document {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -2760,6 +2765,10 @@ body[data-page="index"] .binah-section { border-top: 0; }
 
 .legal-document article { min-width: 0; scroll-margin-top: 96px; }
 .legal-document article + article { border-left: 1px solid var(--line); padding-left: clamp(48px, 6vw, 88px); }
+.legal-document-single {
+  grid-template-columns: minmax(0, 760px);
+  justify-content: center;
+}
 
 .legal-language-heading {
   display: flex;

@@ -12,6 +12,7 @@ import {
 } from "../src/lib/smsProgram";
 
 const origin = "http://127.0.0.1:4321";
+const publicOrigin = "https://binah.co";
 
 test.beforeAll(async () => {
   await rm(consentEvidencePath, { force: true });
@@ -28,8 +29,8 @@ test("the recorded consent hash matches the exact disclosure", () => {
   expect(createHash("sha256").update(SMS_CONSENT_TEXT).digest("hex")).toBe(SMS_CONSENT_TEXT_SHA256);
 });
 
-test("privacy, terms, and SMS routes return 200 on direct load and refresh", async ({ page }) => {
-  for (const path of ["/privacidad", "/terminos", "/sms"]) {
+test("localized privacy, terms, and SMS routes return 200 on direct load and refresh", async ({ page }) => {
+  for (const path of ["/privacidad", "/terminos", "/sms", "/en/privacy", "/en/terms", "/en/sms"]) {
     const response = await page.goto(path, { waitUntil: "domcontentloaded" });
     expect(response?.status(), path).toBe(200);
     const refreshed = await page.reload({ waitUntil: "domcontentloaded" });
@@ -40,22 +41,42 @@ test("privacy, terms, and SMS routes return 200 on direct load and refresh", asy
 test("permanent English aliases resolve to their canonical pages", async ({ request }) => {
   const privacy = await request.get("/privacy", { maxRedirects: 0 });
   expect(privacy.status()).toBe(301);
-  expect(privacy.headers().location).toBe("/privacidad");
+  expect(privacy.headers().location).toBe("/en/privacy");
 
   const terms = await request.get("/terms", { maxRedirects: 0 });
   expect(terms.status()).toBe(301);
-  expect(terms.headers().location).toBe("/terminos");
+  expect(terms.headers().location).toBe("/en/terms");
+});
+
+test("localized routes publish language, canonical, and hreflang metadata", async ({ page }) => {
+  const pairs = [
+    { es: "/privacidad", en: "/en/privacy" },
+    { es: "/terminos", en: "/en/terms" },
+    { es: "/sms", en: "/en/sms" },
+  ];
+
+  for (const pair of pairs) {
+    await page.goto(pair.es);
+    await expect(page.locator("html")).toHaveAttribute("lang", "es");
+    await expect(page.locator("link[rel='canonical']")).toHaveAttribute("href", `${publicOrigin}${pair.es}`);
+    await expect(page.locator("link[rel='alternate'][hreflang='en-US']")).toHaveAttribute("href", `${publicOrigin}${pair.en}`);
+
+    await page.goto(pair.en);
+    await expect(page.locator("html")).toHaveAttribute("lang", "en");
+    await expect(page.locator("link[rel='canonical']")).toHaveAttribute("href", `${publicOrigin}${pair.en}`);
+    await expect(page.locator("link[rel='alternate'][hreflang='es-CO']")).toHaveAttribute("href", `${publicOrigin}${pair.es}`);
+  }
 });
 
 test("the SMS checkbox starts unchecked and submission is unavailable", async ({ page }) => {
   await page.goto("/sms");
   const checkbox = page.getByRole("checkbox", { name: /I agree to receive recurring/i });
-  const submit = page.getByRole("button", { name: /Opt in/i });
+  const submit = page.locator("[data-submit]");
 
   await expect(checkbox).not.toBeChecked();
   await expect(submit).toBeDisabled();
 
-  await page.getByLabel(/US mobile number/i).fill("4155550136");
+  await page.locator("#sms-phone").fill("4155550136");
   await expect(submit).toBeDisabled();
 });
 
@@ -82,7 +103,7 @@ test("a valid submission records complete, versioned consent evidence", async ({
   const response = await request.post("/api/sms-consent", {
     headers: {
       origin,
-      referer: `${origin}/sms`,
+      referer: `${origin}/en/sms`,
       "user-agent": "Binah consent evidence test",
       "x-forwarded-for": "203.0.113.42",
     },
@@ -115,7 +136,7 @@ test("a valid submission records complete, versioned consent evidence", async ({
     consentTextSha256: SMS_CONSENT_TEXT_SHA256,
     privacyPolicyVersion: PRIVACY_POLICY_VERSION,
     smsTermsVersion: SMS_TERMS_VERSION,
-    sourceUrl: `${origin}/sms`,
+    sourceUrl: `${origin}/en/sms`,
     ipAddress: "203.0.113.42",
     userAgent: "Binah consent evidence test",
     brand: "Binah",
@@ -128,15 +149,28 @@ test("a valid submission records complete, versioned consent evidence", async ({
   expect(new Date(record.consentTimestampUtc).toISOString()).toBe(record.consentTimestampUtc);
 });
 
-test("privacy and terms links resolve from the disclosure", async ({ page }) => {
-  await page.goto("/sms");
+test("privacy and terms links resolve from both localized disclosures", async ({ page }) => {
+  for (const route of [
+    { sms: "/sms", terms: "/terminos", privacy: "/privacidad" },
+    { sms: "/en/sms", terms: "/en/terms", privacy: "/en/privacy" },
+  ]) {
+    await page.goto(route.sms);
 
-  const terms = page.locator(".sms-consent-row a[href='/terminos']");
-  const privacy = page.locator(".sms-consent-row a[href='/privacidad']");
-  await expect(terms).toHaveText("Terms");
-  await expect(privacy).toHaveText("Privacy Policy");
-  expect((await page.request.get(await terms.getAttribute("href") as string)).status()).toBe(200);
-  expect((await page.request.get(await privacy.getAttribute("href") as string)).status()).toBe(200);
+    const terms = page.locator(`.sms-consent-row a[href='${route.terms}']`);
+    const privacy = page.locator(`.sms-consent-row a[href='${route.privacy}']`);
+    await expect(terms).toHaveText("Terms");
+    await expect(privacy).toHaveText("Privacy Policy");
+    expect((await page.request.get(route.terms)).status()).toBe(200);
+    expect((await page.request.get(route.privacy)).status()).toBe(200);
+  }
+});
+
+test("public pages use the binah.co support address", async ({ page }) => {
+  for (const path of ["/privacidad", "/terminos", "/sms", "/en/privacy", "/en/terms", "/en/sms"]) {
+    await page.goto(path);
+    await expect(page.locator("a[href='mailto:soporte@binah.co']").first()).toBeVisible();
+    await expect(page.locator("body")).not.toContainText("binahcrm.com");
+  }
 });
 
 test("the form succeeds without putting a phone number in a URL or analytics payload", async ({ page }) => {
@@ -144,10 +178,10 @@ test("the form succeeds without putting a phone number in a URL or analytics pay
   page.on("request", (request) => requestedUrls.push(request.url()));
 
   await page.goto("/sms");
-  await page.getByLabel(/US mobile number/i).fill("2025550147");
+  await page.locator("#sms-phone").fill("2025550147");
   await page.getByRole("checkbox", { name: /I agree to receive recurring/i }).check();
   await page.waitForTimeout(1_600);
-  await page.getByRole("button", { name: /Opt in/i }).click();
+  await page.locator("[data-submit]").click();
 
   await expect(page.locator("[data-success]")).toBeVisible();
   expect(page.url()).toBe(`${origin}/sms`);
@@ -158,10 +192,10 @@ test("the mobile layout has no horizontal overflow and supports keyboard consent
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/sms");
 
-  const name = page.getByLabel(/Name/i);
-  const phone = page.getByLabel(/US mobile number/i);
+  const name = page.locator("#sms-name");
+  const phone = page.locator("#sms-phone");
   const consent = page.getByRole("checkbox", { name: /I agree to receive recurring/i });
-  const submit = page.getByRole("button", { name: /Opt in/i });
+  const submit = page.locator("[data-submit]");
 
   await expect(consent).not.toBeChecked();
   await page.screenshot({ path: "test-results/sms-opt-in-full-page.png", fullPage: true });

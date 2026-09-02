@@ -1,19 +1,25 @@
 ---
 import { waUrl, WA_MESSAGES } from "./whatsapp";
 
+interface Props {
+  locale?: "es" | "en";
+}
+
+const { locale = "es" } = Astro.props;
+const isEnglish = locale === "en";
 const links = [
-  { href: "/", label: "Inicio", key: "index" },
-  { href: "/modulos", label: "Módulos", key: "modulos" },
-  { href: "/soluciones", label: "Soluciones", key: "soluciones" },
-  { href: "/precios", label: "Precios", key: "precios" },
-  { href: "/nosotros", label: "Nosotros", key: "nosotros" },
+  { href: "/", label: isEnglish ? "Home" : "Inicio", key: "index" },
+  { href: "/modulos", label: isEnglish ? "Modules" : "Módulos", key: "modulos" },
+  { href: "/soluciones", label: isEnglish ? "Solutions" : "Soluciones", key: "soluciones" },
+  { href: "/precios", label: isEnglish ? "Pricing" : "Precios", key: "precios" },
+  { href: "/nosotros", label: isEnglish ? "About" : "Nosotros", key: "nosotros" },
 ] as const;
 
 const demoHref = waUrl(WA_MESSAGES.demo);
 const appHref = "https://app.binah.co";
 ---
 
-<nav class="nav" transition:persist="binah-nav">
+<nav class="nav" transition:persist={`binah-nav-${locale}`}>
   <div class="container-binah nav-inner">
     <a href="/" class="nav-logo" aria-label="Binah">
       <img class="logo-light" src="/wordmark-black.png" alt="Binah" width="75" height="24" />
@@ -30,15 +36,15 @@ const appHref = "https://app.binah.co";
       }
     </div>
     <div class="nav-cta">
-      <a href={appHref} class="btn btn-ghost">Iniciar sesión</a>
+      <a href={appHref} class="btn btn-ghost">{isEnglish ? "Sign in" : "Iniciar sesión"}</a>
       <a href={demoHref} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-        Agendar demo <span class="arrow">→</span>
+        {isEnglish ? "Book a demo" : "Agendar demo"} <span class="arrow">→</span>
       </a>
     </div>
     <button
       class="nav-menu-toggle"
       type="button"
-      aria-label="Abrir navegación"
+      aria-label={isEnglish ? "Open navigation" : "Abrir navegación"}
       aria-expanded="false"
       data-menu-toggle
     >
@@ -54,7 +60,7 @@ const appHref = "https://app.binah.co";
         <img class="logo-light" src="/wordmark-black.png" alt="Binah" width="75" height="24" />
         <img class="logo-dark" src="/wordmark-white.png" alt="Binah" width="75" height="24" />
       </a>
-      <button class="nav-menu-close" type="button" aria-label="Cerrar navegación" data-menu-close>&times;</button>
+      <button class="nav-menu-close" type="button" aria-label={isEnglish ? "Close navigation" : "Cerrar navegación"} data-menu-close>&times;</button>
     </div>
     <div class="nav-menu-links">
       {
@@ -66,9 +72,9 @@ const appHref = "https://app.binah.co";
       }
     </div>
     <div class="nav-menu-actions">
-      <a href={appHref} class="btn btn-outline" data-menu-link>Iniciar sesión</a>
+      <a href={appHref} class="btn btn-outline" data-menu-link>{isEnglish ? "Sign in" : "Iniciar sesión"}</a>
       <a href={demoHref} target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-menu-link>
-        Agendar demo <span class="arrow">→</span>
+        {isEnglish ? "Book a demo" : "Agendar demo"} <span class="arrow">→</span>
       </a>
     </div>
   </div>

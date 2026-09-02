@@ -8,12 +8,16 @@ interface Props {
   description: string;
   eyebrow: string;
   heading: string;
-  headingEnglish: string;
   canonicalPath: string;
+  alternatePath: string;
   version: string;
+  locale: "es" | "en";
 }
 
-const { title, description, eyebrow, heading, headingEnglish, canonicalPath, version } = Astro.props;
+const { title, description, eyebrow, heading, canonicalPath, alternatePath, version, locale } = Astro.props;
+const isEnglish = locale === "en";
+const spanishPath = isEnglish ? alternatePath : canonicalPath;
+const englishPath = isEnglish ? canonicalPath : alternatePath;
 ---
 
 <Layout
@@ -24,28 +28,33 @@ const { title, description, eyebrow, heading, headingEnglish, canonicalPath, ver
   ogType="article"
   enableMarketingTracking={false}
   showContactWidget={false}
+  lang={locale}
+  alternateLinks={[
+    { hreflang: "es-CO", href: spanishPath },
+    { hreflang: "en-US", href: englishPath },
+    { hreflang: "x-default", href: spanishPath },
+  ]}
 >
-  <Nav />
+  <Nav locale={locale} />
   <main class="legal-page">
     <header class="legal-header container-binah">
       <div class="eyebrow">{eyebrow}</div>
-      <h1>{heading}<span lang="en">{headingEnglish}</span></h1>
+      <h1>{heading}</h1>
       <div class="legal-meta">
-        <p>Binah es operado por Soluciones ALCO S.A.S.</p>
-        <p lang="en">Binah is operated by Soluciones ALCO S.A.S.</p>
-        <p class="mono">Versión / Version: {version}</p>
-        <p>Fecha de entrada en vigor / Effective date: pendiente de confirmación del titular / pending owner confirmation</p>
+        <p>{isEnglish ? "Binah is operated by Soluciones ALCO S.A.S." : "Binah es operado por Soluciones ALCO S.A.S."}</p>
+        <p class="mono">{isEnglish ? "Version" : "Versión"}: {version}</p>
+        <p>{isEnglish ? "Effective date: pending owner confirmation" : "Fecha de entrada en vigor: pendiente de confirmación del titular"}</p>
       </div>
-      <nav class="legal-language-nav" aria-label="Idioma / Language">
-        <a href="#espanol" lang="es">Español</a>
+      <nav class="legal-language-nav" aria-label={isEnglish ? "Language" : "Idioma"}>
+        <a href={spanishPath} lang="es" aria-current={!isEnglish ? "page" : undefined}>Español</a>
         <span aria-hidden="true">/</span>
-        <a href="#english" lang="en">English</a>
+        <a href={englishPath} lang="en" aria-current={isEnglish ? "page" : undefined}>English</a>
       </nav>
     </header>
 
-    <div class="legal-document container-binah">
+    <div class="legal-document legal-document-single container-binah">
       <slot />
     </div>
   </main>
-  <Footer />
+  <Footer locale={locale} />
 </Layout>
