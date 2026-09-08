@@ -38,6 +38,35 @@ test("localized privacy, terms, and SMS routes return 200 on direct load and ref
   }
 });
 
+test("localized privacy policies cover platform communication and processing", async ({ page }) => {
+  for (const policy of [
+    {
+      path: "/privacidad",
+      whatsappHeading: "Mensajes por WhatsApp y otros canales de mensajería",
+      emailHeading: "Correo electrónico",
+      processorRole: "Soluciones ALCO actúa como Encargado",
+      effectiveDate: "8 de septiembre de 2026",
+    },
+    {
+      path: "/en/privacy",
+      whatsappHeading: "WhatsApp and other messaging channels",
+      emailHeading: "Email",
+      processorRole: "Soluciones ALCO acts as a Processor",
+      effectiveDate: "September 8, 2026",
+    },
+  ]) {
+    await page.goto(policy.path);
+
+    await expect(page.locator("#whatsapp-privacy h3")).toContainText(policy.whatsappHeading);
+    await expect(page.locator("#email-privacy h3")).toContainText(policy.emailHeading);
+    await expect(page.locator("article")).toContainText(policy.processorRole);
+    await expect(page.locator("article")).toContainText("OpenAI");
+    await expect(page.locator("article")).toContainText("Google Analytics");
+    await expect(page.locator(".legal-meta")).toContainText(PRIVACY_POLICY_VERSION);
+    await expect(page.locator(".legal-meta")).toContainText(policy.effectiveDate);
+  }
+});
+
 test("permanent English aliases resolve to their canonical pages", async ({ request }) => {
   const privacy = await request.get("/privacy", { maxRedirects: 0 });
   expect(privacy.status()).toBe(301);

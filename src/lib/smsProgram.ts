@@ -4,7 +4,7 @@ export const SMS_LEGAL_ENTITY = "Soluciones ALCO S.A.S.";
 export const SMS_SUPPORT_EMAIL = "soporte@binah.co";
 export const SMS_SUPPORT_NUMBER = "+1 844 603 1375";
 
-export const PRIVACY_POLICY_VERSION = "binah-privacy-v1";
+export const PRIVACY_POLICY_VERSION = "binah-privacy-v2";
 export const SMS_TERMS_VERSION = "binah-sms-terms-v1";
 export const SMS_CONSENT_TEXT_VERSION = "binah-sms-marketing-consent-v1";
 

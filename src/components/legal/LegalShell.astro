@@ -12,9 +12,10 @@ interface Props {
   alternatePath: string;
   version: string;
   locale: "es" | "en";
+  effectiveDate?: string;
 }
 
-const { title, description, eyebrow, heading, canonicalPath, alternatePath, version, locale } = Astro.props;
+const { title, description, eyebrow, heading, canonicalPath, alternatePath, version, locale, effectiveDate } = Astro.props;
 const isEnglish = locale === "en";
 const spanishPath = isEnglish ? alternatePath : canonicalPath;
 const englishPath = isEnglish ? canonicalPath : alternatePath;
@@ -43,7 +44,13 @@ const englishPath = isEnglish ? canonicalPath : alternatePath;
       <div class="legal-meta">
         <p>{isEnglish ? "Binah is operated by Soluciones ALCO S.A.S." : "Binah es operado por Soluciones ALCO S.A.S."}</p>
         <p class="mono">{isEnglish ? "Version" : "Versión"}: {version}</p>
-        <p>{isEnglish ? "Effective date: pending owner confirmation" : "Fecha de entrada en vigor: pendiente de confirmación del titular"}</p>
+        <p>
+          {effectiveDate
+            ? `${isEnglish ? "Effective date" : "Fecha de entrada en vigor"}: ${effectiveDate}`
+            : isEnglish
+              ? "Effective date: pending owner confirmation"
+              : "Fecha de entrada en vigor: pendiente de confirmación del titular"}
+        </p>
       </div>
       <nav class="legal-language-nav" aria-label={isEnglish ? "Language" : "Idioma"}>
         <a href={spanishPath} lang="es" aria-current={!isEnglish ? "page" : undefined}>Español</a>
