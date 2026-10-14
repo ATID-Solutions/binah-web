@@ -2,7 +2,7 @@
 import { ClientRouter } from "astro:transitions";
 import GoogleTag from "../components/binah/GoogleTag.astro";
 import MetaPixel from "../components/binah/MetaPixel.astro";
-import WhatsAppButton from "../components/binah/WhatsAppButton.astro";
+import BinahChat from "../components/binah/BinahChat.astro";
 import { absoluteUrl, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "../lib/seo";
 import "../styles/globals.css";
 
@@ -107,6 +107,6 @@ const structuredData = JSON.stringify([...baseStructuredData, ...extraStructured
   <body class="binah-site" data-page={page}>
     {enableMarketingTracking && <MetaPixel noscript />}
     <slot />
-    {showContactWidget && <WhatsAppButton />}
+    {showContactWidget && <BinahChat />}
   </body>
 </html>

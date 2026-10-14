@@ -1,0 +1,27 @@
+---
+// Binah's website chat: the launcher from the CRM's "Chat web" settings for
+// Binah's own organization. Its card offers the chat on this page and
+// WhatsApp on the same line as the site's WhatsApp CTAs (./whatsapp).
+//
+// The launcher renders the title and greeting from these attributes, so keep
+// them equal to the widget's settings in the CRM (the chat itself shows the
+// saved ones). The widget must list this site's origins as allowed sites.
+import { WA_NUMBER } from "./whatsapp";
+
+const BINAH_CHAT = {
+  src: "https://app.binah.co/binah-chat.js",
+  widgetId: "xd7aed8mq5db7dffg9d38cwsw98es3bh",
+  title: "Binah",
+  greeting:
+    "¡Hola! 👋 Te mostramos cómo Binah puede correr tu negocio en una sola plataforma. ¿Por dónde empezamos?",
+};
+---
+
+<script
+  is:inline
+  src={BINAH_CHAT.src}
+  data-widget-id={BINAH_CHAT.widgetId}
+  data-title={BINAH_CHAT.title}
+  data-greeting={BINAH_CHAT.greeting}
+  data-whatsapp={WA_NUMBER}
+  defer></script>
