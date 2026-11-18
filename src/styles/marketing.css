@@ -451,6 +451,9 @@ a.hp-card:hover {
 body[data-nav="overlay"] {
   --hp-nav-h: 81px;
   --hp-capsule-h: 80px;
+  /* Same width as the content of .container-binah (1320px max, 32px
+     gutters), so the capsule lines up with the page's cards and headings. */
+  --hp-capsule-w: min(1256px, calc(100% - 64px));
   --hp-glass-ease: cubic-bezier(0.32, 0.72, 0, 1);
 }
 body[data-nav="overlay"] .nav {
@@ -492,7 +495,7 @@ body[data-nav="overlay"] .nav[data-scrolled] {
 }
 body[data-nav="overlay"] .nav[data-scrolled] .nav-inner {
   pointer-events: auto;
-  max-width: 1160px;
+  max-width: var(--hp-capsule-w);
   height: var(--hp-capsule-h);
   margin: 10px auto 0;
   padding: 0 14px 0 28px;
@@ -559,14 +562,15 @@ body[data-nav="overlay"] .nav button:focus-visible {
   outline-offset: 3px;
 }
 
-/* Phones: a 64px bar and capsule. */
+/* Phones: a 64px bar and capsule; the container gutter is 20px here. */
 @media (max-width: 620px) {
   body[data-nav="overlay"] {
     --hp-nav-h: 65px;
     --hp-capsule-h: 64px;
+    --hp-capsule-w: calc(100% - 40px);
   }
   body[data-nav="overlay"] .nav[data-scrolled] .nav-inner {
-    margin: 8px 8px 0;
+    margin: 8px auto 0;
     padding: 0 8px 0 18px;
     border-radius: 20px;
   }
