@@ -2,8 +2,19 @@
 import Layout from "../layouts/Layout.astro";
 import Nav from "../components/binah/Nav.astro";
 import Footer from "../components/binah/Footer.astro";
-import ModuleList from "../components/binah/ModuleList.tsx";
+import PageHero from "../components/marketing/PageHero.astro";
+import HomeCta from "../components/home/HomeCta.astro";
+import { ModuleGlyph, BrandTile, type BrandIcon } from "../components/binah/brands";
+import { BINAH_MODULES, MODULE_LOGOS } from "../components/binah/modules";
 import { FEATURED_SOLUTIONS } from "../lib/marketing-pages";
+import { waUrl, WA_MESSAGES } from "../components/binah/whatsapp";
+import "../styles/marketing.css";
+
+const demoHref = waUrl(WA_MESSAGES.demo);
+// Display names that differ from the module data (which also feeds each
+// module page's SEO title).
+const displayName: Partial<Record<string, string>> = { soporte: "Tickets de soporte" };
+const modules = BINAH_MODULES.map((m) => ({ ...m, title: displayName[m.id] ?? m.name, logos: MODULE_LOGOS[m.id] ?? [] }));
 ---
 
 <Layout
@@ -11,47 +22,345 @@ import { FEATURED_SOLUTIONS } from "../lib/marketing-pages";
   description="Explora los módulos de Binah: CRM, soporte, ventas, facturación electrónica, contabilidad, operaciones, tareas y más herramientas conectadas en una sola base de datos."
   page="modulos"
   canonicalPath="/modulos"
+  navVariant="overlay"
 >
   <Nav />
-  <main>
-    <div class="container-binah">
-      <div class="crumb">
-        <a href="/">Binah</a> <span class="sep">/</span> Módulos
-      </div>
+  <main class="hp">
+    <PageHero
+      crumb="Módulos"
+      eyebrow="Catálogo · 10 módulos"
+      title="Toma solo los que necesitas."
+      accent="O todos."
+      lead="Cada módulo funciona independiente. Pero cuando los activas todos, Binah se convierte en el único sistema que tu negocio necesita."
+      primaryLabel="Agendar demo"
+      primaryHref={demoHref}
+      secondaryLabel="Ver precios"
+      secondaryHref="/precios"
+    />
 
-      <section class="binah-section no-border" style="padding: 40px 0 56px;">
-        <div class="eyebrow">Catálogo / 10 módulos</div>
-        <h1 class="display display-lg" style="margin-top: 20px; max-width: 16ch;">
-          Toma solo los que necesitas. O todos.
-        </h1>
-        <p class="lead" style="margin-top: 28px; font-size: 18px;">
-          Cada módulo funciona independiente. Pero cuando los activas todos, Binah se convierte en el único sistema que tu negocio necesita.
-        </p>
-      </section>
-
-      <section class="binah-section no-border" style="padding: 0 0 96px;">
-        <ModuleList client:load />
-      </section>
-
-      <section class="binah-section">
-        <div class="section-head">
-          <h2 class="display display-md title">Soluciones por problema.</h2>
-          <p>
-            Los módulos son la estructura. Estas páginas explican búsquedas concretas de operación, ventas, pagos, DIAN e inventario en Colombia.
-          </p>
-        </div>
-        <div class="related-links-grid">
+    <section class="hp-section" aria-label="Módulos de Binah">
+      <div class="container-binah">
+        <ul class="catalog">
           {
-            FEATURED_SOLUTIONS.map((page) => (
-              <a href={page.path}>
-                <span>{page.title.replace(" — Binah", "")}</span>
-                <strong>→</strong>
-              </a>
+            modules.map((m, index) => (
+              <li class="hp-reveal" style={`--d: ${(index % 3) * 80}ms`}>
+                <a href={m.href} class="mod hp-card">
+                  <span class="mod-top">
+                    <span class="mod-glyph">
+                      <ModuleGlyph id={m.id} size={24} />
+                    </span>
+                    <span class="mod-num">Módulo {m.num}</span>
+                  </span>
+                  <h2>{m.title}</h2>
+                  <p class="mod-tagline">{m.tagline}</p>
+                  <ul class="hp-checks">
+                    {m.features.slice(0, 4).map((f) => (
+                      <li>{f}</li>
+                    ))}
+                  </ul>
+                  <span class="mod-foot">
+                    {m.logos.length > 0 && (
+                      <span class="mod-logos">
+                        {m.logos.slice(0, 3).map((icon) => (
+                          <BrandTile icon={icon as BrandIcon} size={24} />
+                        ))}
+                      </span>
+                    )}
+                    <span class="mod-link">
+                      Ver módulo <span class="hp-arrow" aria-hidden="true">→</span>
+                    </span>
+                  </span>
+                </a>
+              </li>
             ))
           }
+          <li class="catalog-cta hp-reveal" style="--d: 80ms">
+            <div class="cta-tile">
+              <span class="cta-kicker">Precios</span>
+              <h2>Paga por módulo. O por todo.</h2>
+              <p>Empieza con lo que necesitas hoy y suma módulos cuando tu operación crezca.</p>
+              <div class="cta-links">
+                <a href="/precios" class="hp-btn cta-btn">Ver precios <span class="hp-arrow" aria-hidden="true">→</span></a>
+                <a href={demoHref} target="_blank" rel="noopener noreferrer" class="cta-more">Agendar demo</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="hp-section hp-section--alt" aria-labelledby="mod-solutions-title">
+      <div class="container-binah">
+        <div class="hp-head hp-reveal">
+          <div>
+            <span class="hp-eyebrow">Soluciones</span>
+            <h2 class="hp-h2" id="mod-solutions-title">Soluciones por problema.</h2>
+          </div>
+          <p class="hp-lead">
+            Los módulos son la estructura. Estas soluciones explican cómo resolver tareas concretas de operación, ventas,
+            pagos, DIAN e inventario en Colombia.
+          </p>
         </div>
-      </section>
-    </div>
+        <ul class="solutions">
+          {
+            FEATURED_SOLUTIONS.map((page, index) => (
+              <li class="hp-reveal" style={`--d: ${(index % 3) * 80}ms`}>
+                <a href={page.path} class="solution hp-card">
+                  <span class="solution-kicker">{page.moduleName}</span>
+                  <h3>{page.title.replace(" — Binah", "")}</h3>
+                  <span class="solution-arrow" aria-hidden="true">↗</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <a href="/soluciones" class="hp-link solutions-more">
+          Ver todas las soluciones <span class="hp-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <HomeCta
+      demoHref={demoHref}
+      eyebrow="Arma tu combinación"
+      heading="Empieza con un módulo. Crece con todos."
+      lead="Te mostramos en 30 minutos qué módulos necesita tu operación hoy y cómo se conectan cuando crezcas."
+    />
   </main>
   <Footer />
 </Layout>
+
+<style>
+  .catalog {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .catalog > li {
+    display: flex;
+  }
+  .mod {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 26px;
+  }
+  .mod-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .mod-glyph {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    background: var(--hp-lavender);
+    color: var(--hp-purple);
+  }
+  .mod-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--hp-mute);
+  }
+  .mod h2 {
+    margin: 22px 0 0;
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    font-weight: 600;
+    color: var(--hp-ink);
+  }
+  .mod-tagline {
+    margin: 8px 0 0;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--hp-mute);
+  }
+  .mod .hp-checks {
+    margin-top: 20px;
+  }
+  .mod .hp-checks li {
+    font-size: 13.5px;
+  }
+  .mod-foot {
+    margin-top: auto;
+    padding-top: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .mod-logos {
+    display: flex;
+    gap: 6px;
+  }
+  .mod-link {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--hp-purple);
+    white-space: nowrap;
+  }
+  .mod-link .hp-arrow {
+    transition: transform 0.2s var(--hp-ease);
+  }
+  .mod:hover .mod-link .hp-arrow {
+    transform: translateX(3px);
+  }
+
+  /* Pricing tile: fills the row after the tenth module */
+  .catalog-cta {
+    grid-column: span 2;
+  }
+  .cta-tile {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    border-radius: var(--hp-radius);
+    color: #fff;
+    background:
+      radial-gradient(ellipse 90% 70% at 100% 0%, rgba(255, 255, 255, 0.18), transparent 60%),
+      linear-gradient(150deg, #5a45ff 0%, var(--hp-purple) 45%, #2f1fc4 100%);
+    box-shadow: 0 24px 60px -30px rgba(77, 55, 246, 0.9);
+  }
+  .cta-kicker {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75);
+  }
+  .cta-tile h2 {
+    margin: 14px 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(26px, 2.6vw, 34px);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    font-weight: 600;
+  }
+  .cta-tile p {
+    margin: 10px 0 0;
+    max-width: 46ch;
+    font-size: 15px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.82);
+  }
+  .cta-links {
+    margin-top: auto;
+    padding-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 18px;
+  }
+  .cta-btn {
+    background: #fff;
+    color: var(--hp-ink);
+    min-height: 44px;
+  }
+  .cta-more {
+    font-size: 14.5px;
+    font-weight: 500;
+    color: #fff;
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.4);
+    text-underline-offset: 4px;
+  }
+  .cta-more:hover {
+    text-decoration-color: #fff;
+  }
+  .cta-tile a:focus-visible {
+    outline-color: #fff;
+  }
+
+  .solutions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .solutions > li {
+    display: flex;
+  }
+  .solution {
+    position: relative;
+    flex: 1;
+    padding: 22px 64px 24px 24px;
+  }
+  .solution-kicker {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--hp-purple);
+  }
+  .solution h3 {
+    margin: 10px 0 0;
+    font-size: 17px;
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+    font-weight: 600;
+    color: var(--hp-ink);
+  }
+  .solution-arrow {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid var(--hp-line);
+    font-size: 14px;
+    color: var(--hp-purple);
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease,
+      border-color 0.25s ease;
+  }
+  .solution:hover .solution-arrow {
+    background: var(--hp-purple);
+    border-color: var(--hp-purple);
+    color: #fff;
+  }
+  .solutions-more {
+    margin-top: 28px;
+  }
+
+  @media (max-width: 1000px) {
+    .catalog,
+    .solutions {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 1000px) {
+    .catalog-cta {
+      grid-column: auto;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .catalog,
+    .solutions {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .mod {
+      padding: 22px;
+    }
+  }
+</style>

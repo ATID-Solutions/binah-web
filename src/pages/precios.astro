@@ -2,14 +2,87 @@
 import Layout from "../layouts/Layout.astro";
 import Nav from "../components/binah/Nav.astro";
 import Footer from "../components/binah/Footer.astro";
-import CtaBand from "../components/binah/CtaBand.astro";
+import PageHero from "../components/marketing/PageHero.astro";
+import HomeCta from "../components/home/HomeCta.astro";
 import { waUrl, WA_MESSAGES } from "../components/binah/whatsapp";
+import "../styles/marketing.css";
 
 const starterHref = waUrl(WA_MESSAGES.pricingStarter);
 const proHref = waUrl(WA_MESSAGES.pricingPro);
 const businessHref = waUrl(WA_MESSAGES.pricingBusiness);
 const scaleHref = waUrl(WA_MESSAGES.pricingScale);
 const demoHref = waUrl(WA_MESSAGES.demo);
+
+const faqs = [
+  {
+    q: "¿El Starter incluye IA?",
+    a: "No. El Starter de $299K al mes solo incluye el módulo CRM: WhatsApp, Instagram, email y próximamente TikTok. La IA está incluida desde el plan Pro de $699K al mes.",
+  },
+  {
+    q: "¿Qué incluye el plan Business de $2.190M al mes?",
+    a: "Incluye todos los módulos de Binah, hasta 20 usuarios, contactos atendidos ilimitados, hasta 1.000 pedidos al mes, paquete de 20.000 documentos electrónicos al año directamente con nosotros, 3 campañas masivas de WhatsApp de 1.000 contactos cada una al mes, 4 horas de llamadas con número activo, soporte prioritario y respuestas en menos de 30 minutos. Para más de 1.000 pedidos al mes, trabajamos un plan personalizado.",
+  },
+  {
+    q: "¿Migro mis datos desde otra herramienta?",
+    a: "Sí. Te ayudamos a importar clientes, productos, facturas y conversaciones desde casi cualquier plataforma, según el alcance del plan y la migración.",
+  },
+  {
+    q: "¿Cómo funciona el cobro de IA y campañas?",
+    a: "Los planes con IA incluyen consumo mensual de alrededor de USD 80 o su proporcional en pesos colombianos; los adicionales se facturan por consumo. Pro incluye 1 campaña masiva de WhatsApp al mes, Business incluye 3 campañas de 1.000 contactos cada una al mes y en Starter se cotizan a $100K por cada 1.000 contactos.",
+  },
+  {
+    q: "¿Las llamadas desde el CRM están incluidas?",
+    a: "Sí. Starter y Pro incluyen 2 horas al mes de llamadas a celulares colombianos. Business incluye 4 horas al mes. Para activar llamadas debes tener un número: activarlo cuesta $90K COP y mantenerlo activo cuesta $40K COP al mes. Cada minuto adicional cuesta $100 COP.",
+  },
+  {
+    q: "¿Puedo pagar una solución personalizada una sola vez y luego usar un plan más bajo?",
+    a: "Sí. Si necesitas que construyamos algo específico pero tu operación no justifica un plan personalizado constante, podemos negociar ese tipo de situaciones.",
+  },
+  {
+    q: "¿Cuándo necesito un plan personalizado?",
+    a: "Cuando tu operación supera 1.000 pedidos al mes o necesita integraciones profundas, reportes específicos, acompañamiento dedicado, desarrollos a medida o flujos empresariales con varias áreas.",
+  },
+  {
+    q: "¿Binah sirve para operaciones con Shopify, Coordinadora y SIIGO?",
+    a: "Sí. Binah puede conectar la tienda, los pedidos, inventario, guías, rótulos, tracking, facturación, conciliación y reportes para que el equipo no tenga que copiar la misma información entre plataformas.",
+  },
+];
+
+const faqStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.q,
+    acceptedAnswer: { "@type": "Answer", text: faq.a },
+  })),
+};
+
+const notes = [
+  {
+    kicker: "Consumo IA",
+    title: "Alrededor de USD 80 incluidos",
+    body: "Los planes con IA incluyen consumo mensual de alrededor de USD 80 o su proporcional en pesos colombianos. El consumo adicional se cobra por uso, sin sorpresas.",
+  },
+  {
+    kicker: "Campañas de WhatsApp",
+    title: "1 en Pro, 3 en Business*",
+    body: "En Pro se incluye 1 campaña masiva por WhatsApp al mes. En Business se incluyen 3 campañas de 1.000 contactos cada una al mes. En Starter se cotizan a $100K por cada 1.000 contactos.",
+  },
+  {
+    kicker: "Llamadas desde CRM",
+    title: "Número activo + horas incluidas",
+    body: "Starter y Pro incluyen 2 horas al mes. Business incluye 4 horas al mes. Para activar llamadas necesitas un número: activación por $90K COP y mantenimiento por $40K COP al mes. Cada minuto adicional cuesta $100 COP.",
+  },
+];
+
+const perks = [
+  "Sin tarjeta para probar",
+  "Cancela cuando quieras",
+  "IA incluida desde $699K al mes",
+  "3 campañas al mes en Business*",
+  "4 horas de llamadas en Business",
+];
 ---
 
 <Layout
@@ -17,347 +90,582 @@ const demoHref = waUrl(WA_MESSAGES.demo);
   description="Conoce los planes mensuales y anuales de Binah para CRM, agentes IA, módulos operativos y equipos en crecimiento."
   page="precios"
   canonicalPath="/precios"
+  navVariant="overlay"
+  structuredData={faqStructuredData}
 >
   <Nav />
-  <main>
-    <div class="container-binah">
-      <div class="crumb">
-        <a href="/">Binah</a> <span class="sep">/</span> Precios
-      </div>
-
-      <section class="binah-section no-border" style="padding: 40px 0 40px;">
-        <div class="eyebrow">Planes / COP</div>
-        <h1 class="display display-lg" style="margin-top: 20px; max-width: 14ch;">
-          Paga por módulo. O por todo.
-        </h1>
-        <p class="lead" style="margin-top: 28px; font-size: 18px;">
-          Sin permanencias forzadas. Sin letra pequeña. Elige el plan mensual o anual, activa los módulos que necesites y paga solo por ellos.
-        </p>
-
-        <div class="pricing-billing-wrap">
-          <input class="pricing-billing-input" id="billing-annual" type="checkbox" aria-describedby="billing-annual-copy" />
-          <div class="pricing-controls">
-            <div class="pricing-billing-group">
-              <label class="pricing-billing" for="billing-annual">
-                <span class="billing-option billing-option-monthly">Mensual</span>
-                <span class="pricing-toggle" aria-hidden="true"><span></span></span>
-                <span class="billing-option billing-option-annual">Anual <span class="pricing-discount">-20%</span></span>
-              </label>
-              <p class="pricing-billing-copy" id="billing-annual-copy">
-                Paga anual y recibe 20% de descuento.
-              </p>
-            </div>
-
-            <label class="pricing-currency">
-              <span class="pricing-currency-label">Precios en</span>
-              <span class="pricing-currency-control">
-                <select class="pricing-currency-select" aria-label="Moneda de precios">
-                  <option selected>🇨🇴 COP</option>
-                </select>
-              </span>
+  <main class="hp">
+    <PageHero
+      crumb="Precios"
+      eyebrow="Planes · COP"
+      title="Paga por módulo."
+      accent="O por todo."
+      lead="Sin permanencias forzadas. Sin letra pequeña. Elige el plan mensual o anual, activa los módulos que necesites y paga solo por ellos."
+      straddle={300}
+    >
+      <div slot="straddle" class="pricing-billing-wrap">
+        <input class="pricing-billing-input" id="billing-annual" type="checkbox" aria-describedby="billing-annual-copy" />
+        <div class="pricing-controls">
+          <div class="pricing-billing-group">
+            <label class="pricing-billing" for="billing-annual">
+              <span class="billing-option billing-option-monthly">Mensual</span>
+              <span class="pricing-toggle" aria-hidden="true"><span></span></span>
+              <span class="billing-option billing-option-annual">Anual <span class="pricing-discount">-20%</span></span>
             </label>
+            <p class="pricing-billing-copy" id="billing-annual-copy">Paga anual y recibe 20% de descuento.</p>
           </div>
 
-          <p class="pricing-setup-fee">
-            <span>Setup fee</span>
-            Todos los planes requieren un pago inicial entre $500K y $1M COP, según lo que se necesite configurar.
-          </p>
-
-          <div class="pricing-grid">
-            <div class="price-card">
-              <div class="plan-name">Starter</div>
-              <div class="price">
-                <span class="monthly-price">$299K<span class="price-period">/mes</span></span>
-                <span class="annual-price">
-                  <span class="price-before">$299K/mes</span>
-                  <span class="annual-price-line">$239K<span class="price-period">/mes</span></span>
-                </span>
-              </div>
-              <div class="price-sub">
-                <span class="monthly-copy">Módulo CRM · hasta 3 usuarios · contactos ilimitados</span>
-                <span class="annual-copy">Módulo CRM · hasta 3 usuarios · contactos ilimitados · $2.87M/año</span>
-              </div>
-              <a href={starterHref} target="_blank" rel="noopener noreferrer" class="btn btn-outline">Empezar</a>
-              <ul>
-                <li>Solo módulo CRM (inbox unificado)</li>
-                <li>WhatsApp, Instagram, email y próximamente TikTok</li>
-                <li>Hasta 3 usuarios</li>
-                <li>Contactos atendidos ilimitados</li>
-                <li>Llamadas desde CRM disponibles con número activo</li>
-                <li>2 horas de llamadas incluidas con número activo</li>
-                <li>Campañas masivas cotizadas aparte: $100K por cada 1.000 contactos</li>
-                <li>Soporte por email</li>
-              </ul>
-            </div>
-
-            <div class="price-card featured">
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div class="plan-name">
-                  Pro
-                  <span
-                    class="mock-pill"
-                    style="background: #fff; color: #000; border-color: #fff; margin-left: 8px;"
-                    >Popular</span
-                  >
-                </div>
-              </div>
-              <div class="price">
-                <span class="monthly-price">$699K<span class="price-period">/mes</span></span>
-                <span class="annual-price">
-                  <span class="price-before">$699K/mes</span>
-                  <span class="annual-price-line">$559K<span class="price-period">/mes</span></span>
-                </span>
-              </div>
-              <div class="price-sub">
-                <span class="monthly-copy">CRM + IA · hasta 6 usuarios · contactos ilimitados</span>
-                <span class="annual-copy">CRM + IA · hasta 6 usuarios · contactos ilimitados · $6.71M/año</span>
-              </div>
-              <a href={proHref} target="_blank" rel="noopener noreferrer" class="btn btn-primary">Empezar</a>
-              <ul>
-                <li>Módulo CRM incluido</li>
-                <li>IA incluida</li>
-                <li>Configuración de 1 tipo de agente: ventas, soporte o reservas*</li>
-                <li>Hasta 6 usuarios</li>
-                <li>Contactos atendidos ilimitados</li>
-                <li>Llamadas desde CRM disponibles con número activo</li>
-                <li>2 horas de llamadas incluidas con número activo</li>
-                <li>1 campaña masiva de WhatsApp al mes incluida*</li>
-                <li>Soporte en grupo directo de WhatsApp · respuesta máxima 3 horas</li>
-              </ul>
-            </div>
-
-            <div class="price-card">
-              <div class="plan-name">Business</div>
-              <div class="price">
-                <span class="monthly-price">$2.190M<span class="price-period">/mes</span></span>
-                <span class="annual-price">
-                  <span class="price-before">$2.190M/mes</span>
-                  <span class="annual-price-line">$1.75M<span class="price-period">/mes</span></span>
-                </span>
-              </div>
-              <div class="price-sub">
-                <span class="monthly-copy">Todos los módulos · hasta 20 usuarios · contactos ilimitados · hasta 1.000 pedidos/mes</span>
-                <span class="annual-copy">Todos los módulos · hasta 20 usuarios · contactos ilimitados · hasta 1.000 pedidos/mes · $21.0M/año</span>
-              </div>
-              <a href={businessHref} target="_blank" rel="noopener noreferrer" class="btn btn-outline">Empezar</a>
-              <ul>
-                <li>Todo lo incluido en Pro</li>
-                <li>Todos los módulos de Binah incluidos</li>
-                <li>Hasta 20 usuarios</li>
-                <li>Contactos atendidos ilimitados</li>
-                <li>Hasta 1.000 pedidos al mes</li>
-                <li>Paquete de 20.000 documentos electrónicos al año directamente con nosotros</li>
-                <li>Llamadas desde CRM disponibles con número activo</li>
-                <li>4 horas de llamadas incluidas con número activo</li>
-                <li>3 campañas masivas de WhatsApp al mes, de 1.000 contactos cada una</li>
-                <li>Soporte prioritario</li>
-                <li>Respuestas en menos de 30 minutos</li>
-                <li>Onboarding guiado</li>
-              </ul>
-            </div>
-
-            <div class="price-card">
-              <div class="plan-name">Personalizado</div>
-              <div class="price price-text">A medida</div>
-              <div class="price-sub">Para empresas con necesidades específicas</div>
-              <a href={scaleHref} target="_blank" rel="noopener noreferrer" class="btn btn-outline">Hablar con ventas</a>
-              <ul>
-                <li>Todo lo incluido en Business</li>
-                <li>Empresas con más de 1.000 pedidos al mes</li>
-                <li>Gerente de cuenta asignado</li>
-                <li>Desarrollos a medida dentro de la plataforma</li>
-                <li>Integraciones profundas con Shopify, Coordinadora, SIIGO u otros sistemas</li>
-                <li>Reportes operativos por ventas, asesores, productos, bodegas y atención</li>
-                <li>Trazabilidad completa de acciones del sistema y usuarios</li>
-                <li>Llamadas desde CRM disponibles con número activo</li>
-                <li>4 horas de llamadas incluidas con número activo</li>
-                <li>3 campañas masivas de WhatsApp al mes, de 1.000 contactos cada una</li>
-                <li>Acompañamiento dedicado</li>
-                <li>Alcance, tiempos y precio según el proyecto</li>
-                <li>Contratos empresariales</li>
-              </ul>
-            </div>
-          </div>
+          <label class="pricing-currency">
+            <span class="pricing-currency-label">Precios en</span>
+            <span class="pricing-currency-control">
+              <select class="pricing-currency-select" aria-label="Moneda de precios">
+                <option selected>🇨🇴 COP</option>
+              </select>
+            </span>
+          </label>
         </div>
 
-        <div class="pricing-notes">
-          <div class="pricing-note">
-            <div class="mono" style="font-size: 10px; color: var(--mute); letter-spacing: 0.12em;">
-              CONSUMO IA
-            </div>
-            <div
-              style="font-family: var(--font-display); font-size: 20px; font-weight: 500; letter-spacing: -0.01em; margin-top: 6px;"
-            >
-              Alrededor de USD 80 incluidos
-            </div>
-            <p style="color: var(--mute); font-size: 13px; margin-top: 8px;">
-              Los planes con IA incluyen consumo mensual de alrededor de USD 80 o su proporcional en pesos colombianos. El consumo adicional se cobra por uso, sin sorpresas.
-            </p>
-          </div>
-          <div class="pricing-note">
-            <div class="mono" style="font-size: 10px; color: var(--mute); letter-spacing: 0.12em;">
-              CAMPAÑAS DE WHATSAPP
-            </div>
-            <div
-              style="font-family: var(--font-display); font-size: 20px; font-weight: 500; letter-spacing: -0.01em; margin-top: 6px;"
-            >
-              1 en Pro, 3 en Business*
-            </div>
-            <p style="color: var(--mute); font-size: 13px; margin-top: 8px;">
-              En Pro se incluye 1 campaña masiva por WhatsApp al mes. En Business se incluyen 3 campañas de 1.000 contactos cada una al mes. En Starter se cotizan a $100K por cada 1.000 contactos.
-            </p>
-          </div>
-          <div class="pricing-note">
-            <div class="mono" style="font-size: 10px; color: var(--mute); letter-spacing: 0.12em;">
-              LLAMADAS DESDE CRM
-            </div>
-            <div
-              style="font-family: var(--font-display); font-size: 20px; font-weight: 500; letter-spacing: -0.01em; margin-top: 6px;"
-            >
-              Número activo + horas incluidas
-            </div>
-            <p style="color: var(--mute); font-size: 13px; margin-top: 8px;">
-              Starter y Pro incluyen 2 horas al mes. Business incluye 4 horas al mes. Para activar llamadas necesitas un número: activación por $90K COP y mantenimiento por $40K COP al mes. Cada minuto adicional cuesta $100 COP.
-            </p>
-          </div>
-        </div>
-        <p class="pricing-disclaimer">
-          * La configuración de 1 tipo de agente aplica solo si se firma contrato de permanencia de 1 año. Las campañas adicionales se cotizan aparte. Para usar llamadas debes activar un número por $90K COP y pagar $40K COP al mes para mantenerlo activo. Cada minuto adicional cuesta $100 COP. Los meses contemplados en la plataforma consisten en 28 días calendario.
+        <p class="pricing-setup-fee">
+          <span>Setup fee</span>
+          Todos los planes requieren un pago inicial entre $500K y $1M COP, según lo que se necesite configurar.
         </p>
 
-        <div
-          style="margin-top: 32px; display: flex; gap: 32px; font-size: 13px; color: var(--mute); flex-wrap: wrap;"
-        >
-          <span>◆ Sin tarjeta para probar</span>
-          <span>◆ Cancela cuando quieras</span>
-          <span>◆ IA incluida desde $699K al mes</span>
-          <span>◆ 3 campañas al mes en Business*</span>
-          <span>◆ 4 horas de llamadas en Business</span>
-        </div>
-      </section>
+        <div class="pricing-grid">
+          <div class="price-card">
+            <h2 class="plan-name">Starter</h2>
+            <div class="price">
+              <span class="monthly-price">$299K<span class="price-period">/mes</span></span>
+              <span class="annual-price">
+                <span class="price-before">$299K/mes</span>
+                <span class="annual-price-line">$239K<span class="price-period">/mes</span></span>
+              </span>
+            </div>
+            <div class="price-sub">
+              <span class="monthly-copy">Módulo CRM · hasta 3 usuarios · contactos ilimitados</span>
+              <span class="annual-copy">Módulo CRM · hasta 3 usuarios · contactos ilimitados · $2.87M/año</span>
+            </div>
+            <a href={starterHref} target="_blank" rel="noopener noreferrer" class="hp-btn hp-btn-light">Empezar</a>
+            <ul>
+              <li>Solo módulo CRM (inbox unificado)</li>
+              <li>WhatsApp, Instagram, email y próximamente TikTok</li>
+              <li>Hasta 3 usuarios</li>
+              <li>Contactos atendidos ilimitados</li>
+              <li>Llamadas desde CRM disponibles con número activo</li>
+              <li>2 horas de llamadas incluidas con número activo</li>
+              <li>Campañas masivas cotizadas aparte: $100K por cada 1.000 contactos</li>
+              <li>Soporte por email</li>
+            </ul>
+          </div>
 
-      <section class="binah-section">
-        <div class="section-head">
-          <h2 class="display display-md title">Preguntas frecuentes.</h2>
-          <p>Las cosas que la gente más nos pregunta antes de decidirse.</p>
-        </div>
-        <div class="faq-grid">
-          <div style="background: var(--bg); padding: 32px;">
-            <div class="mono" style="font-size: 10px; color: var(--mute); letter-spacing: 0.1em; margin-bottom: 12px;">
-              Q.01
+          <div class="price-card featured">
+            <h2 class="plan-name">Pro <span class="plan-badge">Popular</span></h2>
+            <div class="price">
+              <span class="monthly-price">$699K<span class="price-period">/mes</span></span>
+              <span class="annual-price">
+                <span class="price-before">$699K/mes</span>
+                <span class="annual-price-line">$559K<span class="price-period">/mes</span></span>
+              </span>
             </div>
-            <h3
-              style="font-family: var(--font-display); font-size: 22px; letter-spacing: -0.02em; font-weight: 500; margin-bottom: 12px;"
-            >
-              ¿El Starter incluye IA?
-            </h3>
-            <p style="color: var(--ink-soft); font-size: 14px;">
-              No. El Starter de $299K al mes solo incluye el módulo CRM: WhatsApp, Instagram, email y próximamente TikTok. La IA está incluida desde el plan Pro de $699K al mes.
-            </p>
-          </div>
-          <div style="background: var(--bg); padding: 32px;">
-            <div class="mono" style="font-size: 10px; color: var(--mute); letter-spacing: 0.1em; margin-bottom: 12px;">
-              Q.02
+            <div class="price-sub">
+              <span class="monthly-copy">CRM + IA · hasta 6 usuarios · contactos ilimitados</span>
+              <span class="annual-copy">CRM + IA · hasta 6 usuarios · contactos ilimitados · $6.71M/año</span>
             </div>
-            <h3
-              style="font-family: var(--font-display); font-size: 22px; letter-spacing: -0.02em; font-weight: 500; margin-bottom: 12px;"
-            >
-              ¿Qué incluye el plan Business de $2.190M al mes?
-            </h3>
-            <p style="color: var(--ink-soft); font-size: 14px;">
-              Incluye todos los módulos de Binah, hasta 20 usuarios, contactos atendidos ilimitados, hasta 1.000 pedidos al mes, paquete de 20.000 documentos electrónicos al año directamente con nosotros, 3 campañas masivas de WhatsApp de 1.000 contactos cada una al mes, 4 horas de llamadas con número activo, soporte prioritario y respuestas en menos de 30 minutos. Para más de 1.000 pedidos al mes, trabajamos un plan personalizado.
-            </p>
+            <a href={proHref} target="_blank" rel="noopener noreferrer" class="hp-btn hp-btn-primary">Empezar</a>
+            <ul>
+              <li>Módulo CRM incluido</li>
+              <li>IA incluida</li>
+              <li>Configuración de 1 tipo de agente: ventas, soporte o reservas*</li>
+              <li>Hasta 6 usuarios</li>
+              <li>Contactos atendidos ilimitados</li>
+              <li>Llamadas desde CRM disponibles con número activo</li>
+              <li>2 horas de llamadas incluidas con número activo</li>
+              <li>1 campaña masiva de WhatsApp al mes incluida*</li>
+              <li>Soporte en grupo directo de WhatsApp · respuesta máxima 3 horas</li>
+            </ul>
           </div>
-          <div style="background: var(--bg); padding: 32px;">
-            <div class="mono" style="font-size: 10px; color: var(--mute); letter-spacing: 0.1em; margin-bottom: 12px;">
-              Q.03
-            </div>
-            <h3
-              style="font-family: var(--font-display); font-size: 22px; letter-spacing: -0.02em; font-weight: 500; margin-bottom: 12px;"
-            >
-              ¿Migro mis datos desde otra herramienta?
-            </h3>
-            <p style="color: var(--ink-soft); font-size: 14px;">
-              Sí. Te ayudamos a importar clientes, productos, facturas y conversaciones desde casi cualquier plataforma, según el alcance del plan y la migración.
-            </p>
-          </div>
-          <div style="background: var(--bg); padding: 32px;">
-            <div class="mono" style="font-size: 10px; color: var(--mute); letter-spacing: 0.1em; margin-bottom: 12px;">
-              Q.04
-            </div>
-            <h3
-              style="font-family: var(--font-display); font-size: 22px; letter-spacing: -0.02em; font-weight: 500; margin-bottom: 12px;"
-            >
-              ¿Cómo funciona el cobro de IA y campañas?
-            </h3>
-            <p style="color: var(--ink-soft); font-size: 14px;">
-              Los planes con IA incluyen consumo mensual de alrededor de USD 80 o su proporcional en pesos colombianos; los adicionales se facturan por consumo. Pro incluye 1 campaña masiva de WhatsApp al mes, Business incluye 3 campañas de 1.000 contactos cada una al mes y en Starter se cotizan a $100K por cada 1.000 contactos.
-            </p>
-          </div>
-          <div style="background: var(--bg); padding: 32px;">
-            <div class="mono" style="font-size: 10px; color: var(--mute); letter-spacing: 0.1em; margin-bottom: 12px;">
-              Q.05
-            </div>
-            <h3
-              style="font-family: var(--font-display); font-size: 22px; letter-spacing: -0.02em; font-weight: 500; margin-bottom: 12px;"
-            >
-              ¿Las llamadas desde el CRM están incluidas?
-            </h3>
-            <p style="color: var(--ink-soft); font-size: 14px;">
-              Sí. Starter y Pro incluyen 2 horas al mes de llamadas a celulares colombianos. Business incluye 4 horas al mes. Para activar llamadas debes tener un número: activarlo cuesta $90K COP y mantenerlo activo cuesta $40K COP al mes. Cada minuto adicional cuesta $100 COP.
-            </p>
-          </div>
-          <div style="background: var(--bg); padding: 32px;">
-            <div class="mono" style="font-size: 10px; color: var(--mute); letter-spacing: 0.1em; margin-bottom: 12px;">
-              Q.06
-            </div>
-            <h3
-              style="font-family: var(--font-display); font-size: 22px; letter-spacing: -0.02em; font-weight: 500; margin-bottom: 12px;"
-            >
-              ¿Puedo pagar una solución personalizada una sola vez y luego usar un plan más bajo?
-            </h3>
-            <p style="color: var(--ink-soft); font-size: 14px;">
-              Sí. Si necesitas que construyamos algo específico pero tu operación no justifica un plan personalizado constante, podemos negociar ese tipo de situaciones.
-            </p>
-          </div>
-          <div style="background: var(--bg); padding: 32px;">
-            <div class="mono" style="font-size: 10px; color: var(--mute); letter-spacing: 0.1em; margin-bottom: 12px;">
-              Q.07
-            </div>
-            <h3
-              style="font-family: var(--font-display); font-size: 22px; letter-spacing: -0.02em; font-weight: 500; margin-bottom: 12px;"
-            >
-              ¿Cuándo necesito un plan personalizado?
-            </h3>
-            <p style="color: var(--ink-soft); font-size: 14px;">
-              Cuando tu operación supera 1.000 pedidos al mes o necesita integraciones profundas, reportes específicos, acompañamiento dedicado, desarrollos a medida o flujos empresariales con varias áreas.
-            </p>
-          </div>
-          <div style="background: var(--bg); padding: 32px;">
-            <div class="mono" style="font-size: 10px; color: var(--mute); letter-spacing: 0.1em; margin-bottom: 12px;">
-              Q.08
-            </div>
-            <h3
-              style="font-family: var(--font-display); font-size: 22px; letter-spacing: -0.02em; font-weight: 500; margin-bottom: 12px;"
-            >
-              ¿Binah sirve para operaciones con Shopify, Coordinadora y SIIGO?
-            </h3>
-            <p style="color: var(--ink-soft); font-size: 14px;">
-              Sí. Binah puede conectar la tienda, los pedidos, inventario, guías, rótulos, tracking, facturación, conciliación y reportes para que el equipo no tenga que copiar la misma información entre plataformas.
-            </p>
-          </div>
-        </div>
-      </section>
 
-      <CtaBand
-        eyebrow="¿Aún dudando?"
-        heading={`La demo es gratis.<br />Y dura 30 minutos.`}
-        primaryLabel="Agendar demo"
-        primaryHref={demoHref}
-        secondaryLabel="Conoce al equipo"
-        secondaryHref="/nosotros"
-      />
-    </div>
+          <div class="price-card">
+            <h2 class="plan-name">Business</h2>
+            <div class="price">
+              <span class="monthly-price">$2.190M<span class="price-period">/mes</span></span>
+              <span class="annual-price">
+                <span class="price-before">$2.190M/mes</span>
+                <span class="annual-price-line">$1.75M<span class="price-period">/mes</span></span>
+              </span>
+            </div>
+            <div class="price-sub">
+              <span class="monthly-copy">Todos los módulos · hasta 20 usuarios · contactos ilimitados · hasta 1.000 pedidos/mes</span>
+              <span class="annual-copy"
+                >Todos los módulos · hasta 20 usuarios · contactos ilimitados · hasta 1.000 pedidos/mes · $21.0M/año</span
+              >
+            </div>
+            <a href={businessHref} target="_blank" rel="noopener noreferrer" class="hp-btn hp-btn-light">Empezar</a>
+            <ul>
+              <li>Todo lo incluido en Pro</li>
+              <li>Todos los módulos de Binah incluidos</li>
+              <li>Hasta 20 usuarios</li>
+              <li>Contactos atendidos ilimitados</li>
+              <li>Hasta 1.000 pedidos al mes</li>
+              <li>Paquete de 20.000 documentos electrónicos al año directamente con nosotros</li>
+              <li>Llamadas desde CRM disponibles con número activo</li>
+              <li>4 horas de llamadas incluidas con número activo</li>
+              <li>3 campañas masivas de WhatsApp al mes, de 1.000 contactos cada una</li>
+              <li>Soporte prioritario</li>
+              <li>Respuestas en menos de 30 minutos</li>
+              <li>Onboarding guiado</li>
+            </ul>
+          </div>
+
+          <div class="price-card">
+            <h2 class="plan-name">Personalizado</h2>
+            <div class="price price-text">A medida</div>
+            <div class="price-sub">Para empresas con necesidades específicas</div>
+            <a href={scaleHref} target="_blank" rel="noopener noreferrer" class="hp-btn hp-btn-light">Hablar con ventas</a>
+            <ul>
+              <li>Todo lo incluido en Business</li>
+              <li>Empresas con más de 1.000 pedidos al mes</li>
+              <li>Gerente de cuenta asignado</li>
+              <li>Desarrollos a medida dentro de la plataforma</li>
+              <li>Integraciones profundas con Shopify, Coordinadora, SIIGO u otros sistemas</li>
+              <li>Reportes operativos por ventas, asesores, productos, bodegas y atención</li>
+              <li>Trazabilidad completa de acciones del sistema y usuarios</li>
+              <li>Llamadas desde CRM disponibles con número activo</li>
+              <li>4 horas de llamadas incluidas con número activo</li>
+              <li>3 campañas masivas de WhatsApp al mes, de 1.000 contactos cada una</li>
+              <li>Acompañamiento dedicado</li>
+              <li>Alcance, tiempos y precio según el proyecto</li>
+              <li>Contratos empresariales</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </PageHero>
+
+    <section class="hp-section pricing-extra" aria-label="Detalles de los planes">
+      <div class="container-binah">
+        <ul class="perks hp-reveal">{perks.map((perk) => <li>{perk}</li>)}</ul>
+
+        <div class="notes">
+          {
+            notes.map((note, index) => (
+              <div class="note hp-card hp-reveal" style={`--d: ${index * 80}ms`}>
+                <span class="note-kicker">{note.kicker}</span>
+                <h3>{note.title}</h3>
+                <p>{note.body}</p>
+              </div>
+            ))
+          }
+        </div>
+        <p class="disclaimer">
+          * La configuración de 1 tipo de agente aplica solo si se firma contrato de permanencia de 1 año. Las campañas
+          adicionales se cotizan aparte. Para usar llamadas debes activar un número por $90K COP y pagar $40K COP al mes
+          para mantenerlo activo. Cada minuto adicional cuesta $100 COP. Los meses contemplados en la plataforma consisten
+          en 28 días calendario.
+        </p>
+      </div>
+    </section>
+
+    <section class="hp-section hp-section--alt" aria-labelledby="faq-title">
+      <div class="container-binah faq">
+        <div class="faq-head hp-reveal">
+          <span class="hp-eyebrow">FAQ</span>
+          <h2 class="hp-h2" id="faq-title">Preguntas frecuentes.</h2>
+          <p class="hp-lead">Las cosas que la gente más nos pregunta antes de decidirse.</p>
+        </div>
+        <div class="faq-list hp-reveal">
+          {
+            faqs.map((faq, index) => (
+              <details class="faq-item" open={index === 0}>
+                <summary>
+                  <h3>{faq.q}</h3>
+                  <span class="faq-icon" aria-hidden="true" />
+                </summary>
+                <p>{faq.a}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <HomeCta
+      demoHref={demoHref}
+      eyebrow="¿Aún dudando?"
+      heading="La demo es gratis. Y dura 30 minutos."
+      lead="Te mostramos Binah con tu operación real y te ayudamos a elegir el plan y los módulos que de verdad necesitas."
+      secondaryLabel="Conoce al equipo"
+      secondaryHref="/nosotros"
+    />
   </main>
   <Footer />
 </Layout>
+
+<style>
+  /* Billing controls: white pills, legible on the dark panel and the page. */
+  .pricing-billing-wrap {
+    margin-top: 0;
+  }
+  .pricing-controls {
+    align-items: center;
+  }
+  .pricing-billing {
+    padding: 6px 8px 6px 14px;
+    border: 0;
+    border-radius: 999px;
+    background: #fff;
+    box-shadow: 0 8px 24px -12px rgba(0, 0, 0, 0.55);
+    font-size: 14px;
+  }
+  .pricing-toggle {
+    border-color: #dcdad3;
+    background: #f3f2ee;
+  }
+  .pricing-toggle span {
+    background: var(--hp-ink);
+  }
+  .pricing-billing-input:checked ~ .pricing-controls .pricing-billing .pricing-toggle {
+    background: var(--hp-purple);
+    border-color: var(--hp-purple);
+  }
+  .pricing-billing-input:checked ~ .pricing-controls .pricing-billing .pricing-toggle span {
+    background: #fff;
+  }
+  .pricing-discount {
+    border: 0;
+    border-radius: 999px;
+    padding: 4px 8px;
+    background: var(--hp-lavender);
+    color: #3a25d6;
+  }
+  .pricing-billing-input:checked ~ .pricing-controls .pricing-billing .pricing-discount {
+    background: var(--hp-purple);
+    color: #fff;
+  }
+  .pricing-billing-copy {
+    color: var(--hp-on-dark-mute);
+  }
+  .pricing-currency {
+    color: var(--hp-on-dark-mute);
+  }
+  .pricing-currency-select {
+    min-height: 42px;
+    border: 0;
+    border-radius: 999px;
+    background: #fff;
+    box-shadow: 0 8px 24px -12px rgba(0, 0, 0, 0.55);
+  }
+  .pricing-billing-input:focus-visible ~ .pricing-controls .pricing-billing,
+  .pricing-currency-select:focus-visible {
+    outline-color: var(--hp-purple-light);
+  }
+  .pricing-setup-fee {
+    width: fit-content;
+    margin-top: 16px;
+    padding: 8px 14px 8px 8px;
+    border-radius: 999px;
+    background: #fff;
+    box-shadow: 0 8px 24px -12px rgba(0, 0, 0, 0.55);
+    color: var(--hp-body);
+  }
+  .pricing-setup-fee span {
+    border: 0;
+    border-radius: 999px;
+    padding: 4px 10px;
+    background: var(--hp-lavender);
+    color: #3a25d6;
+  }
+
+  /* Plan cards */
+  .pricing-grid {
+    gap: 16px;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
+  }
+  .price-card {
+    padding: 30px 26px;
+    border-radius: 22px;
+    background: #fff;
+    border: 1px solid var(--hp-line);
+    box-shadow: var(--hp-shadow);
+  }
+  .price-card .plan-name {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    color: var(--hp-mute);
+  }
+  .plan-badge {
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--hp-purple);
+    color: #fff;
+  }
+  .price-card .price {
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    color: var(--hp-ink);
+  }
+  .price-card .hp-btn {
+    width: 100%;
+  }
+  .price-card ul {
+    gap: 11px;
+    border-top-color: var(--hp-line);
+    color: var(--hp-body);
+  }
+  .price-card li {
+    line-height: 1.45;
+  }
+  .price-card li::before {
+    content: "";
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+    border-radius: 50%;
+    opacity: 1;
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2 7 10.5l4.5-5' fill='none' stroke='%234d37f6' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+        center / 14px no-repeat,
+      var(--hp-lavender);
+  }
+  .price-card.featured {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: var(--hp-charcoal);
+    color: var(--hp-on-dark);
+    border-color: rgba(156, 143, 255, 0.45);
+    box-shadow:
+      0 0 0 1px rgba(77, 55, 246, 0.25),
+      0 30px 70px -30px rgba(77, 55, 246, 0.9);
+  }
+  .price-card.featured::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    right: -120px;
+    top: -140px;
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(77, 55, 246, 0.5), transparent);
+    pointer-events: none;
+  }
+  .price-card.featured .plan-name {
+    color: var(--hp-purple-light);
+  }
+  .price-card.featured .price {
+    color: #fff;
+  }
+  .price-card.featured ul {
+    border-top-color: var(--hp-on-dark-line);
+    color: rgba(245, 245, 241, 0.86);
+  }
+  .price-card.featured li::before {
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2 7 10.5l4.5-5' fill='none' stroke='%23c9c2ff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+        center / 14px no-repeat,
+      rgba(77, 55, 246, 0.35);
+  }
+  .price-card.featured .hp-btn:focus-visible {
+    outline-color: var(--hp-purple-light);
+  }
+
+  /* Perks, notes, disclaimer */
+  .pricing-extra {
+    padding-top: 48px;
+  }
+  .perks {
+    list-style: none;
+    margin: 0 0 32px;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  .perks li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: #fff;
+    border: 1px solid var(--hp-line);
+    font-size: 13.5px;
+    color: var(--hp-body);
+  }
+  .perks li::before {
+    content: "";
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2 7 10.5l4.5-5' fill='none' stroke='%234d37f6' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+        center / 13px no-repeat,
+      var(--hp-lavender);
+  }
+  .notes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .note {
+    padding: 24px;
+  }
+  .note-kicker {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--hp-purple);
+  }
+  .note h3 {
+    margin: 10px 0 8px;
+    font-size: 19px;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+    color: var(--hp-ink);
+  }
+  .note p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--hp-mute);
+  }
+  .disclaimer {
+    margin: 20px 0 0;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--hp-mute);
+  }
+
+  /* FAQ accordion */
+  .faq {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+    gap: 40px 72px;
+    align-items: start;
+  }
+  .faq-head {
+    position: sticky;
+    top: 120px;
+  }
+  .faq-head .hp-lead {
+    margin-top: 18px;
+  }
+  .faq-list {
+    display: grid;
+    gap: 10px;
+  }
+  .faq-item {
+    border-radius: 16px;
+    background: #fff;
+    border: 1px solid var(--hp-line);
+    box-shadow: var(--hp-shadow-sm);
+    transition: border-color 0.2s ease;
+  }
+  .faq-item[open] {
+    border-color: #d6d1ff;
+  }
+  .faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px 22px;
+    cursor: pointer;
+    list-style: none;
+  }
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-item summary:focus-visible {
+    outline: 2px solid var(--hp-purple);
+    outline-offset: 2px;
+    border-radius: 14px;
+  }
+  .faq-item h3 {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+    font-weight: 600;
+    color: var(--hp-ink);
+  }
+  .faq-icon {
+    position: relative;
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--hp-lavender);
+    transition:
+      transform 0.3s var(--hp-ease),
+      background-color 0.2s ease;
+  }
+  .faq-icon::before,
+  .faq-icon::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 12px;
+    height: 1.8px;
+    margin: -0.9px 0 0 -6px;
+    border-radius: 2px;
+    background: var(--hp-purple);
+  }
+  .faq-icon::after {
+    transform: rotate(90deg);
+  }
+  .faq-item[open] .faq-icon {
+    transform: rotate(45deg);
+    background: var(--hp-purple);
+  }
+  .faq-item[open] .faq-icon::before,
+  .faq-item[open] .faq-icon::after {
+    background: #fff;
+  }
+  .faq-item p {
+    margin: 0;
+    padding: 0 22px 22px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--hp-mute);
+  }
+
+  @media (max-width: 1000px) {
+    .notes {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .faq {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .faq-head {
+      position: static;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .pricing-billing-copy {
+      display: block;
+      margin: 10px 0 0;
+    }
+    .pricing-currency {
+      margin-left: 0;
+    }
+    .pricing-setup-fee {
+      border-radius: 16px;
+      align-items: flex-start;
+    }
+  }
+</style>

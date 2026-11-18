@@ -2,10 +2,38 @@
 import Layout from "../layouts/Layout.astro";
 import Nav from "../components/binah/Nav.astro";
 import Footer from "../components/binah/Footer.astro";
-import CtaBand from "../components/binah/CtaBand.astro";
+import PageHero from "../components/marketing/PageHero.astro";
+import HomeCta from "../components/home/HomeCta.astro";
+import ChannelIcon from "../components/binah/ChannelIcon.astro";
+import ColombiaHexMap from "../components/marketing/ColombiaHexMap.astro";
+import reviewsCache from "../data/google-reviews-cache.json";
 import { waUrl, WA_MESSAGES } from "../components/binah/whatsapp";
+import "../styles/marketing.css";
 
 const careersHref = waUrl(WA_MESSAGES.careers);
+const demoHref = waUrl(WA_MESSAGES.demo);
+const rating = (reviewsCache as { rating: number | null }).rating;
+
+const pillars = [
+  {
+    n: "01",
+    kicker: "Uno",
+    title: "Diseño moderno.",
+    body: "Una plataforma operativa no tiene que sentirse vieja. Binah se diseña para que vender, facturar, despachar y reportar se sienta claro desde el primer día.",
+  },
+  {
+    n: "02",
+    kicker: "Cerca",
+    title: "Intuitivo para todos.",
+    body: "Logística, contador, analista, asesor, gerente, atención al cliente y soporte pueden trabajar en el mismo lugar sin aprender ocho sistemas.",
+  },
+  {
+    n: "03",
+    kicker: "Humano",
+    title: "Escuchamos al cliente.",
+    body: "Construimos con negocios reales. Cada conversación con un cliente mejora el producto, prioriza lo importante y evita funciones que nadie usa.",
+  },
+];
 ---
 
 <Layout
@@ -13,112 +41,294 @@ const careersHref = waUrl(WA_MESSAGES.careers);
   description="Conoce a Binah, el equipo colombiano que construye una plataforma operativa para ventas, finanzas, operaciones y soporte en negocios locales."
   page="nosotros"
   canonicalPath="/nosotros"
+  navVariant="overlay"
 >
   <Nav />
-  <main>
-    <div class="container-binah">
-      <div class="crumb">
-        <a href="/">Binah</a> <span class="sep">/</span> Nosotros
-      </div>
+  <main class="hp">
+    <PageHero
+      crumb="Nosotros"
+      eyebrow="Manifiesto"
+      title="«Binah» es"
+      accent="entendimiento profundo."
+      lead="Los negocios colombianos pagan por ocho herramientas distintas, forzándolas a hablar entre sí con integraciones frágiles. Creemos que eso es absurdo. Un negocio merece un sistema que lo entienda completo —ventas, logística, contabilidad, análisis, gerencia, atención al cliente y soporte—, no piezas pegadas con cinta."
+      primaryLabel="Agendar demo"
+      primaryHref={demoHref}
+      secondaryLabel="Trabaja con nosotros"
+      secondaryHref={careersHref}
+    />
 
-      <section class="binah-section no-border" style="padding: 40px 0 64px;">
-        <div class="eyebrow">Manifiesto</div>
-        <h1 class="display display-lg" style="margin-top: 20px; max-width: 14ch;">
-          <em style="font-style: normal; color: var(--mute);">"Binah"</em> es entendimiento profundo.
-        </h1>
-        <p class="lead" style="margin-top: 32px; font-size: 20px; max-width: 62ch;">
-          Los negocios colombianos pagan por ocho herramientas distintas, forzándolas a hablar entre sí con integraciones frágiles. Creemos que eso es absurdo. Un negocio merece un sistema que lo entienda completo — ventas, logística, contabilidad, análisis, gerencia, atención al cliente y soporte — no piezas pegadas con cinta.
-        </p>
-      </section>
-
-      <section class="binah-section">
-        <div class="section-head">
-          <h2 class="display display-md title">Tres pilares.</h2>
-          <p>Lo que guía cada decisión de producto que tomamos.</p>
-        </div>
-        <div
-          class="principles-grid"
-          style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden;"
-        >
-          <div style="background: var(--bg); padding: 40px 32px;">
-            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">
-              01 — UNO
-            </div>
-            <h3
-              style="font-family: var(--font-display); font-size: 28px; letter-spacing: -0.02em; font-weight: 500; margin: 18px 0 14px; line-height: 1.05;"
-            >
-              Diseño moderno.
-            </h3>
-            <p style="color: var(--ink-soft); font-size: 14px;">
-              Una plataforma operativa no tiene que sentirse vieja. Binah se diseña para que vender, facturar, despachar y reportar se sienta claro desde el primer día.
-            </p>
-          </div>
-          <div style="background: var(--bg); padding: 40px 32px;">
-            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">
-              02 — CERCA
-            </div>
-            <h3
-              style="font-family: var(--font-display); font-size: 28px; letter-spacing: -0.02em; font-weight: 500; margin: 18px 0 14px; line-height: 1.05;"
-            >
-              Intuitivo para todos.
-            </h3>
-            <p style="color: var(--ink-soft); font-size: 14px;">
-              Logística, contador, analista, asesor, gerente, atención al cliente y soporte pueden trabajar en el mismo lugar sin aprender ocho sistemas.
-            </p>
-          </div>
-          <div style="background: var(--bg); padding: 40px 32px;">
-            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">
-              03 — HUMANO
-            </div>
-            <h3
-              style="font-family: var(--font-display); font-size: 28px; letter-spacing: -0.02em; font-weight: 500; margin: 18px 0 14px; line-height: 1.05;"
-            >
-              Escuchamos al cliente.
-            </h3>
-            <p style="color: var(--ink-soft); font-size: 14px;">
-              Construimos con negocios reales. Cada conversación con un cliente mejora el producto, prioriza lo importante y evita funciones que nadie usa.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="binah-section">
-        <div class="section-head">
-          <h2 class="display display-md title">Dónde estamos.</h2>
-          <p>Un equipo. Una sede. En el Caribe colombiano.</p>
-        </div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;">
+    <section class="hp-section" aria-labelledby="about-pillars-title">
+      <div class="container-binah">
+        <div class="hp-head hp-reveal">
           <div>
-            <div
-              style="aspect-ratio: 4/3; background: repeating-linear-gradient(45deg, var(--bg-alt) 0 8px, var(--bg) 8px 16px); border: 1px solid var(--line); border-radius: 8px; display: grid; place-items: center; font-family: var(--font-mono); font-size: 11px; color: var(--mute); letter-spacing: 0.1em;"
-            >
-              FOTO · EQUIPO BINAH
-            </div>
+            <span class="hp-eyebrow">Principios</span>
+            <h2 class="hp-h2" id="about-pillars-title">Tres pilares.</h2>
           </div>
-          <div style="padding-top: 8px;">
-            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em; margin-bottom: 6px;">
-              HQ
-            </div>
-            <div
-              style="font-family: var(--font-display); font-size: 40px; letter-spacing: -0.02em; font-weight: 500; line-height: 1.05;"
-            >
-              Barranquilla,<br />Colombia.
-            </div>
-            <p style="color: var(--ink-soft); font-size: 15px; margin-top: 16px; max-width: 36ch;">
-              Todo el equipo — producto, ingeniería, ventas y soporte — trabaja desde una sola ciudad. Nos gusta verle la cara a la gente con la que construimos.
-            </p>
-          </div>
+          <p class="hp-lead">Lo que guía cada decisión de producto que tomamos.</p>
         </div>
-      </section>
+        <ul class="pillars">
+          {
+            pillars.map((pillar, index) => (
+              <li class="pillar hp-card hp-reveal" style={`--d: ${index * 80}ms`}>
+                <span class="pillar-kicker">
+                  <span>{pillar.n}</span>
+                  {pillar.kicker}
+                </span>
+                <h3>{pillar.title}</h3>
+                <p>{pillar.body}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
 
-      <CtaBand
-        eyebrow="Únete"
-        heading={`¿Quieres construir<br />esto con nosotros?`}
-        body="Buscamos diseñadores, ingenieros y gente de ventas que entienda el problema profundamente."
-        primaryLabel="Escríbenos"
-        primaryHref={careersHref}
-      />
-    </div>
+    <section class="hp-section hp-section--alt" aria-labelledby="about-hq-title">
+      <div class="container-binah hq">
+        <div class="hq-card hp-reveal" aria-hidden="true">
+          <div class="hq-grid"></div>
+          <div class="hq-glow"></div>
+          <ColombiaHexMap class="hq-map" />
+          <img src="/symbol-white.png" alt="" width="40" height="50" class="hq-symbol" />
+          <div class="hq-coords">
+            <span>10.9685° N</span>
+            <span>74.7813° O</span>
+          </div>
+          <div class="hq-label">Caribe colombiano</div>
+        </div>
+
+        <div class="hq-copy hp-reveal" style="--d: 100ms">
+          <span class="hp-eyebrow">Dónde estamos</span>
+          <h2 class="hp-h2" id="about-hq-title">Barranquilla, Colombia.</h2>
+          <p class="hp-lead">
+            Un equipo. Una sede. En el Caribe colombiano. Todo el equipo —producto, ingeniería, ventas y soporte— trabaja
+            desde una sola ciudad. Nos gusta verle la cara a la gente con la que construimos.
+          </p>
+          <ul class="creds">
+            {
+              rating !== null && (
+                <li>
+                  <span class="cred-stars" aria-hidden="true">★★★★★</span>
+                  <span>
+                    <strong>{rating.toFixed(1).replace(".", ",")} en Google</strong>
+                    <small>Reseñas de clientes</small>
+                  </span>
+                </li>
+              )
+            }
+            <li>
+              <ChannelIcon name="meta" size={28} />
+              <span>
+                <strong>Verificado por Meta</strong>
+                <small>Proveedor de tecnología</small>
+              </span>
+            </li>
+            <li>
+              <span class="cred-flag" aria-hidden="true">CO</span>
+              <span>
+                <strong>Hecho en Colombia</strong>
+                <small>Facturación electrónica DIAN</small>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <HomeCta
+      demoHref={careersHref}
+      eyebrow="Únete"
+      heading="¿Quieres construir esto con nosotros?"
+      lead="Buscamos diseñadores, ingenieros y gente de ventas que entienda el problema profundamente."
+      primaryLabel="Escríbenos"
+      secondaryLabel="Agendar demo"
+      secondaryHref={demoHref}
+    />
   </main>
   <Footer />
 </Layout>
+
+<style>
+  .pillars {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .pillar {
+    padding: 30px 28px 32px;
+  }
+  .pillar-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hp-mute);
+  }
+  .pillar-kicker span {
+    display: inline-grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: var(--hp-lavender);
+    color: var(--hp-purple);
+    letter-spacing: 0;
+  }
+  .pillar h3 {
+    margin: 22px 0 10px;
+    font-family: var(--font-display);
+    font-size: 26px;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    font-weight: 600;
+    color: var(--hp-ink);
+  }
+  .pillar p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--hp-mute);
+  }
+
+  .hq {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 48px 72px;
+    align-items: center;
+  }
+  .hq-card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    aspect-ratio: 5 / 4;
+    border-radius: 24px;
+    background: var(--hp-charcoal);
+    box-shadow: var(--hp-shadow-lg);
+  }
+  .hq-grid {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    -webkit-mask-image: radial-gradient(circle at 62% 30%, #000 10%, transparent 75%);
+    mask-image: radial-gradient(circle at 62% 30%, #000 10%, transparent 75%);
+  }
+  .hq-glow {
+    position: absolute;
+    z-index: -1;
+    right: -120px;
+    bottom: -180px;
+    width: 460px;
+    height: 460px;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(77, 55, 246, 0.4), transparent);
+  }
+  .hq-card :global(.hq-map) {
+    position: absolute;
+    top: 7%;
+    bottom: 7%;
+    right: 10%;
+    height: 86%;
+    width: auto;
+  }
+  .hq-symbol {
+    position: absolute;
+    left: 28px;
+    top: 26px;
+    width: 30px;
+    height: auto;
+    opacity: 0.95;
+  }
+  .hq-coords {
+    position: absolute;
+    left: 28px;
+    bottom: 70px;
+    display: grid;
+    gap: 4px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--hp-on-dark-mute);
+  }
+  .hq-label {
+    position: absolute;
+    left: 28px;
+    bottom: 26px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    font-size: 13.5px;
+    color: #fff;
+  }
+  .hq-copy .hp-lead {
+    margin-top: 20px;
+  }
+
+  .creds {
+    list-style: none;
+    margin: 32px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+  .creds li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: #fff;
+    border: 1px solid var(--hp-line);
+    box-shadow: var(--hp-shadow-sm);
+  }
+  .creds strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--hp-ink);
+  }
+  .creds small {
+    font-size: 13px;
+    color: var(--hp-mute);
+  }
+  .creds :global(.ch--meta) {
+    box-shadow: inset 0 0 0 1px var(--hp-line);
+  }
+  .cred-stars {
+    width: 28px;
+    text-align: center;
+    font-size: 9px;
+    letter-spacing: -1px;
+    line-height: 1;
+    color: #f5a524;
+  }
+  .cred-flag {
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #fcd116 0 50%, #003893 50% 75%, #ce1126 75%);
+    font-size: 0;
+  }
+
+
+  @media (max-width: 1000px) {
+    .pillars {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .hq {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

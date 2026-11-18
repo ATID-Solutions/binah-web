@@ -1,0 +1,248 @@
+---
+// Dark hero for the marketing pages (módulos, soluciones, precios,
+// nosotros). It runs full-bleed under the integrated nav, so the page must
+// use <Layout navVariant="overlay"> and sit inside <main class="hp">.
+//
+// Slots:
+//   default   extra content inside the dark area, under the actions
+//   straddle  content that starts on the dark panel and continues onto the
+//             light page (like the product shot on the home page). The
+//             panel's bottom edge sits `straddle` px below the slot's top,
+//             whatever the slot's height.
+interface Props {
+  /** Breadcrumb label for this page (the trail starts at "Inicio"). */
+  crumb: string;
+  eyebrow: string;
+  title: string;
+  /** Part of the title shown with the lavender gradient, after `title`. */
+  accent?: string;
+  lead: string;
+  primaryLabel?: string;
+  primaryHref?: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+  /** How much of the straddle slot sits on the dark panel, in px. */
+  straddle?: number;
+}
+
+const {
+  crumb,
+  eyebrow,
+  title,
+  accent,
+  lead,
+  primaryLabel,
+  primaryHref,
+  secondaryLabel,
+  secondaryHref,
+  straddle = 220,
+} = Astro.props;
+const isExternal = (href: string) => /^(https?:|mailto:|tel:)/i.test(href);
+const hasStraddle = Astro.slots.has("straddle");
+---
+
+<section
+  class:list={["ph", hasStraddle && "ph--straddle"]}
+  aria-labelledby="ph-title"
+  style={`--ph-straddle: ${hasStraddle ? straddle : 0}px`}
+>
+  <div class="ph-dark">
+    <div class="ph-panel" aria-hidden="true" data-nav-dark>
+      <div class="hp-glow ph-glow-a"></div>
+      <div class="hp-glow ph-glow-b"></div>
+    </div>
+
+    <div class="container-binah ph-inner">
+      <nav class="ph-crumb" aria-label="Ruta de navegación">
+        <a href="/">Inicio</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{crumb}</span>
+      </nav>
+
+      <div class="ph-copy">
+        <span class="hp-eyebrow hp-eyebrow--dark">{eyebrow}</span>
+        <h1 id="ph-title">
+          {title}
+          {accent && <span class="ph-accent">{accent}</span>}
+        </h1>
+        <p class="ph-lead">{lead}</p>
+
+        {
+          (primaryHref || secondaryHref) && (
+            <div class="ph-actions">
+              {primaryLabel && primaryHref && (
+                <a
+                  href={primaryHref}
+                  target={isExternal(primaryHref) ? "_blank" : undefined}
+                  rel={isExternal(primaryHref) ? "noopener noreferrer" : undefined}
+                  class="hp-btn hp-btn-primary"
+                >
+                  {primaryLabel} <span class="hp-arrow" aria-hidden="true">→</span>
+                </a>
+              )}
+              {secondaryLabel && secondaryHref && (
+                <a
+                  href={secondaryHref}
+                  target={isExternal(secondaryHref) ? "_blank" : undefined}
+                  rel={isExternal(secondaryHref) ? "noopener noreferrer" : undefined}
+                  class="hp-btn hp-btn-ghost-dark"
+                >
+                  {secondaryLabel}
+                </a>
+              )}
+            </div>
+          )
+        }
+
+        <slot />
+      </div>
+    </div>
+  </div>
+
+  {
+    hasStraddle && (
+      <div class="container-binah ph-straddle">
+        <slot name="straddle" />
+      </div>
+    )
+  }
+</section>
+
+<style>
+  .ph {
+    position: relative;
+    isolation: isolate;
+    margin-top: calc(var(--hp-nav-h, 69px) * -1);
+  }
+  .ph-dark {
+    position: relative;
+    isolation: isolate;
+    padding-top: var(--hp-nav-h, 69px);
+    padding-bottom: clamp(72px, 8vw, 104px);
+  }
+  /* With a straddle slot the dark area extends under the slot's first
+     --ph-straddle px; the slot is pulled up by the same amount. */
+  .ph--straddle .ph-dark {
+    padding-bottom: calc(clamp(48px, 5vw, 64px) + var(--ph-straddle));
+  }
+  .ph-straddle {
+    position: relative;
+    margin-top: calc(var(--ph-straddle) * -1);
+  }
+
+  .ph-panel {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    isolation: isolate;
+    border-radius: 0 0 var(--hp-radius-lg) var(--hp-radius-lg);
+    background: var(--hp-charcoal);
+  }
+  .ph-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+    background-position: center top;
+    -webkit-mask-image: radial-gradient(ellipse 60% 75% at 50% 0%, #000 20%, transparent 75%);
+    mask-image: radial-gradient(ellipse 60% 75% at 50% 0%, #000 20%, transparent 75%);
+  }
+  .ph-glow-a {
+    width: 860px;
+    height: 460px;
+    left: 50%;
+    bottom: -240px;
+    transform: translateX(-50%);
+    opacity: 0.85;
+  }
+  .ph-glow-b {
+    width: 520px;
+    height: 420px;
+    right: -160px;
+    top: -200px;
+    opacity: 0.45;
+  }
+
+  .ph-inner {
+    position: relative;
+    padding-top: 28px;
+  }
+
+  .ph-crumb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--hp-on-dark-mute);
+  }
+  .ph-crumb a {
+    color: var(--hp-on-dark-mute);
+    transition: color 0.2s ease;
+  }
+  .ph-crumb a:hover {
+    color: #fff;
+  }
+  .ph-crumb [aria-current] {
+    color: rgba(245, 245, 241, 0.9);
+  }
+  .ph-crumb a:focus-visible {
+    outline-color: var(--hp-purple-light);
+  }
+
+  .ph-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: clamp(40px, 5vw, 64px);
+  }
+  h1 {
+    margin: 20px 0 0;
+    max-width: 18ch;
+    font-family: var(--font-display);
+    font-size: clamp(40px, 5.2vw, 72px);
+    line-height: 1.02;
+    letter-spacing: -0.046em;
+    font-weight: 600;
+    color: #fff;
+    text-wrap: balance;
+  }
+  .ph-accent {
+    background: linear-gradient(100deg, var(--hp-lavender) 0%, #b9b0ff 45%, var(--hp-purple-light) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .ph-lead {
+    margin: 22px 0 0;
+    max-width: 62ch;
+    font-size: clamp(16px, 1.3vw, 18.5px);
+    line-height: 1.6;
+    color: var(--hp-on-dark-mute);
+    text-wrap: pretty;
+  }
+  .ph-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  .ph-actions a:focus-visible {
+    outline-color: var(--hp-purple-light);
+  }
+
+
+  @media (max-width: 760px) {
+    .ph-panel {
+      border-radius: 0 0 22px 22px;
+    }
+  }
+</style>
