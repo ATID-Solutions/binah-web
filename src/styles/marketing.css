@@ -37,7 +37,7 @@
 }
 
 .hp [id] {
-  scroll-margin-top: 88px;
+  scroll-margin-top: 100px;
 }
 
 .hp ::selection {
@@ -98,7 +98,7 @@
   font-size: clamp(17px, 1.35vw, 19px);
   line-height: 1.55;
   color: var(--hp-mute);
-  max-width: 56ch;
+  max-width: 37em; /* 56ch of Geist; em keeps wrapping stable while it loads */
   text-wrap: pretty;
 }
 .hp-lead--dark {
@@ -379,7 +379,7 @@ a.hp-card:hover {
 }
 .hp-calc p {
   margin: 14px 0 0;
-  max-width: 48ch;
+  max-width: 32em; /* 48ch of Geist */
   font-size: 16px;
   line-height: 1.6;
   color: var(--hp-on-dark-mute);

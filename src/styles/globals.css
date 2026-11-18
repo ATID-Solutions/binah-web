@@ -4,6 +4,30 @@
 /* ----------------------------------------------------------------
    Binah design system — neutral, editorial, mono-accented
    ---------------------------------------------------------------- */
+/* Metric-matched stand-in for Geist while it loads (font-display: swap), so
+   text wraps the same before and after the swap and the page doesn't shift.
+   Values measured in Chrome against Geist from Google Fonts: size-adjust is
+   the width ratio for a Spanish sample, the overrides are Geist's ascent and
+   descent (1.01em / 0.29em) divided by size-adjust. */
+@font-face {
+  font-family: "Geist Fallback";
+  src: local("Arial"), local("ArialMT");
+  font-weight: 100 500;
+  size-adjust: 101.7%;
+  ascent-override: 99.3%;
+  descent-override: 28.5%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Geist Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT");
+  font-weight: 600 900;
+  size-adjust: 99.7%;
+  ascent-override: 101.3%;
+  descent-override: 29.1%;
+  line-gap-override: 0%;
+}
+
 :root {
   --bg: #fafaf8;
   --bg-alt: #f2f2ee;
@@ -20,8 +44,8 @@
   --radius: 6px;
   --radius-md: 8px;
   --radius-lg: 10px;
-  --font-sans: 'Geist', 'Inter', -apple-system, system-ui, sans-serif;
-  --font-display: 'Geist', 'Inter Tight', -apple-system, sans-serif;
+  --font-sans: 'Geist', 'Geist Fallback', 'Inter', -apple-system, system-ui, sans-serif;
+  --font-display: 'Geist', 'Geist Fallback', 'Inter Tight', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'Geist Mono', ui-monospace, monospace;
 }
 

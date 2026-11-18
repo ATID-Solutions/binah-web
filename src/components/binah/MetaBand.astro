@@ -1,6 +1,8 @@
 ---
 // Site-wide announcement band above the nav: Binah is a Verified Meta Tech
-// Provider. Links to the Meta block in the home page's integrations section.
+// Provider. In Spanish it links to the Meta block in the home page's
+// integrations section; the English pages have no such section, so there it
+// is plain text.
 import MetaLogo from "./MetaLogo.astro";
 
 interface Props {
@@ -22,14 +24,34 @@ const copy =
       };
 ---
 
-<div class="meta-band">
-  <a href="/#meta" class="meta-band-link">
-    <MetaLogo size={18} class="meta-band-logo" />
-    <span class="meta-band-long"><strong>{copy.lead}</strong> {copy.rest}</span>
-    <span class="meta-band-short"><strong>{copy.short}</strong></span>
-    <span class="meta-band-arrow" aria-hidden="true">→</span>
-  </a>
-</div>
+<aside class="meta-band" aria-label={locale === "en" ? "Announcement" : "Anuncio"}>
+  {
+    locale === "en" ? (
+      <p class="meta-band-link">
+        <MetaLogo size={18} class="meta-band-logo" />
+        <span class="meta-band-long">
+          <strong>{copy.lead}</strong> {copy.rest}
+        </span>
+        <span class="meta-band-short">
+          <strong>{copy.short}</strong>
+        </span>
+      </p>
+    ) : (
+      <a href="/#meta" class="meta-band-link">
+        <MetaLogo size={18} class="meta-band-logo" />
+        <span class="meta-band-long">
+          <strong>{copy.lead}</strong> {copy.rest}
+        </span>
+        <span class="meta-band-short">
+          <strong>{copy.short}</strong>
+        </span>
+        <span class="meta-band-arrow" aria-hidden="true">
+          →
+        </span>
+      </a>
+    )
+  }
+</aside>
 
 <style>
   .meta-band {
@@ -40,6 +62,7 @@ const copy =
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   }
   .meta-band-link {
+    margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -205,7 +205,7 @@ const hasStraddle = Astro.slots.has("straddle");
   }
   h1 {
     margin: 20px 0 0;
-    max-width: 18ch;
+    max-width: 12.3em; /* 18ch of Geist; em, not ch: ch follows the font, so it changed while Geist loaded (layout shift). */
     font-family: var(--font-display);
     font-size: clamp(40px, 5.2vw, 72px);
     line-height: 1.02;
@@ -222,7 +222,7 @@ const hasStraddle = Astro.slots.has("straddle");
   }
   .ph-lead {
     margin: 22px 0 0;
-    max-width: 62ch;
+    max-width: 41em; /* 62ch of Geist */
     font-size: clamp(16px, 1.3vw, 18.5px);
     line-height: 1.6;
     color: var(--hp-on-dark-mute);

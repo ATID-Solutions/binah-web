@@ -12,6 +12,7 @@ import HomeSolutions from "../components/home/HomeSolutions.astro";
 import HomeIntegrations from "../components/home/HomeIntegrations.astro";
 import HomeReviews from "../components/home/HomeReviews.astro";
 import HomeCta from "../components/home/HomeCta.astro";
+import Reveal from "../components/marketing/Reveal.astro";
 import { waUrl, WA_MESSAGES } from "../components/binah/whatsapp";
 import "../styles/marketing.css";
 
@@ -42,37 +43,6 @@ const chatFallbackHref = waUrl(WA_MESSAGES.general);
   </main>
 
   <Footer />
+  <Reveal />
 </Layout>
 
-<script>
-  // Reveal-on-scroll. Elements are visible by default; only the ones that
-  // start below the fold are hidden, then revealed as they scroll in.
-  function initReveal() {
-    const items = document.querySelectorAll<HTMLElement>(".hp-reveal:not([data-reveal])");
-    if (!items.length) return;
-    if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          (entry.target as HTMLElement).dataset.reveal = "done";
-          observer.unobserve(entry.target);
-        }
-      },
-      { rootMargin: "0px 0px -6% 0px", threshold: 0.06 },
-    );
-
-    const fold = window.innerHeight * 0.94;
-    items.forEach((el) => {
-      if (el.getBoundingClientRect().top > fold) {
-        el.dataset.reveal = "pending";
-        observer.observe(el);
-      } else {
-        el.dataset.reveal = "done";
-      }
-    });
-  }
-
-  document.addEventListener("astro:page-load", initReveal);
-</script>

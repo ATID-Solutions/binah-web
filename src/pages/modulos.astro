@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Nav from "../components/binah/Nav.astro";
 import Footer from "../components/binah/Footer.astro";
 import PageHero from "../components/marketing/PageHero.astro";
+import Reveal from "../components/marketing/Reveal.astro";
 import HomeCta from "../components/home/HomeCta.astro";
 import { ModuleGlyph, BrandTile, type BrandIcon } from "../components/binah/brands";
 import { BINAH_MODULES, MODULE_LOGOS } from "../components/binah/modules";
@@ -128,6 +129,7 @@ const modules = BINAH_MODULES.map((m) => ({ ...m, title: displayName[m.id] ?? m.
     />
   </main>
   <Footer />
+  <Reveal />
 </Layout>
 
 <style>

@@ -405,7 +405,7 @@ const clients = [
 
   h1 {
     margin: 28px 0 0;
-    max-width: 17ch;
+    max-width: 11.6em; /* 17ch of Geist; em, not ch: ch follows the font, so it changed while Geist loaded (layout shift). */
     font-family: var(--font-display);
     font-size: clamp(42px, 5.6vw, 76px);
     line-height: 1;
@@ -423,7 +423,7 @@ const clients = [
 
   .hh-sub {
     margin: 24px 0 0;
-    max-width: 68ch;
+    max-width: 45em; /* 68ch of Geist */
     font-size: clamp(16px, 1.3vw, 18.5px);
     line-height: 1.6;
     color: var(--hp-on-dark-mute);
@@ -564,7 +564,7 @@ const clients = [
     font-size: 9.5px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #9a9a93;
+    color: var(--hp-mute);
   }
   .app-side ul {
     list-style: none;
@@ -804,7 +804,7 @@ const clients = [
     border-top: 0;
     background: #fbfbf9;
     font-size: 10.5px;
-    color: #8a8a83;
+    color: var(--hp-mute);
     text-transform: uppercase;
     letter-spacing: 0.06em;
   }

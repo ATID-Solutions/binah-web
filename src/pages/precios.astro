@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Nav from "../components/binah/Nav.astro";
 import Footer from "../components/binah/Footer.astro";
 import PageHero from "../components/marketing/PageHero.astro";
+import Reveal from "../components/marketing/Reveal.astro";
 import HomeCta from "../components/home/HomeCta.astro";
 import { waUrl, WA_MESSAGES } from "../components/binah/whatsapp";
 import "../styles/marketing.css";
@@ -101,6 +102,10 @@ const perks = [
       title="Paga por módulo."
       accent="O por todo."
       lead="Sin permanencias forzadas. Sin letra pequeña. Elige el plan mensual o anual, activa los módulos que necesites y paga solo por ellos."
+      primaryLabel="Agendar demo"
+      primaryHref={demoHref}
+      secondaryLabel="Ver módulos"
+      secondaryHref="/modulos"
       straddle={300}
     >
       <div slot="straddle" class="pricing-billing-wrap">
@@ -158,7 +163,10 @@ const perks = [
           </div>
 
           <div class="price-card featured">
-            <h2 class="plan-name">Pro <span class="plan-badge">Popular</span></h2>
+            <div class="plan-head">
+              <h2 class="plan-name">Pro</h2>
+              <span class="plan-badge">Popular</span>
+            </div>
             <div class="price">
               <span class="monthly-price">$699K<span class="price-period">/mes</span></span>
               <span class="annual-price">
@@ -298,6 +306,7 @@ const perks = [
     />
   </main>
   <Footer />
+  <Reveal />
 </Layout>
 
 <style>
@@ -398,6 +407,11 @@ const perks = [
     font-weight: 500;
     color: var(--hp-mute);
   }
+  .plan-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
   .plan-badge {
     font-size: 10.5px;
     letter-spacing: 0.08em;
@@ -463,6 +477,12 @@ const perks = [
   }
   .price-card.featured .price {
     color: #fff;
+  }
+  /* globals.css greys (#8a8a85) drop below 4.5:1 over the purple glow. */
+  .price-card.featured .price-period,
+  .price-card.featured .price-sub,
+  .price-card.featured .price-before {
+    color: rgba(245, 245, 241, 0.78);
   }
   .price-card.featured ul {
     border-top-color: var(--hp-on-dark-line);
