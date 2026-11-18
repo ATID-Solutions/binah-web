@@ -1,5 +1,6 @@
 ---
 import { waUrl, WA_MESSAGES } from "./whatsapp";
+import MetaBand from "./MetaBand.astro";
 
 interface Props {
   locale?: "es" | "en";
@@ -19,6 +20,7 @@ const demoHref = waUrl(WA_MESSAGES.demo);
 const appHref = "https://app.binah.co";
 ---
 
+<MetaBand locale={locale} />
 <nav class="nav" transition:persist={`binah-nav-${locale}`}>
   <div class="container-binah nav-inner">
     <a href="/" class="nav-logo" aria-label="Binah">
@@ -154,4 +156,42 @@ const appHref = "https://app.binah.co";
   }
 
   document.addEventListener("astro:after-swap", initMenu);
+
+  // Marks the nav as stuck once the announcement band above it has scrolled
+  // away. Pages with the integrated nav (body[data-nav="overlay"]) style that
+  // state as a floating frosted-glass bar; other pages ignore it.
+  // The glass also takes the tone of what's underneath: dark over surfaces
+  // marked [data-nav-dark], light elsewhere. [data-nav-light] wins over both
+  // (e.g. a light product shot sitting on a dark panel).
+  let scrollQueued = false;
+  const isUnder = (selector: string, y: number) =>
+    Array.from(document.querySelectorAll<HTMLElement>(selector)).some((el) => {
+      const rect = el.getBoundingClientRect();
+      return rect.top <= y && rect.bottom >= y;
+    });
+  function syncNavScrolled() {
+    scrollQueued = false;
+    const nav = document.querySelector<HTMLElement>(".nav");
+    if (!nav) return;
+    const band = document.querySelector<HTMLElement>(".meta-band");
+    const scrolled = window.scrollY > (band?.offsetHeight ?? 0) + 4;
+    nav.toggleAttribute("data-scrolled", scrolled);
+    if (!scrolled || document.body.dataset.nav !== "overlay") {
+      delete nav.dataset.tone;
+      return;
+    }
+    const y = nav.getBoundingClientRect().top + nav.offsetHeight / 2;
+    const dark = !isUnder("[data-nav-light]", y) && isUnder("[data-nav-dark]", y);
+    nav.dataset.tone = dark ? "dark" : "light";
+  }
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (scrollQueued) return;
+      scrollQueued = true;
+      requestAnimationFrame(syncNavScrolled);
+    },
+    { passive: true },
+  );
+  document.addEventListener("astro:page-load", syncNavScrolled);
 </script>
