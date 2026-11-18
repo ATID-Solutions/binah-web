@@ -40,44 +40,34 @@ export default function OperationalSavingsBanner() {
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <section className="ops-savings-banner" aria-labelledby="ops-savings-title">
-        <div className="ops-savings-banner-inner">
-          <div>
-            <div className="section-num section-num-dark">
-              <span className="n">02</span>
-              <span>Ahorro operativo</span>
-              <span className="rule"></span>
-              <span>Calculadora</span>
-            </div>
-            <h2 className="display display-lg" id="ops-savings-title">
-              Calcula cuántas horas libera Binah.
-            </h2>
-            <p>
-              Ajusta pedidos diarios y tiempos actuales de tu equipo para estimar el ahorro al conectar pedidos,
-              despachos, facturación y WhatsApp.
-            </p>
-            <DialogTrigger asChild>
-              <button className="btn ops-savings-cta" type="button">
-                Abrir calculadora <span className="arrow">→</span>
-              </button>
-            </DialogTrigger>
-          </div>
+      <section className="hp-calc" aria-labelledby="ops-savings-title">
+        <span className="hp-eyebrow hp-eyebrow--dark">Calculadora de ahorro</span>
+        <h3 id="ops-savings-title">Calcula cuántas horas libera Binah.</h3>
+        <p>
+          Ajusta tus pedidos diarios y los tiempos actuales de tu equipo para estimar el ahorro al conectar pedidos,
+          cobros, facturación y despachos.
+        </p>
 
-          <div className="ops-savings-banner-metrics" aria-label="Supuestos de cálculo en Binah">
-            <div className="ops-savings-banner-metric">
-              <span>Pedidos</span>
-              <strong>~2 min</strong>
-            </div>
-            <div className="ops-savings-banner-metric">
-              <span>Factura</span>
-              <strong>~10 seg</strong>
-            </div>
-            <div className="ops-savings-banner-metric ops-savings-banner-metric-base">
-              <span>Base del cálculo</span>
-              <strong>28 días</strong>
-            </div>
+        <dl className="hp-calc-metrics" aria-label="Supuestos de cálculo en Binah">
+          <div>
+            <dt>Pedido</dt>
+            <dd>~2 min</dd>
           </div>
-        </div>
+          <div>
+            <dt>Factura</dt>
+            <dd>~10 s</dd>
+          </div>
+          <div>
+            <dt>Base</dt>
+            <dd>28 días</dd>
+          </div>
+        </dl>
+
+        <DialogTrigger asChild>
+          <button className="hp-btn hp-btn-primary hp-calc-cta" type="button">
+            Abrir calculadora <span className="hp-arrow" aria-hidden="true">→</span>
+          </button>
+        </DialogTrigger>
 
         {mounted && (
           <DialogContent

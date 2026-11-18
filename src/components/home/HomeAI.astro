@@ -1,0 +1,428 @@
+---
+import CoCeoAvatar from "../binah/mascot/CoCeoAvatar.tsx";
+
+const agents = [
+  { name: "Agente de ventas", body: "Asesora con tu catálogo, registra el pedido y envía el link de pago." },
+  { name: "Agente de soporte", body: "Responde con tus documentos y FAQ, rastrea guías y escala cuando hace falta." },
+  { name: "Agente de reservas", body: "Agenda citas y recursos según tu disponibilidad real." },
+  { name: "Co-CEO", body: "Lee ventas, costos e inventario y propone la siguiente acción para que tú la apruebes.", lead: true },
+];
+
+const controls = [
+  { title: "Auditoría antes de enviar", body: "Un segundo modelo revisa cada respuesta del agente antes de que llegue al cliente." },
+  { title: "Aprobaciones", body: "Las acciones con impacto esperan a que una persona las confirme." },
+  { title: "Escalación a humanos", body: "El agente pasa la conversación a tu equipo cuando el caso lo pide." },
+  { title: "Tus reglas", body: "Políticas, horarios, promociones y tono definidos por tu empresa." },
+  { title: "Roles y permisos", body: "Cada persona ve solo lo que le corresponde, incluida la información sensible." },
+  { title: "Registro de actividad", body: "Todo queda registrado: lo que hizo el sistema, cada usuario y cada pedido." },
+];
+---
+
+<section class="ai-section" id="ia" aria-labelledby="hp-ai-title">
+  <div class="hp-panel-dark ai-panel" data-nav-dark>
+    <div class="hp-glow ai-glow-a" aria-hidden="true"></div>
+    <div class="hp-glow ai-glow-b" aria-hidden="true"></div>
+
+    <div class="container-binah">
+      <div class="ai-grid">
+        <div class="ai-copy hp-reveal">
+          <span class="hp-eyebrow hp-eyebrow--dark"><span class="n">03</span>·<span>Agentes IA y Co-CEO</span></span>
+          <h2 class="hp-h2 hp-h2--dark" id="hp-ai-title">Agentes de IA y un Co-CEO que trabajan mientras tú decides.</h2>
+          <p class="hp-lead hp-lead--dark">
+            No es un chatbot que solo responde: los agentes ejecutan con herramientas reales —catálogo, pedidos,
+            oportunidades y guías— en todos tus canales, con tus reglas y tu tono. Tu equipo supervisa y decide. El
+            Co-CEO lee tus números y deja sus propuestas en tu bandeja de aprobaciones.
+          </p>
+        </div>
+
+        <figure class="coceo hp-reveal" style="--d: 120ms">
+          <div
+            class="coceo-window"
+            data-nosnippet
+            role="img"
+            aria-label="Ejemplo ilustrativo: el Co-CEO compara el cierre del mes con el anterior y propone una campaña de recompra para aprobar."
+          >
+            <div class="coceo-tabs">
+              <span class="is-active"><CoCeoAvatar size={20} />Co-CEO</span>
+              <span>Aprobaciones <i>3</i></span>
+            </div>
+            <div class="coceo-q">¿Cómo cerramos el mes frente al anterior?</div>
+            <div class="coceo-a">
+              <CoCeoAvatar size={34} />
+              <div>
+                <p>
+                  Las ventas netas subieron <b>18 %</b>, impulsadas por la tienda online y los pedidos que cerró el
+                  agente de ventas. El margen bajó 2 puntos por el costo de envío en Medellín.
+                </p>
+                <div class="coceo-stats">
+                  <div><span>Ventas netas</span><strong>$412 M</strong><em>+18 %</em></div>
+                  <div><span>Margen</span><strong>36 %</strong><em class="is-down">−2 pts</em></div>
+                  <div><span>Ticket prom.</span><strong>$214 mil</strong><em>+6 %</em></div>
+                </div>
+              </div>
+            </div>
+            <div class="coceo-action">
+              <span class="coceo-action-label">Acción propuesta</span>
+              <p>Enviar campaña de recompra a 312 clientes que no compran hace 60 días.</p>
+              <div class="coceo-buttons"><span class="is-primary">Aprobar</span><span>Ajustar</span></div>
+            </div>
+          </div>
+          <figcaption>El Co-CEO puede equivocarse. Ejemplo ilustrativo.</figcaption>
+        </figure>
+      </div>
+
+      <ul class="agents">
+        {
+          agents.map((agent, index) => (
+            <li class:list={["hp-reveal", agent.lead && "is-lead"]} style={`--d: ${index * 80}ms`}>
+              <strong>
+                {agent.lead ? <CoCeoAvatar size={26} /> : <span class="agent-dot" aria-hidden="true" />}
+                {agent.name}
+              </strong>
+              <span>{agent.body}</span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="control">
+        <div class="control-head hp-reveal">
+          <span class="hp-eyebrow hp-eyebrow--dark">Control y confianza</span>
+          <h3>La IA trabaja. Tú tienes el control.</h3>
+        </div>
+        <ul class="control-grid">
+          {
+            controls.map((item, index) => (
+              <li class="hp-reveal" style={`--d: ${(index % 3) * 80}ms`}>
+                <strong>{item.title}</strong>
+                <span>{item.body}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ai-section {
+    padding: 12px 0;
+  }
+  .ai-panel {
+    padding: clamp(80px, 9vw, 128px) 0 clamp(64px, 7vw, 96px);
+  }
+  .ai-glow-a {
+    width: 760px;
+    height: 620px;
+    right: -180px;
+    top: 40px;
+    opacity: 0.7;
+  }
+  .ai-glow-b {
+    width: 600px;
+    height: 400px;
+    left: -240px;
+    bottom: -200px;
+    opacity: 0.35;
+  }
+
+  .ai-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: 48px 72px;
+    align-items: center;
+  }
+  .ai-copy .hp-lead {
+    margin-top: 22px;
+  }
+
+  /* All four agents in one full-width row under the copy and the mock */
+  .agents {
+    list-style: none;
+    margin: clamp(48px, 5vw, 64px) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .agents li {
+    padding: 18px;
+    border-radius: 14px;
+    border: 1px solid var(--hp-on-dark-line);
+    background: var(--hp-on-dark-raised);
+    display: grid;
+    gap: 6px;
+  }
+  .agents strong {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 26px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+  }
+  .agent-dot {
+    width: 7px;
+    height: 7px;
+    margin: 0 4px;
+    border-radius: 50%;
+    background: #3ecf8e;
+    box-shadow: 0 0 0 3px rgba(62, 207, 142, 0.18);
+  }
+  .agents span {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--hp-on-dark-mute);
+  }
+  .agents li.is-lead {
+    border-color: rgba(156, 143, 255, 0.4);
+    background: linear-gradient(160deg, rgba(77, 55, 246, 0.28), rgba(77, 55, 246, 0.06));
+  }
+
+  /* Co-CEO window */
+  .coceo {
+    margin: 0;
+  }
+  .coceo figcaption {
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--hp-on-dark-mute);
+  }
+  .coceo-window {
+    border-radius: 20px;
+    padding: 20px;
+    background: rgba(12, 16, 13, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow:
+      0 0 0 6px rgba(255, 255, 255, 0.03),
+      0 40px 90px -40px rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(12px);
+    font-size: 14px;
+  }
+  .coceo-tabs {
+    display: flex;
+    gap: 6px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--hp-on-dark-line);
+    font-size: 13px;
+  }
+  .coceo-tabs > span {
+    padding: 6px 12px;
+    border-radius: 8px;
+    color: var(--hp-on-dark-mute);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .coceo-tabs .is-active {
+    background: #fff;
+    color: var(--hp-ink);
+    font-weight: 500;
+  }
+  .coceo-tabs i {
+    font-style: normal;
+    font-size: 11px;
+    padding: 0 6px;
+    border-radius: 999px;
+    background: var(--hp-purple);
+    color: #fff;
+  }
+  .coceo-q {
+    margin: 18px 0 16px auto;
+    width: fit-content;
+    max-width: 85%;
+    padding: 10px 14px;
+    border-radius: 14px 14px 4px 14px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+  }
+  .coceo-a {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    gap: 12px;
+  }
+  .coceo-a p {
+    margin: 4px 0 0;
+    line-height: 1.6;
+    color: rgba(245, 245, 241, 0.86);
+  }
+  .coceo-a b {
+    color: #fff;
+    font-weight: 600;
+  }
+  .coceo-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .coceo-stats div {
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--hp-on-dark-line);
+  }
+  .coceo-stats span {
+    display: block;
+    font-size: 11px;
+    color: var(--hp-on-dark-mute);
+  }
+  .coceo-stats strong {
+    display: block;
+    margin-top: 2px;
+    font-size: 17px;
+    letter-spacing: -0.02em;
+    color: #fff;
+    font-weight: 600;
+  }
+  .coceo-stats em {
+    font-style: normal;
+    font-size: 11px;
+    color: #3ecf8e;
+  }
+  .coceo-stats em.is-down {
+    color: #f0a35b;
+  }
+  .coceo-action {
+    margin-top: 18px;
+    padding: 16px;
+    border-radius: 14px;
+    border: 1px solid rgba(156, 143, 255, 0.4);
+    background: linear-gradient(160deg, rgba(77, 55, 246, 0.3), rgba(77, 55, 246, 0.08));
+  }
+  .coceo-action-label {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hp-purple-light);
+  }
+  .coceo-action p {
+    margin: 8px 0 14px;
+    color: #fff;
+    line-height: 1.5;
+  }
+  .coceo-buttons {
+    display: flex;
+    gap: 8px;
+    font-size: 13px;
+  }
+  .coceo-buttons span {
+    padding: 7px 14px;
+    border-radius: 9px;
+    border: 1px solid rgba(156, 143, 255, 0.45);
+    color: #fff;
+    font-weight: 500;
+  }
+  .coceo-buttons .is-primary {
+    background: #fff;
+    color: var(--hp-ink);
+    border-color: #fff;
+  }
+
+  /* Control grid */
+  .control {
+    margin-top: clamp(80px, 9vw, 120px);
+    padding-top: clamp(48px, 5vw, 64px);
+    border-top: 1px solid var(--hp-on-dark-line);
+  }
+  .control-head h3 {
+    margin: 16px 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3vw, 40px);
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+    font-weight: 600;
+    color: #fff;
+  }
+  .control-grid {
+    list-style: none;
+    margin: 40px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-radius: 18px;
+    border: 1px solid var(--hp-on-dark-line);
+    overflow: hidden;
+  }
+  .control-grid li {
+    padding: 26px 28px;
+    display: grid;
+    align-content: start;
+    gap: 8px;
+    border-right: 1px solid var(--hp-on-dark-line);
+    border-bottom: 1px solid var(--hp-on-dark-line);
+    background: rgba(255, 255, 255, 0.015);
+  }
+  .control-grid li:nth-child(3n) {
+    border-right: 0;
+  }
+  .control-grid li:nth-last-child(-n + 3) {
+    border-bottom: 0;
+  }
+  .control-grid strong {
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+  }
+  .control-grid span {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--hp-on-dark-mute);
+  }
+
+  @media (max-width: 1000px) {
+    .ai-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .agents {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .control-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .control-grid li:nth-child(3n) {
+      border-right: 1px solid var(--hp-on-dark-line);
+    }
+    .control-grid li:nth-child(2n) {
+      border-right: 0;
+    }
+    .control-grid li:nth-last-child(-n + 3) {
+      border-bottom: 1px solid var(--hp-on-dark-line);
+    }
+    .control-grid li:nth-last-child(-n + 2) {
+      border-bottom: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .ai-section {
+      padding: 8px 0;
+    }
+    .agents {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .coceo-window {
+      padding: 16px;
+    }
+    .coceo-stats {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .control-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .control-grid li,
+    .control-grid li:nth-child(3n) {
+      border-right: 0;
+      border-bottom: 1px solid var(--hp-on-dark-line);
+    }
+    .control-grid li:nth-last-child(-n + 3) {
+      border-bottom: 1px solid var(--hp-on-dark-line);
+    }
+    .control-grid li:last-child {
+      border-bottom: 0;
+    }
+  }
+</style>

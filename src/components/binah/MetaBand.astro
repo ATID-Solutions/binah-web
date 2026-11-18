@@ -1,0 +1,110 @@
+---
+// Site-wide announcement band above the nav: Binah is a Verified Meta Tech
+// Provider. In Spanish it links to the Meta block in the home page's
+// integrations section; the English pages have no such section, so there it
+// is plain text.
+import MetaLogo from "./MetaLogo.astro";
+
+interface Props {
+  locale?: "es" | "en";
+}
+
+const { locale = "es" } = Astro.props;
+const copy =
+  locale === "en"
+    ? {
+        lead: "We're a Verified Meta Tech Provider.",
+        rest: "WhatsApp and Instagram connected officially and securely.",
+        short: "Verified Meta Tech Provider",
+      }
+    : {
+        lead: "Somos proveedor de tecnología verificado por Meta.",
+        rest: "WhatsApp e Instagram conectados de forma oficial y segura.",
+        short: "Verificado por Meta · Conexión oficial",
+      };
+---
+
+<aside class="meta-band" aria-label={locale === "en" ? "Announcement" : "Anuncio"}>
+  {
+    locale === "en" ? (
+      <p class="meta-band-link">
+        <MetaLogo size={18} class="meta-band-logo" />
+        <span class="meta-band-long">
+          <strong>{copy.lead}</strong> {copy.rest}
+        </span>
+        <span class="meta-band-short">
+          <strong>{copy.short}</strong>
+        </span>
+      </p>
+    ) : (
+      <a href="/#meta" class="meta-band-link">
+        <MetaLogo size={18} class="meta-band-logo" />
+        <span class="meta-band-long">
+          <strong>{copy.lead}</strong> {copy.rest}
+        </span>
+        <span class="meta-band-short">
+          <strong>{copy.short}</strong>
+        </span>
+        <span class="meta-band-arrow" aria-hidden="true">
+          →
+        </span>
+      </a>
+    )
+  }
+</aside>
+
+<style>
+  .meta-band {
+    background: #171e19;
+    color: rgba(245, 245, 241, 0.72);
+    font-size: 13.5px;
+    line-height: 1.4;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .meta-band-link {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 40px;
+    padding: 8px 20px;
+    text-align: center;
+    color: inherit;
+    text-decoration: none;
+  }
+  .meta-band strong {
+    color: #fff;
+    font-weight: 600;
+  }
+  .meta-band :global(.meta-band-logo) {
+    flex-shrink: 0;
+  }
+  .meta-band-short {
+    display: none;
+  }
+  .meta-band-arrow {
+    color: #9c8fff;
+    transition: transform 0.2s ease;
+  }
+  a.meta-band-link:hover .meta-band-arrow {
+    transform: translateX(3px);
+  }
+  a.meta-band-link:hover .meta-band-long,
+  a.meta-band-link:hover .meta-band-short {
+    color: rgba(245, 245, 241, 0.9);
+  }
+  a.meta-band-link:focus-visible {
+    outline: 2px solid #9c8fff;
+    outline-offset: -4px;
+  }
+
+  @media (max-width: 720px) {
+    .meta-band-long {
+      display: none;
+    }
+    .meta-band-short {
+      display: inline;
+    }
+  }
+</style>

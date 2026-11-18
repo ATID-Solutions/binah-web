@@ -1,0 +1,106 @@
+---
+// Hex-grid map of Colombia with Binah's HQ in Barranquilla. Generated from
+// Natural Earth 1:50m boundaries (world-atlas@2.0.2, public domain): one hex
+// per 0.42° × 0.38° cell whose centre falls inside the country, with the HQ
+// pin snapped to its nearest hex. Decorative; the page text names the city.
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+const HQ = { x: 115.5, y: 50.0 };
+const paths = {
+  base: "M192.5 4l5 3v6l-5 3l-5-3v-6zM203.5 4l5 3v6l-5 3l-5-3v-6zM187 14l5 3v6l-5 3l-5-3v-6zM198 14l5 3v6l-5 3l-5-3v-6zM170.5 24l5 3v6l-5 3l-5-3v-6zM181.5 24l5 3v6l-5 3l-5-3v-6zM154 34l5 3v6l-5 3l-5-3v-6zM165 34l5 3v6l-5 3l-5-3v-6zM148.5 44l5 3v6l-5 3l-5-3v-6zM159.5 44l5 3v6l-5 3l-5-3v-6zM154 54l5 3v6l-5 3l-5-3v-6zM148.5 64l5 3v6l-5 3l-5-3v-6zM159.5 64l5 3v6l-5 3l-5-3v-6zM99 74l5 3v6l-5 3l-5-3v-6zM132 74l5 3v6l-5 3l-5-3v-6zM143 74l5 3v6l-5 3l-5-3v-6zM154 74l5 3v6l-5 3l-5-3v-6zM82.5 84l5 3v6l-5 3l-5-3v-6zM93.5 84l5 3v6l-5 3l-5-3v-6zM104.5 84l5 3v6l-5 3l-5-3v-6zM115.5 84l5 3v6l-5 3l-5-3v-6zM126.5 84l5 3v6l-5 3l-5-3v-6zM137.5 84l5 3v6l-5 3l-5-3v-6zM148.5 84l5 3v6l-5 3l-5-3v-6zM159.5 84l5 3v6l-5 3l-5-3v-6zM77 94l5 3v6l-5 3l-5-3v-6zM88 94l5 3v6l-5 3l-5-3v-6zM99 94l5 3v6l-5 3l-5-3v-6zM110 94l5 3v6l-5 3l-5-3v-6zM121 94l5 3v6l-5 3l-5-3v-6zM132 94l5 3v6l-5 3l-5-3v-6zM143 94l5 3v6l-5 3l-5-3v-6zM154 94l5 3v6l-5 3l-5-3v-6zM165 94l5 3v6l-5 3l-5-3v-6zM49.5 104l5 3v6l-5 3l-5-3v-6zM71.5 104l5 3v6l-5 3l-5-3v-6zM82.5 104l5 3v6l-5 3l-5-3v-6zM93.5 104l5 3v6l-5 3l-5-3v-6zM104.5 104l5 3v6l-5 3l-5-3v-6zM115.5 104l5 3v6l-5 3l-5-3v-6zM126.5 104l5 3v6l-5 3l-5-3v-6zM137.5 104l5 3v6l-5 3l-5-3v-6zM148.5 104l5 3v6l-5 3l-5-3v-6zM159.5 104l5 3v6l-5 3l-5-3v-6zM170.5 104l5 3v6l-5 3l-5-3v-6zM55 114l5 3v6l-5 3l-5-3v-6zM66 114l5 3v6l-5 3l-5-3v-6zM77 114l5 3v6l-5 3l-5-3v-6zM88 114l5 3v6l-5 3l-5-3v-6zM99 114l5 3v6l-5 3l-5-3v-6zM110 114l5 3v6l-5 3l-5-3v-6zM121 114l5 3v6l-5 3l-5-3v-6zM132 114l5 3v6l-5 3l-5-3v-6zM143 114l5 3v6l-5 3l-5-3v-6zM154 114l5 3v6l-5 3l-5-3v-6zM165 114l5 3v6l-5 3l-5-3v-6zM176 114l5 3v6l-5 3l-5-3v-6zM38.5 124l5 3v6l-5 3l-5-3v-6zM49.5 124l5 3v6l-5 3l-5-3v-6zM60.5 124l5 3v6l-5 3l-5-3v-6zM71.5 124l5 3v6l-5 3l-5-3v-6zM82.5 124l5 3v6l-5 3l-5-3v-6zM93.5 124l5 3v6l-5 3l-5-3v-6zM104.5 124l5 3v6l-5 3l-5-3v-6zM115.5 124l5 3v6l-5 3l-5-3v-6zM126.5 124l5 3v6l-5 3l-5-3v-6zM137.5 124l5 3v6l-5 3l-5-3v-6zM148.5 124l5 3v6l-5 3l-5-3v-6zM159.5 124l5 3v6l-5 3l-5-3v-6zM170.5 124l5 3v6l-5 3l-5-3v-6zM44 134l5 3v6l-5 3l-5-3v-6zM55 134l5 3v6l-5 3l-5-3v-6zM66 134l5 3v6l-5 3l-5-3v-6zM77 134l5 3v6l-5 3l-5-3v-6zM88 134l5 3v6l-5 3l-5-3v-6zM99 134l5 3v6l-5 3l-5-3v-6zM110 134l5 3v6l-5 3l-5-3v-6zM121 134l5 3v6l-5 3l-5-3v-6zM132 134l5 3v6l-5 3l-5-3v-6zM143 134l5 3v6l-5 3l-5-3v-6zM154 134l5 3v6l-5 3l-5-3v-6zM165 134l5 3v6l-5 3l-5-3v-6zM176 134l5 3v6l-5 3l-5-3v-6zM49.5 144l5 3v6l-5 3l-5-3v-6zM60.5 144l5 3v6l-5 3l-5-3v-6zM71.5 144l5 3v6l-5 3l-5-3v-6zM82.5 144l5 3v6l-5 3l-5-3v-6zM93.5 144l5 3v6l-5 3l-5-3v-6zM104.5 144l5 3v6l-5 3l-5-3v-6zM115.5 144l5 3v6l-5 3l-5-3v-6zM126.5 144l5 3v6l-5 3l-5-3v-6zM137.5 144l5 3v6l-5 3l-5-3v-6zM148.5 144l5 3v6l-5 3l-5-3v-6zM159.5 144l5 3v6l-5 3l-5-3v-6zM170.5 144l5 3v6l-5 3l-5-3v-6zM181.5 144l5 3v6l-5 3l-5-3v-6zM192.5 144l5 3v6l-5 3l-5-3v-6zM203.5 144l5 3v6l-5 3l-5-3v-6zM214.5 144l5 3v6l-5 3l-5-3v-6zM225.5 144l5 3v6l-5 3l-5-3v-6zM236.5 144l5 3v6l-5 3l-5-3v-6zM55 154l5 3v6l-5 3l-5-3v-6zM66 154l5 3v6l-5 3l-5-3v-6zM77 154l5 3v6l-5 3l-5-3v-6zM88 154l5 3v6l-5 3l-5-3v-6zM99 154l5 3v6l-5 3l-5-3v-6zM110 154l5 3v6l-5 3l-5-3v-6zM121 154l5 3v6l-5 3l-5-3v-6zM132 154l5 3v6l-5 3l-5-3v-6zM143 154l5 3v6l-5 3l-5-3v-6zM154 154l5 3v6l-5 3l-5-3v-6zM165 154l5 3v6l-5 3l-5-3v-6zM176 154l5 3v6l-5 3l-5-3v-6zM187 154l5 3v6l-5 3l-5-3v-6zM198 154l5 3v6l-5 3l-5-3v-6zM209 154l5 3v6l-5 3l-5-3v-6zM220 154l5 3v6l-5 3l-5-3v-6zM231 154l5 3v6l-5 3l-5-3v-6zM242 154l5 3v6l-5 3l-5-3v-6zM49.5 164l5 3v6l-5 3l-5-3v-6zM60.5 164l5 3v6l-5 3l-5-3v-6zM71.5 164l5 3v6l-5 3l-5-3v-6zM82.5 164l5 3v6l-5 3l-5-3v-6zM93.5 164l5 3v6l-5 3l-5-3v-6zM104.5 164l5 3v6l-5 3l-5-3v-6zM115.5 164l5 3v6l-5 3l-5-3v-6zM126.5 164l5 3v6l-5 3l-5-3v-6zM137.5 164l5 3v6l-5 3l-5-3v-6zM148.5 164l5 3v6l-5 3l-5-3v-6zM159.5 164l5 3v6l-5 3l-5-3v-6zM170.5 164l5 3v6l-5 3l-5-3v-6zM181.5 164l5 3v6l-5 3l-5-3v-6zM192.5 164l5 3v6l-5 3l-5-3v-6zM203.5 164l5 3v6l-5 3l-5-3v-6zM214.5 164l5 3v6l-5 3l-5-3v-6zM225.5 164l5 3v6l-5 3l-5-3v-6zM236.5 164l5 3v6l-5 3l-5-3v-6zM247.5 164l5 3v6l-5 3l-5-3v-6zM258.5 164l5 3v6l-5 3l-5-3v-6zM269.5 164l5 3v6l-5 3l-5-3v-6zM280.5 164l5 3v6l-5 3l-5-3v-6zM291.5 164l5 3v6l-5 3l-5-3v-6zM302.5 164l5 3v6l-5 3l-5-3v-6zM55 174l5 3v6l-5 3l-5-3v-6zM66 174l5 3v6l-5 3l-5-3v-6zM77 174l5 3v6l-5 3l-5-3v-6zM88 174l5 3v6l-5 3l-5-3v-6zM99 174l5 3v6l-5 3l-5-3v-6zM110 174l5 3v6l-5 3l-5-3v-6zM121 174l5 3v6l-5 3l-5-3v-6zM132 174l5 3v6l-5 3l-5-3v-6zM143 174l5 3v6l-5 3l-5-3v-6zM154 174l5 3v6l-5 3l-5-3v-6zM165 174l5 3v6l-5 3l-5-3v-6zM176 174l5 3v6l-5 3l-5-3v-6zM187 174l5 3v6l-5 3l-5-3v-6zM198 174l5 3v6l-5 3l-5-3v-6zM209 174l5 3v6l-5 3l-5-3v-6zM220 174l5 3v6l-5 3l-5-3v-6zM231 174l5 3v6l-5 3l-5-3v-6zM242 174l5 3v6l-5 3l-5-3v-6zM253 174l5 3v6l-5 3l-5-3v-6zM264 174l5 3v6l-5 3l-5-3v-6zM275 174l5 3v6l-5 3l-5-3v-6zM286 174l5 3v6l-5 3l-5-3v-6zM297 174l5 3v6l-5 3l-5-3v-6zM49.5 184l5 3v6l-5 3l-5-3v-6zM60.5 184l5 3v6l-5 3l-5-3v-6zM71.5 184l5 3v6l-5 3l-5-3v-6zM82.5 184l5 3v6l-5 3l-5-3v-6zM93.5 184l5 3v6l-5 3l-5-3v-6zM104.5 184l5 3v6l-5 3l-5-3v-6zM115.5 184l5 3v6l-5 3l-5-3v-6zM126.5 184l5 3v6l-5 3l-5-3v-6zM137.5 184l5 3v6l-5 3l-5-3v-6zM148.5 184l5 3v6l-5 3l-5-3v-6zM159.5 184l5 3v6l-5 3l-5-3v-6zM170.5 184l5 3v6l-5 3l-5-3v-6zM181.5 184l5 3v6l-5 3l-5-3v-6zM192.5 184l5 3v6l-5 3l-5-3v-6zM203.5 184l5 3v6l-5 3l-5-3v-6zM214.5 184l5 3v6l-5 3l-5-3v-6zM225.5 184l5 3v6l-5 3l-5-3v-6zM236.5 184l5 3v6l-5 3l-5-3v-6zM247.5 184l5 3v6l-5 3l-5-3v-6zM258.5 184l5 3v6l-5 3l-5-3v-6zM269.5 184l5 3v6l-5 3l-5-3v-6zM280.5 184l5 3v6l-5 3l-5-3v-6zM291.5 184l5 3v6l-5 3l-5-3v-6zM55 194l5 3v6l-5 3l-5-3v-6zM66 194l5 3v6l-5 3l-5-3v-6zM77 194l5 3v6l-5 3l-5-3v-6zM88 194l5 3v6l-5 3l-5-3v-6zM99 194l5 3v6l-5 3l-5-3v-6zM110 194l5 3v6l-5 3l-5-3v-6zM121 194l5 3v6l-5 3l-5-3v-6zM132 194l5 3v6l-5 3l-5-3v-6zM143 194l5 3v6l-5 3l-5-3v-6zM154 194l5 3v6l-5 3l-5-3v-6zM165 194l5 3v6l-5 3l-5-3v-6zM176 194l5 3v6l-5 3l-5-3v-6zM187 194l5 3v6l-5 3l-5-3v-6zM198 194l5 3v6l-5 3l-5-3v-6zM209 194l5 3v6l-5 3l-5-3v-6zM220 194l5 3v6l-5 3l-5-3v-6zM231 194l5 3v6l-5 3l-5-3v-6zM242 194l5 3v6l-5 3l-5-3v-6zM253 194l5 3v6l-5 3l-5-3v-6zM264 194l5 3v6l-5 3l-5-3v-6zM275 194l5 3v6l-5 3l-5-3v-6zM286 194l5 3v6l-5 3l-5-3v-6zM297 194l5 3v6l-5 3l-5-3v-6zM49.5 204l5 3v6l-5 3l-5-3v-6zM60.5 204l5 3v6l-5 3l-5-3v-6zM71.5 204l5 3v6l-5 3l-5-3v-6zM82.5 204l5 3v6l-5 3l-5-3v-6zM93.5 204l5 3v6l-5 3l-5-3v-6zM104.5 204l5 3v6l-5 3l-5-3v-6zM115.5 204l5 3v6l-5 3l-5-3v-6zM126.5 204l5 3v6l-5 3l-5-3v-6zM137.5 204l5 3v6l-5 3l-5-3v-6zM148.5 204l5 3v6l-5 3l-5-3v-6zM159.5 204l5 3v6l-5 3l-5-3v-6zM170.5 204l5 3v6l-5 3l-5-3v-6zM181.5 204l5 3v6l-5 3l-5-3v-6zM192.5 204l5 3v6l-5 3l-5-3v-6zM203.5 204l5 3v6l-5 3l-5-3v-6zM214.5 204l5 3v6l-5 3l-5-3v-6zM225.5 204l5 3v6l-5 3l-5-3v-6zM236.5 204l5 3v6l-5 3l-5-3v-6zM247.5 204l5 3v6l-5 3l-5-3v-6zM258.5 204l5 3v6l-5 3l-5-3v-6zM269.5 204l5 3v6l-5 3l-5-3v-6zM280.5 204l5 3v6l-5 3l-5-3v-6zM291.5 204l5 3v6l-5 3l-5-3v-6zM55 214l5 3v6l-5 3l-5-3v-6zM66 214l5 3v6l-5 3l-5-3v-6zM77 214l5 3v6l-5 3l-5-3v-6zM88 214l5 3v6l-5 3l-5-3v-6zM99 214l5 3v6l-5 3l-5-3v-6zM110 214l5 3v6l-5 3l-5-3v-6zM121 214l5 3v6l-5 3l-5-3v-6zM132 214l5 3v6l-5 3l-5-3v-6zM143 214l5 3v6l-5 3l-5-3v-6zM154 214l5 3v6l-5 3l-5-3v-6zM165 214l5 3v6l-5 3l-5-3v-6zM176 214l5 3v6l-5 3l-5-3v-6zM187 214l5 3v6l-5 3l-5-3v-6zM198 214l5 3v6l-5 3l-5-3v-6zM209 214l5 3v6l-5 3l-5-3v-6zM220 214l5 3v6l-5 3l-5-3v-6zM231 214l5 3v6l-5 3l-5-3v-6zM242 214l5 3v6l-5 3l-5-3v-6zM253 214l5 3v6l-5 3l-5-3v-6zM264 214l5 3v6l-5 3l-5-3v-6zM275 214l5 3v6l-5 3l-5-3v-6zM286 214l5 3v6l-5 3l-5-3v-6zM297 214l5 3v6l-5 3l-5-3v-6zM60.5 224l5 3v6l-5 3l-5-3v-6zM71.5 224l5 3v6l-5 3l-5-3v-6zM82.5 224l5 3v6l-5 3l-5-3v-6zM93.5 224l5 3v6l-5 3l-5-3v-6zM104.5 224l5 3v6l-5 3l-5-3v-6zM115.5 224l5 3v6l-5 3l-5-3v-6zM126.5 224l5 3v6l-5 3l-5-3v-6zM137.5 224l5 3v6l-5 3l-5-3v-6zM148.5 224l5 3v6l-5 3l-5-3v-6zM159.5 224l5 3v6l-5 3l-5-3v-6zM170.5 224l5 3v6l-5 3l-5-3v-6zM181.5 224l5 3v6l-5 3l-5-3v-6zM192.5 224l5 3v6l-5 3l-5-3v-6zM203.5 224l5 3v6l-5 3l-5-3v-6zM214.5 224l5 3v6l-5 3l-5-3v-6zM225.5 224l5 3v6l-5 3l-5-3v-6zM236.5 224l5 3v6l-5 3l-5-3v-6zM247.5 224l5 3v6l-5 3l-5-3v-6zM258.5 224l5 3v6l-5 3l-5-3v-6zM269.5 224l5 3v6l-5 3l-5-3v-6zM280.5 224l5 3v6l-5 3l-5-3v-6zM291.5 224l5 3v6l-5 3l-5-3v-6zM302.5 224l5 3v6l-5 3l-5-3v-6zM55 234l5 3v6l-5 3l-5-3v-6zM66 234l5 3v6l-5 3l-5-3v-6zM77 234l5 3v6l-5 3l-5-3v-6zM88 234l5 3v6l-5 3l-5-3v-6zM99 234l5 3v6l-5 3l-5-3v-6zM110 234l5 3v6l-5 3l-5-3v-6zM121 234l5 3v6l-5 3l-5-3v-6zM132 234l5 3v6l-5 3l-5-3v-6zM143 234l5 3v6l-5 3l-5-3v-6zM154 234l5 3v6l-5 3l-5-3v-6zM165 234l5 3v6l-5 3l-5-3v-6zM176 234l5 3v6l-5 3l-5-3v-6zM187 234l5 3v6l-5 3l-5-3v-6zM198 234l5 3v6l-5 3l-5-3v-6zM209 234l5 3v6l-5 3l-5-3v-6zM220 234l5 3v6l-5 3l-5-3v-6zM231 234l5 3v6l-5 3l-5-3v-6zM242 234l5 3v6l-5 3l-5-3v-6zM253 234l5 3v6l-5 3l-5-3v-6zM264 234l5 3v6l-5 3l-5-3v-6zM275 234l5 3v6l-5 3l-5-3v-6zM286 234l5 3v6l-5 3l-5-3v-6zM297 234l5 3v6l-5 3l-5-3v-6zM308 234l5 3v6l-5 3l-5-3v-6zM49.5 244l5 3v6l-5 3l-5-3v-6zM60.5 244l5 3v6l-5 3l-5-3v-6zM71.5 244l5 3v6l-5 3l-5-3v-6zM82.5 244l5 3v6l-5 3l-5-3v-6zM93.5 244l5 3v6l-5 3l-5-3v-6zM104.5 244l5 3v6l-5 3l-5-3v-6zM115.5 244l5 3v6l-5 3l-5-3v-6zM126.5 244l5 3v6l-5 3l-5-3v-6zM137.5 244l5 3v6l-5 3l-5-3v-6zM148.5 244l5 3v6l-5 3l-5-3v-6zM159.5 244l5 3v6l-5 3l-5-3v-6zM170.5 244l5 3v6l-5 3l-5-3v-6zM181.5 244l5 3v6l-5 3l-5-3v-6zM192.5 244l5 3v6l-5 3l-5-3v-6zM203.5 244l5 3v6l-5 3l-5-3v-6zM214.5 244l5 3v6l-5 3l-5-3v-6zM225.5 244l5 3v6l-5 3l-5-3v-6zM236.5 244l5 3v6l-5 3l-5-3v-6zM247.5 244l5 3v6l-5 3l-5-3v-6zM258.5 244l5 3v6l-5 3l-5-3v-6zM269.5 244l5 3v6l-5 3l-5-3v-6zM280.5 244l5 3v6l-5 3l-5-3v-6zM291.5 244l5 3v6l-5 3l-5-3v-6zM44 254l5 3v6l-5 3l-5-3v-6zM55 254l5 3v6l-5 3l-5-3v-6zM66 254l5 3v6l-5 3l-5-3v-6zM77 254l5 3v6l-5 3l-5-3v-6zM88 254l5 3v6l-5 3l-5-3v-6zM99 254l5 3v6l-5 3l-5-3v-6zM110 254l5 3v6l-5 3l-5-3v-6zM121 254l5 3v6l-5 3l-5-3v-6zM132 254l5 3v6l-5 3l-5-3v-6zM143 254l5 3v6l-5 3l-5-3v-6zM154 254l5 3v6l-5 3l-5-3v-6zM165 254l5 3v6l-5 3l-5-3v-6zM176 254l5 3v6l-5 3l-5-3v-6zM187 254l5 3v6l-5 3l-5-3v-6zM198 254l5 3v6l-5 3l-5-3v-6zM209 254l5 3v6l-5 3l-5-3v-6zM220 254l5 3v6l-5 3l-5-3v-6zM231 254l5 3v6l-5 3l-5-3v-6zM242 254l5 3v6l-5 3l-5-3v-6zM253 254l5 3v6l-5 3l-5-3v-6zM264 254l5 3v6l-5 3l-5-3v-6zM275 254l5 3v6l-5 3l-5-3v-6zM286 254l5 3v6l-5 3l-5-3v-6zM297 254l5 3v6l-5 3l-5-3v-6zM16.5 264l5 3v6l-5 3l-5-3v-6zM27.5 264l5 3v6l-5 3l-5-3v-6zM38.5 264l5 3v6l-5 3l-5-3v-6zM49.5 264l5 3v6l-5 3l-5-3v-6zM60.5 264l5 3v6l-5 3l-5-3v-6zM71.5 264l5 3v6l-5 3l-5-3v-6zM82.5 264l5 3v6l-5 3l-5-3v-6zM93.5 264l5 3v6l-5 3l-5-3v-6zM104.5 264l5 3v6l-5 3l-5-3v-6zM115.5 264l5 3v6l-5 3l-5-3v-6zM126.5 264l5 3v6l-5 3l-5-3v-6zM137.5 264l5 3v6l-5 3l-5-3v-6zM148.5 264l5 3v6l-5 3l-5-3v-6zM159.5 264l5 3v6l-5 3l-5-3v-6zM170.5 264l5 3v6l-5 3l-5-3v-6zM181.5 264l5 3v6l-5 3l-5-3v-6zM192.5 264l5 3v6l-5 3l-5-3v-6zM203.5 264l5 3v6l-5 3l-5-3v-6zM214.5 264l5 3v6l-5 3l-5-3v-6zM225.5 264l5 3v6l-5 3l-5-3v-6zM236.5 264l5 3v6l-5 3l-5-3v-6zM247.5 264l5 3v6l-5 3l-5-3v-6zM258.5 264l5 3v6l-5 3l-5-3v-6zM269.5 264l5 3v6l-5 3l-5-3v-6zM280.5 264l5 3v6l-5 3l-5-3v-6zM291.5 264l5 3v6l-5 3l-5-3v-6zM302.5 264l5 3v6l-5 3l-5-3v-6zM313.5 264l5 3v6l-5 3l-5-3v-6zM22 274l5 3v6l-5 3l-5-3v-6zM33 274l5 3v6l-5 3l-5-3v-6zM44 274l5 3v6l-5 3l-5-3v-6zM55 274l5 3v6l-5 3l-5-3v-6zM66 274l5 3v6l-5 3l-5-3v-6zM77 274l5 3v6l-5 3l-5-3v-6zM88 274l5 3v6l-5 3l-5-3v-6zM99 274l5 3v6l-5 3l-5-3v-6zM110 274l5 3v6l-5 3l-5-3v-6zM121 274l5 3v6l-5 3l-5-3v-6zM132 274l5 3v6l-5 3l-5-3v-6zM143 274l5 3v6l-5 3l-5-3v-6zM154 274l5 3v6l-5 3l-5-3v-6zM165 274l5 3v6l-5 3l-5-3v-6zM176 274l5 3v6l-5 3l-5-3v-6zM187 274l5 3v6l-5 3l-5-3v-6zM198 274l5 3v6l-5 3l-5-3v-6zM209 274l5 3v6l-5 3l-5-3v-6zM220 274l5 3v6l-5 3l-5-3v-6zM231 274l5 3v6l-5 3l-5-3v-6zM242 274l5 3v6l-5 3l-5-3v-6zM253 274l5 3v6l-5 3l-5-3v-6zM264 274l5 3v6l-5 3l-5-3v-6zM275 274l5 3v6l-5 3l-5-3v-6zM286 274l5 3v6l-5 3l-5-3v-6zM297 274l5 3v6l-5 3l-5-3v-6zM16.5 284l5 3v6l-5 3l-5-3v-6zM27.5 284l5 3v6l-5 3l-5-3v-6zM38.5 284l5 3v6l-5 3l-5-3v-6zM49.5 284l5 3v6l-5 3l-5-3v-6zM60.5 284l5 3v6l-5 3l-5-3v-6zM71.5 284l5 3v6l-5 3l-5-3v-6zM82.5 284l5 3v6l-5 3l-5-3v-6zM93.5 284l5 3v6l-5 3l-5-3v-6zM104.5 284l5 3v6l-5 3l-5-3v-6zM115.5 284l5 3v6l-5 3l-5-3v-6zM126.5 284l5 3v6l-5 3l-5-3v-6zM137.5 284l5 3v6l-5 3l-5-3v-6zM148.5 284l5 3v6l-5 3l-5-3v-6zM159.5 284l5 3v6l-5 3l-5-3v-6zM170.5 284l5 3v6l-5 3l-5-3v-6zM181.5 284l5 3v6l-5 3l-5-3v-6zM192.5 284l5 3v6l-5 3l-5-3v-6zM203.5 284l5 3v6l-5 3l-5-3v-6zM214.5 284l5 3v6l-5 3l-5-3v-6zM225.5 284l5 3v6l-5 3l-5-3v-6zM236.5 284l5 3v6l-5 3l-5-3v-6zM22 294l5 3v6l-5 3l-5-3v-6zM33 294l5 3v6l-5 3l-5-3v-6zM44 294l5 3v6l-5 3l-5-3v-6zM55 294l5 3v6l-5 3l-5-3v-6zM66 294l5 3v6l-5 3l-5-3v-6zM77 294l5 3v6l-5 3l-5-3v-6zM88 294l5 3v6l-5 3l-5-3v-6zM99 294l5 3v6l-5 3l-5-3v-6zM110 294l5 3v6l-5 3l-5-3v-6zM121 294l5 3v6l-5 3l-5-3v-6zM132 294l5 3v6l-5 3l-5-3v-6zM143 294l5 3v6l-5 3l-5-3v-6zM154 294l5 3v6l-5 3l-5-3v-6zM165 294l5 3v6l-5 3l-5-3v-6zM176 294l5 3v6l-5 3l-5-3v-6zM187 294l5 3v6l-5 3l-5-3v-6zM198 294l5 3v6l-5 3l-5-3v-6zM209 294l5 3v6l-5 3l-5-3v-6zM220 294l5 3v6l-5 3l-5-3v-6zM231 294l5 3v6l-5 3l-5-3v-6zM242 294l5 3v6l-5 3l-5-3v-6zM49.5 304l5 3v6l-5 3l-5-3v-6zM60.5 304l5 3v6l-5 3l-5-3v-6zM71.5 304l5 3v6l-5 3l-5-3v-6zM82.5 304l5 3v6l-5 3l-5-3v-6zM93.5 304l5 3v6l-5 3l-5-3v-6zM104.5 304l5 3v6l-5 3l-5-3v-6zM115.5 304l5 3v6l-5 3l-5-3v-6zM126.5 304l5 3v6l-5 3l-5-3v-6zM137.5 304l5 3v6l-5 3l-5-3v-6zM148.5 304l5 3v6l-5 3l-5-3v-6zM159.5 304l5 3v6l-5 3l-5-3v-6zM170.5 304l5 3v6l-5 3l-5-3v-6zM181.5 304l5 3v6l-5 3l-5-3v-6zM192.5 304l5 3v6l-5 3l-5-3v-6zM203.5 304l5 3v6l-5 3l-5-3v-6zM214.5 304l5 3v6l-5 3l-5-3v-6zM225.5 304l5 3v6l-5 3l-5-3v-6zM236.5 304l5 3v6l-5 3l-5-3v-6zM247.5 304l5 3v6l-5 3l-5-3v-6zM258.5 304l5 3v6l-5 3l-5-3v-6zM55 314l5 3v6l-5 3l-5-3v-6zM66 314l5 3v6l-5 3l-5-3v-6zM88 314l5 3v6l-5 3l-5-3v-6zM99 314l5 3v6l-5 3l-5-3v-6zM110 314l5 3v6l-5 3l-5-3v-6zM121 314l5 3v6l-5 3l-5-3v-6zM132 314l5 3v6l-5 3l-5-3v-6zM143 314l5 3v6l-5 3l-5-3v-6zM154 314l5 3v6l-5 3l-5-3v-6zM165 314l5 3v6l-5 3l-5-3v-6zM176 314l5 3v6l-5 3l-5-3v-6zM187 314l5 3v6l-5 3l-5-3v-6zM198 314l5 3v6l-5 3l-5-3v-6zM209 314l5 3v6l-5 3l-5-3v-6zM220 314l5 3v6l-5 3l-5-3v-6zM231 314l5 3v6l-5 3l-5-3v-6zM104.5 324l5 3v6l-5 3l-5-3v-6zM115.5 324l5 3v6l-5 3l-5-3v-6zM126.5 324l5 3v6l-5 3l-5-3v-6zM137.5 324l5 3v6l-5 3l-5-3v-6zM148.5 324l5 3v6l-5 3l-5-3v-6zM159.5 324l5 3v6l-5 3l-5-3v-6zM170.5 324l5 3v6l-5 3l-5-3v-6zM181.5 324l5 3v6l-5 3l-5-3v-6zM192.5 324l5 3v6l-5 3l-5-3v-6zM203.5 324l5 3v6l-5 3l-5-3v-6zM214.5 324l5 3v6l-5 3l-5-3v-6zM225.5 324l5 3v6l-5 3l-5-3v-6zM236.5 324l5 3v6l-5 3l-5-3v-6zM121 334l5 3v6l-5 3l-5-3v-6zM132 334l5 3v6l-5 3l-5-3v-6zM143 334l5 3v6l-5 3l-5-3v-6zM154 334l5 3v6l-5 3l-5-3v-6zM165 334l5 3v6l-5 3l-5-3v-6zM176 334l5 3v6l-5 3l-5-3v-6zM187 334l5 3v6l-5 3l-5-3v-6zM198 334l5 3v6l-5 3l-5-3v-6zM209 334l5 3v6l-5 3l-5-3v-6zM220 334l5 3v6l-5 3l-5-3v-6zM231 334l5 3v6l-5 3l-5-3v-6zM242 334l5 3v6l-5 3l-5-3v-6zM137.5 344l5 3v6l-5 3l-5-3v-6zM148.5 344l5 3v6l-5 3l-5-3v-6zM159.5 344l5 3v6l-5 3l-5-3v-6zM170.5 344l5 3v6l-5 3l-5-3v-6zM181.5 344l5 3v6l-5 3l-5-3v-6zM192.5 344l5 3v6l-5 3l-5-3v-6zM203.5 344l5 3v6l-5 3l-5-3v-6zM214.5 344l5 3v6l-5 3l-5-3v-6zM225.5 344l5 3v6l-5 3l-5-3v-6zM236.5 344l5 3v6l-5 3l-5-3v-6zM247.5 344l5 3v6l-5 3l-5-3v-6zM143 354l5 3v6l-5 3l-5-3v-6zM154 354l5 3v6l-5 3l-5-3v-6zM165 354l5 3v6l-5 3l-5-3v-6zM176 354l5 3v6l-5 3l-5-3v-6zM187 354l5 3v6l-5 3l-5-3v-6zM198 354l5 3v6l-5 3l-5-3v-6zM209 354l5 3v6l-5 3l-5-3v-6zM220 354l5 3v6l-5 3l-5-3v-6zM231 354l5 3v6l-5 3l-5-3v-6zM242 354l5 3v6l-5 3l-5-3v-6zM253 354l5 3v6l-5 3l-5-3v-6zM159.5 364l5 3v6l-5 3l-5-3v-6zM170.5 364l5 3v6l-5 3l-5-3v-6zM181.5 364l5 3v6l-5 3l-5-3v-6zM192.5 364l5 3v6l-5 3l-5-3v-6zM203.5 364l5 3v6l-5 3l-5-3v-6zM214.5 364l5 3v6l-5 3l-5-3v-6zM225.5 364l5 3v6l-5 3l-5-3v-6zM236.5 364l5 3v6l-5 3l-5-3v-6zM247.5 364l5 3v6l-5 3l-5-3v-6zM165 374l5 3v6l-5 3l-5-3v-6zM176 374l5 3v6l-5 3l-5-3v-6zM187 374l5 3v6l-5 3l-5-3v-6zM198 374l5 3v6l-5 3l-5-3v-6zM209 374l5 3v6l-5 3l-5-3v-6zM220 374l5 3v6l-5 3l-5-3v-6zM231 374l5 3v6l-5 3l-5-3v-6zM242 374l5 3v6l-5 3l-5-3v-6zM253 374l5 3v6l-5 3l-5-3v-6zM170.5 384l5 3v6l-5 3l-5-3v-6zM181.5 384l5 3v6l-5 3l-5-3v-6zM203.5 384l5 3v6l-5 3l-5-3v-6zM225.5 384l5 3v6l-5 3l-5-3v-6zM236.5 384l5 3v6l-5 3l-5-3v-6zM247.5 384l5 3v6l-5 3l-5-3v-6zM242 394l5 3v6l-5 3l-5-3v-6zM236.5 404l5 3v6l-5 3l-5-3v-6zM247.5 404l5 3v6l-5 3l-5-3v-6zM231 414l5 3v6l-5 3l-5-3v-6zM242 414l5 3v6l-5 3l-5-3v-6zM225.5 424l5 3v6l-5 3l-5-3v-6zM236.5 424l5 3v6l-5 3l-5-3v-6zM242 434l5 3v6l-5 3l-5-3v-6z",
+  far: "M132 34l5 3v6l-5 3l-5-3v-6zM143 34l5 3v6l-5 3l-5-3v-6zM137.5 44l5 3v6l-5 3l-5-3v-6zM99 54l5 3v6l-5 3l-5-3v-6zM132 54l5 3v6l-5 3l-5-3v-6zM143 54l5 3v6l-5 3l-5-3v-6zM104.5 64l5 3v6l-5 3l-5-3v-6zM115.5 64l5 3v6l-5 3l-5-3v-6zM126.5 64l5 3v6l-5 3l-5-3v-6zM137.5 64l5 3v6l-5 3l-5-3v-6zM110 74l5 3v6l-5 3l-5-3v-6zM121 74l5 3v6l-5 3l-5-3v-6z",
+  near: "M104.5 44l5 3v6l-5 3l-5-3v-6zM126.5 44l5 3v6l-5 3l-5-3v-6zM110 54l5 3v6l-5 3l-5-3v-6zM121 54l5 3v6l-5 3l-5-3v-6z",
+  hq: "M115.5 44l5 3v6l-5 3l-5-3v-6z",
+};
+---
+
+<svg class:list={["co-map", className]} viewBox="10 3 309 444" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="co-map-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#7a68ff" stop-opacity="0.55"></stop>
+      <stop offset="1" stop-color="#4d37f6" stop-opacity="0"></stop>
+    </radialGradient>
+  </defs>
+  <circle cx={HQ.x} cy={HQ.y} r="70" fill="url(#co-map-glow)"></circle>
+  <path class="co-map-base" d={paths.base}></path>
+  <path class="co-map-far" d={paths.far}></path>
+  <path class="co-map-near" d={paths.near}></path>
+  <path class="co-map-hq" d={paths.hq}></path>
+
+  <g class="co-map-pin">
+    <circle class="co-map-ping" cx={HQ.x} cy={HQ.y} r="9"></circle>
+    <circle cx={HQ.x} cy={HQ.y} r="4.2" fill="#fff"></circle>
+  </g>
+  <!-- Callout to the upper left, over the Caribbean (La Guajira is to the right). -->
+  <g class="co-map-callout">
+    <path d={`M${HQ.x - 7} ${HQ.y - 6}l-20 -18h-22`}></path>
+    <text x={HQ.x - 54} y={HQ.y - 26}>Barranquilla</text>
+    <text class="co-map-sub" x={HQ.x - 54} y={HQ.y - 13}>Sede principal</text>
+  </g>
+</svg>
+
+<style>
+  .co-map {
+    display: block;
+    overflow: visible;
+  }
+  .co-map-base {
+    fill: rgba(255, 255, 255, 0.13);
+  }
+  .co-map-far {
+    fill: rgba(156, 143, 255, 0.26);
+  }
+  .co-map-near {
+    fill: rgba(156, 143, 255, 0.52);
+  }
+  .co-map-hq {
+    fill: #9c8fff;
+  }
+  .co-map-ping {
+    fill: none;
+    stroke: rgba(201, 194, 255, 0.85);
+    stroke-width: 1.4;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: co-map-ping 2.6s ease-out infinite;
+  }
+  .co-map-callout path {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.35);
+    stroke-width: 1;
+  }
+  .co-map-callout text {
+    text-anchor: end;
+    font-family: var(--font-sans, system-ui);
+    font-size: 13px;
+    font-weight: 600;
+    fill: #fff;
+  }
+  .co-map-callout .co-map-sub {
+    font-family: var(--font-mono, ui-monospace);
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    fill: rgba(245, 245, 241, 0.6);
+  }
+
+  @keyframes co-map-ping {
+    0% {
+      transform: scale(0.5);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(2.4);
+      opacity: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .co-map-ping {
+      animation: none;
+    }
+  }
+</style>

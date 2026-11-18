@@ -1,0 +1,380 @@
+---
+import MetaLogo from "../binah/MetaLogo.astro";
+
+// Brands always show their logo (public/logos). Generic capabilities that
+// aren't brands (email, SMS, API…) show an icon instead.
+type Icon = "email" | "chat" | "sms" | "phone" | "api" | "file";
+type Item = { label: string; logo?: string; icon?: Icon };
+const groups: Array<{ title: string; note?: string; items: Item[]; wide?: boolean }> = [
+  {
+    title: "Canales",
+    note: "Conexión oficial con Meta",
+    items: [
+      { label: "WhatsApp", logo: "/logos/whatsapp.png" },
+      { label: "Instagram", logo: "/logos/instagram.png" },
+      { label: "Email", icon: "email" },
+      { label: "Chat web", icon: "chat" },
+      { label: "SMS", icon: "sms" },
+      { label: "Llamadas y voz", icon: "phone" },
+    ],
+  },
+  {
+    title: "Tiendas en línea",
+    items: [
+      { label: "Shopify", logo: "/logos/shopify.png" },
+      { label: "WooCommerce", logo: "/logos/woo.png" },
+    ],
+  },
+  {
+    title: "Facturación y contabilidad",
+    items: [
+      { label: "DIAN", logo: "/logos/dian.png" },
+      { label: "Siigo", logo: "/logos/siigo.png" },
+    ],
+  },
+  {
+    title: "Pagos",
+    items: [
+      { label: "Wompi", logo: "/logos/wompi.png" },
+      { label: "ePayco", logo: "/logos/epayco.png" },
+      { label: "Nequi", logo: "/logos/nequi.png" },
+      { label: "PSE", logo: "/logos/pse.png" },
+      { label: "Visa", logo: "/logos/visa.png" },
+      { label: "Mastercard", logo: "/logos/mastercard.png" },
+    ],
+  },
+  {
+    title: "Transportadoras",
+    items: [
+      { label: "Coordinadora", logo: "/logos/coordinadora.png" },
+      { label: "Servientrega", logo: "/logos/servientrega.png" },
+      { label: "Inter Rapidísimo", logo: "/logos/interrapidisimo.png" },
+    ],
+  },
+  {
+    title: "Tus sistemas",
+    items: [
+      { label: "API y webhooks", icon: "api" },
+      { label: "Excel y PDF", icon: "file" },
+    ],
+  },
+  {
+    title: "Catálogo listo para vender en",
+    wide: true,
+    items: [
+      { label: "Falabella", logo: "/logos/falabella.png" },
+      { label: "Éxito", logo: "/logos/exito.png" },
+      { label: "Carulla", logo: "/logos/carulla.png" },
+      { label: "Olímpica", logo: "/logos/olimpica.png" },
+      { label: "Mercado Libre", logo: "/logos/mercadolibre.webp" },
+      { label: "Rappi", logo: "/logos/rappi.png" },
+    ],
+  },
+];
+
+const iconPaths: Record<Icon, string> = {
+  email: "M4 6h16v12H4z M4 7l8 6 8-6",
+  chat: "M20 11.5a7.5 7.5 0 0 1-10.9 6.7L4 19.5l1.3-4.6A7.5 7.5 0 1 1 20 11.5Z",
+  sms: "M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-8l-4 3v-3H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z M8 9.5h8 M8 12.5h5",
+  phone:
+    "M7.2 4.5 9.6 7c.5.5.5 1.3 0 1.8L8.4 10a11 11 0 0 0 5.6 5.6l1.2-1.2c.5-.5 1.3-.5 1.8 0l2.5 2.4c.5.5.5 1.3 0 1.8l-1.1 1.1c-.9.9-2.2 1.2-3.4.8C9.6 18.8 5.2 14.4 3.5 9c-.4-1.2-.1-2.5.8-3.4l1.1-1.1c.5-.5 1.3-.5 1.8 0Z",
+  api: "M9 7 4 12l5 5 M15 7l5 5-5 5 M13.5 5l-3 14",
+  file: "M7 3h7l5 5v13H7z M14 3v5h5 M10 13h6 M10 17h6",
+};
+
+const metaFeatures = [
+  { title: "WhatsApp Business API", body: "Varios asesores y agentes de IA sobre un mismo número." },
+  { title: "Instagram Direct", body: "Mensajes y comentarios en el mismo inbox." },
+  { title: "Conexión oficial", body: "Sin apps no autorizadas que pongan en riesgo tu número." },
+  { title: "Plantillas y campañas", body: "Mensajes aprobados para remarketing, avisos y seguimiento." },
+];
+---
+
+<section class="hp-section" aria-labelledby="hp-integrations-title">
+  <div class="container-binah">
+    <div class="hp-head hp-reveal">
+      <div>
+        <span class="hp-eyebrow"><span class="n">06</span>·<span>Integraciones</span></span>
+        <h2 class="hp-h2" id="hp-integrations-title">Conectado con lo que ya usas.</h2>
+      </div>
+      <p class="hp-lead">
+        Canales, tiendas en línea, facturación, pagos y transportadoras. Y si falta alguna, Binah tiene API y webhooks
+        para conectar tus propios sistemas.
+      </p>
+    </div>
+
+    <section class="meta hp-reveal" id="meta" aria-labelledby="hp-meta-title" data-nav-dark>
+      <div class="meta-copy">
+        <div class="meta-badge">
+          <span class="meta-logo"><MetaLogo size={26} /></span>
+          <span class="meta-badge-text">
+            <small>Verificado por Meta</small>
+            <strong>Proveedor de tecnología</strong>
+          </span>
+          <span class="meta-check" aria-hidden="true"></span>
+        </div>
+        <h3 id="hp-meta-title">WhatsApp e Instagram conectados como debe ser: de forma oficial.</h3>
+        <p>
+          Somos proveedor de tecnología verificado por Meta (Verified Meta Tech Provider). Conectamos tu número a la
+          API oficial de WhatsApp Business y tu cuenta de Instagram directamente con Meta, sin intermediarios ni
+          herramientas no autorizadas.
+        </p>
+      </div>
+      <ul class="meta-features">
+        {
+          metaFeatures.map((feature) => (
+            <li>
+              <strong>{feature.title}</strong>
+              <span>{feature.body}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <div class="groups">
+      {
+        groups.map((group, index) => (
+          <div class:list={["group hp-card hp-reveal", group.wide && "is-wide"]} style={`--d: ${(index % 3) * 80}ms`}>
+            <div class="group-head">
+              <h3>{group.title}</h3>
+              {group.note && <span class="group-note">{group.note}</span>}
+            </div>
+            <ul>
+              {group.items.map((item) =>
+                item.logo ? (
+                  <li class="chip chip-logo">
+                    <img src={item.logo} alt={item.label} width="96" height="38" loading="lazy" />
+                  </li>
+                ) : (
+                  <li class="chip">
+                    {item.icon && (
+                      <svg class="chip-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d={iconPaths[item.icon]} />
+                      </svg>
+                    )}
+                    {item.label}
+                  </li>
+                ),
+              )}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Verified Meta Tech Provider callout */
+  .meta {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 32px 56px;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: clamp(28px, 3.4vw, 48px);
+    border-radius: 22px;
+    background: var(--hp-charcoal);
+    color: var(--hp-on-dark);
+    scroll-margin-top: 96px;
+  }
+  .meta::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: -120px;
+    bottom: -220px;
+    width: 520px;
+    height: 460px;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(77, 55, 246, 0.5), transparent);
+    pointer-events: none;
+  }
+  .meta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px 8px 10px;
+    border-radius: 12px;
+    background: #fff;
+    color: var(--hp-ink);
+  }
+  .meta-logo {
+    display: grid;
+    place-items: center;
+  }
+  .meta-badge-text {
+    display: grid;
+    line-height: 1.15;
+  }
+  .meta-badge-text small {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hp-mute);
+  }
+  .meta-badge-text strong {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .meta-check {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2 7 10.5l4.5-5' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+        center / 13px no-repeat,
+      #0082fb;
+  }
+  .meta h3 {
+    margin: 24px 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(26px, 2.6vw, 36px);
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+    font-weight: 600;
+    color: #fff;
+    text-wrap: balance;
+  }
+  .meta p {
+    margin: 14px 0 0;
+    max-width: 34.5em; /* 52ch of Geist */
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--hp-on-dark-mute);
+  }
+  .meta-features {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .meta-features li {
+    display: grid;
+    gap: 6px;
+    align-content: start;
+    padding: 18px;
+    border-radius: 14px;
+    border: 1px solid var(--hp-on-dark-line);
+    background: var(--hp-on-dark-raised);
+  }
+  .meta-features strong {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #fff;
+  }
+  .meta-features strong::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--hp-purple-light);
+    box-shadow: 0 0 0 3px rgba(156, 143, 255, 0.22);
+  }
+  .meta-features span {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--hp-on-dark-mute);
+  }
+
+  .groups {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .group {
+    padding: 20px 22px 22px;
+  }
+  .group.is-wide {
+    grid-column: 1 / -1;
+  }
+  .group-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .group h3 {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: var(--hp-mute);
+  }
+  .group-note {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: var(--hp-lavender);
+    color: #3a25d6;
+    white-space: nowrap;
+  }
+  .group ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    height: 44px;
+    padding: 0 14px;
+    border-radius: 10px;
+    border: 1px solid var(--hp-line);
+    background: #fbfbf9;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--hp-ink);
+  }
+  .chip-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    fill: none;
+    stroke: var(--hp-purple);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .chip-logo {
+    padding: 0 6px;
+    background: #fff;
+  }
+  .chip-logo img {
+    height: 38px;
+    width: auto;
+  }
+
+  @media (max-width: 1000px) {
+    .meta {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .groups {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .groups,
+    .meta-features {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

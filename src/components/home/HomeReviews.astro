@@ -1,0 +1,281 @@
+---
+import reviewsCache from "../../data/google-reviews-cache.json";
+
+interface GoogleReview {
+  authorName: string;
+  authorUri: string;
+  authorPhotoUri: string | null;
+  rating: number;
+  relativePublishTimeDescription: string;
+  text: string;
+  googleMapsUri: string;
+}
+
+interface GoogleReviewsCache {
+  googleMapsUri: string;
+  rating: number | null;
+  userRatingCount: number;
+  reviews: GoogleReview[];
+}
+
+// Short pull quotes, keyed by author. Each must be a verbatim excerpt of that
+// author's review (only the first letter may change case); otherwise the card
+// falls back to the full text, so a refreshed cache can't misquote anyone.
+const PULL_QUOTES: Record<string, string> = {
+  JD: "La plataforma es increiblemente sencilla de usar y poner en marcha.",
+  "Maria Ujueta": "Tener un agente de IA es una ayuda idonea para ofrecer atención 24/7 a tus clientes",
+  "María Camila Romero Bravo":
+    "Nos ha permitido centralizar la gestión de manera mucho más eficiente.",
+  "Mariana Jaramillo": "Muy completa y me permite manejar mi empresa desde 1 solo lugar",
+};
+
+function quoteFor(review: GoogleReview) {
+  const excerpt = PULL_QUOTES[review.authorName];
+  if (!excerpt) return { text: review.text, excerpt: false };
+  const lowered = excerpt.charAt(0).toLowerCase() + excerpt.slice(1);
+  const isVerbatim = review.text.includes(excerpt) || review.text.includes(lowered);
+  if (!isVerbatim) return { text: review.text, excerpt: false };
+  // Close the excerpt: "…" when it cuts the review short, "." when it is the
+  // review's own ending without punctuation.
+  if (/[.!?…]$/.test(excerpt)) return { text: excerpt, excerpt: true };
+  const endsReview = review.text.trimEnd().endsWith(excerpt.slice(1));
+  return { text: `${excerpt}${endsReview ? "." : "…"}`, excerpt: true };
+}
+
+const cache = reviewsCache as GoogleReviewsCache;
+const reviews = cache.reviews
+  .filter((review) => review.text.trim().length > 0)
+  .slice(0, 4)
+  .map((review) => ({ ...review, quote: quoteFor(review) }));
+const mapsHref = cache.googleMapsUri || "https://maps.google.com/?cid=17703495939762672124";
+const ratingText = cache.rating === null ? null : cache.rating.toFixed(1).replace(".", ",");
+
+const initials = (name: string) =>
+  name
+    .split(" ")
+    .map((part) => part[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+const star = "m10 1.6 2.58 5.23 5.78.84-4.18 4.08.99 5.75L10 14.79 4.83 17.5l.99-5.75-4.18-4.08 5.78-.84L10 1.6Z";
+---
+
+{
+  reviews.length > 0 && (
+    <section class="hp-section reviews" aria-labelledby="hp-reviews-title">
+      <div class="container-binah">
+        <div class="reviews-head hp-reveal">
+          <div>
+            <span class="hp-eyebrow">
+              <span class="n">07</span>·<span>Clientes</span>
+            </span>
+            <h2 class="hp-h2" id="hp-reviews-title">
+              Lo que dicen de Binah en Google.
+            </h2>
+          </div>
+          <a href={mapsHref} target="_blank" rel="noopener noreferrer" class="rating">
+            <span class="rating-stars" aria-hidden="true">
+              {Array.from({ length: 5 }).map(() => (
+                <svg viewBox="0 0 20 20">
+                  <path d={star} />
+                </svg>
+              ))}
+            </span>
+            <span>
+              {ratingText ? (
+                <>
+                  <strong>{ratingText}</strong> en Google
+                </>
+              ) : (
+                "Ver en Google"
+              )}
+            </span>
+            <span class="hp-arrow" aria-hidden="true">
+              ↗
+            </span>
+          </a>
+        </div>
+
+        <ul class="reviews-grid">
+          {reviews.map((review, index) => (
+            <li class="review hp-card hp-reveal" style={`--d: ${index * 80}ms`}>
+              <span class="review-stars" role="img" aria-label={`${review.rating} de 5 estrellas`}>
+                {Array.from({ length: review.rating }).map(() => (
+                  <svg viewBox="0 0 20 20" aria-hidden="true">
+                    <path d={star} />
+                  </svg>
+                ))}
+              </span>
+              <blockquote class:list={[review.quote.excerpt && "is-excerpt"]}>{review.quote.text}</blockquote>
+              <div class="review-author">
+                {review.authorPhotoUri ? (
+                  <img
+                    src={review.authorPhotoUri}
+                    alt=""
+                    width="36"
+                    height="36"
+                    loading="lazy"
+                    referrerpolicy="no-referrer"
+                  />
+                ) : (
+                  <span class="review-initials" aria-hidden="true">
+                    {initials(review.authorName)}
+                  </span>
+                )}
+                <span>
+                  <strong>{review.authorName}</strong>
+                  <small>{review.relativePublishTimeDescription} · Google</small>
+                </span>
+              </div>
+              <a
+                href={review.googleMapsUri || mapsHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="review-link"
+                aria-label={`Leer reseña completa de ${review.authorName} en Google`}
+              >
+                Leer reseña completa <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .reviews-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: clamp(36px, 4vw, 52px);
+  }
+  .rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--hp-line);
+    background: #fff;
+    font-size: 14px;
+    color: var(--hp-body);
+    box-shadow: var(--hp-shadow-sm);
+    transition: border-color 0.2s ease;
+  }
+  .rating:hover {
+    border-color: #cfcec7;
+  }
+  .rating strong {
+    color: var(--hp-ink);
+    font-weight: 600;
+  }
+  .rating-stars,
+  .review-stars {
+    display: inline-flex;
+    gap: 2px;
+  }
+  .rating svg,
+  .review-stars svg {
+    width: 15px;
+    height: 15px;
+    fill: #f5a524;
+  }
+
+  .reviews-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .review {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+  }
+  .review blockquote {
+    margin: 16px 0 24px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--hp-ink);
+  }
+  .review blockquote.is-excerpt {
+    font-size: 19px;
+    line-height: 1.4;
+    letter-spacing: -0.015em;
+    font-weight: 500;
+    text-wrap: pretty;
+  }
+  .review blockquote::before {
+    content: "“";
+  }
+  .review blockquote::after {
+    content: "”";
+  }
+  .review-author {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 18px;
+    border-top: 1px solid var(--hp-line);
+  }
+  .review-author img,
+  .review-initials {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .review-initials {
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #3a25d6;
+    background: var(--hp-lavender);
+  }
+  .review-author span {
+    display: grid;
+    min-width: 0;
+  }
+  .review-author strong {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--hp-ink);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .review-link {
+    margin-top: 14px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--hp-purple);
+  }
+  .review-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .review-author small {
+    font-size: 12px;
+    color: var(--hp-mute);
+  }
+
+  @media (max-width: 1080px) {
+    .reviews-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .reviews-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

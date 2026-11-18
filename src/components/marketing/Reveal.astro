@@ -1,0 +1,37 @@
+---
+// Reveal-on-scroll for elements marked .hp-reveal (styles in marketing.css).
+// Include it once on every page that uses the class. Elements are visible by
+// default; only those that start below the fold are hidden, then revealed as
+// they scroll in. Re-runs on each Astro page load (ClientRouter).
+---
+
+<script>
+  function initReveal() {
+    const items = document.querySelectorAll<HTMLElement>(".hp-reveal:not([data-reveal])");
+    if (!items.length) return;
+    if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          (entry.target as HTMLElement).dataset.reveal = "done";
+          observer.unobserve(entry.target);
+        }
+      },
+      { rootMargin: "0px 0px -6% 0px", threshold: 0.06 },
+    );
+
+    const fold = window.innerHeight * 0.94;
+    items.forEach((el) => {
+      if (el.getBoundingClientRect().top > fold) {
+        el.dataset.reveal = "pending";
+        observer.observe(el);
+      } else {
+        el.dataset.reveal = "done";
+      }
+    });
+  }
+
+  document.addEventListener("astro:page-load", initReveal);
+</script>

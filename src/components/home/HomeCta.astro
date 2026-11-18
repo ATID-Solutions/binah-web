@@ -1,0 +1,211 @@
+---
+import { ModuleGlyph } from "../binah/brands";
+import { BINAH_MODULES } from "../binah/modules";
+
+// Closing call to action, shared by the marketing pages. Defaults are the
+// home page's copy; other pages pass their own.
+interface Props {
+  demoHref: string;
+  eyebrow?: string;
+  heading?: string;
+  lead?: string;
+  primaryLabel?: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+}
+
+const {
+  demoHref,
+  eyebrow = "Empieza hoy",
+  heading = "Una demo. Cero compromisos. Todas las respuestas.",
+  lead = "30 minutos con nuestro equipo para ver Binah aplicado a tu negocio: tus canales, tu catálogo y tu operación real. La implementación la hace nuestro equipo.",
+  primaryLabel = "Agendar demo",
+  secondaryLabel = "Ver precios",
+  secondaryHref = "/precios",
+} = Astro.props;
+const isExternal = (href: string) => /^(https?:|mailto:|tel:)/i.test(href);
+const orbit = BINAH_MODULES.map((module, index) => ({
+  id: module.id,
+  angle: (360 / BINAH_MODULES.length) * index,
+}));
+---
+
+<section class="cta" id="demo" aria-labelledby="hp-cta-title">
+  <div class="hp-panel-dark cta-panel" data-nav-dark>
+    <div class="hp-glow cta-glow" aria-hidden="true"></div>
+    <div class="container-binah cta-grid">
+      <div class="cta-copy hp-reveal">
+        <span class="hp-eyebrow hp-eyebrow--dark">{eyebrow}</span>
+        <h2 class="hp-h2 hp-h2--dark" id="hp-cta-title">{heading}</h2>
+        <p class="hp-lead hp-lead--dark">{lead}</p>
+        <div class="cta-actions">
+          <a
+            href={demoHref}
+            target={isExternal(demoHref) ? "_blank" : undefined}
+            rel={isExternal(demoHref) ? "noopener noreferrer" : undefined}
+            class="hp-btn hp-btn-primary"
+          >
+            {primaryLabel} <span class="hp-arrow" aria-hidden="true">→</span>
+          </a>
+          {
+            secondaryLabel && secondaryHref && (
+              <a
+                href={secondaryHref}
+                target={isExternal(secondaryHref) ? "_blank" : undefined}
+                rel={isExternal(secondaryHref) ? "noopener noreferrer" : undefined}
+                class="hp-btn hp-btn-ghost-dark"
+              >
+                {secondaryLabel}
+              </a>
+            )
+          }
+        </div>
+      </div>
+
+      <div class="orbit" aria-hidden="true">
+        <div class="orbit-ring orbit-ring-outer">
+          {
+            orbit.map((item) => (
+              <span class="orbit-item" style={`--a: ${item.angle}deg`}>
+                <span class="orbit-icon">
+                  <ModuleGlyph id={item.id} size={20} />
+                </span>
+              </span>
+            ))
+          }
+        </div>
+        <div class="orbit-ring orbit-ring-inner"></div>
+        <div class="orbit-core">
+          <img src="/symbol-white.png" alt="" width="44" height="55" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    padding: 0 0 12px;
+  }
+  .cta-panel {
+    padding: clamp(72px, 8vw, 112px) 0;
+  }
+  .cta-glow {
+    width: 700px;
+    height: 600px;
+    right: -100px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.75;
+  }
+  .cta-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 48px;
+    align-items: center;
+  }
+  .cta-copy .hp-h2 {
+    font-size: clamp(38px, 5vw, 68px);
+    max-width: 8.9em; /* 13ch of Geist 600; em keeps wrapping stable while it loads */
+  }
+  .cta-copy .hp-lead {
+    margin-top: 24px;
+  }
+  .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 36px;
+  }
+
+  .orbit {
+    --size: 400px;
+    --r: 170px;
+    position: relative;
+    width: var(--size);
+    height: var(--size);
+    margin: 0 auto;
+  }
+  .orbit-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .orbit-ring-outer {
+    inset: calc((var(--size) - 2 * var(--r)) / 2);
+    animation: hp-orbit 80s linear infinite;
+  }
+  .orbit-ring-inner {
+    inset: 28%;
+    border-style: dashed;
+    border-color: rgba(156, 143, 255, 0.3);
+  }
+  .orbit-item {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 44px;
+    height: 44px;
+    margin: -22px 0 0 -22px;
+    transform: rotate(var(--a)) translateX(var(--r)) rotate(calc(var(--a) * -1));
+  }
+  .orbit-icon {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    border-radius: 13px;
+    background: rgba(29, 37, 31, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--hp-purple-light);
+    box-shadow: 0 10px 24px -12px rgba(0, 0, 0, 0.8);
+    animation: hp-orbit 80s linear infinite reverse;
+  }
+  .orbit-core {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 120px;
+    height: 120px;
+    margin: -60px 0 0 -60px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 25%, #7d6cff, var(--hp-purple) 55%, #2f1fc4);
+    box-shadow:
+      0 0 0 10px rgba(77, 55, 246, 0.14),
+      0 0 0 22px rgba(77, 55, 246, 0.07),
+      0 30px 80px -10px rgba(77, 55, 246, 0.8);
+  }
+  .orbit-core img {
+    width: 44px;
+    height: auto;
+  }
+  @keyframes hp-orbit {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .orbit-ring-outer,
+    .orbit-icon {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    .cta-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .orbit {
+      display: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .cta {
+      padding-bottom: 8px;
+    }
+  }
+</style>

@@ -19,6 +19,8 @@ interface Props {
   showContactWidget?: boolean;
   lang?: "es" | "en";
   alternateLinks?: Array<{ href: string; hreflang: string }>;
+  /** "overlay" lays the nav over the page's dark hero, as frosted glass (home page). */
+  navVariant?: "overlay";
 }
 
 const {
@@ -34,6 +36,7 @@ const {
   showContactWidget = true,
   lang = "es",
   alternateLinks = [],
+  navVariant,
 } = Astro.props;
 
 const canonicalUrl = absoluteUrl(canonicalPath);
@@ -104,7 +107,7 @@ const structuredData = JSON.stringify([...baseStructuredData, ...extraStructured
     <script type="application/ld+json" set:html={structuredData} />
     <title>{title}</title>
   </head>
-  <body class="binah-site" data-page={page}>
+  <body class="binah-site" data-page={page} data-nav={navVariant}>
     {enableMarketingTracking && <MetaPixel noscript />}
     <slot />
     {showContactWidget && <BinahChat />}

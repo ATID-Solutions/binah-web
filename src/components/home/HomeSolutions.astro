@@ -1,0 +1,240 @@
+---
+import { FEATURED_SOLUTIONS, getMarketingPageBySlug } from "../../lib/marketing-pages";
+
+// Titles mirror each landing page's search terms, so the home links to the
+// use-case pages with descriptive anchor text.
+const featuredCopy: Record<string, { kicker: string; title: string; body: string }> = {
+  "codigos-ean-productos-colombia": {
+    kicker: "Ventas",
+    title: "Códigos EAN y GTIN para tus productos",
+    body: "Productos, variantes y códigos listos para vender en grandes superficies, marketplaces y tu tienda física.",
+  },
+  "facturacion-electronica-dian": {
+    kicker: "DIAN",
+    title: "Facturación electrónica DIAN automática",
+    body: "Cada venta termina en factura electrónica y conciliación, con notas crédito y trazabilidad, sin copiar datos.",
+  },
+  "crm-whatsapp-instagram-colombia": {
+    kicker: "CRM",
+    title: "CRM para WhatsApp, Instagram y email",
+    body: "Un inbox para vender y atender, con historial, asesores, estados y seguimiento.",
+  },
+  "agente-ia-ventas-whatsapp": {
+    kicker: "IA",
+    title: "Agente IA de ventas por WhatsApp",
+    body: "Responde, califica y cobra a los leads que llegan de pauta, redes o referidos. Escala solo lo que necesita una persona.",
+  },
+  "software-despachos-transportadoras-colombia": {
+    kicker: "Despachos",
+    title: "Despachos con transportadoras",
+    body: "Del pedido a la guía, el rótulo y el tracking con las transportadoras que ya usas, con avisos al cliente.",
+  },
+  "links-de-pago-whatsapp-colombia": {
+    kicker: "Pagos",
+    title: "Links de pago desde el chat",
+    body: "Links de pago con PSE, tarjeta o Nequi, con el pedido actualizado en tiempo real.",
+  },
+};
+
+const featured = FEATURED_SOLUTIONS.map((page) => ({
+  href: page.path,
+  ...(featuredCopy[page.slug] ?? {
+    kicker: page.moduleName,
+    title: page.title.replace(" — Binah", ""),
+    body: page.lead,
+  }),
+}));
+
+// Long-tail use-case pages (the full list lives on /soluciones). These links
+// pass the home page's authority to the pages that bring search traffic.
+// Unknown slugs are skipped so a renamed page never leaves a broken link here.
+const moreLabels: Array<[slug: string, label: string]> = [
+  ["pos-documento-equivalente-electronico-dian", "POS y documento equivalente DIAN"],
+  ["conciliacion-pagos-facturas-colombia", "Conciliación de pagos y facturas"],
+  ["ordenes-compra-proveedores-colombia", "Órdenes de compra y proveedores"],
+  ["costeo-productos-inventario-colombia", "Costeo por producto"],
+  ["inventario-conectado-ventas-whatsapp-tienda-online", "Inventario conectado a WhatsApp y tienda online"],
+  ["picking-packing-ecommerce-colombia", "Picking y packing"],
+  ["notas-credito-devoluciones-dian-retail", "Notas crédito y devoluciones"],
+  ["agente-ia-soporte-clientes-whatsapp", "Agente IA de soporte"],
+  ["agente-ia-reservas-citas-whatsapp", "Agente IA para reservas y citas"],
+  ["base-conocimiento-agente-ia-soporte", "Base de conocimiento para IA"],
+  ["campanas-whatsapp-clientes-colombia", "Campañas y remarketing"],
+  ["llamadas-celulares-colombia-crm", "Llamadas a celulares desde el CRM"],
+  ["integracion-siigo-facturacion-automatica", "Integración Siigo"],
+  ["software-shopify-colombia-crm-inventario", "Software para Shopify"],
+  ["software-woocommerce-colombia-crm-facturacion", "Software para WooCommerce"],
+  ["crm-negocios-servicios-agenda-whatsapp", "CRM para negocios de servicios"],
+  ["crm-inventario-tienda-ropa-colombia", "CRM e inventario para tiendas de ropa"],
+  ["reportes-excel-pdf-negocio-colombia", "Reportes en Excel y PDF"],
+  ["migrar-clientes-productos-facturas-binah", "Migración de clientes, productos y facturas"],
+];
+const more = moreLabels.flatMap(([slug, label]) => {
+  const page = getMarketingPageBySlug(slug);
+  return page ? [{ href: page.path, label }] : [];
+});
+---
+
+<section class="hp-section hp-section--alt" aria-labelledby="hp-solutions-title">
+  <div class="container-binah">
+    <div class="hp-head hp-reveal">
+      <div>
+        <span class="hp-eyebrow"><span class="n">05</span>·<span>Soluciones</span></span>
+        <h2 class="hp-h2" id="hp-solutions-title">Problemas concretos. Soluciones concretas.</h2>
+      </div>
+      <p class="hp-lead">
+        Cada solución usa los mismos módulos y la misma base de datos. Empieza por la que más te duele hoy.
+      </p>
+    </div>
+
+    <ul class="solutions">
+      {
+        featured.map((solution, index) => (
+          <li class="hp-reveal" style={`--d: ${(index % 3) * 80}ms`}>
+            <a href={solution.href} class="solution hp-card">
+              <span class="solution-meta">
+                <span>{solution.kicker}</span>
+                <span class="solution-arrow" aria-hidden="true">
+                  ↗
+                </span>
+              </span>
+              <h3>{solution.title}</h3>
+              <span class="solution-body">{solution.body}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="more hp-reveal">
+      <span class="more-label">Y más soluciones</span>
+      <ul>
+        {
+          more.map((item) => (
+            <li>
+              <a href={item.href}>{item.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+      <a href="/soluciones" class="hp-link">
+        Ver todas las soluciones <span class="hp-arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .solutions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .solutions li {
+    display: flex;
+  }
+  .solution {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 26px 28px;
+  }
+  .solution-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--hp-mute);
+  }
+  .solution-arrow {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid var(--hp-line);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--hp-purple);
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease,
+      border-color 0.25s ease;
+  }
+  .solution:hover .solution-arrow {
+    background: var(--hp-purple);
+    border-color: var(--hp-purple);
+    color: #fff;
+  }
+  .solution h3 {
+    margin: 22px 0 0;
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    font-weight: 600;
+    color: var(--hp-ink);
+  }
+  .solution-body {
+    margin-top: 10px;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--hp-mute);
+  }
+
+  .more {
+    margin-top: 48px;
+  }
+  .more-label {
+    display: block;
+    margin-bottom: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hp-mute);
+  }
+  .more ul {
+    list-style: none;
+    margin: 0 0 24px;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .more ul a {
+    display: inline-block;
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: #fff;
+    border: 1px solid var(--hp-line);
+    font-size: 13.5px;
+    color: var(--hp-body);
+    transition:
+      border-color 0.2s ease,
+      color 0.2s ease,
+      background-color 0.2s ease;
+  }
+  .more ul a:hover {
+    border-color: var(--hp-purple);
+    color: var(--hp-purple);
+    background: #fbfaff;
+  }
+
+  @media (max-width: 1000px) {
+    .solutions {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .solutions {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

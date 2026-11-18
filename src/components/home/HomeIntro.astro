@@ -1,0 +1,148 @@
+---
+// "¿Qué es Binah?" — the one-paragraph answer and the what/how/who cards.
+const pillars = [
+  {
+    kicker: "Qué es",
+    title: "Una plataforma todo en uno",
+    body: "CRM, tickets de soporte, ventas e inventario, facturación electrónica, contabilidad, pagos, reportes, operaciones, tareas y chat interno: diez módulos sobre una sola base de datos.",
+  },
+  {
+    kicker: "Qué hace",
+    title: "Pone la IA a trabajar en tu operación",
+    body: "Los agentes atienden, venden y registran pedidos. Cada venta genera sola la factura, el cobro y el despacho, y el Co-CEO te dice qué está pasando y qué hacer.",
+  },
+  {
+    kicker: "Para quién",
+    title: "Empresas que ya venden y quieren crecer",
+    body: "Retail, e-commerce, servicios, salud, belleza, educación y marcas con equipos desde 1 hasta más de 500 personas.",
+    featured: true,
+  },
+];
+
+
+---
+
+<section class="hp-section intro" aria-labelledby="hp-intro-title">
+  <div class="container-binah">
+    <div class="intro-statement hp-reveal">
+      <span class="hp-eyebrow">¿Qué es Binah?</span>
+      <h2 id="hp-intro-title">
+        Binah es un software de gestión empresarial con IA, hecho en Colombia.
+        <span>
+          En una sola plataforma tu equipo vende, atiende clientes, factura, despacha, cobra y lleva la contabilidad, y
+          los agentes de IA hacen buena parte del trabajo.
+        </span>
+      </h2>
+    </div>
+
+    <div class="pillars">
+      {
+        pillars.map((pillar, index) => (
+          <article
+            class:list={["pillar hp-card hp-reveal", pillar.featured && "is-featured"]}
+            style={`--d: ${index * 90}ms`}
+          >
+            <span class="pillar-kicker">{pillar.kicker}</span>
+            <h3>{pillar.title}</h3>
+            <p>{pillar.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .intro {
+    padding-top: clamp(96px, 10vw, 140px);
+  }
+
+  .intro-statement {
+    max-width: 1040px;
+  }
+  .intro-statement h2 {
+    margin: 22px 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.3vw, 46px);
+    line-height: 1.12;
+    letter-spacing: -0.035em;
+    font-weight: 600;
+    color: var(--hp-ink);
+    text-wrap: pretty;
+  }
+  .intro-statement h2 span {
+    color: var(--hp-mute);
+  }
+
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: clamp(48px, 6vw, 72px);
+  }
+  .pillar {
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .pillar-kicker {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hp-mute);
+  }
+  .pillar h3 {
+    margin: 4px 0 0;
+    font-size: 21px;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    font-weight: 600;
+    color: var(--hp-ink);
+  }
+  .pillar p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--hp-mute);
+  }
+  .pillar.is-featured {
+    position: relative;
+    overflow: hidden;
+    background: var(--hp-charcoal);
+    border-color: var(--hp-charcoal);
+  }
+  .pillar.is-featured::after {
+    content: "";
+    position: absolute;
+    right: -80px;
+    bottom: -120px;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(77, 55, 246, 0.6), transparent);
+    pointer-events: none;
+  }
+  .pillar.is-featured .pillar-kicker {
+    color: var(--hp-purple-light);
+  }
+  .pillar.is-featured h3 {
+    color: #fff;
+  }
+  .pillar.is-featured p {
+    color: var(--hp-on-dark-mute);
+  }
+
+  @media (max-width: 900px) {
+    .pillars {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .pillar {
+      padding: 24px;
+    }
+  }
+</style>

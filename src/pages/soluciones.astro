@@ -2,21 +2,25 @@
 import Layout from "../layouts/Layout.astro";
 import Nav from "../components/binah/Nav.astro";
 import Footer from "../components/binah/Footer.astro";
-import CtaBand from "../components/binah/CtaBand.astro";
+import PageHero from "../components/marketing/PageHero.astro";
+import Reveal from "../components/marketing/Reveal.astro";
+import HomeCta from "../components/home/HomeCta.astro";
+import { ModuleGlyph } from "../components/binah/brands";
+import { BINAH_MODULES } from "../components/binah/modules";
 import { ALL_SEO_FEATURE_PAGES, FEATURED_SOLUTIONS } from "../lib/marketing-pages";
 import { waUrl, WA_MESSAGES } from "../components/binah/whatsapp";
+import "../styles/marketing.css";
 
-const grouped = {
-  P0: ALL_SEO_FEATURE_PAGES.filter((page) => page.priority === "P0"),
-  P1: ALL_SEO_FEATURE_PAGES.filter((page) => page.priority === "P1"),
-  P2: ALL_SEO_FEATURE_PAGES.filter((page) => page.priority === "P2"),
-};
+const demoHref = waUrl(WA_MESSAGES.demo);
 
-const solutionGroups = [
-  { priority: "P0", label: "Páginas de captura principal", pages: grouped.P0 },
-  { priority: "P1", label: "Long-tail de alto valor", pages: grouped.P1 },
-  { priority: "P2", label: "Nichos y casos específicos", pages: grouped.P2 },
-] as const;
+// Every solution page, grouped by the module it belongs to (in module order),
+// so visitors browse by area instead of by internal priority.
+const groups = BINAH_MODULES.map((module) => ({
+  id: module.id,
+  name: module.id === "soporte" ? "Tickets de soporte" : module.name,
+  href: module.href,
+  pages: ALL_SEO_FEATURE_PAGES.filter((page) => page.moduleId === module.id),
+})).filter((group) => group.pages.length > 0);
 ---
 
 <Layout
@@ -24,86 +28,271 @@ const solutionGroups = [
   description="Páginas de solución de Binah para CRM, remarketing, EAN/GTIN, facturación DIAN, ventas, despachos, pagos, inventario, agentes IA y operación en Colombia."
   page="soluciones"
   canonicalPath="/soluciones"
+  navVariant="overlay"
 >
   <Nav />
-  <main>
-    <div class="container-binah">
-      <div class="crumb">
-        <a href="/">Binah</a> <span class="sep">/</span> Soluciones
-      </div>
+  <main class="hp">
+    <PageHero
+      crumb="Soluciones"
+      eyebrow="Soluciones · Colombia"
+      title="Problemas concretos."
+      accent="Soluciones concretas."
+      lead="Cada solución explica un flujo que una empresa colombiana puede necesitar resolver: códigos EAN, facturación DIAN, CRM por WhatsApp, remarketing, despachos, pagos, inventario y más."
+      primaryLabel="Agendar demo"
+      primaryHref={demoHref}
+      secondaryLabel="Ver módulos"
+      secondaryHref="/modulos"
+    />
 
-      <section class="binah-section no-border" style="padding: 40px 0 56px;">
-        <div class="eyebrow">Soluciones / Colombia</div>
-        <h1 class="display display-lg" style="margin-top: 20px; max-width: 15ch;">
-          Problemas concretos. Páginas concretas.
-        </h1>
-        <p class="lead" style="margin-top: 28px; font-size: 18px;">
-          Cada página explica un flujo que una empresa colombiana puede necesitar resolver: códigos EAN,
-          facturación DIAN, CRM por WhatsApp, remarketing, despachos, pagos, inventario y más.
-        </p>
-        <div class="hero-cta">
-          <a href={waUrl(WA_MESSAGES.demo)} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            Agendar demo <span class="arrow">→</span>
-          </a>
-          <a href="/modulos" class="btn btn-outline">Ver módulos</a>
+    <section class="hp-section" aria-labelledby="sol-featured-title">
+      <div class="container-binah">
+        <div class="hp-head hp-reveal">
+          <div>
+            <span class="hp-eyebrow">Destacadas</span>
+            <h2 class="hp-h2" id="sol-featured-title">Las soluciones más buscadas.</h2>
+          </div>
+          <p class="hp-lead">Empieza por la que más le duele hoy a tu operación.</p>
         </div>
-      </section>
-
-      <section class="binah-section">
-        <div class="section-num">
-          <span class="n">P0</span><span>Prioridad alta</span><span class="rule"></span><span>{FEATURED_SOLUTIONS.length} páginas</span>
-        </div>
-        <div class="solution-index-hero">
+        <ul class="featured">
           {
-            FEATURED_SOLUTIONS.map((page) => (
-              <a href={page.path}>
-                <span class="mono">{page.priority}</span>
-                <h2>{page.h1}</h2>
-                <p>{page.colombiaUseCase}</p>
-                <strong>Ver página →</strong>
-              </a>
+            FEATURED_SOLUTIONS.map((page, index) => (
+              <li class="hp-reveal" style={`--d: ${(index % 3) * 80}ms`}>
+                <a href={page.path} class="feat hp-card">
+                  <span class="feat-top">
+                    <span class="feat-glyph">
+                      <ModuleGlyph id={page.moduleId} size={22} />
+                    </span>
+                    <span class="feat-kicker">{page.moduleName}</span>
+                  </span>
+                  <h3>{page.h1}</h3>
+                  <p>{page.colombiaUseCase}</p>
+                  <span class="feat-link">
+                    Ver solución <span class="hp-arrow" aria-hidden="true">→</span>
+                  </span>
+                </a>
+              </li>
             ))
           }
-        </div>
-      </section>
+        </ul>
+      </div>
+    </section>
 
-      <section class="binah-section">
-        <div class="section-head">
-          <h2 class="display display-md title">Todas las soluciones.</h2>
-          <p>
-            Publicadas como rutas reales, enlazadas desde el sitio y listas para entrar al sitemap.
+    <section class="hp-section hp-section--alt" aria-labelledby="sol-all-title">
+      <div class="container-binah">
+        <div class="hp-head hp-reveal">
+          <div>
+            <span class="hp-eyebrow">{ALL_SEO_FEATURE_PAGES.length} soluciones</span>
+            <h2 class="hp-h2" id="sol-all-title">Todas las soluciones.</h2>
+          </div>
+          <p class="hp-lead">
+            Organizadas por módulo. Cada una explica el flujo completo y cómo se conecta con el resto de Binah.
           </p>
         </div>
 
-        {
-          solutionGroups.map((group) => (
-            <div class="solution-group">
-              <div class="solution-group-head">
-                <span class="mono">{group.priority}</span>
-                <p>{group.label}</p>
-              </div>
-              <div class="solution-link-list">
-                {group.pages.map((page) => (
-                  <a href={page.path}>
-                    <span>{page.title.replace(" — Binah", "")}</span>
-                    <small>{page.moduleName}</small>
+        <div class="groups">
+          {
+            groups.map((group, index) => (
+              <div class="group hp-card hp-reveal" style={`--d: ${(index % 2) * 80}ms`}>
+                <div class="group-head">
+                  <span class="group-glyph">
+                    <ModuleGlyph id={group.id} size={18} />
+                  </span>
+                  <h3>{group.name}</h3>
+                  <a href={group.href} class="group-module">
+                    Ver módulo <span aria-hidden="true">→</span>
                   </a>
-                ))}
+                </div>
+                <ul>
+                  {group.pages.map((page) => (
+                    <li>
+                      <a href={page.path}>
+                        <span>{page.title.replace(" — Binah", "")}</span>
+                        <span class="row-arrow" aria-hidden="true">
+                          →
+                        </span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </div>
-          ))
-        }
-      </section>
+            ))
+          }
+        </div>
+      </div>
+    </section>
 
-      <CtaBand
-        eyebrow="Soluciones Binah"
-        heading="Convierte búsqueda<br />en conversación."
-        body="Cada página apunta a un problema real y termina en una demo con contexto del negocio."
-        primaryHref={waUrl(WA_MESSAGES.demo)}
-        secondaryLabel="Ver precios"
-        secondaryHref="/precios"
-      />
-    </div>
+    <HomeCta
+      demoHref={demoHref}
+      eyebrow="Soluciones Binah"
+      heading="Cuéntanos tu problema. Te mostramos la solución."
+      lead="En 30 minutos vemos tu operación real y te mostramos cómo se resuelve en Binah, con tus canales, tu catálogo y tu equipo."
+    />
   </main>
   <Footer />
+  <Reveal />
 </Layout>
+
+<style>
+  .featured {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .featured > li {
+    display: flex;
+  }
+  .feat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 26px;
+  }
+  .feat-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .feat-glyph {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: var(--hp-lavender);
+    color: var(--hp-purple);
+  }
+  .feat-kicker {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--hp-mute);
+  }
+  .feat h3 {
+    margin: 22px 0 0;
+    font-size: 20px;
+    line-height: 1.25;
+    letter-spacing: -0.025em;
+    font-weight: 600;
+    color: var(--hp-ink);
+    text-wrap: balance;
+  }
+  .feat p {
+    margin: 10px 0 0;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--hp-mute);
+  }
+  .feat-link {
+    margin-top: auto;
+    padding-top: 22px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--hp-purple);
+  }
+  .feat-link .hp-arrow {
+    transition: transform 0.2s var(--hp-ease);
+  }
+  .feat:hover .feat-link .hp-arrow {
+    transform: translateX(3px);
+  }
+
+  /* Masonry: groups flow into two balanced columns */
+  .groups {
+    columns: 2;
+    column-gap: 16px;
+  }
+  .group {
+    display: block;
+    break-inside: avoid;
+    margin-bottom: 16px;
+    padding: 22px 24px 12px;
+  }
+  .group-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--hp-line);
+  }
+  .group-glyph {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    background: var(--hp-lavender);
+    color: var(--hp-purple);
+    flex-shrink: 0;
+  }
+  .group h3 {
+    margin: 0;
+    font-size: 17px;
+    letter-spacing: -0.015em;
+    font-weight: 600;
+    color: var(--hp-ink);
+  }
+  .group-module {
+    margin-left: auto;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--hp-purple);
+    white-space: nowrap;
+  }
+  .group ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .group li + li {
+    border-top: 1px solid var(--hp-line);
+  }
+  .group li a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 13px 0;
+    font-size: 15px;
+    line-height: 1.4;
+    color: var(--hp-body);
+    transition: color 0.2s ease;
+  }
+  .group li a:hover {
+    color: var(--hp-purple);
+  }
+  .row-arrow {
+    color: var(--hp-mute);
+    transition:
+      transform 0.2s var(--hp-ease),
+      color 0.2s ease;
+  }
+  .group li a:hover .row-arrow {
+    color: var(--hp-purple);
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 1000px) {
+    .featured {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .groups {
+      columns: 1;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .featured {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .feat {
+      padding: 22px;
+    }
+  }
+</style>
