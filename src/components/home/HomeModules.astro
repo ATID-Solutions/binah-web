@@ -1,0 +1,713 @@
+---
+import { ModuleGlyph } from "../binah/brands";
+import { BINAH_MODULES, type ModuleId } from "../binah/modules";
+
+const hrefOf = (id: ModuleId) => BINAH_MODULES.find((m) => m.id === id)?.href ?? "/modulos";
+
+const compact: Array<{ id: ModuleId; title: string; body: string; features: string[] }> = [
+  {
+    id: "soporte",
+    title: "Tickets de soporte",
+    body: "Cada caso tiene dueño, prioridad, historial y cierre.",
+    features: ["Tickets por cliente y pedido", "Responsables, prioridades y SLA", "Motivos recurrentes medidos"],
+  },
+  {
+    id: "contabilidad",
+    title: "Contabilidad",
+    body: "Costos, compras y proveedores. Tu contador te va a pedir un aumento (de cariño).",
+    features: ["Órdenes de compra y cuentas por pagar", "Bancos, cajas y centros de costo", "Balance de prueba y plan de cuentas"],
+  },
+];
+
+// Operaciones, Tareas and Chat interno are presented as one module on the
+// home; each part still links to its own module page.
+const team: Array<{ id: ModuleId; title: string; features: string[] }> = [
+  { id: "operaciones", title: "Operaciones y agenda", features: ["Agenda multi-recurso", "Reservas y citas con IA"] },
+  { id: "tareas", title: "Tareas", features: ["Tableros Kanban y línea de tiempo", "Responsables y fechas"] },
+  { id: "chat", title: "Chat interno", features: ["Canales, hilos y menciones", "Alertas de la IA y los pedidos"] },
+];
+
+const inbox = [
+  { channel: "Instagram", who: "Laura Gómez", text: "¿Tienen la proteína de 2 lb?", tag: "IA", tone: "ai" },
+  { channel: "Email", who: "Compras · Clínica Sol", text: "Adjunto la orden de compra de marzo", tag: "Ana", tone: "human" },
+  { channel: "WhatsApp", who: "Andrés Pérez", text: "¿Cuándo llega mi pedido?", tag: "IA", tone: "ai" },
+  { channel: "Chat web", who: "Visitante", text: "Quiero agendar una cita para el sábado", tag: "IA", tone: "ai" },
+  { channel: "Llamada", who: "+57 300 ··· 4821", text: "Llamada saliente · 3:42 min", tag: "Juan", tone: "human" },
+];
+
+const channels = ["WhatsApp", "Instagram", "Email", "Chat web", "SMS", "Voz"];
+const bars = [38, 52, 44, 60, 56, 70, 64, 78, 72, 84, 80, 96];
+---
+
+<section class="hp-section" id="modulos" aria-labelledby="hp-modules-title">
+  <div class="container-binah">
+    <div class="hp-head hp-reveal">
+      <div>
+        <span class="hp-eyebrow"><span class="n">02</span>·<span>Módulos · 10 en 1</span></span>
+        <h2 class="hp-h2" id="hp-modules-title">Diez módulos. Una sola base de datos.</h2>
+      </div>
+      <p class="hp-lead">
+        Cada módulo es útil por sí solo. Juntos son imbatibles: una venta cerrada en el CRM puede disparar la factura
+        electrónica, reservar inventario, generar el despacho, abrir un ticket de soporte y avisar al equipo por chat
+        interno.
+      </p>
+    </div>
+
+    <div class="bento">
+      <!-- CRM -->
+      <a href={hrefOf("crm")} class="tile hp-card tile-wide hp-reveal">
+        <div class="tile-visual" data-nosnippet>
+          <ul class="inbox" aria-hidden="true">
+            {
+              inbox.map((row) => (
+                <li>
+                  <span class="inbox-channel">{row.channel}</span>
+                  <span class="inbox-who">{row.who}</span>
+                  <span class="inbox-text">{row.text}</span>
+                  <span class={`inbox-tag is-${row.tone}`}>{row.tag}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div class="tile-copy">
+          <h3>CRM y agentes IA</h3>
+          <p>Un solo inbox para todos tus canales, con agentes de IA entrenados y llamadas a celulares desde el CRM.</p>
+          <ul class="tile-chips">{channels.map((c) => <li>{c}</li>)}</ul>
+        </div>
+      </a>
+
+      <!-- Facturación -->
+      <a href={hrefOf("facturacion")} class="tile hp-card hp-reveal" style="--d: 80ms">
+        <div class="tile-visual" data-nosnippet>
+          <div class="invoice" aria-hidden="true">
+            <div class="invoice-head">
+              <span>Factura electrónica</span>
+              <strong>FE-10293</strong>
+            </div>
+            <div class="invoice-row"><span>Subtotal</span><span>$243.613</span></div>
+            <div class="invoice-row"><span>IVA 19 %</span><span>$46.287</span></div>
+            <div class="invoice-row invoice-total"><span>Total</span><span>$289.900</span></div>
+            <div class="invoice-stamp">Aceptada por la DIAN</div>
+          </div>
+        </div>
+        <div class="tile-copy">
+          <h3>Facturación electrónica</h3>
+          <p>Facturas, notas crédito y notas débito emitidas a la DIAN desde la venta, sin copiar datos.</p>
+        </div>
+      </a>
+
+      <!-- Ventas -->
+      <a href={hrefOf("retail")} class="tile hp-card hp-reveal">
+        <div class="tile-visual" data-nosnippet>
+          <div class="stock" aria-hidden="true">
+            <div class="stock-head"><strong>Proteína vainilla 2 lb</strong><span>SKU PV-2LB</span></div>
+            <div class="stock-row"><span>Barranquilla</span><i style="--w: 72%"></i><b>72</b></div>
+            <div class="stock-row"><span>Bogotá</span><i style="--w: 45%"></i><b>45</b></div>
+            <div class="stock-row is-low"><span>Medellín</span><i style="--w: 14%"></i><b>8</b></div>
+          </div>
+        </div>
+        <div class="tile-copy">
+          <h3>Ventas e inventario</h3>
+          <p>Pedidos por canal y asesor, inventario multibodega y catálogo con SKU, variantes y códigos EAN.</p>
+        </div>
+      </a>
+
+      <!-- Pagos -->
+      <a href={hrefOf("invoice")} class="tile hp-card hp-reveal" style="--d: 80ms">
+        <div class="tile-visual" data-nosnippet>
+          <div class="paylink" aria-hidden="true">
+            <div class="paylink-card">
+              <span class="paylink-label">Link de pago · Pedido #4821</span>
+              <strong>$289.900</strong>
+              <span class="paylink-ok">Pagado</span>
+            </div>
+            <div class="paylink-methods"><span>PSE</span><span>Tarjeta</span><span>Nequi</span></div>
+          </div>
+        </div>
+        <div class="tile-copy">
+          <h3>Pagos</h3>
+          <p>Cobra en cinco segundos por cualquier canal, con cobros recurrentes y conciliación.</p>
+        </div>
+      </a>
+
+      <!-- Reportes -->
+      <a href={hrefOf("reportes")} class="tile hp-card hp-reveal" style="--d: 160ms">
+        <div class="tile-visual" data-nosnippet>
+          <div class="chart" aria-hidden="true">
+            <div class="chart-head"><span>Ventas netas</span><strong>+18 %</strong></div>
+            <div class="chart-bars">
+              {bars.map((h, i) => <i style={`--h: ${h}%`} class:list={[i === bars.length - 1 && "is-last"]} />)}
+            </div>
+          </div>
+        </div>
+        <div class="tile-copy">
+          <h3>Reportes</h3>
+          <p>Tableros en vivo, exportación a Excel y PDF y reportes automáticos por correo.</p>
+        </div>
+      </a>
+
+      <div class="tile tile-wide tile-team hp-card hp-reveal">
+        <span class="tile-glyph">
+          <ModuleGlyph id="operaciones" size={22} />
+        </span>
+        <h3>Operaciones, tareas y chat interno</h3>
+        <p>La agenda, los proyectos y las conversaciones del equipo, junto a tus clientes y pedidos.</p>
+        <ul class="team-parts">
+          {
+            team.map((part) => (
+              <li>
+                <a href={hrefOf(part.id)} class="team-part">
+                  <span class="team-part-title">
+                    <ModuleGlyph id={part.id} size={18} />
+                    {part.title}
+                    <span class="hp-arrow" aria-hidden="true">→</span>
+                  </span>
+                  <ul class="hp-checks">{part.features.map((f) => <li>{f}</li>)}</ul>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      {
+        compact.map((m, index) => (
+          <a href={hrefOf(m.id)} class="tile tile-compact hp-card hp-reveal" style={`--d: ${index * 80}ms`}>
+            <span class="tile-glyph">
+              <ModuleGlyph id={m.id} size={22} />
+            </span>
+            <h3>{m.title}</h3>
+            <p>{m.body}</p>
+            <ul class="hp-checks">{m.features.map((f) => <li>{f}</li>)}</ul>
+          </a>
+        ))
+      }
+
+      <div class="tile tile-wide tile-cta hp-reveal" style="--d: 80ms">
+        <span class="tile-cta-kicker">Precios</span>
+        <h3>Paga por módulo. O por todo.</h3>
+        <p>Empieza con lo que necesitas hoy y suma módulos cuando tu operación crezca.</p>
+        <div class="tile-cta-links">
+          <a href="/precios" class="hp-btn tile-cta-btn">Ver precios <span class="hp-arrow" aria-hidden="true">→</span></a>
+          <a href="/modulos" class="tile-cta-more">Todos los módulos</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .tile {
+    --visual-h: 212px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-width: 0;
+  }
+  .tile-wide {
+    grid-column: span 2;
+  }
+  .tile h3 {
+    margin: 0;
+    font-size: 21px;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    font-weight: 600;
+    color: var(--hp-ink);
+  }
+  .tile p {
+    margin: 8px 0 0;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--hp-mute);
+  }
+  .tile-copy {
+    padding: 22px 26px 26px;
+  }
+  a.tile::after {
+    content: "↗";
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid var(--hp-line);
+    font-size: 14px;
+    color: var(--hp-purple);
+    opacity: 0;
+    transform: translate(-4px, 4px);
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s var(--hp-ease);
+  }
+  /* On tiles with a mock, keep the chip in the copy area so it never covers
+     the mock's own corner (e.g. the CRM inbox's first tag). */
+  a.tile:has(.tile-visual)::after {
+    top: calc(var(--visual-h) + 18px);
+  }
+  a.tile:has(.tile-visual) .tile-copy h3 {
+    padding-right: 36px;
+  }
+  a.tile:hover::after,
+  a.tile:focus-visible::after {
+    opacity: 1;
+    transform: none;
+  }
+
+  .tile-visual {
+    position: relative;
+    height: var(--visual-h);
+    padding: 24px 26px 0;
+    background:
+      radial-gradient(ellipse 80% 90% at 50% 100%, rgba(77, 55, 246, 0.07), transparent 70%),
+      linear-gradient(180deg, #f7f7f4, #fbfbf9);
+    border-bottom: 1px solid var(--hp-line);
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .tile-visual > * {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ebeae4;
+    border-bottom: 0;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 -2px 18px -10px rgba(16, 16, 12, 0.16);
+    transition: transform 0.4s var(--hp-ease);
+  }
+  .tile:hover .tile-visual > * {
+    transform: translateY(-4px);
+  }
+
+  .tile-chips {
+    list-style: none;
+    margin: 16px 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .tile-chips li {
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--hp-alt);
+    border: 1px solid var(--hp-line);
+    color: var(--hp-body);
+  }
+
+  /* CRM inbox */
+  .inbox {
+    list-style: none;
+    margin: 0;
+    padding: 6px 0 0;
+    font-size: 12.5px;
+  }
+  .inbox li {
+    display: grid;
+    grid-template-columns: 82px 150px minmax(0, 1fr) auto;
+    gap: 14px;
+    align-items: center;
+    padding: 9px 16px;
+    border-top: 1px solid #f2f1ec;
+    white-space: nowrap;
+  }
+  .inbox li:first-child {
+    border-top: 0;
+    background: rgba(77, 55, 246, 0.045);
+  }
+  .inbox-channel {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--hp-mute);
+  }
+  .inbox-who {
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .inbox-text {
+    color: var(--hp-mute);
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .inbox-tag {
+    font-size: 10.5px;
+    font-weight: 500;
+    padding: 3px 9px;
+    border-radius: 999px;
+  }
+  .inbox-tag.is-ai {
+    background: var(--hp-lavender);
+    color: #3a25d6;
+  }
+  .inbox-tag.is-human {
+    background: #efeee9;
+    color: #55554f;
+  }
+
+  /* Invoice */
+  .invoice {
+    max-width: 260px;
+    padding: 16px 16px 14px;
+    font-size: 12px;
+  }
+  .invoice-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+    color: var(--hp-mute);
+  }
+  .invoice-head strong {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--hp-ink);
+  }
+  .invoice-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-top: 1px dashed #e6e5df;
+    color: var(--hp-body);
+    font-variant-numeric: tabular-nums;
+  }
+  .invoice-total {
+    font-weight: 600;
+    color: var(--hp-ink);
+  }
+  .invoice-stamp {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: #e3f5ec;
+    color: #17734b;
+    font-weight: 500;
+    font-size: 11.5px;
+  }
+  .invoice-stamp::before {
+    content: "✓";
+  }
+
+  /* Stock */
+  .stock {
+    padding: 16px 16px 18px;
+    font-size: 12px;
+  }
+  .stock-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .stock-head span {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--hp-mute);
+  }
+  .stock-row {
+    display: grid;
+    grid-template-columns: 84px 1fr 24px;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 0;
+    color: var(--hp-body);
+  }
+  .stock-row i {
+    height: 8px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--hp-purple) var(--w), #efeee9 var(--w));
+  }
+  .stock-row b {
+    text-align: right;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+  .stock-row.is-low i {
+    background: linear-gradient(90deg, #d98a14 var(--w), #efeee9 var(--w));
+  }
+  .stock-row.is-low b {
+    color: #a3620a;
+  }
+
+  /* Payment link */
+  .paylink {
+    padding: 16px;
+    font-size: 12px;
+  }
+  .paylink-card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2px 10px;
+    align-items: center;
+    padding: 14px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #4d37f6, #3b25e6);
+    color: #fff;
+  }
+  .paylink-label {
+    grid-column: 1 / -1;
+    font-size: 11px;
+    opacity: 0.8;
+  }
+  .paylink-card strong {
+    font-size: 22px;
+    letter-spacing: -0.03em;
+    font-weight: 600;
+  }
+  .paylink-ok {
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+    font-weight: 500;
+  }
+  .paylink-ok::before {
+    content: "✓ ";
+  }
+  .paylink-methods {
+    display: flex;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .paylink-methods span {
+    flex: 1;
+    text-align: center;
+    padding: 6px 0;
+    border-radius: 8px;
+    border: 1px solid #ebeae4;
+    color: var(--hp-body);
+  }
+
+  /* Chart */
+  .chart {
+    padding: 16px 16px 0;
+    font-size: 12px;
+  }
+  .chart-head {
+    display: flex;
+    justify-content: space-between;
+    color: var(--hp-mute);
+  }
+  .chart-head strong {
+    color: #17734b;
+    font-weight: 600;
+  }
+  .chart-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    height: 112px;
+    margin-top: 14px;
+  }
+  .chart-bars i {
+    flex: 1;
+    height: var(--h);
+    border-radius: 4px 4px 0 0;
+    background: #e4e0fd;
+  }
+  .chart-bars i.is-last {
+    background: var(--hp-purple);
+  }
+
+  /* Compact tiles */
+  .tile-compact {
+    padding: 26px;
+  }
+  .tile-glyph {
+    margin-bottom: 22px;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: var(--hp-lavender);
+    color: var(--hp-purple);
+  }
+  .tile-compact .hp-checks {
+    margin-top: 18px;
+  }
+  .tile-compact .hp-checks li {
+    font-size: 13.5px;
+  }
+
+  /* Operaciones + Tareas + Chat interno, shown as one module */
+  .tile-team {
+    padding: 26px;
+  }
+  .tile-team .tile-glyph {
+    margin-bottom: 22px;
+  }
+  .team-parts {
+    list-style: none;
+    margin: 20px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .team-part {
+    display: block;
+    height: 100%;
+    padding: 16px;
+    border-radius: 12px;
+    background: var(--hp-alt);
+    border: 1px solid var(--hp-line);
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease;
+  }
+  .team-part:hover {
+    border-color: #cfc8ff;
+    background: #f7f5ff;
+  }
+  .team-part-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--hp-ink);
+  }
+  .team-part-title :global(svg) {
+    color: var(--hp-purple);
+    flex-shrink: 0;
+  }
+  .team-part-title .hp-arrow {
+    margin-left: auto;
+    color: var(--hp-purple);
+    transition: transform 0.2s var(--hp-ease);
+  }
+  .team-part:hover .hp-arrow {
+    transform: translateX(3px);
+  }
+  .team-part .hp-checks {
+    margin-top: 12px;
+    gap: 6px;
+  }
+  .team-part .hp-checks li {
+    font-size: 13px;
+  }
+
+  /* Pricing CTA tile */
+  .tile-cta {
+    padding: 28px;
+    border-radius: var(--hp-radius);
+    color: #fff;
+    background:
+      radial-gradient(ellipse 90% 70% at 100% 0%, rgba(255, 255, 255, 0.18), transparent 60%),
+      linear-gradient(150deg, #5a45ff 0%, var(--hp-purple) 45%, #2f1fc4 100%);
+    box-shadow: 0 24px 60px -30px rgba(77, 55, 246, 0.9);
+  }
+  .tile-cta-kicker {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75);
+  }
+  .tile-cta h3 {
+    margin-top: 14px;
+    font-size: 26px;
+    color: #fff;
+  }
+  .tile-cta p {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .tile-cta-links {
+    margin-top: auto;
+    padding-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 18px;
+  }
+  .tile-cta-btn {
+    background: #fff;
+    color: var(--hp-ink);
+    min-height: 44px;
+  }
+  .tile-cta-more {
+    font-size: 14.5px;
+    font-weight: 500;
+    color: #fff;
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.4);
+    text-underline-offset: 4px;
+  }
+  .tile-cta-more:hover {
+    text-decoration-color: #fff;
+  }
+  .tile-cta a:focus-visible {
+    outline-color: #fff;
+  }
+
+  @media (max-width: 1080px) {
+    .bento {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .inbox li {
+      grid-template-columns: 74px 130px minmax(0, 1fr) auto;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .bento {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .tile-wide {
+      grid-column: auto;
+    }
+    .inbox li {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 4px 10px;
+    }
+    .inbox-channel {
+      grid-column: 1;
+    }
+    .inbox-who {
+      grid-column: 1;
+      grid-row: 2;
+    }
+    .inbox-text,
+    .inbox li:nth-child(n + 4) {
+      display: none;
+    }
+    .inbox-tag {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+    }
+    .tile-copy,
+    .tile-compact,
+    .tile-team,
+    .tile-cta {
+      padding: 22px;
+    }
+    .team-parts {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .tile-compact .hp-checks {
+      display: none;
+    }
+    .tile-visual {
+      padding: 20px 20px 0;
+    }
+  }
+</style>

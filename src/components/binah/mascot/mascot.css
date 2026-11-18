@@ -1,0 +1,255 @@
+/* Copied from the Binah app (binah repo, src/styles/app.css) with the mascot.
+   Keep in sync with src/components/binah/mascot/Mascot.tsx. */
+/* Binah mascot (plush sheep) — calm, steady idle motion. See
+   src/components/shared/mascot/Mascot.tsx. Every class is opt-in via the
+   `animated` prop and disabled under reduced-motion. Idle loops use unequal
+   cycle lengths so their combination never visibly repeats, and start at a
+   per-instance offset (`--binah-mascot-phase`) so mascots on one screen do
+   not move in lockstep. Pivots are in viewBox units: feet at (100,190), neck
+   at (100,130), eyes on y = 98. */
+@keyframes binah-mascot-enter {
+    from {
+        opacity: 0;
+        transform: translateY(6px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+@keyframes binah-mascot-breathe {
+    from {
+        transform: scale(1, 1);
+    }
+    to {
+        transform: scale(0.992, 1.018);
+    }
+}
+@keyframes binah-mascot-head {
+    from {
+        transform: translateY(0.6px);
+    }
+    to {
+        transform: translateY(-1px);
+    }
+}
+@keyframes binah-mascot-sway {
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+    30% {
+        transform: rotate(-1.1deg);
+    }
+    65% {
+        transform: rotate(0.9deg);
+    }
+}
+/* One blink mid-cycle and a double blink near the end. */
+@keyframes binah-mascot-blink {
+    0%,
+    42%,
+    47%,
+    87%,
+    91.5%,
+    96%,
+    100% {
+        transform: scaleY(1);
+    }
+    44.5%,
+    89.2%,
+    93.8% {
+        transform: scaleY(0.08);
+    }
+}
+/* An occasional glance aside, held for a moment; otherwise she keeps eye contact. */
+@keyframes binah-mascot-gaze {
+    0%,
+    52%,
+    66%,
+    100% {
+        transform: translate(0, 0);
+    }
+    53.5%,
+    64.5% {
+        transform: translate(-1.4px, 0.3px);
+    }
+}
+@keyframes binah-mascot-wave {
+    from {
+        transform: rotate(-7deg);
+    }
+    to {
+        transform: rotate(7deg);
+    }
+}
+@keyframes binah-mascot-spark {
+    from {
+        transform: scale(0.94);
+        opacity: 0.85;
+    }
+    to {
+        transform: scale(1.06);
+        opacity: 1;
+    }
+}
+.binah-mascot-enter {
+    transform-box: view-box;
+    transform-origin: 100px 190px;
+    animation: binah-mascot-enter 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.binah-mascot-figure {
+    transform-box: view-box;
+    transform-origin: 100px 190px;
+    animation: binah-mascot-breathe 4.2s ease-in-out
+        var(--binah-mascot-phase, 0s) infinite alternate;
+}
+/* Same period as the breath, half a second behind it. */
+.binah-mascot-head {
+    animation: binah-mascot-head 4.2s ease-in-out
+        calc(var(--binah-mascot-phase, 0s) + 0.6s) infinite alternate;
+}
+.binah-mascot-sway {
+    transform-box: view-box;
+    transform-origin: 100px 130px;
+    animation: binah-mascot-sway 9.7s ease-in-out var(--binah-mascot-phase, 0s)
+        infinite;
+}
+.binah-mascot-eyes {
+    transform-box: view-box;
+    transform-origin: 100px 98px;
+    animation: binah-mascot-blink 7.1s ease-in-out var(--binah-mascot-phase, 0s)
+        infinite;
+}
+.binah-mascot-gaze {
+    animation: binah-mascot-gaze 14.3s cubic-bezier(0.3, 0, 0.2, 1)
+        calc(var(--binah-mascot-phase, 0s) * 2.3) infinite;
+}
+.binah-mascot-wave {
+    transform-box: fill-box;
+    transform-origin: 12% 50%;
+    animation: binah-mascot-wave 1.1s ease-in-out infinite alternate;
+}
+.binah-mascot-spark {
+    transform-box: fill-box;
+    transform-origin: 50% 60%;
+    animation: binah-mascot-spark 1.6s ease-in-out infinite alternate;
+}
+@keyframes binah-mascot-pop {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    65% {
+        transform: scale(1.18);
+        opacity: 1;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+@keyframes binah-mascot-glow {
+    from {
+        transform: scale(0.75);
+        opacity: 0.35;
+    }
+    to {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+@keyframes binah-mascot-ray {
+    0%,
+    100% {
+        opacity: 0.25;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.15);
+    }
+}
+@keyframes binah-mascot-dot {
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+@keyframes binah-mascot-ripple {
+    from {
+        opacity: 0.2;
+        transform: translateX(-1.5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(2px);
+    }
+}
+@keyframes binah-mascot-float {
+    from {
+        transform: translateY(0) rotate(0deg);
+    }
+    to {
+        transform: translateY(-6px) rotate(30deg);
+    }
+}
+/* One-shot entrance for the idea bulb (grows from its own centre). */
+.binah-mascot-pop {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: binah-mascot-pop 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.25) both;
+}
+.binah-mascot-glow {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: binah-mascot-glow 1.4s ease-in-out infinite alternate;
+}
+.binah-mascot-ray {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: binah-mascot-ray 1.5s ease-in-out infinite;
+}
+.binah-mascot-dot {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: binah-mascot-dot 1.5s ease-in-out infinite;
+}
+.binah-mascot-ripple {
+    animation: binah-mascot-ripple 0.9s ease-in-out infinite alternate;
+}
+/* Confetti bursts out of the head once, then every piece keeps floating. */
+.binah-mascot-burst {
+    transform-box: view-box;
+    transform-origin: 100px 80px;
+    animation: binah-mascot-pop 0.7s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+.binah-mascot-confetti {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: binah-mascot-float 2s ease-in-out infinite alternate;
+}
+@media (prefers-reduced-motion: reduce) {
+    .binah-mascot-enter,
+    .binah-mascot-figure,
+    .binah-mascot-head,
+    .binah-mascot-sway,
+    .binah-mascot-eyes,
+    .binah-mascot-gaze,
+    .binah-mascot-wave,
+    .binah-mascot-spark,
+    .binah-mascot-pop,
+    .binah-mascot-glow,
+    .binah-mascot-ray,
+    .binah-mascot-dot,
+    .binah-mascot-ripple,
+    .binah-mascot-burst,
+    .binah-mascot-confetti {
+        animation: none;
+    }
+}

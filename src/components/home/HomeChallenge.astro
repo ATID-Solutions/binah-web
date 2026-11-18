@@ -1,0 +1,181 @@
+---
+// The problem (operations don't scale) and a short AI-native answer that leads
+// into the modules. The AI-native idea also runs through the hero and the AI
+// section rather than having a section of its own.
+const pains = [
+  {
+    title: "Ocho herramientas que no se hablan",
+    body: "CRM por un lado, facturación por otro, inventario en Excel. Los datos se copian a mano y se pierden.",
+  },
+  {
+    title: "La operación vive en chats",
+    body: "Pedidos en chats personales, clientes sin respuesta de noche y ventas que dependen de quién esté conectado.",
+  },
+  {
+    title: "Despachos y facturas a mano",
+    body: "Guías, rótulos, facturas DIAN y conciliación hechos uno por uno, con errores y horas perdidas.",
+  },
+  {
+    title: "El dueño como cuello de botella",
+    body: "Los números se arman a fin de mes y las decisiones esperan a que alguien tenga tiempo de revisarlos.",
+  },
+];
+
+---
+
+<section class="hp-section hp-section--alt" aria-labelledby="hp-challenge-title">
+  <div class="container-binah">
+    <div class="hp-head hp-reveal">
+      <div>
+        <span class="hp-eyebrow"><span class="n">01</span>·<span>El reto</span></span>
+        <h2 class="hp-h2" id="hp-challenge-title">Tu negocio ya vende. Lo que no escala es la operación.</h2>
+      </div>
+      <p class="hp-lead">
+        Cada venta nueva pide más gente, más chats, más Excel y más horas del dueño. Sin un sistema que trabaje por ti,
+        crecer se vuelve más caro que vender.
+      </p>
+    </div>
+
+    <div class="pains">
+      {
+        pains.map((pain, index) => (
+          <article class="pain hp-card hp-reveal" style={`--d: ${index * 80}ms`}>
+            <span class="pain-n">{String(index + 1).padStart(2, "0")}</span>
+            <h3>{pain.title}</h3>
+            <p>{pain.body}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="answer hp-reveal">
+      <span class="answer-tag">AI-native</span>
+      <p>
+        <strong>Binah no es software con IA pegada.</strong> Los agentes ejecutan, tu equipo supervisa y decide, y vendes
+        más sin crecer la nómina al mismo ritmo.
+      </p>
+      <a href="#ia" class="answer-link">Conoce los agentes <span class="hp-arrow" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pains {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .pain {
+    padding: 26px 24px 28px;
+  }
+  .pain-n {
+    display: inline-grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: var(--hp-alt);
+    border: 1px solid var(--hp-line);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--hp-mute);
+  }
+  .pain h3 {
+    margin: 22px 0 10px;
+    font-size: 18px;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+    color: var(--hp-ink);
+  }
+  .pain p {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--hp-mute);
+  }
+
+  .answer {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 16px 24px;
+    margin-top: 16px;
+    padding: 22px 26px;
+    border-radius: var(--hp-radius);
+    background: var(--hp-charcoal);
+    color: var(--hp-on-dark-mute);
+  }
+  .answer::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    right: -80px;
+    top: -140px;
+    width: 360px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(77, 55, 246, 0.55), transparent);
+    pointer-events: none;
+  }
+  .answer-tag {
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--hp-purple);
+    border-radius: 999px;
+    padding: 5px 11px;
+  }
+  .answer p {
+    margin: 0;
+    flex: 1;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  .answer strong {
+    color: #fff;
+    font-weight: 600;
+  }
+  .answer-link {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--hp-purple-light);
+  }
+  .answer-link .hp-arrow {
+    transition: transform 0.2s var(--hp-ease);
+  }
+  .answer-link:hover .hp-arrow {
+    transform: translateX(3px);
+  }
+  .answer-link:focus-visible {
+    outline-color: var(--hp-purple-light);
+  }
+
+  @media (max-width: 1080px) {
+    .pains {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 760px) {
+    .answer {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .pains {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

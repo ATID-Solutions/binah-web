@@ -1,0 +1,205 @@
+---
+// A looping band of logo tiles with a pause button (WCAG 2.2.2). The list is
+// rendered twice so the loop is seamless; the copy is hidden from assistive
+// tech. With reduced motion the band is static and wraps.
+interface Item {
+  src: string;
+  alt: string;
+}
+
+interface Props {
+  items: Item[];
+  variant: "tools" | "clients";
+  /** What the pause button stops, e.g. "los logos de integraciones". */
+  label: string;
+  /** Seconds for one full loop. */
+  duration?: number;
+}
+
+const { items, variant, label, duration = 40 } = Astro.props;
+const size = variant === "tools" ? { width: 132, height: 52 } : { width: 96, height: 96 };
+---
+
+<div class={`mq mq--${variant}`} data-marquee>
+  <div class="mq-viewport">
+    <ul class="mq-track" style={`--mq-duration: ${duration}s`}>
+      {
+        items.map((item) => (
+          <li class="mq-item">
+            <img src={item.src} alt={item.alt} width={size.width} height={size.height} loading="lazy" decoding="async" />
+          </li>
+        ))
+      }
+      {
+        items.map((item) => (
+          <li class="mq-item mq-clone" aria-hidden="true">
+            <img src={item.src} alt="" width={size.width} height={size.height} loading="lazy" decoding="async" />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  <button type="button" class="mq-toggle" aria-pressed="false" aria-label={`Pausar ${label}`} data-marquee-toggle>
+    <svg class="mq-icon-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.5v9M11 3.5v9"></path></svg>
+    <svg class="mq-icon-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M5.5 3.5 12 8l-6.5 4.5z"></path></svg>
+  </button>
+</div>
+
+<script>
+  function initMarquees() {
+    document.querySelectorAll<HTMLElement>("[data-marquee]:not([data-marquee-ready])").forEach((root) => {
+      root.dataset.marqueeReady = "true";
+      const toggle = root.querySelector<HTMLButtonElement>("[data-marquee-toggle]");
+      toggle?.addEventListener("click", () => {
+        const paused = toggle.getAttribute("aria-pressed") !== "true";
+        toggle.setAttribute("aria-pressed", String(paused));
+        root.toggleAttribute("data-paused", paused);
+      });
+    });
+  }
+
+  document.addEventListener("astro:page-load", initMarquees);
+</script>
+
+<style>
+  .mq {
+    --mq-gap: 14px;
+    position: relative;
+  }
+  .mq-viewport {
+    overflow: hidden;
+    padding: 6px 0 10px;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .mq-track {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: var(--mq-gap);
+    width: max-content;
+    animation: mq-loop var(--mq-duration, 40s) linear infinite;
+  }
+  .mq:hover .mq-track,
+  .mq:focus-within .mq-track,
+  .mq[data-paused] .mq-track {
+    animation-play-state: paused;
+  }
+  .mq-item {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background: #fff;
+    box-shadow:
+      0 0 0 1px var(--hp-line, #e6e5df),
+      0 1px 2px rgba(16, 16, 12, 0.05),
+      0 6px 16px -10px rgba(16, 16, 12, 0.18);
+  }
+
+  /* Tools: wide tiles with the logo inset */
+  .mq--tools .mq-item {
+    width: 132px;
+    height: 52px;
+    border-radius: 12px;
+  }
+  .mq--tools img {
+    width: 88%;
+    height: 88%;
+    object-fit: contain;
+  }
+
+  /* Clients: square brand tiles */
+  .mq--clients {
+    --mq-gap: 16px;
+  }
+  .mq--clients .mq-item {
+    width: 96px;
+    height: 96px;
+    border-radius: 22px;
+  }
+  .mq--clients img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .mq-toggle {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 32px;
+    height: 32px;
+    margin-top: -18px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid var(--hp-line, #e6e5df);
+    color: var(--hp-body, #45453f);
+    box-shadow: 0 4px 12px -6px rgba(16, 16, 12, 0.3);
+    cursor: pointer;
+    transition:
+      border-color 0.2s ease,
+      color 0.2s ease;
+  }
+  .mq-toggle:hover {
+    border-color: var(--hp-purple, #4d37f6);
+    color: var(--hp-purple, #4d37f6);
+  }
+  .mq-toggle svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .mq-icon-play {
+    display: none;
+  }
+  .mq-toggle[aria-pressed="true"] .mq-icon-pause {
+    display: none;
+  }
+  .mq-toggle[aria-pressed="true"] .mq-icon-play {
+    display: block;
+    fill: currentColor;
+  }
+
+  @keyframes mq-loop {
+    to {
+      transform: translateX(calc(-50% - var(--mq-gap) / 2));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mq-viewport {
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+    .mq-track {
+      animation: none;
+      width: auto;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .mq-clone,
+    .mq-toggle {
+      display: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .mq--tools .mq-item {
+      width: 112px;
+      height: 46px;
+    }
+    .mq--clients .mq-item {
+      width: 80px;
+      height: 80px;
+      border-radius: 18px;
+    }
+  }
+</style>

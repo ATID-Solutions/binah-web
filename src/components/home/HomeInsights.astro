@@ -1,0 +1,193 @@
+---
+import OperationalSavingsBanner from "../binah/OperationalSavingsBanner.tsx";
+
+const questions = [
+  { label: "Canales", text: "¿Cuánto tarda cada asesor en responder y cuántas conversaciones terminan en venta?" },
+  { label: "Ventas", text: "¿Cuántos pedidos cierra cada asesor por canal, producto y periodo?" },
+  { label: "Soporte", text: "¿Qué tickets están abiertos, quién responde, cuánto falta para el SLA y qué motivos se repiten?" },
+  { label: "Bodegas", text: "¿Qué bodega vende, separa o despacha más, y dónde se represa el flujo?" },
+  { label: "Productos", text: "¿Qué productos se mueven mejor, cuáles se quedan quietos y cómo impactan el inventario?" },
+  { label: "Auditoría", text: "¿Quién hizo qué, cuándo y en qué pedido, sea una persona o la IA?" },
+];
+
+const remarketing = [
+  "Reactiva clientes que ya compraron sin perder el contexto de la conversación original.",
+  "Logística, contador, asesor, gerente y soporte trabajan sobre la misma información.",
+  "Las campañas dejan de ser envíos masivos sueltos y se vuelven recompra medible.",
+];
+---
+
+<section class="hp-section" aria-labelledby="hp-insights-title">
+  <div class="container-binah">
+    <div class="hp-head hp-reveal">
+      <div>
+        <span class="hp-eyebrow"><span class="n">04</span>·<span>Datos en vivo · Sin Excel</span></span>
+        <h2 class="hp-h2" id="hp-insights-title">Preguntas que deberían responderse sin pedir un reporte.</h2>
+      </div>
+      <p class="hp-lead">
+        Binah convierte la operación diaria en datos disponibles: ventas, asesores, productos, bodegas, atención al
+        cliente y la trazabilidad de cada acción.
+      </p>
+    </div>
+
+    <ul class="questions hp-reveal">
+      {
+        questions.map((q) => (
+          <li class="question">
+            <span class="question-label">{q.label}</span>
+            <p>{q.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="growth">
+      <article class="remarketing hp-card hp-reveal" aria-labelledby="hp-remarketing-title">
+        <span class="hp-eyebrow">Remarketing</span>
+        <h3 id="hp-remarketing-title">¿Qué pasa con tus clientes antiguos?</h3>
+        <p class="remarketing-lead">
+          Binah los conserva con historial, segmentos y campañas para que la recompra no dependa de la memoria ni de
+          Excel.
+        </p>
+        <ol>
+          {
+            remarketing.map((item, index) => (
+              <li>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                {item}
+              </li>
+            ))
+          }
+        </ol>
+        <a href="/remarketing-clientes-antiguos-whatsapp-colombia" class="hp-link">
+          Ver remarketing <span class="hp-arrow" aria-hidden="true">→</span>
+        </a>
+      </article>
+
+      <div class="hp-reveal" style="--d: 100ms">
+        <OperationalSavingsBanner client:visible />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .questions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 48px;
+    border-top: 1px solid var(--hp-line);
+  }
+  .question {
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+    gap: 16px;
+    align-items: baseline;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--hp-line);
+  }
+  .question-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--hp-purple);
+  }
+  .question-label::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--hp-purple);
+    box-shadow: 0 0 0 3px var(--hp-lavender);
+  }
+  .question p {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.45;
+    letter-spacing: -0.012em;
+    color: var(--hp-ink);
+    text-wrap: pretty;
+  }
+
+  .growth {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: clamp(64px, 7vw, 96px);
+  }
+  .growth > div {
+    display: flex;
+  }
+  .remarketing {
+    padding: clamp(28px, 3vw, 40px);
+    display: flex;
+    flex-direction: column;
+    border-radius: 22px;
+  }
+  .remarketing h3 {
+    margin: 18px 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(28px, 2.8vw, 38px);
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    font-weight: 600;
+    color: var(--hp-ink);
+  }
+  .remarketing-lead {
+    margin: 14px 0 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--hp-mute);
+  }
+  .remarketing ol {
+    list-style: none;
+    margin: 24px 0 28px;
+    padding: 0;
+    display: grid;
+    gap: 14px;
+  }
+  .remarketing li {
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    gap: 8px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--hp-ink);
+  }
+  .remarketing li span {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding-top: 3px;
+    color: var(--hp-purple);
+  }
+  .remarketing .hp-link {
+    margin-top: auto;
+  }
+
+  @media (max-width: 1000px) {
+    .questions {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .growth {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .question {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 8px;
+      padding: 18px 0;
+    }
+    .question p {
+      font-size: 16px;
+    }
+  }
+</style>
