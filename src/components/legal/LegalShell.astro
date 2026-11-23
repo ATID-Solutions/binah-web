@@ -9,7 +9,8 @@ interface Props {
   eyebrow: string;
   heading: string;
   canonicalPath: string;
-  alternatePath: string;
+  /** The other language's page; leave it out when the document has none. */
+  alternatePath?: string;
   version: string;
   locale: "es" | "en";
   effectiveDate?: string;
@@ -19,6 +20,14 @@ const { title, description, eyebrow, heading, canonicalPath, alternatePath, vers
 const isEnglish = locale === "en";
 const spanishPath = isEnglish ? alternatePath : canonicalPath;
 const englishPath = isEnglish ? canonicalPath : alternatePath;
+const alternateLinks =
+  spanishPath && englishPath
+    ? [
+        { hreflang: "es-CO", href: spanishPath },
+        { hreflang: "en-US", href: englishPath },
+        { hreflang: "x-default", href: spanishPath },
+      ]
+    : [];
 ---
 
 <Layout
@@ -30,11 +39,7 @@ const englishPath = isEnglish ? canonicalPath : alternatePath;
   enableMarketingTracking={false}
   showContactWidget={false}
   lang={locale}
-  alternateLinks={[
-    { hreflang: "es-CO", href: spanishPath },
-    { hreflang: "en-US", href: englishPath },
-    { hreflang: "x-default", href: spanishPath },
-  ]}
+  alternateLinks={alternateLinks}
 >
   <Nav locale={locale} />
   <main class="legal-page">
@@ -52,11 +57,13 @@ const englishPath = isEnglish ? canonicalPath : alternatePath;
               : "Fecha de entrada en vigor: pendiente de confirmación del titular"}
         </p>
       </div>
-      <nav class="legal-language-nav" aria-label={isEnglish ? "Language" : "Idioma"}>
-        <a href={spanishPath} lang="es" aria-current={!isEnglish ? "page" : undefined}>Español</a>
-        <span aria-hidden="true">/</span>
-        <a href={englishPath} lang="en" aria-current={isEnglish ? "page" : undefined}>English</a>
-      </nav>
+      {alternateLinks.length > 0 && (
+        <nav class="legal-language-nav" aria-label={isEnglish ? "Language" : "Idioma"}>
+          <a href={spanishPath} lang="es" aria-current={!isEnglish ? "page" : undefined}>Español</a>
+          <span aria-hidden="true">/</span>
+          <a href={englishPath} lang="en" aria-current={isEnglish ? "page" : undefined}>English</a>
+        </nav>
+      )}
     </header>
 
     <div class="legal-document legal-document-single container-binah">

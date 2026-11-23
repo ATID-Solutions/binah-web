@@ -2318,6 +2318,11 @@ body[data-page="index"] .binah-section { border-top: 0; }
 .legal-document ul { display: grid; gap: 10px; margin: 18px 0 0; padding-left: 20px; }
 .legal-document li { padding-left: 4px; }
 .legal-highlight { border-top: 3px solid var(--ink); }
+/* Legal texts kept as Markdown (src/legal/): each heading opens a section. */
+.legal-markdown > p:first-child { padding-top: 36px; }
+.legal-markdown > h3 { margin-top: 36px; padding-top: 36px; border-top: 1px solid var(--line); }
+.legal-version-proof { border-top: 1px solid var(--line); }
+.legal-version-proof .mono { overflow-wrap: anywhere; font-size: 12px; }
 .legal-section-kicker { margin-bottom: 12px !important; color: var(--mute) !important; font-family: var(--font-mono); font-size: 10px !important; letter-spacing: 0.14em; text-transform: uppercase; }
 
 .legal-definition-list { display: grid; gap: 0; margin: 24px 0 32px; border-top: 1px solid var(--line); }
