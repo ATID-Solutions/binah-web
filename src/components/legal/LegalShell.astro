@@ -14,9 +14,25 @@ interface Props {
   version: string;
   locale: "es" | "en";
   effectiveDate?: string;
+  /** Frozen version pages stay out of search results. */
+  noindex?: boolean;
+  /** Where the version in force lives, for a version that was replaced. */
+  supersededBy?: string;
 }
 
-const { title, description, eyebrow, heading, canonicalPath, alternatePath, version, locale, effectiveDate } = Astro.props;
+const {
+  title,
+  description,
+  eyebrow,
+  heading,
+  canonicalPath,
+  alternatePath,
+  version,
+  locale,
+  effectiveDate,
+  noindex = false,
+  supersededBy,
+} = Astro.props;
 const isEnglish = locale === "en";
 const spanishPath = isEnglish ? alternatePath : canonicalPath;
 const englishPath = isEnglish ? canonicalPath : alternatePath;
@@ -39,6 +55,7 @@ const alternateLinks =
   enableMarketingTracking={false}
   showContactWidget={false}
   lang={locale}
+  noindex={noindex}
   alternateLinks={alternateLinks}
 >
   <Nav locale={locale} />
@@ -56,6 +73,12 @@ const alternateLinks =
               ? "Effective date: pending owner confirmation"
               : "Fecha de entrada en vigor: pendiente de confirmación del titular"}
         </p>
+        {supersededBy && (
+          <p>
+            {isEnglish ? "This version was replaced. " : "Esta versión fue reemplazada. "}
+            <a href={supersededBy}>{isEnglish ? "Read the version in force" : "Lee la versión vigente"}</a>.
+          </p>
+        )}
       </div>
       {alternateLinks.length > 0 && (
         <nav class="legal-language-nav" aria-label={isEnglish ? "Language" : "Idioma"}>

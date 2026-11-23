@@ -29,7 +29,7 @@ const sha256 = createHash("sha256").update(text, "utf8").digest("hex");
     </div>
     <section class="legal-version-proof">
       <p>
-        Texto exacto de esta versión: <a href={`/terminos-plataforma/${VERSION}.md`}>{`/terminos-plataforma/${VERSION}.md`}</a>.
+        Texto exacto de esta versión: <a href={`/terminos-plataforma/${VERSION}.md`} data-astro-reload>{`/terminos-plataforma/${VERSION}.md`}</a>.
         Su huella SHA-256 es <span class="mono">{sha256}</span>.
       </p>
     </section>
