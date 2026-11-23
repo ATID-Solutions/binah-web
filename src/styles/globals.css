@@ -745,8 +745,10 @@ body[data-page="index"] .binah-section { border-top: 0; }
 }
 .footer-operator { display: grid; gap: 6px; max-width: 66ch; }
 .footer-legal { display: flex; justify-content: flex-end; gap: 16px; flex-wrap: wrap; text-align: right; }
-.footer-legal a { color: var(--ink-soft); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 4px; }
-.footer-legal a:hover { color: var(--ink); text-decoration-color: currentColor; }
+.footer-legal a,
+.footer-operator a { color: var(--ink-soft); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 4px; }
+.footer-legal a:hover,
+.footer-operator a:hover { color: var(--ink); text-decoration-color: currentColor; }
 
 /* Pricing */
 .pricing-billing-wrap {
@@ -2171,7 +2173,8 @@ body[data-page="index"] .binah-section { border-top: 0; }
 
 .legal-page :focus-visible,
 .sms-page :focus-visible,
-.footer-legal a:focus-visible {
+.footer-legal a:focus-visible,
+.footer-operator a:focus-visible {
   outline: 2px solid var(--ink);
   outline-offset: 4px;
 }
