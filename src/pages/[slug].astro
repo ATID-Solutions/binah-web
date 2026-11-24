@@ -21,7 +21,7 @@ if (!page) {
 }
 
 const demoHref = page
-  ? waUrl(`Hola, quiero conocer ${page.h1.replace(/\.$/, "")} en Binah.`)
+  ? waUrl(page.demoMessage ?? `Hola, quiero conocer ${page.h1.replace(/\.$/, "")} en Binah.`)
   : waUrl("Hola, quisiera más información sobre Binah.");
 
 const pageTitle = page?.title ?? "Página no encontrada — Binah";

@@ -40,6 +40,8 @@ export interface MarketingPageDetail {
   capabilities: string[];
   faqs: MarketingPageFaq[];
   related: MarketingPageLink[];
+  /** WhatsApp text for the demo button; defaults to one built from the H1. */
+  demoMessage?: string;
   sources?: MarketingPageLink[];
   disclaimer?: string;
   sitemapPriority: string;
@@ -686,7 +688,7 @@ const additionalSolutions: Array<
     related: [
       { label: "Remarketing clientes antiguos", href: "/remarketing-clientes-antiguos-whatsapp-colombia" },
       { label: "CRM WhatsApp", href: "/crm-whatsapp-instagram-colombia" },
-      { label: "Precios", href: "/precios" },
+      { label: "Límite de mensajes WhatsApp", href: "/whatsapp-limite-mensajes-cuenta-restringida" },
     ],
   },
   {
@@ -1483,6 +1485,215 @@ const additionalSolutions: Array<
       { label: "Módulo CRM", href: "/modulo-crm" },
     ],
   },
+  {
+    priority: "P1",
+    slug: "whatsapp-business-numero-bloqueado",
+    title: "Número de WhatsApp Business bloqueado o suspendido — Binah",
+    description:
+      "¿WhatsApp bloqueó o suspendió el número de tu negocio? Entiende por qué pasa, cómo apelar y cómo vender con la API oficial sin volver a arriesgarlo.",
+    h1: "Número de WhatsApp bloqueado: que no vuelva a pasar.",
+    lead:
+      "Casi siempre pasa por lo mismo: envíos masivos desde la app, herramientas no oficiales o contactos que te bloquean y reportan. Así recuperas el control y vendes por la API oficial de WhatsApp Business sin arriesgar el número.",
+    demoMessage: "Hola, bloquearon nuestro número de WhatsApp y queremos pasar a la API oficial con Binah.",
+    moduleId: "crm",
+    moduleName: "CRM & Agentes",
+    searchIntent:
+      "whatsapp bloqueó mi número, número whatsapp business suspendido, cuenta suspendida whatsapp, mensajes masivos whatsapp sin ser bloqueado",
+    colombiaUseCase:
+      "Tiendas y equipos comerciales en Colombia que perdieron su número de WhatsApp por enviar promociones desde el celular o con programas de envío masivo.",
+    heroMetric: "API",
+    heroMetricLabel: "oficial de WhatsApp Business",
+    proof:
+      "Binah es proveedor de tecnología verificado por Meta: tu número se conecta a la API oficial de WhatsApp Business, sin extensiones, apps modificadas ni bots de WhatsApp Web que pongan en riesgo la cuenta.",
+    disclaimer:
+      "Binah no puede desbloquear números ni cambiar decisiones de WhatsApp: esa revisión la hace solo WhatsApp. Un número bloqueado debe recuperarse primero por apelación antes de conectarlo a la API. La API oficial tampoco autoriza el spam: exige plantillas aprobadas, contactos que esperen tus mensajes y buena calidad de envío.",
+    situations: [
+      "WhatsApp muestra «Cuenta suspendida temporalmente» o dice que tu número ya no puede usar WhatsApp.",
+      "Enviaste una promoción a toda tu lista de contactos y muchos te bloquearon o reportaron.",
+      "Usas una extensión de Chrome, un bot de WhatsApp Web o una app modificada para enviar masivos.",
+      "Todo el equipo vende desde un solo celular y perder el número detiene las ventas.",
+    ],
+    workflow: [
+      {
+        label: "Diagnóstico",
+        detail: "Identificas el aviso (restricción, suspensión temporal o bloqueo) y dejas de usar cualquier herramienta no oficial.",
+      },
+      {
+        label: "Apelación",
+        detail: "Si el número está bloqueado, tocas «Solicitar revisión» en la app. Solo WhatsApp puede levantar el bloqueo.",
+      },
+      {
+        label: "API oficial",
+        detail: "Conectas el número recuperado, o uno nuevo, a la API oficial de WhatsApp Business desde Binah.",
+      },
+      {
+        label: "Operación",
+        detail: "Las campañas salen con plantillas aprobadas y varios asesores y agentes IA atienden desde el mismo número.",
+      },
+    ],
+    capabilities: [
+      "Conexión a la API oficial de WhatsApp Business como Verified Meta Tech Provider.",
+      "Varios asesores y agentes de IA sobre un mismo número, con el historial en el CRM y no en un celular.",
+      "Campañas con plantillas aprobadas por Meta, por segmentos de historial y no a toda la base.",
+      "Instagram, email, chat web, SMS y llamadas en el mismo inbox.",
+    ],
+    faqs: [
+      {
+        question: "¿Por qué WhatsApp bloquea el número de una empresa?",
+        answer:
+          "Según WhatsApp, las causas más comunes son enviar mensajes masivos o automatizados desde la app, usar apps no oficiales o modificadas, extraer datos de contactos y recibir muchos bloqueos o reportes, incluso de personas que te dieron su número. La app de WhatsApp y WhatsApp Business no están hechas para envíos masivos.",
+      },
+      {
+        question: "¿Qué diferencia hay entre cuenta restringida, suspendida y bloqueada?",
+        answer:
+          "Una cuenta restringida no puede iniciar chats con contactos nuevos durante un tiempo, pero sigue hablando con quienes ya conversaba, y la restricción termina sola. Una suspensión temporal suele indicar el uso de apps no oficiales o extracción de datos. Si ese comportamiento sigue, WhatsApp puede bloquear el número de forma permanente.",
+      },
+      {
+        question: "¿Cómo apelo un número de WhatsApp bloqueado?",
+        answer:
+          "Abre WhatsApp y toca «Solicitar revisión». WhatsApp te avisa cuando decide, y según su centro de ayuda la mayoría de las revisiones terminan en 24 horas. Si no aparece la opción de revisión, el bloqueo es definitivo y no se puede apelar. Escribirle a WhatsApp por otros medios no acelera la revisión.",
+      },
+      {
+        question: "¿Binah puede desbloquear mi número?",
+        answer:
+          "No. Solo WhatsApp revisa y levanta bloqueos, y lo hace con su proceso de apelación. Binah te ayuda a que no se repita: una vez recuperes el número, o si empiezas con uno nuevo, operas con la API oficial y llevas tus contactos al CRM.",
+      },
+      {
+        question: "¿Puedo conectar a la API un número bloqueado?",
+        answer:
+          "No. Meta exige que un número bloqueado en WhatsApp se recupere primero con la apelación. Si no se puede recuperar, empiezas con un número nuevo en la API oficial e importas tus contactos a Binah.",
+      },
+      {
+        question: "¿La API oficial de WhatsApp Business evita los bloqueos?",
+        answer:
+          "Elimina la causa más común: las herramientas no autorizadas. Con la API envías a escala de forma permitida, con plantillas aprobadas por Meta y límites publicados. Pero no es una licencia para spam: si muchas personas bloquean o reportan tus mensajes, las plantillas pierden calidad y Meta puede pausarlas.",
+      },
+      {
+        question: "¿Cómo envío mensajes masivos por WhatsApp sin que me bloqueen?",
+        answer:
+          "Escríbele solo a quien espera tus mensajes, di quién eres y por qué escribes, ofrece una forma fácil de darse de baja y respétala. Segmenta por historial en vez de escribirle a toda la base y deja que los clientes inicien el chat desde tu web, anuncios o Instagram. En Binah las campañas salen por la API oficial con plantillas aprobadas.",
+      },
+    ],
+    sources: [
+      { label: "WhatsApp: información sobre el bloqueo de cuentas", href: "https://faq.whatsapp.com/465883178708358/?locale=es_LA" },
+      {
+        label: "WhatsApp: cuentas suspendidas temporalmente",
+        href: "https://faq.whatsapp.com/1848531392146538/?locale=es_LA",
+      },
+      { label: "WhatsApp: cuentas restringidas", href: "https://faq.whatsapp.com/717472490411581/?locale=es_LA" },
+    ],
+    related: [
+      { label: "Límite de mensajes y cuenta restringida", href: "/whatsapp-limite-mensajes-cuenta-restringida" },
+      { label: "Campañas WhatsApp", href: "/campanas-whatsapp-clientes-colombia" },
+      { label: "CRM WhatsApp", href: "/crm-whatsapp-instagram-colombia" },
+    ],
+  },
+  {
+    priority: "P1",
+    slug: "whatsapp-limite-mensajes-cuenta-restringida",
+    title: "Límite de mensajes de WhatsApp y cuenta restringida — Binah",
+    description:
+      "¿WhatsApp no te deja iniciar chats nuevos o la API te limita a 250 personas al día? Así funcionan la cuenta restringida y los niveles de mensajes, y así se suben.",
+    h1: "Límite de mensajes en WhatsApp y cómo subirlo.",
+    lead:
+      "Si la app dice «Tu cuenta está restringida en este momento», no puedes escribirle a contactos nuevos por un tiempo. En la API oficial, Meta limita a cuántas personas puedes escribir primero en 24 horas: empiezas en 250 y puedes llegar a ilimitado.",
+    demoMessage: "Hola, queremos subir el límite de mensajes de WhatsApp con la API oficial en Binah.",
+    moduleId: "crm",
+    moduleName: "CRM & Agentes",
+    searchIntent:
+      "whatsapp cuenta restringida, whatsapp no me deja iniciar chats nuevos, límite de mensajes whatsapp business api, subir límite 250 whatsapp, error 131049",
+    colombiaUseCase:
+      "Negocios en Colombia que hacen remarketing, cobran o confirman pedidos por WhatsApp y de pronto no pueden escribirle a clientes nuevos.",
+    heroMetric: "250",
+    heroMetricLabel: "personas cada 24 h al empezar en la API",
+    proof:
+      "Con Binah tu número opera en la API oficial y tus campañas salen con plantillas aprobadas por Meta, a segmentos con historial real, que es la calidad que Meta revisa para subir tu nivel.",
+    disclaimer:
+      "Los límites y reglas los define Meta y pueden cambiar. Binah no puede quitar una restricción ni subir tu límite a mano: te ayuda a operar con la API oficial y con las prácticas que Meta tiene en cuenta para aprobar aumentos. Datos revisados en noviembre de 2026.",
+    situations: [
+      "WhatsApp muestra «Tu cuenta está restringida en este momento» y no puedes escribirle a contactos nuevos.",
+      "Tu campaña se detiene en 250 envíos porque el número es nuevo en la API.",
+      "Algunos mensajes de marketing fallan con el error 131049.",
+      "Una plantilla bajó a calidad media o baja y está en riesgo de pausa.",
+    ],
+    workflow: [
+      {
+        label: "Ventana de 24 h",
+        detail: "Cuando el cliente escribe primero se abre una ventana de atención de 24 horas, y esas respuestas no cuentan contra el límite.",
+      },
+      {
+        label: "Verificación",
+        detail: "Verificar tu negocio en Meta es un camino para pasar de 250 a 2.000 personas al día. Meta revisa la calidad antes de aprobarlo.",
+      },
+      {
+        label: "Calidad",
+        detail: "Envías plantillas aprobadas a contactos que esperan tu mensaje, con baja fácil, para mantener la calidad alta.",
+      },
+      {
+        label: "Escalamiento",
+        detail: "Con buena calidad y al menos la mitad del límite usado en 7 días, Meta sube un nivel en unas 6 horas.",
+      },
+    ],
+    capabilities: [
+      "Conexión a la API oficial de WhatsApp Business como Verified Meta Tech Provider.",
+      "Campañas con plantillas aprobadas por Meta, por segmentos de historial y medidas en el CRM.",
+      "Agentes de IA que responden al instante cuando el cliente escribe primero.",
+      "Chat web, Instagram, email y SMS para que el cliente inicie la conversación.",
+    ],
+    faqs: [
+      {
+        question: "¿Qué significa «Tu cuenta está restringida» en WhatsApp?",
+        answer:
+          "Que WhatsApp detectó señales de spam, automatización o envíos masivos, por ejemplo muchos bloqueos o reportes. Mientras dure no puedes iniciar chats ni llamadas con contactos nuevos, crear grupos ni añadir miembros, pero sí hablar con quienes ya conversabas. La restricción termina sola cuando pasa el tiempo asignado.",
+      },
+      {
+        question: "¿Cuánto dura la restricción y cómo veo el tiempo que falta?",
+        answer:
+          "WhatsApp no publica una duración fija. Para ver el tiempo restante, toca Nuevo chat y elige un contacto con el que nunca hayas hablado: aparece un aviso con lo que falta. No tienes que hacer nada para que termine, y WhatsApp te avisa cuando acaba.",
+      },
+      {
+        question: "¿Cuál es el límite de mensajes de la API de WhatsApp Business?",
+        answer:
+          "Es el máximo de personas distintas a las que puedes escribir fuera de una ventana de atención en 24 horas móviles. Un portafolio de negocio nuevo empieza en 250 y puede subir a 2.000, 10.000, 100.000 e ilimitado. Desde octubre de 2025 el límite es por portafolio y lo comparten todos sus números.",
+      },
+      {
+        question: "¿Cómo paso de 250 a 2.000 personas al día?",
+        answer:
+          "Meta ofrece dos caminos: verificar tu negocio, o enviar en 30 días 2.000 mensajes fuera de ventanas de atención a personas distintas con plantillas de alta calidad. En ambos casos Meta revisa la calidad de tus mensajes antes de aprobar el aumento.",
+      },
+      {
+        question: "¿Comprar otro número aumenta el límite?",
+        answer:
+          "No. Desde octubre de 2025 todos los números de un mismo portafolio comparten el límite, así que un número nuevo no suma capacidad. Lo que sube el límite es mantener buena calidad y usar al menos la mitad de tu límite en 7 días.",
+      },
+      {
+        question: "¿Las respuestas del agente de IA cuentan contra el límite?",
+        answer:
+          "No, si el cliente escribió primero. El límite aplica a mensajes fuera de la ventana de atención de 24 horas, y las respuestas dentro de esa ventana no lo consumen. Por eso conviene que el cliente inicie el chat desde tu web, anuncios o Instagram.",
+      },
+      {
+        question: "¿Qué es el error 131049 de WhatsApp?",
+        answer:
+          "Indica que WhatsApp no entregó un mensaje de marketing porque esa persona ya recibió muchos mensajes de marketing de empresas, o porque se reintentó el envío varias veces. No afecta tus envíos a otras personas. Espera al menos 24 horas antes de reenviarlo.",
+      },
+    ],
+    sources: [
+      { label: "WhatsApp: cuentas restringidas", href: "https://faq.whatsapp.com/717472490411581/?locale=es_LA" },
+      {
+        label: "Meta: límites de mensajes de WhatsApp",
+        href: "https://developers.facebook.com/documentation/business-messaging/whatsapp/messaging-limits",
+      },
+      {
+        label: "Meta: límites de marketing por usuario",
+        href: "https://developers.facebook.com/documentation/business-messaging/whatsapp/templates/marketing-templates/per-user-limits",
+      },
+    ],
+    related: [
+      { label: "Número de WhatsApp bloqueado", href: "/whatsapp-business-numero-bloqueado" },
+      { label: "Campañas WhatsApp", href: "/campanas-whatsapp-clientes-colombia" },
+      { label: "Agente IA de ventas", href: "/agente-ia-ventas-whatsapp" },
+    ],
+  },
 ];
 
 export const ADDITIONAL_SEO_FEATURE_PAGES: MarketingPageDetail[] = additionalSolutions.map((page) => ({
@@ -1507,6 +1718,7 @@ export const ADDITIONAL_SEO_FEATURE_PAGES: MarketingPageDetail[] = additionalSol
   capabilities: page.capabilities,
   faqs: page.faqs ?? commonFaqs(page.title.replace(" — Binah", "").toLowerCase(), page.moduleName),
   related: page.related,
+  demoMessage: page.demoMessage,
   sources: page.sources,
   disclaimer: page.disclaimer,
   sitemapPriority: page.priority === "P1" ? "0.8" : "0.68",
