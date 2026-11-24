@@ -45,14 +45,14 @@ test("localized privacy policies cover platform communication and processing", a
       whatsappHeading: "Mensajes por WhatsApp y otros canales de mensajería",
       emailHeading: "Correo electrónico",
       processorRole: "Soluciones ALCO actúa como Encargado",
-      effectiveDate: "8 de septiembre de 2026",
+      effectiveDate: "24 de noviembre de 2026",
     },
     {
       path: "/en/privacy",
       whatsappHeading: "WhatsApp and other messaging channels",
       emailHeading: "Email",
       processorRole: "Soluciones ALCO acts as a Processor",
-      effectiveDate: "September 8, 2026",
+      effectiveDate: "November 24, 2026",
     },
   ]) {
     await page.goto(policy.path);
@@ -241,4 +241,45 @@ test("the mobile layout has no horizontal overflow and supports keyboard consent
 
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
   expect(overflow).toBeLessThanOrEqual(1);
+});
+
+// The dashboard records each legal version's address and, for the platform
+// terms, the SHA-256 of its text: a published version must never change.
+const PLATFORM_TERMS_2026_11_SHA256 = "b6a4f14f71b26568c3035ea41a981b29856024af2eb12b72b8e04bbfe81f8725";
+
+test("the platform terms 2026-11 keep serving the text the dashboard recorded", async ({ request }) => {
+  const raw = await request.get("/terminos-plataforma/2026-11.md");
+  expect(raw.status()).toBe(200);
+  expect(raw.headers()["content-type"]).toContain("text/markdown");
+  const text = await raw.text();
+  expect(createHash("sha256").update(text, "utf8").digest("hex")).toBe(PLATFORM_TERMS_2026_11_SHA256);
+
+  const page = await request.get("/terminos-plataforma/2026-11");
+  expect(page.status()).toBe(200);
+  const html = await page.text();
+  expect(html).toContain(PLATFORM_TERMS_2026_11_SHA256);
+  expect(html).toContain('"Binah"');
+
+  const latest = await request.get("/terminos-plataforma", { maxRedirects: 0 });
+  expect(latest.status()).toBe(302);
+  expect(latest.headers().location).toBe("/terminos-plataforma/2026-11");
+});
+
+test("each privacy policy version keeps its own address", async ({ page }) => {
+  for (const version of [
+    { path: "/privacidad/v3", label: "binah-privacy-v3", date: "24 de noviembre de 2026", superseded: false },
+    { path: "/privacidad/v2", label: "binah-privacy-v2", date: "8 de septiembre de 2026", superseded: true },
+  ]) {
+    const response = await page.goto(version.path);
+    expect(response?.status(), version.path).toBe(200);
+    await expect(page.locator(".legal-meta")).toContainText(version.label);
+    await expect(page.locator(".legal-meta")).toContainText(version.date);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `${publicOrigin}${version.path}`);
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex, nofollow");
+    await expect(page.locator(".legal-meta")).toContainText(
+      version.superseded ? "Esta versión fue reemplazada." : version.label,
+    );
+  }
+  await page.goto("/privacidad/v3");
+  await expect(page.locator("article")).toContainText("Constancia de aceptación de documentos legales");
 });

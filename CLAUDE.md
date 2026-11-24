@@ -55,3 +55,13 @@ Brutalist shadow variants: `shadow-brutal-sm`, `shadow-brutal-md`, `shadow-bruta
 ### Tailwind Base Styles
 
 Tailwind base styles are **not** auto-applied by the Astro integration (`applyBaseStyles: false` in `astro.config.mjs`). Base styles are imported via `src/styles/globals.css`.
+
+## Legal document versions
+
+Binah's dashboard asks every member to accept the platform terms and the privacy policy, and records the version's address (and, for the terms, the SHA-256 of its text). So a published version never changes:
+
+- The platform terms live as Markdown in `src/legal/terminos-plataforma/<version>.md`, served at `/terminos-plataforma/<version>` and, as exact text, at `/terminos-plataforma/<version>.md`. `/terminos-plataforma` redirects to the version in force.
+- The privacy policy's frozen text is `src/components/legal/privacy/PrivacyPolicyEsV<n>.astro`, served at `/privacidad/v<n>`; `/privacidad` shows the version in force.
+- Never edit a published version's file, not even a typo: write a new version (new file, new page, new address), point the redirect or `/privacidad` at it, and publish it from the dashboard's operator command. Keep frozen texts free of shared constants that could change them.
+- A replaced version keeps its page: give its wrapper `noindex` and `supersededBy` (`LegalShell`), never touch its text. `tests/sms-legal.spec.ts` pins the terms' hash and each version's address.
+

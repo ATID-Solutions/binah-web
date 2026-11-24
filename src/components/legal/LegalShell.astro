@@ -9,16 +9,41 @@ interface Props {
   eyebrow: string;
   heading: string;
   canonicalPath: string;
-  alternatePath: string;
+  /** The other language's page; leave it out when the document has none. */
+  alternatePath?: string;
   version: string;
   locale: "es" | "en";
   effectiveDate?: string;
+  /** Frozen version pages stay out of search results. */
+  noindex?: boolean;
+  /** Where the version in force lives, for a version that was replaced. */
+  supersededBy?: string;
 }
 
-const { title, description, eyebrow, heading, canonicalPath, alternatePath, version, locale, effectiveDate } = Astro.props;
+const {
+  title,
+  description,
+  eyebrow,
+  heading,
+  canonicalPath,
+  alternatePath,
+  version,
+  locale,
+  effectiveDate,
+  noindex = false,
+  supersededBy,
+} = Astro.props;
 const isEnglish = locale === "en";
 const spanishPath = isEnglish ? alternatePath : canonicalPath;
 const englishPath = isEnglish ? canonicalPath : alternatePath;
+const alternateLinks =
+  spanishPath && englishPath
+    ? [
+        { hreflang: "es-CO", href: spanishPath },
+        { hreflang: "en-US", href: englishPath },
+        { hreflang: "x-default", href: spanishPath },
+      ]
+    : [];
 ---
 
 <Layout
@@ -30,11 +55,8 @@ const englishPath = isEnglish ? canonicalPath : alternatePath;
   enableMarketingTracking={false}
   showContactWidget={false}
   lang={locale}
-  alternateLinks={[
-    { hreflang: "es-CO", href: spanishPath },
-    { hreflang: "en-US", href: englishPath },
-    { hreflang: "x-default", href: spanishPath },
-  ]}
+  noindex={noindex}
+  alternateLinks={alternateLinks}
 >
   <Nav locale={locale} />
   <main class="legal-page">
@@ -51,12 +73,20 @@ const englishPath = isEnglish ? canonicalPath : alternatePath;
               ? "Effective date: pending owner confirmation"
               : "Fecha de entrada en vigor: pendiente de confirmación del titular"}
         </p>
+        {supersededBy && (
+          <p>
+            {isEnglish ? "This version was replaced. " : "Esta versión fue reemplazada. "}
+            <a href={supersededBy}>{isEnglish ? "Read the version in force" : "Lee la versión vigente"}</a>.
+          </p>
+        )}
       </div>
-      <nav class="legal-language-nav" aria-label={isEnglish ? "Language" : "Idioma"}>
-        <a href={spanishPath} lang="es" aria-current={!isEnglish ? "page" : undefined}>Español</a>
-        <span aria-hidden="true">/</span>
-        <a href={englishPath} lang="en" aria-current={isEnglish ? "page" : undefined}>English</a>
-      </nav>
+      {alternateLinks.length > 0 && (
+        <nav class="legal-language-nav" aria-label={isEnglish ? "Language" : "Idioma"}>
+          <a href={spanishPath} lang="es" aria-current={!isEnglish ? "page" : undefined}>Español</a>
+          <span aria-hidden="true">/</span>
+          <a href={englishPath} lang="en" aria-current={isEnglish ? "page" : undefined}>English</a>
+        </nav>
+      )}
     </header>
 
     <div class="legal-document legal-document-single container-binah">

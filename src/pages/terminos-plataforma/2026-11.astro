@@ -1,0 +1,37 @@
+---
+import { createHash } from "node:crypto";
+import LegalShell from "../../components/legal/LegalShell.astro";
+// A published version never changes: a new text is a new file and a new page.
+import { Content } from "../../legal/terminos-plataforma/2026-11.md";
+import text from "../../legal/terminos-plataforma/2026-11.md?raw";
+
+const VERSION = "2026-11";
+const sha256 = createHash("sha256").update(text, "utf8").digest("hex");
+---
+
+<LegalShell
+  title="Términos y condiciones de uso de la plataforma — Binah"
+  description="Términos y condiciones de uso de la plataforma Binah, versión 2026-11: licencia, propiedad intelectual, restricciones de copia e ingeniería inversa y cláusula penal."
+  eyebrow="Documento legal"
+  heading="Términos y condiciones de uso de la plataforma"
+  canonicalPath={`/terminos-plataforma/${VERSION}`}
+  version={VERSION}
+  effectiveDate="24 de noviembre de 2026"
+  locale="es"
+>
+  <article lang="es" aria-labelledby="platform-terms-title">
+    <div class="legal-language-heading">
+      <span class="mono">ES</span>
+      <h2 id="platform-terms-title">Términos de la plataforma</h2>
+    </div>
+    <div class="legal-markdown">
+      <Content />
+    </div>
+    <section class="legal-version-proof">
+      <p>
+        Texto exacto de esta versión: <a href={`/terminos-plataforma/${VERSION}.md`} data-astro-reload>{`/terminos-plataforma/${VERSION}.md`}</a>.
+        Su huella SHA-256 es <span class="mono">{sha256}</span>.
+      </p>
+    </section>
+  </article>
+</LegalShell>

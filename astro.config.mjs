@@ -11,6 +11,8 @@ export default defineConfig({
     mode: 'standalone',
   }),
   integrations: [react()],
+  // Legal texts are hashed as written: no typographic quote substitution.
+  markdown: { smartypants: false },
   vite: {
     plugins: [tailwindcss()],
   },
