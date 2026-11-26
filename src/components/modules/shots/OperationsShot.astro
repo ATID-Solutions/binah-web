@@ -1,0 +1,816 @@
+---
+// Product shot for /modulo-operaciones: a beauty salon's Saturday agenda with
+// people and a room as resources, the team's availability and the booking the
+// reservas agent just confirmed (the CRM page's story: "sábado 10:30 con
+// Camila"), followed by its reminder, checklist and postventa. Decorative and
+// illustrative: the figure has a text alternative.
+import AppWindow from "../AppWindow.astro";
+
+const HOUR = 88; // px per hour in the day grid
+const START = 9; // first hour shown
+
+type Kind = "done" | "booked" | "selected" | "event";
+interface Slot {
+  title: string;
+  who: string;
+  time: string;
+  from: number;
+  to: number;
+  kind: Kind;
+}
+
+// hide: the lane drops out on tablets (≤1100px) or on phones (≤760px).
+const resources: Array<{ initials: string; name: string; role: string; tone: string; hide?: "tablet" | "phone"; slots: Slot[] }> = [
+  {
+    initials: "CA",
+    name: "Camila",
+    role: "Estilista",
+    tone: "purple",
+    slots: [
+      { title: "Color", who: "S. León", time: "9:00 – 10:00", from: 9, to: 10, kind: "done" },
+      { title: "Corte de cabello", who: "M. Castro", time: "10:30 – 11:30", from: 10.5, to: 11.5, kind: "selected" },
+      { title: "Corte", who: "A. Rincón", time: "12:00 – 12:30", from: 12, to: 12.5, kind: "booked" },
+    ],
+  },
+  {
+    initials: "JU",
+    name: "Julián",
+    role: "Estilista",
+    tone: "green",
+    slots: [
+      { title: "Corte", who: "D. Mejía", time: "9:00 – 9:45", from: 9, to: 9.75, kind: "done" },
+      { title: "Barba y corte", who: "J. Pardo", time: "10:00 – 11:00", from: 10, to: 11, kind: "booked" },
+      { title: "Keratina", who: "N. Ortiz", time: "11:30 – 1:00", from: 11.5, to: 13, kind: "booked" },
+    ],
+  },
+  {
+    initials: "PA",
+    name: "Paula",
+    role: "Manicurista",
+    tone: "gray",
+    hide: "tablet",
+    slots: [
+      { title: "Manicure", who: "L. Torres", time: "9:30 – 10:30", from: 9.5, to: 10.5, kind: "booked" },
+      { title: "Pedicure", who: "C. Vargas", time: "11:00 – 12:00", from: 11, to: 12, kind: "booked" },
+    ],
+  },
+  {
+    initials: "C1",
+    name: "Cabina 1",
+    role: "Sala",
+    tone: "room",
+    hide: "phone",
+    slots: [
+      { title: "Limpieza facial", who: "M. Díaz", time: "10:00 – 11:00", from: 10, to: 11, kind: "booked" },
+      { title: "Capacitación", who: "Evento del equipo", time: "12:00 – 1:00", from: 12, to: 13, kind: "event" },
+    ],
+  },
+];
+
+const hours = ["9 a. m.", "10 a. m.", "11 a. m.", "12 m."];
+const now = 10.25; // 10:15 a. m.
+
+const availability = [
+  { name: "Camila", role: "Estilista", busy: 80 },
+  { name: "Julián", role: "Estilista", busy: 90 },
+  { name: "Paula", role: "Manicurista", busy: 55 },
+  { name: "Cabina 1", role: "Sala", busy: 40 },
+];
+
+const nav = [
+  { label: "Agenda", count: "24", active: true },
+  { label: "Servicios" },
+  { label: "Checklists" },
+  { label: "Postventa" },
+];
+
+const steps = [
+  { title: "Reservada por el agente", meta: "Jueves · chat web", state: "done" },
+  { title: "Recordatorio enviado", meta: "Viernes · 6:00 p. m.", state: "done" },
+  { title: "Checklist del servicio", meta: "4 pasos · Camila", state: "next" },
+  { title: "Seguimiento postventa", meta: "Programado para el lunes", state: "next" },
+];
+
+const pos = (s: Slot) => `top: ${(s.from - START) * HOUR + 2}px; height: ${(s.to - s.from) * HOUR - 4}px`;
+---
+
+<AppWindow
+  url="app.binah.co/operaciones/agenda"
+  label="Ejemplo ilustrativo del módulo de Operaciones de Binah: la agenda del sábado de un centro de belleza con estilistas, manicurista y una cabina como recursos, la disponibilidad del equipo y una cita de corte de cabello reservada por el agente de IA, con recordatorio, checklist y seguimiento postventa."
+  people={["CA", "JU", "+3"]}
+>
+  <div class="opx-body">
+    <aside class="opx-side">
+      <div class="opx-side-head">
+        <strong>Operaciones</strong>
+      </div>
+      <ul class="opx-nav">
+        {
+          nav.map((n) => (
+            <li class:list={[n.active && "is-active"]}>
+              {n.label}
+              {n.count && <span class="opx-count">{n.count}</span>}
+            </li>
+          ))
+        }
+      </ul>
+
+      <span class="opx-group">Disponibilidad hoy</span>
+      <ul class="opx-avail">
+        {
+          availability.map((a) => (
+            <li>
+              <span class="opx-avail-top">
+                <b>{a.name}</b>
+                <span>{a.role}</span>
+              </span>
+              <span class="opx-meter"><i style={`--w: ${a.busy}%`} /></span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="opx-agent">
+        <span class="opx-agent-top"><span class="opx-pulse"></span>Agente de reservas</span>
+        <span>9 citas agendadas hoy</span>
+      </div>
+    </aside>
+
+    <div class="opx-main">
+      <div class="opx-head">
+        <span class="opx-head-title">
+          <span class="opx-crumb">Agenda</span>
+          <strong>Sábado 28 de noviembre</strong>
+        </span>
+        <span class="opx-seg"><i class="is-active">Día</i><i>Semana</i></span>
+        <span class="opx-new">+ Nueva cita</span>
+      </div>
+
+      <div class="opx-grid">
+        <div class="opx-cols">
+          <span class="opx-corner"></span>
+          {
+            resources.map((r) => (
+              <span class:list={["opx-res", r.hide && `opx-hide-${r.hide}`]}>
+                <span class={`opx-face is-${r.tone}`}>{r.initials}</span>
+                <span class="opx-res-name">
+                  <b>{r.name}</b>
+                  <span>{r.role}</span>
+                </span>
+              </span>
+            ))
+          }
+        </div>
+
+        <div class="opx-day" style={`--hour: ${HOUR}px`}>
+          <div class="opx-hours">
+            {hours.map((h) => <span>{h}</span>)}
+          </div>
+          {
+            resources.map((r) => (
+              <div class:list={["opx-lane", r.hide && `opx-hide-${r.hide}`]}>
+                {r.slots.map((s) => (
+                  <div class:list={["opx-slot", `is-${s.kind}`, s.to - s.from <= 0.5 && "is-short"]} style={pos(s)}>
+                    <b>{s.title}</b>
+                    <span class="opx-slot-who">{s.who}</span>
+                    <span class="opx-slot-time">{s.time}</span>
+                    {s.kind === "selected" && <span class="opx-ai">IA</span>}
+                  </div>
+                ))}
+              </div>
+            ))
+          }
+          <div class="opx-now" style={`top: ${(now - START) * HOUR}px`}>
+            <span>10:15</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="opx-detail">
+      <div class="opx-section">
+        <span class="opx-label">Cita</span>
+        <div class="opx-detail-top">
+          <strong>Corte de cabello</strong>
+          <span class="opx-pill">Confirmada</span>
+        </div>
+        <dl class="opx-facts">
+          <div><dt>Cliente</dt><dd>Manuela Castro</dd></div>
+          <div><dt>Hora</dt><dd>Sábado · 10:30 a. m.</dd></div>
+          <div><dt>Con</dt><dd>Camila · Estilista</dd></div>
+          <div><dt>Origen</dt><dd class="is-ai"><span class="opx-pulse"></span>Agente de reservas</dd></div>
+        </dl>
+      </div>
+
+      <div class="opx-section">
+        <span class="opx-label">Seguimiento</span>
+        <ol class="opx-steps">
+          {
+            steps.map((s) => (
+              <li class={`is-${s.state}`}>
+                <span class="opx-mark" />
+                <span>
+                  <b>{s.title}</b>
+                  <span>{s.meta}</span>
+                </span>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+
+      <div class="opx-section">
+        <span class="opx-label">Historial</span>
+        <span class="opx-history"><b>3 servicios</b> · cliente desde 2025</span>
+      </div>
+    </aside>
+  </div>
+</AppWindow>
+
+<style>
+  .opx-body {
+    display: grid;
+    grid-template-columns: 210px minmax(0, 1fr) 262px;
+    min-height: 480px;
+  }
+
+  /* Sidebar */
+  .opx-side {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 16px 12px 14px;
+    border-right: 1px solid #eeede8;
+    background: #fbfbf9;
+  }
+  .opx-side-head {
+    padding: 0 6px;
+  }
+  .opx-side-head strong {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .opx-nav {
+    list-style: none;
+    margin: 12px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 1px;
+  }
+  .opx-nav li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 8px;
+    border-radius: 8px;
+    color: var(--hp-body);
+  }
+  .opx-nav li.is-active {
+    background: #fff;
+    color: var(--hp-ink);
+    font-weight: 600;
+    box-shadow: var(--hp-shadow-sm);
+    outline: 1px solid #e4e1fb;
+  }
+  .opx-count {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 1px 7px;
+    border-radius: 999px;
+    background: var(--hp-purple);
+    color: #fff;
+  }
+  .opx-group {
+    margin: 16px 8px 8px;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hp-mute);
+  }
+  .opx-avail {
+    list-style: none;
+    margin: 0;
+    padding: 0 8px;
+    display: grid;
+    gap: 10px;
+  }
+  .opx-avail li {
+    display: grid;
+    gap: 5px;
+  }
+  .opx-avail-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .opx-avail-top b {
+    font-weight: 500;
+  }
+  .opx-avail-top span {
+    font-size: 10.5px;
+    color: var(--hp-mute);
+  }
+  .opx-meter {
+    height: 5px;
+    border-radius: 999px;
+    background: #ecebe5;
+    overflow: hidden;
+  }
+  .opx-meter i {
+    display: block;
+    width: var(--w);
+    height: 100%;
+    border-radius: inherit;
+    background: #b9b0ff;
+  }
+  .opx-agent {
+    display: grid;
+    gap: 3px;
+    margin-top: auto;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #e3f5ec;
+    color: #2b7d57;
+    font-size: 11px;
+  }
+  .opx-agent-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #17734b;
+  }
+  .opx-pulse {
+    position: relative;
+    width: 7px;
+    height: 7px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #22a06b;
+  }
+  .opx-pulse::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 1.5px solid #22a06b;
+    animation: opx-pulse 2.2s ease-out infinite;
+  }
+  @keyframes opx-pulse {
+    0% {
+      transform: scale(0.6);
+      opacity: 0.9;
+    }
+    80%,
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+
+  /* Agenda */
+  .opx-main {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: #fff;
+  }
+  .opx-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    border-bottom: 1px solid #eeede8;
+  }
+  .opx-head-title {
+    display: grid;
+    gap: 1px;
+    min-width: 0;
+    margin-right: auto;
+  }
+  .opx-crumb {
+    font-size: 11px;
+    color: var(--hp-mute);
+  }
+  .opx-head-title strong {
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .opx-seg {
+    display: inline-flex;
+    padding: 2px;
+    border-radius: 8px;
+    background: #f1f0eb;
+  }
+  .opx-seg i {
+    font-style: normal;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    color: var(--hp-mute);
+  }
+  .opx-seg i.is-active {
+    background: #fff;
+    color: var(--hp-ink);
+    font-weight: 500;
+    box-shadow: var(--hp-shadow-sm);
+  }
+  .opx-new {
+    flex-shrink: 0;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: #fff;
+    background: var(--hp-purple);
+    white-space: nowrap;
+  }
+
+  .opx-grid {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 14px 14px 0;
+  }
+  .opx-cols,
+  .opx-day {
+    display: grid;
+    grid-template-columns: 52px repeat(4, minmax(0, 1fr));
+  }
+  .opx-cols {
+    border-bottom: 1px solid #eeede8;
+  }
+  .opx-res {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    padding: 10px 8px;
+  }
+  .opx-res-name {
+    display: grid;
+    min-width: 0;
+  }
+  .opx-res-name b {
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .opx-res-name span {
+    font-size: 10.5px;
+    color: var(--hp-mute);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .opx-face {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 8.5px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--hp-purple);
+  }
+  .opx-face.is-green {
+    background: #1f7a5a;
+  }
+  .opx-face.is-gray {
+    background: #ecebe5;
+    color: #45453f;
+  }
+  .opx-face.is-room {
+    border-radius: 7px;
+    background: #e5f0fb;
+    color: #1d5fa6;
+  }
+
+  .opx-day {
+    position: relative;
+    height: calc(var(--hour) * 4);
+    margin-top: 10px;
+  }
+  .opx-hours {
+    position: relative;
+  }
+  .opx-hours span {
+    display: block;
+    height: var(--hour);
+    padding-right: 8px;
+    margin-top: -6px;
+    text-align: right;
+    font-size: 10px;
+    color: var(--hp-mute);
+    white-space: nowrap;
+  }
+  .opx-lane {
+    position: relative;
+    border-left: 1px solid #f1f0eb;
+    background: repeating-linear-gradient(
+      to bottom,
+      #f1f0eb 0,
+      #f1f0eb 1px,
+      transparent 1px,
+      transparent var(--hour)
+    );
+  }
+  .opx-slot {
+    position: absolute;
+    left: 4px;
+    right: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    padding: 6px 8px;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid #e6e3fb;
+    border-left: 3px solid #b9b0ff;
+    background: #f8f7ff;
+    z-index: 1;
+  }
+  .opx-slot b {
+    font-weight: 600;
+    font-size: 11.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .opx-slot-who,
+  .opx-slot-time {
+    font-size: 11px;
+    color: #5c5c56;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .opx-slot-time {
+    font-size: 10.5px;
+    color: var(--hp-mute);
+    font-variant-numeric: tabular-nums;
+  }
+  .opx-slot.is-short {
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    padding-block: 0;
+  }
+  .opx-slot.is-short .opx-slot-time {
+    display: none;
+  }
+  .opx-slot.is-done {
+    border-color: #ecebe5;
+    border-left-color: #d6d5cf;
+    background: #f6f5f1;
+  }
+  .opx-slot.is-done b {
+    color: #5c5c56;
+  }
+  .opx-slot.is-selected {
+    border: 0;
+    background: var(--hp-purple);
+    box-shadow: 0 10px 24px -12px rgba(77, 55, 246, 0.9);
+  }
+  .opx-slot.is-selected b,
+  .opx-slot.is-selected .opx-slot-who,
+  .opx-slot.is-selected .opx-slot-time {
+    color: #fff;
+  }
+  .opx-slot.is-selected .opx-slot-time {
+    color: rgba(255, 255, 255, 0.75);
+  }
+  .opx-ai {
+    position: absolute;
+    right: 6px;
+    bottom: 6px;
+    font-size: 9px;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 5px;
+    color: var(--hp-purple);
+    background: #fff;
+  }
+  .opx-slot.is-event {
+    border: 1px dashed #a9cbee;
+    background: #f1f7fd;
+  }
+  .opx-slot.is-event b {
+    color: #1d5fa6;
+  }
+  .opx-slot.is-event .opx-slot-who {
+    color: #1d5fa6;
+  }
+
+  .opx-now {
+    position: absolute;
+    left: 52px;
+    right: 0;
+    height: 0;
+    border-top: 2px solid #e0533d;
+  }
+  .opx-now::before {
+    content: "";
+    position: absolute;
+    left: -4px;
+    top: -4.5px;
+    z-index: 2;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #e0533d;
+  }
+  .opx-now span {
+    position: absolute;
+    left: -50px;
+    top: -8px;
+    padding: 1px 4px;
+    border-radius: 4px;
+    font-size: 9.5px;
+    font-weight: 600;
+    color: #fff;
+    background: #e0533d;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Booking detail */
+  .opx-detail {
+    display: grid;
+    align-content: start;
+    gap: 14px;
+    min-width: 0;
+    padding: 16px;
+    border-left: 1px solid #eeede8;
+  }
+  .opx-section {
+    display: grid;
+    gap: 8px;
+  }
+  .opx-section + .opx-section {
+    padding-top: 14px;
+    border-top: 1px solid #f1f0eb;
+  }
+  .opx-label {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hp-purple);
+  }
+  .opx-detail-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .opx-detail-top strong {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .opx-pill {
+    flex-shrink: 0;
+    font-size: 10.5px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: #e3f5ec;
+    color: #17734b;
+  }
+  .opx-facts {
+    margin: 2px 0 0;
+    display: grid;
+    gap: 6px;
+  }
+  .opx-facts div {
+    display: grid;
+    grid-template-columns: 54px minmax(0, 1fr);
+    gap: 8px;
+  }
+  .opx-facts dt {
+    color: var(--hp-mute);
+  }
+  .opx-facts dd {
+    margin: 0;
+    font-weight: 500;
+    min-width: 0;
+  }
+  .opx-facts dd.is-ai {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #17734b;
+  }
+  .opx-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 2px;
+  }
+  .opx-steps li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 16px 1fr;
+    gap: 10px;
+    padding: 5px 0;
+  }
+  .opx-steps li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 7.5px;
+    top: 24px;
+    bottom: -6px;
+    width: 1px;
+    background: #e6e5df;
+  }
+  .opx-steps b {
+    display: block;
+    font-weight: 500;
+  }
+  .opx-steps li > span:last-child > span {
+    display: block;
+    font-size: 11px;
+    color: var(--hp-mute);
+  }
+  .opx-mark {
+    width: 16px;
+    height: 16px;
+    margin-top: 1px;
+    border-radius: 50%;
+  }
+  .opx-steps .is-done .opx-mark {
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2 7 10.5l4.5-5' fill='none' stroke='white' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+        center / 12px no-repeat,
+      var(--hp-purple);
+  }
+  .opx-steps .is-next .opx-mark {
+    border: 1.5px dashed #c9c8c1;
+  }
+  .opx-steps .is-next b {
+    color: var(--hp-body);
+  }
+  .opx-history {
+    color: var(--hp-mute);
+  }
+  .opx-history b {
+    font-weight: 500;
+    color: var(--hp-ink);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .opx-pulse::after {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .opx-body {
+      grid-template-columns: minmax(0, 1fr) 250px;
+    }
+    .opx-side,
+    .opx-hide-tablet {
+      display: none;
+    }
+    .opx-cols,
+    .opx-day {
+      grid-template-columns: 52px repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  /* Phones: the day agenda alone, two resources wide, like the app on a phone. */
+  @media (max-width: 760px) {
+    .opx-body {
+      grid-template-columns: minmax(0, 1fr);
+      min-height: 0;
+    }
+    .opx-detail,
+    .opx-seg,
+    .opx-hide-phone {
+      display: none;
+    }
+    .opx-head {
+      padding: 12px 14px;
+    }
+    .opx-cols,
+    .opx-day {
+      grid-template-columns: 48px repeat(2, minmax(0, 1fr));
+    }
+    .opx-now {
+      left: 48px;
+    }
+    .opx-now span {
+      left: -46px;
+    }
+    .opx-grid {
+      padding-right: 10px;
+    }
+  }
+</style>

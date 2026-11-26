@@ -1,0 +1,712 @@
+---
+// Product shot for /modulo-facturacion-electronica: the electronic documents
+// list and invoice FE-10293, accepted by the DIAN, issued from order #4821
+// with the data the sale already had (customer, products, taxes, shipping and
+// payment method). Same story as the home hero (Laura Gómez, $289.900).
+// Decorative and illustrative: the figure has a text alternative.
+import AppWindow from "../AppWindow.astro";
+
+type Tone = "purple" | "green" | "blue" | "amber" | "gray";
+
+const docs: Array<{
+  id: string;
+  kind: string;
+  name: string;
+  total: string;
+  status: string;
+  tone: Tone;
+  selected?: boolean;
+}> = [
+  { id: "FE-10293", kind: "Factura", name: "Laura Gómez", total: "$289.900", status: "Aceptada", tone: "green", selected: true },
+  { id: "NC-0412", kind: "Nota crédito", name: "Mariana Ruiz", total: "−$158.000", status: "Aceptada", tone: "green" },
+  { id: "FE-10292", kind: "Factura", name: "Tienda Norte", total: "$1.240.000", status: "Aceptada", tone: "green" },
+  { id: "POS-3381", kind: "Doc. equivalente POS", name: "Venta de mostrador", total: "$64.000", status: "Aceptada", tone: "green" },
+  { id: "FE-10291", kind: "Factura", name: "Clínica Sol", total: "$3.480.000", status: "Enviando", tone: "blue" },
+  { id: "DS-0087", kind: "Documento soporte", name: "Empaques del Caribe", total: "$412.000", status: "Borrador", tone: "gray" },
+];
+
+const lines = [
+  { name: "Proteína vainilla 2 lb", code: "PV-2LB", qty: 1, value: "$159.580" },
+  { name: "Creatina 300 g", code: "CR-300", qty: 1, value: "$84.033" },
+];
+
+const fromSale = ["Cliente", "Productos", "Impuestos", "Envío", "Medio de pago"];
+
+const dian = [
+  { label: "Generada", time: "10:43" },
+  { label: "Firmada digitalmente", time: "10:43" },
+  { label: "Enviada a la DIAN", time: "10:43" },
+  { label: "Aceptada por la DIAN", time: "10:44" },
+];
+---
+
+<AppWindow
+  url="app.binah.co/facturacion/documentos"
+  label="Ejemplo ilustrativo del módulo de Facturación electrónica de Binah: una lista de facturas, notas crédito, documentos equivalentes POS y documentos soporte, y la factura FE-10293 del pedido #4821 por $289.900 con IVA del 19 %, firmada y aceptada por la DIAN, con los datos tomados de la venta."
+>
+  <div class="fac-body">
+    <aside class="fac-list">
+      <div class="fac-list-head">
+        <strong>Documentos</strong>
+        <span class="fac-count">79</span>
+      </div>
+      <div class="fac-filters">
+        <span class="is-active">Todos</span>
+        <span>Facturas</span>
+        <span>Notas</span>
+      </div>
+      <ul>
+        {
+          docs.map((d) => (
+            <li class:list={["fac-doc", d.selected && "is-selected"]}>
+              <span class="fac-doc-top">
+                <b>{d.name}</b>
+                <span class="fac-doc-total">{d.total}</span>
+              </span>
+              <span class="fac-doc-bottom">
+                <span class="fac-doc-id">{d.id}</span>
+                <span class="fac-doc-kind">{d.kind}</span>
+                <span class={`fac-pill is-${d.tone}`}>{d.status}</span>
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </aside>
+
+    <div class="fac-main">
+      <div class="fac-head">
+        <div class="fac-head-copy">
+          <span class="fac-crumb">Facturación · Documentos</span>
+          <span class="fac-title">
+            <strong>Factura FE-10293</strong>
+            <span class="fac-pill is-green fac-pill-check">Aceptada por la DIAN</span>
+          </span>
+        </div>
+        <span class="fac-actions">
+          <span class="fac-btn">Descargar PDF</span>
+          <span class="fac-btn">Nota crédito</span>
+        </span>
+      </div>
+
+      <div class="fac-doc-card">
+        <div class="fac-parties">
+          <div>
+            <span class="fac-k">Cliente</span>
+            <b>Laura Gómez</b>
+            <span>C.C. 1.045 ··· 482 · Barranquilla</span>
+          </div>
+          <div>
+            <span class="fac-k">Origen</span>
+            <b>Pedido #4821</b>
+            <span>Instagram · Agente de ventas</span>
+          </div>
+        </div>
+
+        <div class="fac-lines">
+          <div class="fac-line fac-line-head">
+            <span>Producto</span>
+            <span>Cant.</span>
+            <span>IVA</span>
+            <span>Valor</span>
+          </div>
+          {
+            lines.map((l) => (
+              <div class="fac-line">
+                <span class="fac-line-product">
+                  <b>{l.name}</b>
+                  <em>{l.code}</em>
+                </span>
+                <span class="fac-num">{l.qty}</span>
+                <span class="fac-num">19 %</span>
+                <span class="fac-num">{l.value}</span>
+              </div>
+            ))
+          }
+        </div>
+
+        <dl class="fac-meta">
+          <div><dt>Medio de pago</dt><dd>PSE</dd></div>
+          <div><dt>Envío</dt><dd>Coordinadora · $0</dd></div>
+          <div><dt>Bodega</dt><dd>Barranquilla</dd></div>
+        </dl>
+
+        <div class="fac-foot">
+          <span class="fac-cufe">
+            <span class="fac-k">CUFE</span>
+            <code>8f3a2c…e91b07</code>
+          </span>
+          <div class="fac-totals">
+            <div><span>Subtotal</span><span>$243.613</span></div>
+            <div><span>IVA 19 %</span><span>$46.287</span></div>
+            <div class="fac-total"><span>Total</span><span>$289.900</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="fac-side">
+      <div class="fac-section">
+        <span class="fac-label">Datos de la venta</span>
+        <ul class="fac-checks">{fromSale.map((item) => <li>{item}</li>)}</ul>
+        <span class="fac-note">Tomados del pedido #4821, sin digitar.</span>
+      </div>
+      <div class="fac-section">
+        <span class="fac-label">Envío a la DIAN</span>
+        <ol class="fac-steps">
+          {
+            dian.map((step) => (
+              <li>
+                <span class="fac-step-mark" />
+                <span class="fac-step-copy">
+                  <b>{step.label}</b>
+                  <time>{step.time}</time>
+                </span>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+      <div class="fac-section">
+        <span class="fac-label">Conectado</span>
+        <span class="fac-linked">
+          <span>Cobro PSE</span>
+          <span class="fac-pill is-green">Conciliado</span>
+        </span>
+        <span class="fac-linked">
+          <span>Reporte de ventas</span>
+          <span class="fac-pill is-purple">Actualizado</span>
+        </span>
+      </div>
+    </aside>
+  </div>
+</AppWindow>
+
+<style>
+  .fac-body {
+    display: grid;
+    grid-template-columns: 290px minmax(0, 1fr) 240px;
+    min-height: 488px;
+  }
+
+  /* Status pills (same tones as the home mock) */
+  .fac-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+    font-size: 10.5px;
+    font-weight: 500;
+    line-height: 1.4;
+    padding: 2px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .fac-pill-check::before {
+    content: "✓";
+  }
+  .is-purple {
+    background: var(--hp-lavender);
+    color: #3a25d6;
+  }
+  .is-green {
+    background: #e3f5ec;
+    color: #17734b;
+  }
+  .is-blue {
+    background: #e5f0fb;
+    color: #1d5fa6;
+  }
+  .is-amber {
+    background: #fbf0dc;
+    color: #8a5a0c;
+  }
+  .is-gray {
+    background: #efeee9;
+    color: #5c5c56;
+  }
+  .fac-k {
+    font-size: 10.5px;
+    color: var(--hp-mute);
+  }
+
+  /* Documents list */
+  .fac-list {
+    border-right: 1px solid #eeede8;
+    background: #fbfbf9;
+    padding: 16px 12px;
+    min-width: 0;
+  }
+  .fac-list-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 6px;
+  }
+  .fac-list-head strong {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .fac-count {
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 1px 7px;
+    border-radius: 999px;
+    background: var(--hp-purple);
+    color: #fff;
+  }
+  .fac-filters {
+    display: flex;
+    gap: 4px;
+    margin: 12px 0 10px;
+    padding: 0 2px;
+  }
+  .fac-filters span {
+    padding: 4px 10px;
+    border-radius: 7px;
+    font-size: 11.5px;
+    color: var(--hp-mute);
+    white-space: nowrap;
+  }
+  .fac-filters .is-active {
+    background: #fff;
+    color: var(--hp-ink);
+    font-weight: 500;
+    box-shadow: var(--hp-shadow-sm);
+    outline: 1px solid #ecebe6;
+  }
+  .fac-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 2px;
+  }
+  .fac-doc {
+    display: grid;
+    gap: 5px;
+    padding: 9px 10px;
+    border-radius: 10px;
+    min-width: 0;
+  }
+  .fac-doc.is-selected {
+    background: #fff;
+    box-shadow: var(--hp-shadow-sm);
+    outline: 1px solid #e4e1fb;
+  }
+  .fac-doc-top,
+  .fac-doc-bottom {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+  .fac-doc-top {
+    justify-content: space-between;
+  }
+  .fac-doc-top b {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .fac-doc-total {
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .fac-doc-id {
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--hp-mute);
+  }
+  .fac-doc-kind {
+    min-width: 0;
+    font-size: 11.5px;
+    color: var(--hp-mute);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .fac-doc-bottom .fac-pill {
+    margin-left: auto;
+  }
+
+  /* Open invoice */
+  .fac-main {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+    padding: 16px 20px 20px;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 100%, rgba(77, 55, 246, 0.06), transparent 70%),
+      #fbfbf9;
+  }
+  .fac-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .fac-head-copy {
+    display: grid;
+    gap: 4px;
+    min-width: 0;
+  }
+  .fac-crumb {
+    font-size: 11px;
+    color: var(--hp-mute);
+  }
+  .fac-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 10px;
+  }
+  .fac-title strong {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .fac-actions {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .fac-btn {
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--hp-ink);
+    border: 1px solid #e3e2dc;
+    background: #fff;
+    white-space: nowrap;
+  }
+
+  /* The invoice itself */
+  .fac-doc-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 16px 18px 18px;
+    border-radius: 12px;
+    border: 1px solid #eeede8;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(16, 16, 12, 0.04), 0 12px 30px -20px rgba(16, 16, 12, 0.18);
+  }
+  .fac-parties {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed #e6e5df;
+  }
+  .fac-parties > div {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+  }
+  .fac-parties b {
+    font-weight: 600;
+  }
+  .fac-parties > div > span:last-child {
+    font-size: 11.5px;
+    color: var(--hp-mute);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .fac-lines {
+    display: grid;
+  }
+  .fac-line {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 40px 44px 80px;
+    gap: 10px;
+    align-items: center;
+    padding: 8px 0;
+    border-top: 1px solid #f1f0eb;
+  }
+  .fac-line-head {
+    padding-top: 0;
+    border-top: 0;
+    font-size: 10.5px;
+    color: var(--hp-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .fac-line-head > :not(:first-child),
+  .fac-num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .fac-line-product {
+    display: grid;
+    gap: 1px;
+    min-width: 0;
+  }
+  .fac-line-product b {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .fac-line-product em {
+    font-style: normal;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--hp-mute);
+  }
+  .fac-meta {
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .fac-meta div {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: #fbfbf9;
+    border: 1px solid #f0efea;
+  }
+  .fac-meta dt {
+    font-size: 10.5px;
+    color: var(--hp-mute);
+  }
+  .fac-meta dd {
+    margin: 0;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .fac-foot {
+    margin-top: auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 12px;
+    border-top: 1px dashed #e6e5df;
+  }
+  .fac-cufe {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+  }
+  .fac-cufe code {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--hp-body);
+  }
+  .fac-totals {
+    display: grid;
+    gap: 2px;
+    min-width: 200px;
+  }
+  .fac-totals div {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 3px 0;
+    color: var(--hp-body);
+    font-variant-numeric: tabular-nums;
+  }
+  .fac-totals .fac-total {
+    margin-top: 4px;
+    padding-top: 8px;
+    border-top: 1px solid #eeede8;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--hp-ink);
+  }
+
+  /* Side panel */
+  .fac-side {
+    border-left: 1px solid #eeede8;
+    padding: 16px;
+    display: grid;
+    align-content: start;
+    gap: 14px;
+    min-width: 0;
+  }
+  .fac-section {
+    display: grid;
+    gap: 9px;
+    min-width: 0;
+  }
+  .fac-section + .fac-section {
+    padding-top: 14px;
+    border-top: 1px solid #f1f0eb;
+  }
+  .fac-label {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hp-purple);
+  }
+  .fac-checks {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .fac-checks li {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 9px 3px 6px;
+    border-radius: 999px;
+    border: 1px solid #ebeae4;
+    font-size: 11px;
+    color: var(--hp-body);
+  }
+  .fac-checks li::before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2 7 10.5l4.5-5' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+        center / 10px no-repeat,
+      var(--hp-purple);
+  }
+  .fac-note {
+    font-size: 11px;
+    color: var(--hp-mute);
+  }
+  .fac-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 2px;
+  }
+  .fac-steps li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 16px 1fr;
+    gap: 10px;
+    padding: 4px 0;
+  }
+  .fac-steps li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 7.5px;
+    top: 22px;
+    bottom: -6px;
+    width: 1px;
+    background: #d9d4ff;
+  }
+  .fac-step-mark {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2 7 10.5l4.5-5' fill='none' stroke='white' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+        center / 12px no-repeat,
+      var(--hp-purple);
+  }
+  .fac-steps li:last-child .fac-step-mark {
+    background-color: #22a06b;
+  }
+  .fac-step-copy {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    min-width: 0;
+  }
+  .fac-step-copy b {
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .fac-step-copy time {
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--hp-mute);
+  }
+  .fac-linked {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  @media (max-width: 1100px) {
+    .fac-body {
+      grid-template-columns: 270px minmax(0, 1fr);
+    }
+    .fac-side {
+      display: none;
+    }
+  }
+
+  /* Phones: the open invoice alone, like the app on a phone. */
+  @media (max-width: 760px) {
+    .fac-body {
+      grid-template-columns: minmax(0, 1fr);
+      min-height: 0;
+    }
+    .fac-list {
+      display: none;
+    }
+    .fac-main {
+      gap: 14px;
+      padding: 14px;
+    }
+    .fac-actions {
+      display: none;
+    }
+    .fac-doc-card {
+      padding: 14px;
+    }
+    .fac-line {
+      grid-template-columns: minmax(0, 1fr) 40px 76px;
+    }
+    .fac-line > :nth-child(2) {
+      display: none;
+    }
+    .fac-foot {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+    }
+    .fac-totals {
+      min-width: 0;
+      order: -1;
+    }
+    .fac-meta {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .fac-meta div:last-child {
+      display: none;
+    }
+    .fac-pill,
+    .fac-meta dt,
+    .fac-k,
+    .fac-line-head,
+    .fac-line-product em {
+      font-size: 11px;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .fac-parties {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px;
+    }
+  }
+</style>

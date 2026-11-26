@@ -1,161 +1,160 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Nav from "../components/binah/Nav.astro";
-import Footer from "../components/binah/Footer.astro";
-import CtaBand from "../components/binah/CtaBand.astro";
-import ModuleMockFrame from "../components/binah/ModuleMockFrame.tsx";
-import ChannelCards from "../components/binah/ChannelCards.tsx";
-import { waUrl, WA_MESSAGES } from "../components/binah/whatsapp";
-import { ALL_SEO_FEATURE_PAGES } from "../lib/marketing-pages";
+import ModulePage from "../components/modules/ModulePage.astro";
+import CrmShot from "../components/modules/shots/CrmShot.astro";
+import type { ModuleContent } from "../components/modules/types";
+import { WA_MESSAGES } from "../components/binah/whatsapp";
 
-const crmHref = waUrl(WA_MESSAGES.moduleCrm);
-const crmSolutions = ALL_SEO_FEATURE_PAGES.filter((page) => page.moduleId === "crm").slice(0, 6);
+const content: ModuleContent = {
+  id: "crm",
+  path: "/modulo-crm",
+  seo: {
+    title: "CRM & Agentes IA — Binah",
+    description:
+      "Centraliza WhatsApp, Instagram, correo y llamadas en el CRM de Binah, con agentes IA para ventas, soporte y reservas entrenados para tu negocio.",
+  },
+  demoMessage: WA_MESSAGES.moduleCrm,
+  hero: {
+    crumb: "CRM y agentes IA",
+    eyebrow: "Módulo 01 · CRM y agentes IA",
+    title: "Un solo inbox con",
+    accent: "tres agentes de IA.",
+    lead: "WhatsApp, Instagram, correo, chat web y llamadas en un solo lugar. Agentes entrenados con tu catálogo y tus reglas responden, califican y cierran a cualquier hora. Cero conversaciones perdidas.",
+  },
+  features: {
+    label: "Inbox unificado",
+    title: "Todos los canales.",
+    soft: "Un solo inbox.",
+    lead: "Tu equipo responde y llama desde Binah. Tus clientes reciben la respuesta en el canal que eligieron, y nadie pierde el hilo cuando cambian de canal.",
+    compact: true,
+    items: [
+      { icon: { channel: "whatsapp" }, title: "WhatsApp", body: "API oficial de WhatsApp Business, sin apps intermediarias." },
+      { icon: { channel: "instagram" }, title: "Instagram", body: "Mensajes directos y respuestas a tus historias." },
+      { icon: { channel: "email" }, title: "Email", body: "Conecta el correo de cualquier dominio." },
+      { icon: { channel: "web" }, title: "Chat web", body: "Un widget para atender desde tu sitio." },
+      {
+        icon: { channel: "call" },
+        title: "Llamadas",
+        body: "Llama a celulares colombianos desde el CRM.",
+        link: { label: "Ver llamadas", href: "/llamadas-celulares-colombia-crm" },
+      },
+    ],
+    notes: [
+      { title: "Cada conversación tiene dueño", body: "Asigna por asesor, equipo o estado, o deja que un agente de IA la atienda." },
+      { title: "Todo el historial del cliente", body: "Mensajes, llamadas, pedidos y pagos en una sola ficha, sin importar el canal." },
+      { title: "Del chat al pipeline", body: "Las conversaciones se vuelven oportunidades con etapa, valor y siguiente paso." },
+    ],
+  },
+  highlight: {
+    label: "Agentes de IA",
+    title: "Tres agentes de IA entrenados con tu negocio.",
+    lead: "No es un chatbot que solo responde: cada agente usa tu catálogo, tus políticas y el historial del cliente para resolver, y le pasa la conversación a tu equipo cuando hace falta.",
+    cards: [
+      {
+        kicker: "Agente A",
+        name: "Ventas",
+        status: "En línea",
+        body: "Saluda, califica, recomienda, cotiza y cierra. Envía el link de pago cuando el prospecto está listo y no se olvida de hacer seguimiento.",
+        visual: {
+          type: "chat",
+          in: "¿Tienen la proteína de 2 lb?",
+          out: "Sí, quedan 72. ¿Te envío el link de pago?",
+          result: "Link de pago enviado · $289.900",
+        },
+        points: ["Conversión promedio 34%", "Responde en menos de 3 segundos", "Escala a humano si es necesario"],
+        link: { label: "Agente de ventas", href: "/agente-ia-ventas-whatsapp" },
+      },
+      {
+        kicker: "Agente B",
+        name: "Soporte",
+        status: "En línea",
+        body: "Resuelve dudas comunes, rastrea pedidos y procesa cambios y devoluciones. Conoce al cliente porque vive en la misma base de datos que ventas.",
+        visual: {
+          type: "chat",
+          in: "¿Dónde va mi pedido #4819?",
+          out: "Va en ruta con Coordinadora y llega mañana.",
+          result: "Resuelto sin escalar",
+        },
+        points: ["Resolución en primer contacto 71%", "Integrado con Ventas y Pedidos", "Aprende de cada conversación"],
+        link: { label: "Agente de soporte", href: "/agente-ia-soporte-clientes-whatsapp" },
+      },
+      {
+        kicker: "Agente C",
+        name: "Reservas",
+        status: "En línea",
+        body: "Cuadra citas consultando tu agenda en vivo. Propone horarios, confirma, recuerda y reagenda. Ideal para servicios y consultorías.",
+        visual: {
+          type: "chat",
+          in: "¿Tienen cita el sábado en la mañana?",
+          out: "Tengo 9:00 o 10:30 con Camila. ¿Cuál prefieres?",
+          result: "Cita confirmada · sábado 10:30",
+        },
+        points: ["Conecta con el módulo Operaciones", "Recordatorios automáticos", "Reduce no-shows 58%"],
+        link: { label: "Agente de reservas", href: "/agente-ia-reservas-citas-whatsapp" },
+      },
+    ],
+    guardrails: {
+      label: "Control y confianza",
+      title: "La IA trabaja. Tu equipo supervisa y decide.",
+      items: [
+        { title: "Auditoría antes de enviar", body: "Un segundo modelo revisa cada respuesta del agente antes de que llegue al cliente." },
+        { title: "Escalación a humanos", body: "El agente pasa la conversación a tu equipo cuando el caso lo pide." },
+        { title: "Tus reglas y tu tono", body: "Políticas, horarios, promociones y forma de hablar definidos por tu empresa." },
+      ],
+    },
+  },
+  flow: {
+    label: "Del chat a la venta",
+    title: "De la conversación a la venta,",
+    soft: "sin copiar datos.",
+    lead: "Lo que pasa en el inbox mueve el resto de Binah: el cobro, el pedido, la factura y el reporte salen de la misma conversación.",
+    steps: [
+      {
+        title: "Entra la conversación",
+        body: "El cliente escribe por WhatsApp, Instagram, email o chat web, o tu equipo lo llama desde el CRM.",
+      },
+      { title: "Binah la asigna", body: "Dueño, estado, prioridad y contexto: un agente de IA o una persona de tu equipo." },
+      {
+        title: "Se cierra en el chat",
+        body: "El agente o el asesor responde, cotiza y envía el link de pago sin salir de la conversación.",
+        modules: ["invoice"],
+      },
+      {
+        title: "La operación sigue sola",
+        body: "El pedido reserva inventario, la factura sale a la DIAN y todo queda en tus reportes.",
+        modules: ["retail", "facturacion", "reportes"],
+      },
+    ],
+  },
+  solutions: {
+    title: "Soluciones con CRM y agentes de IA.",
+    lead: "Casos concretos para equipos que venden, atienden, reservan y llaman desde un mismo inbox en Colombia.",
+  },
+  faqs: [
+    {
+      q: "¿Qué canales conecta el CRM de Binah?",
+      a: "WhatsApp con la API oficial de WhatsApp Business, Instagram, correo, chat web y llamadas a celulares colombianos. Todas las conversaciones llegan al mismo inbox, con el historial completo del cliente.",
+    },
+    {
+      q: "¿Los agentes de IA atienden sin supervisión?",
+      a: "Responden con tu catálogo, tus políticas y tu tono, y le pasan la conversación a tu equipo cuando hay una excepción, una negociación o el cliente lo pide. Las acciones con impacto pueden esperar a que una persona las apruebe.",
+    },
+    {
+      q: "¿Se puede activar sin cambiar todo el negocio de una vez?",
+      a: "Sí. Puedes empezar con el inbox y un agente, y conectar ventas, pagos, facturación y reportes cuando la operación lo pida.",
+    },
+    {
+      q: "¿El equipo de Binah ayuda con la configuración?",
+      a: "Sí. Migramos tus contactos, entrenamos los agentes con tu catálogo y tus reglas, y conectamos tus canales con tus datos reales.",
+    },
+  ],
+  cta: {
+    eyebrow: "CRM · Módulo 01",
+    heading: "Activa el CRM en 24 horas.",
+    lead: "Migramos tus contactos, entrenamos los agentes con tu catálogo y conectamos tus canales. Tú solo revisas y apruebas.",
+  },
+};
 ---
 
-<Layout
-  title="CRM & Agentes IA — Binah"
-  description="Centraliza WhatsApp, Instagram, correo y llamadas en el CRM de Binah, con agentes IA para ventas, soporte y reservas entrenados para tu negocio."
-  page="modulos"
-  canonicalPath="/modulo-crm"
->
-  <Nav />
-  <main>
-    <div class="container-binah">
-      <div class="crumb">
-        <a href="/">Binah</a> <span class="sep">/</span> <a href="/modulos">Módulos</a>
-        <span class="sep">/</span> CRM & Agentes
-      </div>
-
-      <section class="binah-section no-border" style="padding: 40px 0 56px;">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">
-          <div>
-            <div class="eyebrow">Módulo 01 / CRM</div>
-            <h1 class="display display-lg" style="margin-top: 20px;">
-              Un inbox.<br />Tres agentes.<br />Cero perdidas.
-            </h1>
-            <p class="lead" style="margin-top: 28px; font-size: 18px;">
-              WhatsApp, Instagram, correo y llamadas en un solo lugar. Tres agentes IA entrenados para tu negocio responden, califican y cierran mientras tú duermes.
-            </p>
-            <div class="hero-cta">
-              <a href={crmHref} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                Probar CRM <span class="arrow">→</span>
-              </a>
-              <a href="/modulos" class="btn btn-outline">Ver otros módulos</a>
-            </div>
-          </div>
-          <ModuleMockFrame id="crm" client:load />
-        </div>
-      </section>
-
-      <section class="binah-section">
-        <div class="section-head">
-          <h2 class="display display-md title">Los tres agentes.</h2>
-          <p>Cada uno especializado. Entrenado con tu catálogo, tu tono, tu negocio.</p>
-        </div>
-        <div
-          style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden;"
-        >
-          <div
-            style="background: var(--bg); padding: 40px 32px; display: flex; flex-direction: column; gap: 16px; min-height: 340px;"
-          >
-            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">
-              AGENTE A
-            </div>
-            <h3
-              style="font-family: var(--font-display); font-size: 30px; font-weight: 500; letter-spacing: -0.02em;"
-            >
-              Ventas
-            </h3>
-            <p style="color: var(--ink-soft); font-size: 14px;">
-              Saluda, califica, recomienda, cotiza y cierra. Envía link de pago cuando el prospecto está listo. No duerme, no pierde el tono, no se olvida de hacer seguimiento.
-            </p>
-            <ul
-              style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--ink-soft); margin-top: auto; padding: 0;"
-            >
-              <li>— Conversión promedio 34%</li>
-              <li>— Responde en &lt; 3 segundos</li>
-              <li>— Escala a humano si es necesario</li>
-            </ul>
-          </div>
-          <div
-            style="background: var(--bg); padding: 40px 32px; display: flex; flex-direction: column; gap: 16px; min-height: 340px;"
-          >
-            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">
-              AGENTE B
-            </div>
-            <h3
-              style="font-family: var(--font-display); font-size: 30px; font-weight: 500; letter-spacing: -0.02em;"
-            >
-              Soporte
-            </h3>
-            <p style="color: var(--ink-soft); font-size: 14px;">
-              Resuelve dudas comunes, rastrea pedidos, procesa cambios y devoluciones. Accede a toda la info del cliente porque vive en la misma base que ventas.
-            </p>
-            <ul
-              style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--ink-soft); margin-top: auto; padding: 0;"
-            >
-              <li>— Resolución 1er contacto 71%</li>
-              <li>— Integrado con Ventas y Pedidos</li>
-              <li>— Aprende de cada conversación</li>
-            </ul>
-          </div>
-          <div
-            style="background: var(--bg); padding: 40px 32px; display: flex; flex-direction: column; gap: 16px; min-height: 340px;"
-          >
-            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">
-              AGENTE C
-            </div>
-            <h3
-              style="font-family: var(--font-display); font-size: 30px; font-weight: 500; letter-spacing: -0.02em;"
-            >
-              Reservas
-            </h3>
-            <p style="color: var(--ink-soft); font-size: 14px;">
-              Cuadra citas consultando tu agenda en vivo. Propone horarios, confirma, recuerda, reagenda. Perfecto para servicios y consultorías.
-            </p>
-            <ul
-              style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--ink-soft); margin-top: auto; padding: 0;"
-            >
-              <li>— Conecta con módulo Operaciones</li>
-              <li>— Recordatorios automáticos</li>
-              <li>— Reduce no-shows 58%</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section class="binah-section">
-        <div class="section-head">
-          <h2 class="display display-md title">Todos los canales. Un solo inbox.</h2>
-          <p>Tu equipo responde y llama desde Binah. Tus clientes reciben la respuesta en el canal que eligieron.</p>
-        </div>
-        <ChannelCards client:load />
-      </section>
-
-      <section class="binah-section">
-        <div class="section-head">
-          <h2 class="display display-md title">Soluciones CRM.</h2>
-          <p>Casos concretos para equipos que venden, soportan, reservan y llaman desde WhatsApp, Instagram, email y CRM.</p>
-        </div>
-        <div class="related-links-grid">
-          {
-            crmSolutions.map((page) => (
-              <a href={page.path}>
-                <span>{page.title.replace(" — Binah", "")}</span>
-                <strong>→</strong>
-              </a>
-            ))
-          }
-        </div>
-      </section>
-
-      <CtaBand
-        eyebrow="CRM · Módulo 01"
-        heading="Activa el CRM en 24 horas."
-        body="Migramos tus contactos, entrenamos los agentes y conectamos tus canales."
-        primaryHref={crmHref}
-      />
-    </div>
-  </main>
-  <Footer />
-</Layout>
+<ModulePage content={content}>
+  <CrmShot slot="shot" />
+</ModulePage>

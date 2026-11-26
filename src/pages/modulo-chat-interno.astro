@@ -1,0 +1,150 @@
+---
+import ModulePage from "../components/modules/ModulePage.astro";
+import TeamChatShot from "../components/modules/shots/TeamChatShot.astro";
+import type { ModuleContent } from "../components/modules/types";
+import { WA_MESSAGES } from "../components/binah/whatsapp";
+
+const content: ModuleContent = {
+  id: "chat",
+  path: "/modulo-chat-interno",
+  seo: {
+    title: "Chat Interno — Binah",
+    description: "Canales, mensajes directos e hilos dentro de la misma plataforma donde tu equipo ya trabaja.",
+  },
+  demoMessage: WA_MESSAGES.moduleChat,
+  hero: {
+    crumb: "Chat interno",
+    eyebrow: "Módulo 06 · Chat interno",
+    title: "Tu chat interno,",
+    accent: "junto a cada pedido.",
+    lead: "Canales, mensajes directos e hilos dentro de la misma plataforma donde tu equipo ya trabaja. Cada conversación queda conectada al pedido, al cliente, a la factura o a la tarea de la que habla.",
+  },
+  features: {
+    label: "Comunicación del equipo",
+    title: "Canales, hilos y huddles.",
+    soft: "Dentro de Binah.",
+    lead: "Ordena la conversación del equipo por proyecto o por área, responde en hilo y menciona a quien tiene que actuar. Todo pasa donde ya viven los pedidos, los clientes y las tareas.",
+    items: [
+      { icon: { icon: "hash" }, title: "Canales por proyecto o área", body: "#despachos, #ventas, #soporte o un canal por proyecto: cada tema tiene su lugar." },
+      { icon: { icon: "user" }, title: "Mensajes directos", body: "Conversaciones uno a uno con cualquier persona del equipo." },
+      { icon: { icon: "at" }, title: "Hilos y menciones", body: "Responde en hilo para no mezclar temas y menciona a quien tiene que actuar." },
+      { icon: { icon: "paperclip" }, title: "Archivos compartidos", body: "Rótulos, fotos y documentos dentro de la conversación donde se usan." },
+      { icon: { icon: "mic" }, title: "Huddles de voz", body: "Una llamada de voz rápida con el equipo, desde el mismo canal." },
+      { icon: { icon: "bell" }, title: "Alertas en los canales", body: "Los avisos de la IA y de los pedidos llegan al canal del equipo que tiene que actuar." },
+    ],
+    notes: [
+      { title: "Cada conversación con contexto", body: "Queda conectada al pedido, al cliente, a la factura o a la tarea correcta." },
+      { title: "Adiós a los grupos caóticos", body: "El trabajo sale de los grupos personales y vive junto a pedidos, clientes y tareas." },
+      { title: "Una sola plataforma", body: "Tu equipo conversa en el mismo lugar donde vende, despacha y atiende." },
+    ],
+  },
+  highlight: {
+    label: "Alertas y contexto",
+    title: "Los avisos llegan al canal que tiene que actuar.",
+    lead: "Las alertas de la IA y de los pedidos se publican en los canales del equipo, y cada conversación queda conectada a lo que está pasando en el negocio.",
+    cards: [
+      {
+        kicker: "Pedidos",
+        name: "Avisos de pedidos",
+        status: "Automático",
+        body: "Cuando un pedido avanza, el aviso llega al canal del equipo que sigue. Bodega sabe que la guía está lista sin que nadie la reenvíe.",
+        visual: {
+          type: "rows",
+          title: "# despachos",
+          rows: [
+            { label: "Guía de despacho · #4821", value: "Generada", tone: "green" },
+            { label: "Clínica Sol · #4818", value: "Preparando", tone: "amber" },
+          ],
+          result: "Aviso publicado en #despachos",
+        },
+        points: ["Avisos de pedidos en el canal del área", "Cada aviso enlaza su pedido", "El equipo responde en hilo"],
+      },
+      {
+        kicker: "IA",
+        name: "Alertas de la IA",
+        status: "En línea",
+        body: "La IA de Binah publica en el canal lo que el equipo tiene que saber, y la conversación sigue ahí mismo, con la persona que tiene que decidir.",
+        visual: {
+          type: "chat",
+          in: "Quedan 8 unidades de PV-2LB en Medellín.",
+          out: "@Juan, ¿revisas el inventario?",
+          result: "Respondido en hilo",
+        },
+        points: ["Alertas de la IA en los canales", "Menciones a quien decide", "Todo queda en el historial"],
+      },
+      {
+        kicker: "Contexto",
+        name: "Hilos conectados",
+        body: "Cada conversación interna queda conectada al pedido, al cliente, a la factura o a la tarea correcta. Nadie pregunta de qué pedido hablan.",
+        visual: {
+          type: "rows",
+          title: "Hilo · conectado a",
+          rows: [
+            { label: "Pedido #4821", value: "Facturado", tone: "purple" },
+            { label: "Laura Gómez", value: "Cliente", tone: "gray" },
+            { label: "Factura FE-10293", value: "Aceptada DIAN", tone: "green" },
+          ],
+        },
+        points: ["Pedidos, clientes, facturas y tareas", "Archivos dentro del hilo", "Sin pantallazos reenviados"],
+      },
+    ],
+  },
+  flow: {
+    label: "De la operación al equipo",
+    title: "Del pedido al equipo,",
+    soft: "sin pantallazos.",
+    lead: "Lo que pasa en ventas, despachos y facturación llega al chat del equipo con su contexto, y la respuesta queda guardada junto al pedido.",
+    steps: [
+      {
+        title: "Algo cambia en la operación",
+        body: "Se factura una venta, se genera una guía de despacho o la IA detecta algo que revisar.",
+        modules: ["retail", "facturacion"],
+      },
+      {
+        title: "El aviso llega al canal",
+        body: "Binah publica la alerta en el canal del área: #despachos, #ventas o #soporte.",
+      },
+      {
+        title: "El equipo responde en hilo",
+        body: "Menciona a quien tiene que actuar, comparte archivos o abre un huddle de voz si hace falta.",
+      },
+      {
+        title: "Todo queda en contexto",
+        body: "La conversación queda conectada al pedido, al cliente, a la factura o a la tarea correcta.",
+        modules: ["crm", "tareas"],
+      },
+    ],
+  },
+  solutions: {
+    title: "Soluciones con chat interno.",
+    lead: "Casos concretos para equipos que coordinan su operación desde Binah.",
+  },
+  faqs: [
+    {
+      q: "¿Qué incluye el chat interno de Binah?",
+      a: "Canales por proyecto o área, mensajes directos, hilos y menciones, archivos compartidos y huddles de voz, dentro de la misma plataforma donde tu equipo maneja pedidos, clientes y tareas.",
+    },
+    {
+      q: "¿Qué alertas llegan a los canales?",
+      a: "Las alertas de la IA y de los pedidos. Por ejemplo, cuando se genera la guía de despacho de un pedido, el aviso llega al canal #despachos y el equipo lo coordina ahí mismo.",
+    },
+    {
+      q: "¿En qué se diferencia de un grupo de chat personal?",
+      a: "En un grupo personal la conversación queda lejos del trabajo. En Binah, cada conversación interna queda conectada al pedido, al cliente, a la factura o a la tarea correcta, en la misma plataforma donde trabaja tu equipo.",
+    },
+    {
+      q: "¿El equipo de Binah ayuda con la configuración?",
+      a: "Sí. Organizamos contigo los canales por área o proyecto y dejamos el chat conectado con tus pedidos, clientes y tareas.",
+    },
+  ],
+  cta: {
+    eyebrow: "Chat interno · Módulo 06",
+    heading: "Un solo chat para tu equipo.",
+    lead: "Organizamos los canales de cada área y conectamos los avisos de pedidos y de la IA. Tu equipo solo entra y conversa.",
+  },
+};
+---
+
+<ModulePage content={content}>
+  <TeamChatShot slot="shot" />
+</ModulePage>

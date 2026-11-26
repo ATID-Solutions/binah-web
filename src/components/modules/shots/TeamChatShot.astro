@@ -1,0 +1,826 @@
+---
+// Product shot for /modulo-chat-interno: the team chat open on #despachos,
+// where the order alert for pedido #4821 (the home's story: Laura Gómez,
+// $289.900, guía Coordinadora) arrives in the channel and the team answers in
+// a thread linked to the order, the customer and the invoice. Decorative and
+// illustrative: the figure has a text alternative.
+import { ModuleGlyph } from "../../binah/brands";
+import CoCeoAvatar from "../../binah/mascot/CoCeoAvatar.tsx";
+import AppWindow from "../AppWindow.astro";
+
+const channels = [
+  { name: "despachos", active: true },
+  { name: "ventas", unread: 3 },
+  { name: "soporte", unread: 1 },
+  { name: "compras" },
+  { name: "general" },
+];
+
+const people = [
+  { initials: "AN", name: "Ana", online: true, tone: "purple" },
+  { initials: "JM", name: "Juan", online: true, tone: "green" },
+  { initials: "CA", name: "Camila", tone: "gray" },
+  { initials: "VA", name: "Valeria", online: true, tone: "gray" },
+];
+
+const linked = [
+  { id: "retail", label: "Pedido #4821", meta: "$289.900 · Facturado" },
+  { id: "crm", label: "Laura Gómez", meta: "Cliente · Instagram" },
+  { id: "facturacion", label: "Factura FE-10293", meta: "Aceptada por la DIAN" },
+];
+---
+
+<AppWindow
+  url="app.binah.co/chat/despachos"
+  label="Ejemplo ilustrativo del chat interno de Binah: el canal #despachos recibe el aviso de la guía de despacho del pedido #4821, el equipo responde en un hilo conectado al pedido, la cliente y la factura, comparte un archivo y recibe una alerta de inventario de la IA."
+  people={["DA", "CR", "+6"]}
+>
+  <div class="tcs-body">
+    <aside class="tcs-side">
+      <div class="tcs-side-head">
+        <strong>Chat interno</strong>
+        <span class="tcs-new" aria-hidden="true">+</span>
+      </div>
+      <div class="tcs-search">Buscar en el chat</div>
+
+      <span class="tcs-group">Canales</span>
+      <ul class="tcs-channels">
+        {
+          channels.map((c) => (
+            <li class:list={["tcs-channel", c.active && "is-active", c.unread && "is-unread"]}>
+              <span class="tcs-hash">#</span>
+              <span class="tcs-channel-name">{c.name}</span>
+              {c.unread && <span class="tcs-badge">{c.unread}</span>}
+            </li>
+          ))
+        }
+      </ul>
+
+      <span class="tcs-group">Mensajes directos</span>
+      <ul class="tcs-people">
+        {
+          people.map((p) => (
+            <li>
+              <span class={`tcs-face tcs-face--sm is-${p.tone}`}>
+                {p.initials}
+                {p.online && <span class="tcs-online" />}
+              </span>
+              {p.name}
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="tcs-huddle">
+        <span class="tcs-huddle-top">
+          <span class="tcs-wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          Huddle de voz
+          <time>4:12</time>
+        </span>
+        <span class="tcs-huddle-who"># despachos · Daniela, Carlos</span>
+      </div>
+    </aside>
+
+    <div class="tcs-main">
+      <div class="tcs-head">
+        <span class="tcs-head-title">
+          <b><span class="tcs-hash">#</span> despachos</b>
+          <span>Pedidos listos para salir · 8 personas</span>
+        </span>
+        <span class="tcs-join">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="6" y="2" width="4" height="7.5" rx="2" /><path d="M3.5 7.5a4.5 4.5 0 0 0 9 0M8 12v2" /></svg>
+          Unirse al huddle
+        </span>
+      </div>
+
+      <div class="tcs-feed">
+        <div class="tcs-msg is-alert">
+          <span class="tcs-bot"><ModuleGlyph id="retail" size={16} /></span>
+          <div class="tcs-msg-body">
+            <span class="tcs-meta"><b>Binah · Ventas</b><span class="tcs-tag">Alerta</span><time>2:41 p. m.</time></span>
+            <div class="tcs-alert">
+              <span class="tcs-alert-top">
+                <strong>Guía de despacho generada</strong>
+                <span class="tcs-pill is-green">Lista</span>
+              </span>
+              <span class="tcs-alert-sub">Pedido #4821 · Laura Gómez · Coordinadora</span>
+              <span class="tcs-chips"><i>Bodega Barranquilla</i><i>FE-10293 · Aceptada DIAN</i></span>
+            </div>
+            <span class="tcs-replies">
+              <span class="tcs-stack"><i class="is-gray">VA</i><i class="is-gray">DA</i></span>
+              2 respuestas · hilo abierto
+            </span>
+          </div>
+        </div>
+
+        <div class="tcs-msg">
+          <span class="tcs-face is-gray">DA</span>
+          <div class="tcs-msg-body">
+            <span class="tcs-meta"><b>Daniela</b><time>2:44 p. m.</time></span>
+            <p><span class="tcs-mention">@Carlos</span> el #4818 de Clínica Sol queda listo antes de la recogida.</p>
+          </div>
+        </div>
+
+        <div class="tcs-msg">
+          <span class="tcs-face is-green">CR</span>
+          <div class="tcs-msg-body">
+            <span class="tcs-meta"><b>Carlos</b><time>2:46 p. m.</time></span>
+            <p>Perfecto. Te dejo el rótulo del #4819.</p>
+            <span class="tcs-file">
+              <span class="tcs-file-icon">PDF</span>
+              <span class="tcs-file-name"><b>rotulo-4819.pdf</b><span>84 KB</span></span>
+            </span>
+          </div>
+        </div>
+
+        <div class="tcs-msg">
+          <CoCeoAvatar size={30} />
+          <div class="tcs-msg-body">
+            <span class="tcs-meta"><b>Co-CEO</b><span class="tcs-tag">IA</span><time>2:50 p. m.</time></span>
+            <p class="tcs-ai">Quedan <strong>8 unidades</strong> de PV-2LB en la bodega de Medellín.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcs-composer">
+        <span>Escribe en #despachos…</span>
+        <span class="tcs-tools" aria-hidden="true">
+          <svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.6" /><path d="M10.6 5.5v3.2a1.8 1.8 0 0 0 3.4.8 6 6 0 1 0-2.4 3.7" /></svg>
+          <svg viewBox="0 0 16 16"><path d="m13 7.5-5 5a3 3 0 0 1-4.3-4.2l5.3-5.4a2 2 0 0 1 2.9 2.8l-5 5.1a1 1 0 0 1-1.5-1.4L10 4.8" /></svg>
+          <svg viewBox="0 0 16 16"><rect x="6" y="2" width="4" height="7.5" rx="2" /><path d="M3.5 7.5a4.5 4.5 0 0 0 9 0M8 12v2" /></svg>
+        </span>
+      </div>
+    </div>
+
+    <aside class="tcs-thread">
+      <div class="tcs-thread-head">
+        <strong>Hilo</strong>
+        <span># despachos</span>
+      </div>
+
+      <div class="tcs-section">
+        <span class="tcs-label">Conectado a</span>
+        <ul class="tcs-linked">
+          {
+            linked.map((l) => (
+              <li>
+                <span class="tcs-linked-icon"><ModuleGlyph id={l.id} size={15} /></span>
+                <span class="tcs-linked-text">
+                  <b>{l.label}</b>
+                  <span>{l.meta}</span>
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="tcs-section">
+        <span class="tcs-label">2 respuestas</span>
+        <div class="tcs-reply">
+          <span class="tcs-face tcs-face--sm is-gray">VA</span>
+          <span class="tcs-reply-text">
+            <span class="tcs-meta"><b>Valeria</b><time>2:42 p. m.</time></span>
+            Inventario actualizado en Barranquilla.
+          </span>
+        </div>
+        <div class="tcs-reply">
+          <span class="tcs-face tcs-face--sm is-gray">DA</span>
+          <span class="tcs-reply-text">
+            <span class="tcs-meta"><b>Daniela</b><time>2:43 p. m.</time></span>
+            Empacado. Sale en la recogida de las 4:00 p. m.
+          </span>
+        </div>
+      </div>
+
+      <div class="tcs-thread-input">Responder en el hilo…</div>
+    </aside>
+  </div>
+</AppWindow>
+
+<style>
+  .tcs-body {
+    display: grid;
+    grid-template-columns: 228px minmax(0, 1fr) 270px;
+    min-height: 480px;
+  }
+
+  /* Channels and people */
+  .tcs-side {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 16px 12px 14px;
+    border-right: 1px solid #eeede8;
+    background: #fbfbf9;
+  }
+  .tcs-side-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6px;
+  }
+  .tcs-side-head strong {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .tcs-new {
+    width: 22px;
+    height: 22px;
+    display: grid;
+    place-items: center;
+    border-radius: 7px;
+    font-size: 14px;
+    line-height: 1;
+    color: var(--hp-purple);
+    background: var(--hp-lavender);
+  }
+  .tcs-search {
+    margin: 12px 2px 4px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid #ecebe6;
+    background: #fff;
+    font-size: 11.5px;
+    color: #9a9a93;
+  }
+  .tcs-group {
+    margin: 14px 8px 6px;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hp-mute);
+  }
+  .tcs-channels,
+  .tcs-people {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1px;
+  }
+  .tcs-channel {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    color: var(--hp-body);
+  }
+  .tcs-channel.is-unread {
+    color: var(--hp-ink);
+    font-weight: 600;
+  }
+  .tcs-channel.is-active {
+    background: #fff;
+    color: var(--hp-ink);
+    font-weight: 600;
+    box-shadow: var(--hp-shadow-sm);
+    outline: 1px solid #e4e1fb;
+  }
+  .tcs-hash {
+    font-family: var(--font-mono);
+    color: #9a9a93;
+    font-weight: 400;
+  }
+  .tcs-channel.is-active .tcs-hash {
+    color: var(--hp-purple);
+  }
+  .tcs-channel-name {
+    min-width: 0;
+    flex: 1;
+  }
+  .tcs-badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 1px 7px;
+    border-radius: 999px;
+    background: var(--hp-purple);
+    color: #fff;
+  }
+  .tcs-people li {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 5px 8px;
+    color: var(--hp-body);
+  }
+
+  /* Avatars */
+  .tcs-face {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--hp-purple);
+  }
+  .tcs-face--sm {
+    width: 22px;
+    height: 22px;
+    font-size: 8.5px;
+  }
+  .tcs-face.is-green {
+    background: #1f7a5a;
+  }
+  .tcs-face.is-gray {
+    background: #ecebe5;
+    color: #45453f;
+  }
+  .tcs-online {
+    position: absolute;
+    right: -2px;
+    bottom: -2px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: 2px solid #fbfbf9;
+    background: #22a06b;
+  }
+
+  .tcs-huddle {
+    display: grid;
+    gap: 3px;
+    margin-top: auto;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #e3f5ec;
+    color: #17734b;
+  }
+  .tcs-huddle-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 12px;
+  }
+  .tcs-huddle-top time {
+    margin-left: auto;
+    font-weight: 500;
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+  }
+  .tcs-huddle-who {
+    font-size: 11px;
+    color: #2b7d57;
+  }
+  .tcs-wave {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    height: 12px;
+  }
+  .tcs-wave i {
+    width: 2.5px;
+    height: 6px;
+    border-radius: 2px;
+    background: #22a06b;
+    animation: tcs-wave 1.2s ease-in-out infinite;
+  }
+  .tcs-wave i:nth-child(2) {
+    height: 11px;
+    animation-delay: 0.15s;
+  }
+  .tcs-wave i:nth-child(3) {
+    height: 8px;
+    animation-delay: 0.3s;
+  }
+  .tcs-wave i:nth-child(4) {
+    height: 5px;
+    animation-delay: 0.45s;
+  }
+  @keyframes tcs-wave {
+    0%,
+    100% {
+      transform: scaleY(1);
+    }
+    50% {
+      transform: scaleY(0.45);
+    }
+  }
+
+  /* Channel */
+  .tcs-main {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 100%, rgba(77, 55, 246, 0.05), transparent 70%),
+      #fff;
+  }
+  .tcs-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 18px;
+    border-bottom: 1px solid #eeede8;
+  }
+  .tcs-head-title {
+    display: grid;
+    gap: 1px;
+    min-width: 0;
+  }
+  .tcs-head-title b {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .tcs-head-title > span {
+    font-size: 11.5px;
+    color: var(--hp-mute);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .tcs-join {
+    margin-left: auto;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: #17734b;
+    background: #e3f5ec;
+  }
+  .tcs-join svg,
+  .tcs-tools svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .tcs-feed {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 16px 18px;
+  }
+  .tcs-msg {
+    display: grid;
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 11px;
+    align-items: start;
+  }
+  .tcs-msg.is-alert {
+    margin: -6px -8px 0;
+    padding: 8px;
+    border-radius: 12px;
+    background: #f8f7ff;
+    outline: 1px solid #ebe8fd;
+  }
+  .tcs-bot {
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    border-radius: 9px;
+    color: #fff;
+    background: var(--hp-purple);
+  }
+  .tcs-msg-body {
+    display: grid;
+    gap: 3px;
+    min-width: 0;
+  }
+  .tcs-msg-body p {
+    margin: 0;
+    line-height: 1.5;
+    color: var(--hp-ink);
+  }
+  .tcs-meta {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    min-width: 0;
+  }
+  .tcs-meta b {
+    font-weight: 600;
+  }
+  .tcs-meta time {
+    font-size: 10.5px;
+    color: var(--hp-mute);
+    white-space: nowrap;
+  }
+  .tcs-tag {
+    font-size: 9.5px;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 5px;
+    color: #3a25d6;
+    background: var(--hp-lavender);
+  }
+  .tcs-alert {
+    display: grid;
+    gap: 3px;
+    margin-top: 3px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #eeede8;
+    border-left: 3px solid var(--hp-purple);
+    background: #fff;
+  }
+  .tcs-alert-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .tcs-alert-top strong {
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .tcs-alert-sub {
+    color: var(--hp-mute);
+  }
+  .tcs-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 4px;
+  }
+  .tcs-chips i {
+    font-style: normal;
+    font-size: 10.5px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid #ebeae4;
+    color: #5c5c56;
+  }
+  .tcs-pill {
+    flex-shrink: 0;
+    font-size: 10.5px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+  .tcs-pill.is-green {
+    background: #e3f5ec;
+    color: #17734b;
+  }
+  .tcs-replies {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--hp-purple);
+  }
+  .tcs-stack {
+    display: inline-flex;
+  }
+  .tcs-stack i {
+    width: 20px;
+    height: 20px;
+    margin-right: -5px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 2px solid #f8f7ff;
+    font-style: normal;
+    font-size: 7.5px;
+    font-weight: 600;
+    color: #45453f;
+    background: #ecebe5;
+  }
+  .tcs-stack i:last-child {
+    margin-right: 0;
+  }
+  .tcs-mention {
+    padding: 0 3px;
+    border-radius: 4px;
+    font-weight: 500;
+    color: #3a25d6;
+    background: var(--hp-lavender);
+  }
+  .tcs-file {
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 4px;
+    padding: 7px 14px 7px 7px;
+    border-radius: 10px;
+    border: 1px solid #ebeae4;
+    background: #fff;
+  }
+  .tcs-file-icon {
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    border-radius: 7px;
+    font-family: var(--font-mono);
+    font-size: 8.5px;
+    font-weight: 600;
+    color: #8a5a0c;
+    background: #fbf0dc;
+  }
+  .tcs-file-name {
+    display: grid;
+    gap: 1px;
+  }
+  .tcs-file-name b {
+    font-weight: 500;
+  }
+  .tcs-file-name span {
+    font-size: 10.5px;
+    color: var(--hp-mute);
+  }
+  .tcs-msg :global(.coceo-avatar-disc) {
+    margin-top: 1px;
+  }
+  .tcs-ai strong {
+    font-weight: 600;
+    color: #8a5a0c;
+  }
+
+  .tcs-composer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 0 18px 16px;
+    padding: 9px 12px 9px 14px;
+    border-radius: 12px;
+    border: 1px solid #ebeae4;
+    background: #fff;
+    color: var(--hp-mute);
+  }
+  .tcs-composer > span:first-child {
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .tcs-tools {
+    display: inline-flex;
+    gap: 10px;
+    color: #9a9a93;
+  }
+
+  /* Thread */
+  .tcs-thread {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+    padding: 14px 16px 16px;
+    border-left: 1px solid #eeede8;
+  }
+  .tcs-thread-head {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f1f0eb;
+  }
+  .tcs-thread-head strong {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .tcs-thread-head span {
+    font-size: 11.5px;
+    color: var(--hp-mute);
+  }
+  .tcs-section {
+    display: grid;
+    gap: 8px;
+  }
+  .tcs-section + .tcs-section {
+    padding-top: 14px;
+    border-top: 1px solid #f1f0eb;
+  }
+  .tcs-label {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hp-purple);
+  }
+  .tcs-linked {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+  }
+  .tcs-linked li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 9px;
+    border-radius: 10px;
+    border: 1px solid #eeede8;
+    background: #fbfbf9;
+  }
+  .tcs-linked-icon {
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    color: var(--hp-purple);
+    background: var(--hp-lavender);
+  }
+  .tcs-linked-text {
+    display: grid;
+    gap: 1px;
+    min-width: 0;
+  }
+  .tcs-linked-text b {
+    font-weight: 500;
+  }
+  .tcs-linked-text span {
+    font-size: 11px;
+    color: var(--hp-mute);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .tcs-reply {
+    display: grid;
+    grid-template-columns: 22px minmax(0, 1fr);
+    gap: 9px;
+    align-items: start;
+  }
+  .tcs-reply-text {
+    display: grid;
+    gap: 2px;
+    line-height: 1.45;
+  }
+  .tcs-thread-input {
+    margin-top: auto;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1px solid #ebeae4;
+    color: var(--hp-mute);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tcs-wave i {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .tcs-body {
+      grid-template-columns: 220px minmax(0, 1fr);
+    }
+    .tcs-thread {
+      display: none;
+    }
+  }
+
+  /* Phones: the open channel alone, like the app on a phone. */
+  @media (max-width: 760px) {
+    .tcs-body {
+      grid-template-columns: minmax(0, 1fr);
+      min-height: 0;
+    }
+    .tcs-side {
+      display: none;
+    }
+    .tcs-head {
+      padding: 12px 14px;
+    }
+    .tcs-feed {
+      padding: 14px;
+    }
+    .tcs-msg.is-alert {
+      margin: -4px -6px 0;
+      padding: 6px;
+    }
+    .tcs-composer {
+      margin: 0 14px 14px;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .tcs-head-title > span {
+      display: none;
+    }
+    .tcs-join {
+      padding: 5px 10px;
+      font-size: 11px;
+    }
+    .tcs-chips i:last-child {
+      display: none;
+    }
+  }
+</style>

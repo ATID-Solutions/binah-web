@@ -1,0 +1,150 @@
+---
+import ModulePage from "../components/modules/ModulePage.astro";
+import TasksShot from "../components/modules/shots/TasksShot.astro";
+import type { ModuleContent } from "../components/modules/types";
+import { WA_MESSAGES } from "../components/binah/whatsapp";
+
+const content: ModuleContent = {
+  id: "tareas",
+  path: "/modulo-tareas",
+  seo: {
+    title: "Tareas — Binah",
+    description: "Tableros, listas y cronogramas para que los equipos avancen sin saltar entre cinco apps.",
+  },
+  demoMessage: WA_MESSAGES.moduleTareas,
+  hero: {
+    crumb: "Tareas",
+    eyebrow: "Módulo 08 · Tareas",
+    title: "Tareas con dueño,",
+    accent: "fecha y contexto.",
+    lead: "Tableros, listas y cronogramas para que los equipos avancen sin saltar entre cinco apps. Las ventas, los pedidos y los casos de soporte se convierten en tareas enlazadas al pedido, al cliente o al ticket.",
+  },
+  features: {
+    label: "Gestión de tareas",
+    title: "Tableros y cronogramas.",
+    soft: "Las mismas tareas.",
+    lead: "Cada equipo trabaja en la vista que le sirve. La tarea es la misma en todas: con responsable, fecha, prioridad y comentarios.",
+    items: [
+      { icon: { icon: "kanban" }, title: "Tableros Kanban", body: "Mueve cada tarea entre columnas: por hacer, en curso y hecho." },
+      { icon: { icon: "checklist" }, title: "Vista de lista", body: "Todas las tareas del equipo, una debajo de otra, con su estado." },
+      { icon: { icon: "timeline" }, title: "Cronograma", body: "La línea de tiempo del proyecto, con las fechas de cada tarea." },
+      { icon: { icon: "user" }, title: "Responsables y prioridades", body: "Cada tarea tiene dueño, fecha límite y prioridad." },
+      { icon: { icon: "at" }, title: "Comentarios en cada tarea", body: "La conversación sobre la tarea queda dentro de la tarea." },
+      { icon: { icon: "link" }, title: "Integrado con cada módulo", body: "Ventas, pedidos y casos de soporte se convierten en tareas para cada equipo." },
+    ],
+    notes: [
+      { title: "Dueño y estado", body: "Cada pendiente tiene responsable y estado. Nadie pregunta quién lo tiene." },
+      { title: "Contexto operativo", body: "La tarea enlaza el pedido, el cliente o el ticket del que salió." },
+      { title: "Sin saltar entre apps", body: "Tareas, pedidos y clientes en la misma plataforma." },
+    ],
+  },
+  highlight: {
+    label: "Conectado a cada módulo",
+    title: "Ventas, pedidos y soporte se vuelven tareas.",
+    lead: "Las tareas no viven aparte: nacen de lo que pasa en el resto de Binah y quedan enlazadas al pedido, al cliente o al ticket que las originó.",
+    cards: [
+      {
+        kicker: "Desde Ventas",
+        name: "El siguiente paso",
+        body: "Cuando una venta necesita un siguiente paso, el asesor lo tiene como tarea, con el cliente y la oportunidad a un clic.",
+        visual: {
+          type: "rows",
+          title: "Tienda Norte · reposición",
+          rows: [
+            { label: "Enviar cotización", value: "Hoy", tone: "amber" },
+            { label: "Confirmar fecha de entrega", value: "Mañana", tone: "gray" },
+          ],
+          result: "Enlazada a la oportunidad",
+        },
+        points: ["El siguiente paso de cada venta", "Enlazada al cliente", "Visible para el equipo comercial"],
+      },
+      {
+        kicker: "Desde Pedidos",
+        name: "Bodega sabe qué sigue",
+        body: "Un pedido por preparar o despachar aparece como tarea para bodega, con su responsable y el pedido enlazado.",
+        visual: {
+          type: "rows",
+          title: "Pedido #4818 · Clínica Sol",
+          rows: [
+            { label: "Preparar pedido", value: "En curso", tone: "amber" },
+            { label: "Confirmar despacho", value: "Por hacer", tone: "gray" },
+          ],
+          result: "Enlazada al pedido #4818",
+        },
+        points: ["Tareas que nacen del pedido", "Responsable y fecha desde el inicio", "El pedido a un clic"],
+      },
+      {
+        kicker: "Desde Soporte",
+        name: "Casos con dueño",
+        body: "Un caso de soporte que necesita a otro equipo se vuelve una tarea visible, enlazada al ticket y al cliente.",
+        visual: {
+          type: "rows",
+          title: "Ticket · Pedido #4819",
+          rows: [
+            { label: "Revisar el envío con Coordinadora", value: "Alta", tone: "amber" },
+            { label: "Responder a Andrés Pérez", value: "Media", tone: "blue" },
+          ],
+          result: "Enlazada al ticket",
+        },
+        points: ["Casos visibles para cada equipo", "Enlazada al ticket y al cliente", "Prioridad y fecha en cada tarea"],
+      },
+    ],
+  },
+  flow: {
+    label: "De la operación a la tarea",
+    title: "De la operación a la tarea,",
+    soft: "sin perder el contexto.",
+    lead: "Lo que pasa en ventas, pedidos y soporte se vuelve trabajo asignado, y cada tarea lleva consigo el pedido, el cliente o el ticket de donde salió.",
+    steps: [
+      {
+        title: "Pasa algo en Binah",
+        body: "Se cierra una venta, entra un pedido o se abre un caso de soporte.",
+        modules: ["crm", "retail", "soporte"],
+      },
+      {
+        title: "Se crea la tarea",
+        body: "Con responsable, fecha, prioridad y el enlace al pedido, al cliente o al ticket.",
+      },
+      {
+        title: "El equipo la mueve",
+        body: "En el tablero, la lista o el cronograma, con los comentarios dentro de la tarea.",
+      },
+      {
+        title: "Nadie pregunta qué falta",
+        body: "Cada pendiente tiene dueño, estado y contexto, a la vista de todo el equipo.",
+      },
+    ],
+  },
+  solutions: {
+    title: "Soluciones con tareas.",
+    lead: "Casos concretos para equipos que organizan su trabajo desde Binah.",
+  },
+  faqs: [
+    {
+      q: "¿Qué vistas tiene el módulo de Tareas?",
+      a: "Tableros Kanban, listas y cronograma (línea de tiempo). Son las mismas tareas vistas de tres formas, con responsable, fecha, prioridad y comentarios.",
+    },
+    {
+      q: "¿Cómo se conectan las tareas con el resto de Binah?",
+      a: "Las ventas, los pedidos y los casos de soporte se convierten en tareas visibles para cada equipo. Cada tarea queda enlazada al pedido, al cliente o al ticket que la originó.",
+    },
+    {
+      q: "¿Se puede activar sin cambiar todo el negocio de una vez?",
+      a: "Sí. Puedes empezar con un tablero para un equipo y conectar ventas, pedidos y soporte cuando la operación lo pida.",
+    },
+    {
+      q: "¿El equipo de Binah ayuda con la configuración?",
+      a: "Sí. Armamos contigo los tableros de cada equipo y te ayudamos a migrar los pendientes que hoy tienes en otras herramientas.",
+    },
+  ],
+  cta: {
+    eyebrow: "Tareas · Módulo 08",
+    heading: "Que cada pendiente tenga dueño.",
+    lead: "Armamos los tableros de cada equipo y conectamos las tareas con tus ventas, pedidos y casos de soporte. Tú solo revisas y apruebas.",
+  },
+};
+---
+
+<ModulePage content={content}>
+  <TasksShot slot="shot" />
+</ModulePage>

@@ -1,0 +1,173 @@
+---
+import ModulePage from "../components/modules/ModulePage.astro";
+import OperationsShot from "../components/modules/shots/OperationsShot.astro";
+import type { ModuleContent } from "../components/modules/types";
+import { WA_MESSAGES } from "../components/binah/whatsapp";
+
+const content: ModuleContent = {
+  id: "operaciones",
+  path: "/modulo-operaciones",
+  seo: {
+    title: "Operaciones — Binah",
+    description:
+      "Centraliza agenda, asignación de personal, seguimiento de servicios y soporte postventa en un único panel.",
+  },
+  demoMessage: WA_MESSAGES.moduleOperaciones,
+  hero: {
+    crumb: "Operaciones",
+    eyebrow: "Módulo 07 · Operaciones",
+    title: "Agenda y servicios",
+    accent: "en un solo panel.",
+    lead: "Para negocios de servicios. Personas, salas y equipos en una sola agenda, personal asignado de forma automática y un agente de IA que reserva, confirma, recuerda y reagenda citas.",
+  },
+  features: {
+    label: "Agenda y servicios",
+    title: "Agenda y personal.",
+    soft: "Servicio y postventa.",
+    lead: "Salud, belleza, educación, consultorías: si tu negocio vive de la agenda, Operaciones ordena quién atiende, cuándo, dónde y qué pasa después del servicio.",
+    items: [
+      {
+        icon: { icon: "calendar" },
+        title: "Agenda multi-recurso",
+        body: "Personas, salas y equipos en la misma agenda, con la disponibilidad de cada uno a la vista.",
+      },
+      {
+        icon: { icon: "users" },
+        title: "Asignación automática",
+        body: "Binah asigna al personal disponible para cada servicio, sin cuadrar turnos a mano.",
+      },
+      {
+        icon: { icon: "sparkles" },
+        title: "Reservas y citas con IA",
+        body: "El agente de reservas propone horarios, confirma, envía recordatorios y reagenda.",
+        link: { label: "Agente de reservas", href: "/agente-ia-reservas-citas-whatsapp" },
+      },
+      {
+        icon: { icon: "clock" },
+        title: "Seguimiento de servicios",
+        body: "Cada servicio con responsable, hora y estado, desde la reserva hasta el cierre.",
+      },
+      {
+        icon: { icon: "checklist" },
+        title: "Checklists operativas",
+        body: "Los pasos de cada servicio, listos para que el equipo los marque.",
+      },
+      {
+        icon: { icon: "history" },
+        title: "Historial y postventa",
+        body: "El historial de servicio de cada cliente y el seguimiento después de la cita.",
+      },
+    ],
+    notes: [
+      { title: "Eventos del equipo", body: "Reuniones internas y citas con invitados externos en la misma agenda." },
+      { title: "Disponibilidad a la vista", body: "Quién está libre y cuándo, antes de confirmar una cita." },
+      { title: "Hecho para servicios", body: "Salud, belleza, educación, consultorías y servicios profesionales." },
+    ],
+  },
+  highlight: {
+    label: "Reservas con IA",
+    title: "Un agente de IA que cuadra tus citas.",
+    lead: "El agente de reservas consulta la agenda y los recursos en vivo, así que solo ofrece horarios que de verdad están libres. Cada cita queda en Operaciones con su responsable y su estado.",
+    cards: [
+      {
+        kicker: "Reserva",
+        name: "Propone y confirma",
+        status: "En línea",
+        body: "Consulta la agenda y los recursos en vivo, propone horarios con la persona indicada y confirma la cita en la misma conversación.",
+        visual: {
+          type: "chat",
+          in: "¿Tienen cita el sábado en la mañana?",
+          out: "Tengo 9:00 o 10:30 con Camila. ¿Cuál prefieres?",
+          result: "Cita confirmada · sábado 10:30",
+        },
+        points: ["Agenda y recursos en vivo", "Propone horarios libres", "La cita queda en Operaciones"],
+      },
+      {
+        kicker: "Recordatorio",
+        name: "Recuerda la cita",
+        status: "Automático",
+        body: "Antes de cada cita, el cliente recibe su recordatorio. Tu equipo ve quién confirmó y quién falta por confirmar.",
+        visual: {
+          type: "rows",
+          title: "Recordatorios · sábado",
+          rows: [
+            { label: "10:30 · Corte · M. Castro", value: "Confirmada", tone: "green" },
+            { label: "11:00 · Pedicure · C. Vargas", value: "Enviado", tone: "purple" },
+          ],
+          result: "Recordatorios enviados",
+        },
+        points: ["Recordatorios antes de cada cita", "Confirmaciones a la vista", "Menos citas olvidadas"],
+      },
+      {
+        kicker: "Reagenda",
+        name: "Mueve la cita",
+        status: "En línea",
+        body: "Si el cliente no puede llegar, el agente busca otro horario libre, mueve la cita y deja la agenda al día.",
+        visual: {
+          type: "chat",
+          in: "¿Podemos mover la cita del sábado?",
+          out: "Claro. Tengo 4:00 p. m. con Camila. ¿Te sirve?",
+          result: "Cita movida · sábado 4:00 p. m.",
+        },
+        points: ["Otro horario sin llamadas", "La agenda se actualiza sola", "El historial queda guardado"],
+      },
+    ],
+  },
+  flow: {
+    label: "De la reserva a la postventa",
+    title: "De la cita al servicio,",
+    soft: "sin perseguir horarios.",
+    lead: "La cita, el responsable, el recordatorio y el seguimiento quedan en el mismo flujo, conectados con el cliente en el CRM.",
+    steps: [
+      {
+        title: "El cliente pide cita",
+        body: "Escribe por chat y el agente de reservas atiende, o tu equipo crea la cita en la agenda.",
+        modules: ["crm"],
+      },
+      {
+        title: "Binah cuadra la agenda",
+        body: "Consulta personas, salas y equipos, propone horarios libres y asigna al personal.",
+      },
+      {
+        title: "Se confirma y se recuerda",
+        body: "La cita queda reservada y el cliente recibe su recordatorio. Si no puede, se reagenda.",
+      },
+      {
+        title: "Servicio y postventa",
+        body: "El equipo sigue la checklist del servicio y el cliente queda con su historial y su próximo paso.",
+      },
+    ],
+  },
+  solutions: {
+    title: "Soluciones con agenda y reservas.",
+    lead: "Casos concretos para negocios de servicios que agendan, confirman y hacen seguimiento desde Binah.",
+  },
+  faqs: [
+    {
+      q: "¿Para qué negocios sirve el módulo de Operaciones?",
+      a: "Para negocios de servicios que viven de la agenda: salud, belleza, educación, consultorías y servicios profesionales. Centraliza agenda, asignación de personal, seguimiento de servicios y soporte postventa en un único panel.",
+    },
+    {
+      q: "¿Cómo funciona el agente de reservas?",
+      a: "Consulta la agenda y los recursos en vivo, propone horarios, confirma la cita, envía recordatorios y reagenda cuando el cliente lo pide. La cita queda en Operaciones con su responsable y su estado.",
+    },
+    {
+      q: "¿Puedo agendar reuniones del equipo y citas con invitados externos?",
+      a: "Sí. La agenda incluye eventos del equipo y citas con invitados externos, y muestra la disponibilidad de cada persona antes de confirmar.",
+    },
+    {
+      q: "¿El equipo de Binah ayuda con la configuración?",
+      a: "Sí. Cargamos tus servicios, tu personal y tus recursos, y dejamos la agenda y el agente de reservas listos con tus datos reales.",
+    },
+  ],
+  cta: {
+    eyebrow: "Operaciones · Módulo 07",
+    heading: "Ordena tu agenda con Binah.",
+    lead: "Cargamos tus servicios, tu personal y tus recursos, y entrenamos al agente de reservas con tus horarios. Tú solo revisas y apruebas.",
+  },
+};
+---
+
+<ModulePage content={content}>
+  <OperationsShot slot="shot" />
+</ModulePage>

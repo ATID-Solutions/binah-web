@@ -19,6 +19,13 @@ export const WA_MESSAGES = {
   moduleCrm: "Hola, me interesa el módulo de CRM & Agentes de Binah.",
   moduleSupport: "Hola, me interesa el módulo de Soporte de Binah.",
   moduleVentas: "Hola, me interesa el módulo de Ventas de Binah.",
+  moduleFacturacion: "Hola, me interesa el módulo de Facturación Electrónica de Binah.",
+  moduleContabilidad: "Hola, me interesa el módulo de Contabilidad de Binah.",
+  moduleChat: "Hola, me interesa el módulo de Chat Interno de Binah.",
+  moduleOperaciones: "Hola, me interesa el módulo de Operaciones de Binah.",
+  moduleTareas: "Hola, me interesa el módulo de Tareas de Binah.",
+  modulePagos: "Hola, me interesa el módulo de Pagos de Binah.",
+  moduleReportes: "Hola, me interesa el módulo de Reportes de Binah.",
   careers: "Hola, me interesa trabajar en Binah.",
   general: "Hola, quisiera más información sobre Binah.",
 } as const;

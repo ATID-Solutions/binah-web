@@ -1,0 +1,773 @@
+---
+// Product shot for /modulo-tareas: the operations team's Kanban board, where
+// orders, support cases and sales become tasks with an owner, a due date and
+// a priority, each linked to the order, customer or ticket it came from (the
+// home's story: pedidos #4821, #4819 and #4818). Decorative and illustrative:
+// the figure has a text alternative.
+import { ModuleGlyph } from "../../binah/brands";
+import type { ModuleId } from "../../binah/modules";
+import AppWindow from "../AppWindow.astro";
+
+type Priority = "Alta" | "Media" | "Baja";
+interface Task {
+  title: string;
+  link?: { module: ModuleId; label: string };
+  priority?: Priority;
+  due?: string;
+  comments?: number;
+  owner: string;
+  ownerTone?: "purple" | "green" | "gray";
+  selected?: boolean;
+  done?: boolean;
+  hideOnPhone?: boolean;
+}
+
+const columns: Array<{ id: string; name: string; tasks: Task[] }> = [
+  {
+    id: "todo",
+    name: "Por hacer",
+    tasks: [
+      {
+        title: "Revisar inventario",
+        link: { module: "retail", label: "PV-2LB · Medellín" },
+        priority: "Alta",
+        due: "Hoy",
+        comments: 1,
+        owner: "JM",
+        ownerTone: "green",
+      },
+      {
+        title: "Responder caso del pedido #4819",
+        link: { module: "soporte", label: "Ticket · Andrés Pérez" },
+        priority: "Media",
+        due: "Hoy",
+        owner: "AN",
+      },
+      { title: "Llamar proveedor", priority: "Media", due: "Mañana", owner: "CR", ownerTone: "gray", hideOnPhone: true },
+    ],
+  },
+  {
+    id: "doing",
+    name: "En curso",
+    tasks: [
+      {
+        title: "Preparar pedido #4818",
+        link: { module: "retail", label: "Clínica Sol · $3.480.000" },
+        priority: "Alta",
+        due: "Hoy",
+        comments: 2,
+        owner: "DA",
+        ownerTone: "gray",
+        selected: true,
+      },
+      { title: "Rediseño empaque", priority: "Baja", due: "4 dic", comments: 3, owner: "VA", ownerTone: "gray" },
+    ],
+  },
+  {
+    id: "done",
+    name: "Hecho",
+    tasks: [
+      {
+        title: "Despachar pedido #4821",
+        link: { module: "retail", label: "Laura Gómez · Coordinadora" },
+        owner: "DA",
+        ownerTone: "gray",
+        done: true,
+      },
+      { title: "Fotos producto", owner: "VA", ownerTone: "gray", done: true },
+    ],
+  },
+];
+
+const boards = [
+  { label: "Operación", count: 7, active: true },
+  { label: "Comercial", count: 5 },
+  { label: "Soporte", count: 4 },
+  { label: "Proyecto empaque", count: 6 },
+];
+
+const sources: Array<{ id: ModuleId; label: string; count: number }> = [
+  { id: "retail", label: "Ventas y pedidos", count: 6 },
+  { id: "soporte", label: "Soporte", count: 3 },
+  { id: "crm", label: "CRM", count: 2 },
+];
+
+const tone = (p?: Priority) => (p === "Alta" ? "amber" : p === "Media" ? "blue" : "gray");
+---
+
+<AppWindow
+  url="app.binah.co/tareas/operacion"
+  label="Ejemplo ilustrativo del módulo de Tareas de Binah: un tablero Kanban con tareas por hacer, en curso y hechas, cada una con responsable, fecha y prioridad, enlazadas a pedidos y casos de soporte, y el detalle de la tarea de preparar el pedido #4818 con sus comentarios."
+  people={["DA", "JM", "+4"]}
+>
+  <div class="tks-body">
+    <aside class="tks-side">
+      <div class="tks-side-head">
+        <strong>Tareas</strong>
+        <span class="tks-add" aria-hidden="true">+</span>
+      </div>
+      <ul class="tks-nav">
+        <li>Mis tareas <span class="tks-num">5</span></li>
+        <li>Para hoy <span class="tks-num">4</span></li>
+      </ul>
+
+      <span class="tks-group">Tableros</span>
+      <ul class="tks-nav">
+        {
+          boards.map((b) => (
+            <li class:list={[b.active && "is-active"]}>
+              {b.label}
+              <span class="tks-num">{b.count}</span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="tks-sources">
+        <span class="tks-group">Creadas hoy desde</span>
+        <ul>
+          {
+            sources.map((s) => (
+              <li>
+                <span class="tks-src-icon"><ModuleGlyph id={s.id} size={13} /></span>
+                {s.label}
+                <b>{s.count}</b>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </aside>
+
+    <div class="tks-main">
+      <div class="tks-head">
+        <span class="tks-head-title">
+          <span class="tks-crumb">Tableros</span>
+          <strong>Operación</strong>
+        </span>
+        <span class="tks-views">
+          <i class="is-active">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="2.5" width="3.5" height="11" rx="1" /><rect x="6.5" y="2.5" width="3.5" height="7.5" rx="1" /><rect x="11" y="2.5" width="3" height="5" rx="1" /></svg>
+            Tablero
+          </i>
+          <i>
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5.5 4h8M5.5 8h8M5.5 12h8M2.5 4h.01M2.5 8h.01M2.5 12h.01" /></svg>
+            Lista
+          </i>
+          <i>
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h6M5 8h7M8 12h6" /></svg>
+            Cronograma
+          </i>
+        </span>
+      </div>
+
+      <div class="tks-board">
+        {
+          columns.map((col) => (
+            <section class={`tks-col is-${col.id}`}>
+              <header class="tks-col-head">
+                <span class={`tks-col-dot is-${col.id}`} />
+                {col.name}
+                <span class="tks-col-count">{col.tasks.length}</span>
+              </header>
+              {col.tasks.map((t) => (
+                <article class:list={["tks-card", t.selected && "is-selected", t.done && "is-done", t.hideOnPhone && "is-extra"]}>
+                  <span class="tks-card-title">
+                    {t.done && <span class="tks-check" />}
+                    {t.title}
+                  </span>
+                  {t.link && (
+                    <span class="tks-link">
+                      <ModuleGlyph id={t.link.module} size={12} />
+                      {t.link.label}
+                    </span>
+                  )}
+                  <span class="tks-card-foot">
+                    {t.priority && <span class={`tks-prio is-${tone(t.priority)}`}>{t.priority}</span>}
+                    {t.due && <span class:list={["tks-due", t.due === "Hoy" && "is-today"]}>{t.due}</span>}
+                    {t.comments && (
+                      <span class="tks-comments">
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3.5h10v7H7.5L4.5 13v-2.5H3z" /></svg>
+                        {t.comments}
+                      </span>
+                    )}
+                    <span class={`tks-owner is-${t.ownerTone ?? "purple"}`}>{t.owner}</span>
+                  </span>
+                </article>
+              ))}
+            </section>
+          ))
+        }
+      </div>
+    </div>
+
+    <aside class="tks-detail">
+      <div class="tks-section">
+        <span class="tks-label">Tarea</span>
+        <div class="tks-detail-top">
+          <strong>Preparar pedido #4818</strong>
+          <span class="tks-prio is-amber">En curso</span>
+        </div>
+        <dl class="tks-facts">
+          <div><dt>Responsable</dt><dd><span class="tks-owner is-gray">DA</span>Daniela</dd></div>
+          <div><dt>Fecha</dt><dd>Hoy · 3:00 p. m.</dd></div>
+          <div><dt>Prioridad</dt><dd><span class="tks-prio is-amber">Alta</span></dd></div>
+        </dl>
+      </div>
+
+      <div class="tks-section">
+        <span class="tks-label">Enlazada a</span>
+        <div class="tks-linked">
+          <span class="tks-linked-icon"><ModuleGlyph id="retail" size={15} /></span>
+          <span class="tks-linked-text">
+            <span class="tks-linked-top"><b>Pedido #4818</b><span class="tks-prio is-amber">Preparando</span></span>
+            <span class="tks-linked-sub">Clínica Sol · $3.480.000</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="tks-section">
+        <span class="tks-label">Comentarios · 2</span>
+        <div class="tks-comment">
+          <span class="tks-owner is-purple">AN</span>
+          <span>
+            <span class="tks-meta"><b>Ana</b><time>10:12 a. m.</time></span>
+            Clínica Sol pidió la entrega antes del viernes.
+          </span>
+        </div>
+        <div class="tks-comment">
+          <span class="tks-owner is-gray">DA</span>
+          <span>
+            <span class="tks-meta"><b>Daniela</b><time>11:40 a. m.</time></span>
+            Empacando. Queda para la recogida de Servientrega.
+          </span>
+        </div>
+        <div class="tks-input">Escribe un comentario…</div>
+      </div>
+    </aside>
+  </div>
+</AppWindow>
+
+<style>
+  .tks-body {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr) 262px;
+    min-height: 480px;
+  }
+
+  /* Sidebar */
+  .tks-side {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 16px 12px 14px;
+    border-right: 1px solid #eeede8;
+    background: #fbfbf9;
+  }
+  .tks-side-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6px;
+    margin-bottom: 10px;
+  }
+  .tks-side-head strong {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .tks-add {
+    width: 22px;
+    height: 22px;
+    display: grid;
+    place-items: center;
+    border-radius: 7px;
+    font-size: 14px;
+    line-height: 1;
+    color: var(--hp-purple);
+    background: var(--hp-lavender);
+  }
+  .tks-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1px;
+  }
+  .tks-nav li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    color: var(--hp-body);
+  }
+  .tks-nav li.is-active {
+    background: #fff;
+    color: var(--hp-ink);
+    font-weight: 600;
+    box-shadow: var(--hp-shadow-sm);
+    outline: 1px solid #e4e1fb;
+  }
+  .tks-num {
+    font-size: 10.5px;
+    font-weight: 500;
+    color: var(--hp-mute);
+  }
+  .tks-group {
+    display: block;
+    margin: 14px 8px 6px;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hp-mute);
+  }
+  .tks-sources {
+    margin-top: auto;
+    padding: 2px 0 0;
+    border-radius: 10px;
+    border: 1px solid #eeede8;
+    background: #fff;
+  }
+  .tks-sources .tks-group {
+    margin: 10px 12px 4px;
+  }
+  .tks-sources ul {
+    list-style: none;
+    margin: 0;
+    padding: 0 6px 8px;
+    display: grid;
+  }
+  .tks-sources li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 6px;
+  }
+  .tks-sources li b {
+    margin-left: auto;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  .tks-src-icon {
+    width: 20px;
+    height: 20px;
+    display: grid;
+    place-items: center;
+    border-radius: 6px;
+    color: var(--hp-purple);
+    background: var(--hp-lavender);
+  }
+
+  /* Board */
+  .tks-main {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: #fff;
+  }
+  .tks-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    border-bottom: 1px solid #eeede8;
+  }
+  .tks-head-title {
+    display: grid;
+    gap: 1px;
+    min-width: 0;
+    margin-right: auto;
+  }
+  .tks-crumb {
+    font-size: 11px;
+    color: var(--hp-mute);
+  }
+  .tks-head-title strong {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .tks-views {
+    display: inline-flex;
+    padding: 2px;
+    border-radius: 8px;
+    background: #f1f0eb;
+  }
+  .tks-views i {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-style: normal;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    color: var(--hp-mute);
+  }
+  .tks-views i.is-active {
+    background: #fff;
+    color: var(--hp-ink);
+    font-weight: 500;
+    box-shadow: var(--hp-shadow-sm);
+  }
+  .tks-views svg,
+  .tks-comments svg {
+    width: 13px;
+    height: 13px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .tks-views i.is-active svg {
+    color: var(--hp-purple);
+  }
+
+  .tks-board {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    align-items: start;
+    padding: 14px;
+    background: #fbfbf9;
+  }
+  .tks-col {
+    display: grid;
+    gap: 8px;
+    min-width: 0;
+    padding: 8px;
+    border-radius: 12px;
+    background: #f3f2ee;
+  }
+  .tks-col-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 2px 4px 2px;
+    font-weight: 600;
+  }
+  .tks-col-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #c9c8c1;
+  }
+  .tks-col-dot.is-doing {
+    background: #e0a43a;
+  }
+  .tks-col-dot.is-done {
+    background: #22a06b;
+  }
+  .tks-col-count {
+    font-size: 10.5px;
+    font-weight: 500;
+    color: var(--hp-mute);
+  }
+
+  .tks-card {
+    display: grid;
+    gap: 8px;
+    min-width: 0;
+    padding: 10px 11px;
+    border-radius: 10px;
+    border: 1px solid #ebeae4;
+    background: #fff;
+    box-shadow: var(--hp-shadow-sm);
+  }
+  .tks-card.is-selected {
+    border-color: #b9b0ff;
+    box-shadow:
+      0 0 0 3px rgba(77, 55, 246, 0.1),
+      0 10px 24px -16px rgba(77, 55, 246, 0.7);
+  }
+  .tks-card-title {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .tks-card.is-done .tks-card-title {
+    color: var(--hp-mute);
+  }
+  .tks-check {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    border-radius: 50%;
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2 7 10.5l4.5-5' fill='none' stroke='white' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+        center / 11px no-repeat,
+      #22a06b;
+  }
+  .tks-link {
+    justify-self: start;
+    max-width: 100%;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 8px 2px 6px;
+    border-radius: 6px;
+    font-size: 11px;
+    color: #3a25d6;
+    background: var(--hp-lavender);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .tks-link :global(svg) {
+    flex-shrink: 0;
+  }
+  .tks-card.is-done .tks-link {
+    color: #5c5c56;
+    background: #f1f0eb;
+  }
+  .tks-card-foot {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+  .tks-prio {
+    flex-shrink: 0;
+    font-size: 10.5px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+  .tks-prio.is-amber {
+    background: #fbf0dc;
+    color: #8a5a0c;
+  }
+  .tks-prio.is-blue {
+    background: #e5f0fb;
+    color: #1d5fa6;
+  }
+  .tks-prio.is-gray {
+    background: #efeee9;
+    color: #5c5c56;
+  }
+  .tks-due {
+    font-size: 11px;
+    color: var(--hp-mute);
+    white-space: nowrap;
+  }
+  .tks-due.is-today {
+    color: #b4442f;
+    font-weight: 500;
+  }
+  .tks-comments {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 11px;
+    color: var(--hp-mute);
+  }
+  .tks-owner {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 8.5px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--hp-purple);
+  }
+  .tks-card-foot .tks-owner {
+    margin-left: auto;
+  }
+  .tks-owner.is-green {
+    background: #1f7a5a;
+  }
+  .tks-owner.is-gray {
+    background: #ecebe5;
+    color: #45453f;
+  }
+
+  /* Task detail */
+  .tks-detail {
+    display: grid;
+    align-content: start;
+    gap: 14px;
+    min-width: 0;
+    padding: 16px;
+    border-left: 1px solid #eeede8;
+  }
+  .tks-section {
+    display: grid;
+    gap: 8px;
+  }
+  .tks-section + .tks-section {
+    padding-top: 14px;
+    border-top: 1px solid #f1f0eb;
+  }
+  .tks-label {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hp-purple);
+  }
+  .tks-detail-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .tks-detail-top strong {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+  .tks-facts {
+    margin: 2px 0 0;
+    display: grid;
+    gap: 6px;
+  }
+  .tks-facts div {
+    display: grid;
+    grid-template-columns: 78px minmax(0, 1fr);
+    align-items: center;
+    gap: 8px;
+  }
+  .tks-facts dt {
+    color: var(--hp-mute);
+  }
+  .tks-facts dd {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-weight: 500;
+    min-width: 0;
+  }
+  .tks-facts .tks-owner {
+    width: 20px;
+    height: 20px;
+    font-size: 8px;
+  }
+  .tks-linked {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 9px;
+    border-radius: 10px;
+    border: 1px solid #eeede8;
+    background: #fbfbf9;
+  }
+  .tks-linked-icon {
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    color: var(--hp-purple);
+    background: var(--hp-lavender);
+  }
+  .tks-linked-text {
+    flex: 1;
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+  }
+  .tks-linked-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .tks-linked-top b {
+    font-weight: 500;
+  }
+  .tks-linked-sub {
+    font-size: 11px;
+    color: var(--hp-mute);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .tks-comment {
+    display: grid;
+    grid-template-columns: 22px minmax(0, 1fr);
+    gap: 9px;
+    align-items: start;
+    line-height: 1.45;
+  }
+  .tks-meta {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .tks-meta b {
+    font-weight: 600;
+  }
+  .tks-meta time {
+    font-size: 10.5px;
+    color: var(--hp-mute);
+  }
+  .tks-input {
+    margin-top: 2px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1px solid #ebeae4;
+    color: var(--hp-mute);
+  }
+
+  @media (max-width: 1100px) {
+    .tks-body {
+      grid-template-columns: minmax(0, 1fr) 250px;
+    }
+    .tks-side {
+      display: none;
+    }
+  }
+
+  /* Small tablets: the open columns only, so the cards keep their width. */
+  @media (max-width: 900px) {
+    .tks-board {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .tks-col.is-done {
+      display: none;
+    }
+  }
+
+  /* Phones: the board alone, the open columns stacked, like the app on a phone. */
+  @media (max-width: 760px) {
+    .tks-body {
+      grid-template-columns: minmax(0, 1fr);
+      min-height: 0;
+    }
+    .tks-detail,
+    .tks-card.is-extra {
+      display: none;
+    }
+    .tks-head {
+      padding: 12px 14px;
+    }
+    .tks-board {
+      grid-template-columns: minmax(0, 1fr);
+      padding: 12px;
+    }
+    .tks-col.is-doing {
+      order: -1;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .tks-views i:not(.is-active) svg {
+      display: none;
+    }
+    .tks-views i {
+      padding: 4px 8px;
+    }
+  }
+</style>

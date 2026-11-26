@@ -1,176 +1,215 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Nav from "../components/binah/Nav.astro";
-import Footer from "../components/binah/Footer.astro";
-import CtaBand from "../components/binah/CtaBand.astro";
-import ModuleMockFrame from "../components/binah/ModuleMockFrame.tsx";
-import RetailLogos from "../components/binah/RetailLogos.tsx";
-import { waUrl, WA_MESSAGES } from "../components/binah/whatsapp";
-import { ALL_SEO_FEATURE_PAGES } from "../lib/marketing-pages";
+import ModulePage from "../components/modules/ModulePage.astro";
+import SalesShot from "../components/modules/shots/SalesShot.astro";
+import type { ModuleContent } from "../components/modules/types";
+import { WA_MESSAGES } from "../components/binah/whatsapp";
 
-const retailHref = waUrl(WA_MESSAGES.moduleVentas);
-const retailSolutions = ALL_SEO_FEATURE_PAGES.filter((page) => page.moduleId === "retail").slice(0, 6);
+const content: ModuleContent = {
+  id: "retail",
+  path: "/modulo-retail",
+  seo: {
+    title: "Ventas — Binah",
+    description:
+      "Centraliza ventas, pedidos, inventario, despachos, transportadoras colombianas y notificaciones de clientes desde Binah.",
+  },
+  demoMessage: WA_MESSAGES.moduleVentas,
+  hero: {
+    crumb: "Ventas e inventario",
+    eyebrow: "Módulo 03 · Ventas",
+    title: "Ventas e inventario,",
+    accent: "del pedido a la guía.",
+    lead: "Pedidos de WhatsApp, Instagram, tienda online, asesores y POS en un solo lugar. Cada venta reserva inventario, sale con la guía de la transportadora y le avisa al cliente.",
+  },
+  features: {
+    label: "Pedidos e inventario",
+    title: "Pedidos, inventario y despachos",
+    soft: "en el mismo flujo.",
+    lead: "Cada venta nace conectada a inventario, bodega, factura y cliente. Tu equipo deja de copiar el mismo dato entre la tienda, la bodega y la transportadora.",
+    items: [
+      {
+        icon: { icon: "cart" },
+        title: "Pedidos por canal y asesor",
+        body: "WhatsApp, Instagram, tienda online, asesores y POS en una sola lista, con cotizaciones y pedidos.",
+      },
+      {
+        icon: { icon: "warehouse" },
+        title: "Inventario multibodega",
+        body: "Stock por producto y variante en cada bodega. Cada venta reserva sus unidades.",
+        link: { label: "Inventario conectado", href: "/inventario-conectado-ventas-whatsapp-tienda-online" },
+      },
+      {
+        icon: { icon: "barcode" },
+        title: "Catálogo con SKU y EAN",
+        body: "Variantes por talla, color o presentación, con SKU y códigos EAN/GTIN por producto.",
+        link: { label: "Catálogo con variantes", href: "/catalogo-productos-variantes-sku-ean" },
+      },
+      {
+        icon: { icon: "box" },
+        title: "Picking y empaque",
+        body: "Listas de picking y estados de empaque para que bodega sepa qué separar y qué sigue.",
+      },
+      {
+        icon: { icon: "truck" },
+        title: "Guías y transportadoras",
+        body: "Guías, rótulos y tracking con transportadoras como Servientrega, Coordinadora e Interrapidísimo.",
+        link: { label: "Ver despachos", href: "/software-despachos-transportadoras-colombia" },
+      },
+      {
+        icon: { icon: "bell" },
+        title: "Avisos al cliente",
+        body: "El cliente recibe por WhatsApp cada cambio de estado de su pedido, sin que nadie lo escriba.",
+      },
+    ],
+    notes: [
+      {
+        title: "Tu tienda online conectada",
+        body: "Shopify y WooCommerce comparten pedidos, productos, clientes e inventario con Binah.",
+      },
+      {
+        title: "Historial por pedido",
+        body: "Quién hizo qué y cuándo: una persona del equipo, la IA o el sistema.",
+      },
+      {
+        title: "La venta mueve el resto",
+        body: "Cada pedido puede disparar la factura electrónica, el cobro y los reportes.",
+      },
+    ],
+  },
+  highlight: {
+    label: "Tienda, bodega y transportadora",
+    title: "Shopify vende. Binah opera lo que pasa después.",
+    lead: "Conecta tu tienda online, tu bodega y tu transportadora. Los pedidos entran a Binah, reservan inventario, salen con guía y le avisan al cliente sin copiar datos entre sistemas.",
+    cards: [
+      {
+        kicker: "Tienda online",
+        name: "Shopify y WooCommerce",
+        status: "Conectado",
+        body: "Pedidos, productos, clientes e inventario de tu tienda entran a Binah. La tienda, los asesores y la bodega trabajan sobre el mismo stock.",
+        visual: {
+          type: "rows",
+          title: "Tienda online · hoy",
+          rows: [
+            { label: "Pedido #4820 · Tienda Norte", value: "Pagado", tone: "green" },
+            { label: "Productos y variantes", value: "Al día", tone: "purple" },
+            { label: "Inventario en 3 bodegas", value: "Al día", tone: "purple" },
+          ],
+          result: "Pedido #4820 en Binah",
+        },
+        points: ["Pedidos, productos y clientes", "Inventario conectado con las bodegas", "Sin copiar datos entre sistemas"],
+        link: { label: "Shopify + Binah", href: "/software-shopify-colombia-crm-inventario" },
+      },
+      {
+        kicker: "Transportadora",
+        name: "Coordinadora",
+        status: "Conectado",
+        body: "Crea guías y rótulos en lote desde los pedidos listos. El tracking y las novedades vuelven al pedido para que soporte y el cliente los vean.",
+        visual: {
+          type: "rows",
+          title: "Guías · hoy",
+          rows: [
+            { label: "#4821 · Laura Gómez", value: "Guía creada", tone: "purple" },
+            { label: "#4819 · Andrés Pérez", value: "En ruta", tone: "blue" },
+            { label: "#4817 · Mariana Ruiz", value: "Entregado", tone: "green" },
+          ],
+          result: "Rótulos listos para imprimir",
+        },
+        points: ["Creación masiva de guías y rótulos", "Tracking y novedades en el pedido", "Notificaciones según el estado"],
+        link: { label: "Integración con Coordinadora", href: "/integracion-coordinadora-ecommerce-colombia" },
+      },
+      {
+        kicker: "Cliente",
+        name: "Avisos de estado",
+        status: "Automático",
+        body: "Cada cambio de estado le llega al cliente por WhatsApp. Soporte ve el mismo estado antes de responder y recibe menos preguntas de seguimiento.",
+        visual: {
+          type: "rows",
+          title: "Pedido #4819 · avisos",
+          rows: [
+            { label: "Recibido", value: "Enviado", tone: "green" },
+            { label: "Empacado", value: "Enviado", tone: "green" },
+            { label: "En ruta · Coordinadora", value: "Enviado", tone: "green" },
+          ],
+          result: "Cliente avisado en cada paso",
+        },
+        points: ["Mensajes según el estado del pedido", "Recibido, empacado, en ruta y entregado", "Menos preguntas de seguimiento"],
+        link: { label: "Tracking de pedidos", href: "/tracking-pedidos-whatsapp-colombia" },
+      },
+    ],
+    guardrails: {
+      label: "Trazabilidad",
+      title: "Cada acción deja rastro.",
+      items: [
+        {
+          title: "Historial completo por pedido",
+          body: "Cada cambio de estado, reserva y guía queda registrado con fecha y responsable.",
+        },
+        {
+          title: "Persona, IA o sistema",
+          body: "Sabes si el paso lo dio alguien del equipo, un agente de IA o una regla automática.",
+        },
+        {
+          title: "Base para mejorar",
+          body: "Revisa errores, entrena al equipo y ajusta reglas con lo que de verdad pasó.",
+        },
+      ],
+    },
+  },
+  flow: {
+    label: "De la venta a la entrega",
+    title: "De la venta a la entrega,",
+    soft: "en el mismo pedido.",
+    lead: "Desde que el cliente confirma hasta que el producto llega a su puerta, cada paso usa los datos del mismo pedido. Y la venta también dispara la factura, el cobro y los reportes.",
+    steps: [
+      {
+        title: "Venta cerrada",
+        body: "El pedido entra desde el CRM, la tienda online o el POS, o lo crea un asesor.",
+        modules: ["crm"],
+      },
+      {
+        title: "Inventario reservado",
+        body: "Las unidades se reservan en la bodega y el equipo recibe la lista de picking.",
+      },
+      {
+        title: "Etiqueta generada",
+        body: "Guía y rótulo con la transportadora, sin copiar la dirección en otro portal.",
+      },
+      {
+        title: "Cliente notificado",
+        body: "El cliente recibe cada estado por WhatsApp. La factura, el cobro y los reportes salen de la misma venta.",
+        modules: ["facturacion", "invoice", "reportes"],
+      },
+    ],
+  },
+  solutions: {
+    title: "Soluciones para ventas e inventario.",
+    lead: "Casos concretos para vender con catálogo, inventario, bodega, despachos y tracking en Colombia.",
+  },
+  faqs: [
+    {
+      q: "¿Qué canales de venta conecta el módulo de Ventas?",
+      a: "Pedidos de WhatsApp, Instagram, tienda online, asesores y POS en una sola lista. Shopify y WooCommerce se conectan con pedidos, productos, clientes e inventario.",
+    },
+    {
+      q: "¿Con qué transportadoras trabaja Binah?",
+      a: "Con transportadoras colombianas como Servientrega, Coordinadora e Interrapidísimo. Con Coordinadora puedes crear guías y rótulos en lote, y el tracking y las novedades quedan conectados al pedido.",
+    },
+    {
+      q: "¿Se puede activar sin cambiar todo el negocio de una vez?",
+      a: "Sí. Puedes empezar con pedidos e inventario y conectar despachos, facturación electrónica y reportes cuando la operación lo pida.",
+    },
+    {
+      q: "¿El equipo de Binah ayuda con la migración?",
+      a: "Sí. Importamos productos, variantes, clientes e inventario desde Excel, Shopify, WooCommerce u otros sistemas, y conectamos tu tienda y tu transportadora con tus datos reales.",
+    },
+  ],
+  cta: {
+    eyebrow: "Ventas · Módulo 03",
+    heading: "Conecta tus ventas con la operación.",
+    lead: "Unimos tienda online, asesores, inventario, transportadoras y facturación para vender sin reconstruir datos.",
+  },
+};
 ---
 
-<Layout
-  title="Ventas — Binah"
-  description="Centraliza ventas, pedidos, inventario, despachos, transportadoras colombianas y notificaciones de clientes desde Binah."
-  page="modulos"
-  canonicalPath="/modulo-retail"
->
-  <Nav />
-  <main>
-    <div class="container-binah">
-      <div class="crumb">
-        <a href="/">Binah</a> <span class="sep">/</span> <a href="/modulos">Módulos</a>
-        <span class="sep">/</span> Ventas
-      </div>
-
-      <section class="binah-section no-border" style="padding: 40px 0 56px;">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">
-          <div>
-            <div class="eyebrow">Módulo 03 / Ventas</div>
-            <h1 class="display display-lg" style="margin-top: 20px;">
-              Vende por todos<br />tus canales.<br />Opera en uno.
-            </h1>
-            <p class="lead" style="margin-top: 28px; font-size: 18px;">
-              WhatsApp, tienda online, asesores y bodega trabajan sobre el mismo pedido: inventario, despacho, cliente y seguimiento.
-            </p>
-            <div class="hero-cta">
-              <a href={retailHref} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                Probar Ventas <span class="arrow">→</span>
-              </a>
-              <a href="/modulos" class="btn btn-outline">Ver otros módulos</a>
-            </div>
-          </div>
-          <ModuleMockFrame id="retail" client:load />
-        </div>
-      </section>
-
-      <section class="binah-section">
-        <div class="section-head">
-          <h2 class="display display-md title">Cuatro pasos. Todos automáticos.</h2>
-          <p>Desde que el cliente confirma hasta que el producto toca su puerta.</p>
-        </div>
-        <div
-          style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden;"
-        >
-          <div
-            style="background: var(--bg); padding: 36px 28px; min-height: 280px; display: flex; flex-direction: column; gap: 14px;"
-          >
-            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">
-              01 / RECIBIDO
-            </div>
-            <h3
-              style="font-family: var(--font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.02em;"
-            >
-              Venta cerrada
-            </h3>
-            <p style="color: var(--ink-soft); font-size: 14px;">
-              El pedido entra automáticamente desde el CRM, la tienda online, o capturado a mano.
-            </p>
-          </div>
-          <div
-            style="background: var(--bg); padding: 36px 28px; min-height: 280px; display: flex; flex-direction: column; gap: 14px;"
-          >
-            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">
-              02 / EMPACADO
-            </div>
-            <h3
-              style="font-family: var(--font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.02em;"
-            >
-              Inventario reservado
-            </h3>
-            <p style="color: var(--ink-soft); font-size: 14px;">
-              Se descuenta del stock, se genera la lista de picking, el equipo de bodega recibe la tarea.
-            </p>
-          </div>
-          <div
-            style="background: var(--bg); padding: 36px 28px; min-height: 280px; display: flex; flex-direction: column; gap: 14px;"
-          >
-            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">
-              03 / RUTA
-            </div>
-            <h3
-              style="font-family: var(--font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.02em;"
-            >
-              Etiqueta generada
-            </h3>
-            <p style="color: var(--ink-soft); font-size: 14px;">
-              Un clic: Servientrega, Coordinadora, Interrapidísimo o la que prefieras. Guía al instante.
-            </p>
-          </div>
-          <div
-            style="background: var(--bg); padding: 36px 28px; min-height: 280px; display: flex; flex-direction: column; gap: 14px;"
-          >
-            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">
-              04 / ENTREGADO
-            </div>
-            <h3
-              style="font-family: var(--font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.02em;"
-            >
-              Cliente notificado
-            </h3>
-            <p style="color: var(--ink-soft); font-size: 14px;">
-              El cliente recibe cada actualización en WhatsApp. Tú recibes la factura firmada DIAN.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="binah-section">
-        <div class="eyebrow" style="margin-bottom: 24px;">
-          Integraciones / Plataformas & transportadoras
-        </div>
-        <RetailLogos client:load />
-      </section>
-
-      <section class="binah-section">
-        <div class="section-head">
-          <h2 class="display display-md title">Ventas e-commerce conectadas.</h2>
-          <p>
-            Shopify, Coordinadora, SIIGO y WhatsApp pueden operar como un solo flujo después de cada venta.
-          </p>
-        </div>
-        <div class="solution-statement">
-          <h2 class="display display-md">Shopify vende. Binah opera lo que pasa después.</h2>
-          <p>
-            Conecta tienda online, bodega, transportadora, facturación, cliente y reportes sin copiar el mismo dato
-            entre sistemas.
-          </p>
-        </div>
-        <div class="hero-cta">
-          <a href="/operacion-ecommerce-colombia" class="btn btn-primary">
-            Ver operación e-commerce <span class="arrow">→</span>
-          </a>
-          <a href="/software-shopify-colombia-crm-inventario" class="btn btn-outline">Ver Shopify + Binah</a>
-        </div>
-      </section>
-
-      <section class="binah-section">
-        <div class="section-head">
-          <h2 class="display display-md title">Soluciones Ventas.</h2>
-          <p>Casos concretos para vender con catálogo, inventario, bodega, despachos y tracking en Colombia.</p>
-        </div>
-        <div class="related-links-grid">
-          {
-            retailSolutions.map((page) => (
-              <a href={page.path}>
-                <span>{page.title.replace(" — Binah", "")}</span>
-                <strong>→</strong>
-              </a>
-            ))
-          }
-        </div>
-      </section>
-
-      <CtaBand
-        eyebrow="Ventas · Módulo 03"
-        heading="Conecta tus ventas con la operación."
-        body="Unimos tienda online, asesores, inventario, transportadoras, facturación y WhatsApp para vender sin reconstruir datos."
-        primaryHref={retailHref}
-      />
-    </div>
-  </main>
-  <Footer />
-</Layout>
+<ModulePage content={content}>
+  <SalesShot slot="shot" />
+</ModulePage>

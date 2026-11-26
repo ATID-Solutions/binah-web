@@ -93,7 +93,7 @@ export const BINAH_MODULES: BinahModule[] = [
     num: "05",
     name: "Contabilidad",
     short: "Costos, compras, proveedores",
-    tagline: "Tu contador te va a pedir un aumento (de cariño).",
+    tagline: "Compras, proveedores y costos que cuadran con cada venta.",
     description:
       "Seguimiento de costos, órdenes de compra, proveedores y conciliaciones — todo conectado con ventas y facturación.",
     features: [

@@ -1,0 +1,776 @@
+---
+// Product shot for /modulo-soporte: the ticket queue with one case open. The
+// support agent asked for the missing photo and escalated a damaged product
+// to a person; the side panel shows the customer's order, tracking and
+// invoice, and the return moving through inventory and invoicing. Same story
+// as the home hero (Laura Gómez, pedido #4821, FE-10293). Decorative and
+// illustrative: the figure has a text alternative.
+import ChannelIcon from "../../binah/ChannelIcon.astro";
+import AppWindow from "../AppWindow.astro";
+
+type Tone = "purple" | "green" | "blue" | "amber" | "gray";
+
+const tickets: Array<{
+  id: string;
+  name: string;
+  subject: string;
+  sla: string;
+  slaTone: Tone;
+  state: string;
+  stateTone: Tone;
+  owner: string;
+  ai?: boolean;
+  selected?: boolean;
+}> = [
+  { id: "#1287", name: "Laura Gómez", subject: "Producto dañado · Pedido #4821", sla: "1 h 20 min", slaTone: "amber", state: "En proceso", stateTone: "purple", owner: "Ana", selected: true },
+  { id: "#1286", name: "Andrés Pérez", subject: "Tracking · Pedido #4819", sla: "A tiempo", slaTone: "green", state: "Resuelto", stateTone: "green", owner: "IA", ai: true },
+  { id: "#1285", name: "Clínica Sol", subject: "Factura · Pedido #4818", sla: "25 min", slaTone: "amber", state: "Abierto", stateTone: "blue", owner: "Juan" },
+  { id: "#1284", name: "Mariana Ruiz", subject: "Cambio · Pedido #4817", sla: "En pausa", slaTone: "gray", state: "Esperando al cliente", stateTone: "gray", owner: "Ana" },
+];
+
+const next = [
+  { label: "Motivo registrado", meta: "Producto dañado", state: "done" },
+  { label: "Inventario revisa la unidad", meta: "Bodega Barranquilla", state: "active" },
+  { label: "Nota crédito", meta: "Facturación", state: "next" },
+];
+---
+
+<AppWindow
+  url="app.binah.co/soporte/tickets"
+  label="Ejemplo ilustrativo del módulo de Soporte de Binah: una lista de tickets con responsable, prioridad y tiempo límite, un caso abierto donde el agente de soporte pide una foto y lo escala a una persona, y el pedido, el tracking, la factura y la devolución del cliente a la vista."
+>
+  <div class="sup-body">
+    <aside class="sup-list">
+      <div class="sup-list-head">
+        <strong>Tickets</strong>
+        <span class="sup-count">18</span>
+      </div>
+      <div class="sup-filters">
+        <span class="is-active">Abiertos</span>
+        <span>Míos</span>
+        <span>Por vencer</span>
+      </div>
+      <ul>
+        {
+          tickets.map((t) => (
+            <li class:list={["sup-tk", t.selected && "is-selected"]}>
+              <span class="sup-tk-top">
+                <b>{t.name}</b>
+                <span class={`sup-sla-chip is-${t.slaTone}`}>{t.sla}</span>
+              </span>
+              <span class="sup-tk-subject">{t.subject}</span>
+              <span class="sup-tk-meta">
+                <span class="sup-tk-id">{t.id}</span>
+                <span class={`sup-pill is-${t.stateTone}`}>{t.state}</span>
+                <span class:list={["sup-owner", t.ai && "is-ai"]}>{t.owner}</span>
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </aside>
+
+    <div class="sup-main">
+      <div class="sup-head">
+        <div class="sup-head-copy">
+          <span class="sup-head-tags">
+            <span class="sup-tk-id">#1287</span>
+            <span class="sup-pill is-purple">En proceso</span>
+            <span class="sup-pill is-amber">Prioridad alta</span>
+          </span>
+          <strong>La creatina llegó con el sello roto</strong>
+          <span class="sup-head-meta">
+            <span class="sup-ig"><ChannelIcon name="instagram" size={14} /></span>
+            Laura Gómez · Pedido #4821 · Responsable: Ana
+          </span>
+        </div>
+        <div class="sup-sla">
+          <span class="sup-sla-label">Vence en</span>
+          <b>1 h 20 min</b>
+          <span class="sup-sla-bar"><i></i></span>
+        </div>
+      </div>
+
+      <div class="sup-thread">
+        <p class="sup-msg is-in">Hola, la creatina de mi pedido llegó con el sello roto.</p>
+        <div class="sup-msg is-out">
+          <span class="sup-by">Agente de soporte · IA</span>
+          Lo siento, Laura. ¿Me envías una foto del empaque para revisar el caso?
+        </div>
+        <p class="sup-msg is-in is-file">
+          <svg viewBox="0 0 24 24" aria-hidden="true"
+            ><path
+              d="m20 11-8.5 8.5a5 5 0 0 1-7-7L13 4a3.3 3.3 0 0 1 4.7 4.7l-8.4 8.4a1.7 1.7 0 0 1-2.4-2.4L14.5 7"
+            ></path></svg
+          >
+          foto-empaque.jpg
+        </p>
+        <p class="sup-event">
+          <span class="sup-event-dot" aria-hidden="true"></span>
+          El agente escaló el caso a Ana · producto dañado
+        </p>
+        <div class="sup-note">
+          <span class="sup-note-by">Nota interna · Ana</span>
+          Cambio aprobado. Registro la devolución para que inventario revise la unidad.
+        </div>
+      </div>
+
+      <div class="sup-composer">
+        <span class="sup-composer-hint">Responder a Laura…</span>
+        <span class="sup-btn">Registrar devolución</span>
+        <span class="sup-btn is-primary">Resolver</span>
+      </div>
+    </div>
+
+    <aside class="sup-ctx">
+      <div class="sup-section">
+        <span class="sup-label">Cliente</span>
+        <div class="sup-customer">
+          <span class="sup-avatar">LG</span>
+          <span class="sup-customer-who">
+            <b>Laura Gómez</b>
+            <span>Cliente desde 2025 · 4 pedidos</span>
+          </span>
+        </div>
+      </div>
+      <div class="sup-section">
+        <span class="sup-label">Pedido #4821</span>
+        <div class="sup-order">
+          <div><span>Proteína vainilla 2 lb</span><span>$189.900</span></div>
+          <div><span>Creatina 300 g</span><span>$100.000</span></div>
+        </div>
+        <div class="sup-facts">
+          <span><em>Tracking</em><span class="sup-pill is-green">Entregado · Coordinadora</span></span>
+          <span><em>Factura</em><span class="sup-pill is-gray">FE-10293 · DIAN</span></span>
+        </div>
+      </div>
+      <div class="sup-section">
+        <span class="sup-label">Devolución en Binah</span>
+        <ul class="sup-next">
+          {
+            next.map((step) => (
+              <li class={`is-${step.state}`}>
+                <span class="sup-next-mark" />
+                <span>
+                  <b>{step.label}</b>
+                  <em>{step.meta}</em>
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </aside>
+  </div>
+</AppWindow>
+
+<style>
+  .sup-body {
+    display: grid;
+    grid-template-columns: 290px minmax(0, 1fr) 250px;
+    min-height: 488px;
+  }
+
+  /* Status pills (same tones as the home mock) */
+  .sup-pill {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    font-size: 10.5px;
+    font-weight: 500;
+    line-height: 1.4;
+    padding: 2px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .is-purple {
+    background: var(--hp-lavender);
+    color: #3a25d6;
+  }
+  .is-green {
+    background: #e3f5ec;
+    color: #17734b;
+  }
+  .is-blue {
+    background: #e5f0fb;
+    color: #1d5fa6;
+  }
+  .is-amber {
+    background: #fbf0dc;
+    color: #8a5a0c;
+  }
+  .is-gray {
+    background: #efeee9;
+    color: #5c5c56;
+  }
+  .sup-tk-id {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--hp-mute);
+  }
+
+  /* Ticket queue */
+  .sup-list {
+    border-right: 1px solid #eeede8;
+    background: #fbfbf9;
+    padding: 16px 12px;
+    min-width: 0;
+  }
+  .sup-list-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 6px;
+  }
+  .sup-list-head strong {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .sup-count {
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 1px 7px;
+    border-radius: 999px;
+    background: var(--hp-purple);
+    color: #fff;
+  }
+  .sup-filters {
+    display: flex;
+    gap: 4px;
+    margin: 12px 0 10px;
+    padding: 0 2px;
+  }
+  .sup-filters span {
+    padding: 4px 10px;
+    border-radius: 7px;
+    font-size: 11.5px;
+    color: var(--hp-mute);
+    white-space: nowrap;
+  }
+  .sup-filters .is-active {
+    background: #fff;
+    color: var(--hp-ink);
+    font-weight: 500;
+    box-shadow: var(--hp-shadow-sm);
+    outline: 1px solid #ecebe6;
+  }
+  .sup-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 2px;
+  }
+  .sup-tk {
+    display: grid;
+    gap: 3px;
+    padding: 9px 10px;
+    border-radius: 10px;
+    min-width: 0;
+  }
+  .sup-tk.is-selected {
+    background: #fff;
+    box-shadow: var(--hp-shadow-sm);
+    outline: 1px solid #e4e1fb;
+  }
+  .sup-tk-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .sup-tk-top b {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .sup-sla-chip {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10.5px;
+    font-weight: 500;
+    padding: 1px 7px 1px 6px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .sup-sla-chip::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: 1.5px solid currentColor;
+    background: linear-gradient(currentColor, currentColor) 50% 1.5px / 1.2px 3.2px no-repeat;
+    opacity: 0.85;
+  }
+  .sup-sla-chip.is-green::before {
+    border: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.4 6.6 11.2 12.5 4.8' fill='none' stroke='%2317734b' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+      center / 10px no-repeat;
+  }
+  .sup-tk-subject {
+    color: var(--hp-mute);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .sup-tk-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 3px;
+    min-width: 0;
+  }
+  .sup-owner {
+    margin-left: auto;
+    flex-shrink: 0;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: #efeee9;
+    color: #5c5c56;
+  }
+  .sup-owner.is-ai {
+    background: var(--hp-lavender);
+    color: #3a25d6;
+  }
+
+  /* Open ticket */
+  .sup-main {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 100%, rgba(77, 55, 246, 0.05), transparent 70%),
+      #fff;
+  }
+  .sup-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 18px;
+    border-bottom: 1px solid #eeede8;
+  }
+  .sup-head-copy {
+    display: grid;
+    gap: 5px;
+    min-width: 0;
+  }
+  .sup-head-tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+  .sup-head-copy > strong {
+    font-size: 14.5px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+  .sup-head-meta {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11.5px;
+    color: var(--hp-mute);
+    min-width: 0;
+  }
+  .sup-ig {
+    display: inline-grid;
+    flex-shrink: 0;
+  }
+  .sup-sla {
+    flex-shrink: 0;
+    display: grid;
+    gap: 3px;
+    min-width: 132px;
+    padding: 9px 12px 10px;
+    border-radius: 10px;
+    border: 1px solid #f3e3c4;
+    background: #fdf8ee;
+  }
+  .sup-sla-label {
+    font-size: 10.5px;
+    color: #8a5a0c;
+  }
+  .sup-sla b {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .sup-sla-bar {
+    height: 4px;
+    margin-top: 3px;
+    border-radius: 999px;
+    background: #f1e4c9;
+    overflow: hidden;
+  }
+  .sup-sla-bar i {
+    display: block;
+    width: 68%;
+    height: 100%;
+    border-radius: inherit;
+    background: #d98a14;
+  }
+
+  .sup-thread {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px 18px;
+  }
+  .sup-msg {
+    margin: 0;
+    max-width: 78%;
+    padding: 10px 13px;
+    line-height: 1.5;
+    font-size: 12.5px;
+  }
+  .sup-msg.is-in {
+    align-self: flex-start;
+    border-radius: 14px 14px 14px 4px;
+    background: #f1f0eb;
+    color: var(--hp-ink);
+  }
+  .sup-msg.is-out {
+    align-self: flex-end;
+    border-radius: 14px 14px 4px 14px;
+    background: var(--hp-purple);
+    color: #fff;
+    box-shadow: 0 10px 24px -14px rgba(77, 55, 246, 0.9);
+  }
+  .sup-msg.is-file {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--hp-body);
+  }
+  .sup-msg.is-file svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .sup-by {
+    display: block;
+    margin-bottom: 4px;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.72);
+  }
+  .sup-event {
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 2px 0;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #3a25d6;
+    background: var(--hp-lavender);
+  }
+  .sup-event-dot {
+    width: 6px;
+    height: 6px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--hp-purple);
+  }
+  .sup-note {
+    align-self: flex-end;
+    max-width: 82%;
+    padding: 9px 12px;
+    border-radius: 10px;
+    border: 1px dashed #e3d3ad;
+    background: #fdf8ee;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--hp-body);
+  }
+  .sup-note-by {
+    display: block;
+    margin-bottom: 3px;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: #8a5a0c;
+  }
+
+  .sup-composer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 18px 16px;
+    padding: 8px 8px 8px 14px;
+    border-radius: 12px;
+    border: 1px solid #ebeae4;
+    background: #fff;
+    color: var(--hp-mute);
+  }
+  .sup-composer-hint {
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .sup-btn {
+    flex-shrink: 0;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--hp-ink);
+    border: 1px solid #e3e2dc;
+    white-space: nowrap;
+  }
+  .sup-btn.is-primary {
+    background: var(--hp-ink);
+    border-color: var(--hp-ink);
+    color: #fff;
+  }
+
+  /* Customer context */
+  .sup-ctx {
+    border-left: 1px solid #eeede8;
+    padding: 16px;
+    display: grid;
+    align-content: start;
+    gap: 14px;
+    min-width: 0;
+  }
+  .sup-section {
+    display: grid;
+    gap: 9px;
+    min-width: 0;
+  }
+  .sup-section + .sup-section {
+    padding-top: 14px;
+    border-top: 1px solid #f1f0eb;
+  }
+  .sup-label {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hp-purple);
+  }
+  .sup-customer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sup-avatar {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: #45453f;
+    background: #ecebe5;
+  }
+  .sup-customer-who {
+    display: grid;
+    gap: 1px;
+    min-width: 0;
+  }
+  .sup-customer-who b {
+    font-weight: 600;
+  }
+  .sup-customer-who span {
+    font-size: 11px;
+    color: var(--hp-mute);
+  }
+  .sup-order {
+    border-radius: 10px;
+    background: #fbfbf9;
+    border: 1px solid #f0efea;
+    padding: 2px 10px;
+  }
+  .sup-order div {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 6px 0;
+    font-size: 11.5px;
+    color: var(--hp-body);
+    font-variant-numeric: tabular-nums;
+  }
+  .sup-order div + div {
+    border-top: 1px solid #f0efea;
+  }
+  .sup-facts {
+    display: grid;
+    gap: 6px;
+  }
+  .sup-facts > span {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .sup-facts em {
+    font-style: normal;
+    font-size: 11.5px;
+    color: var(--hp-mute);
+  }
+  .sup-next {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 2px;
+  }
+  .sup-next li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 16px 1fr;
+    gap: 10px;
+    padding: 5px 0;
+  }
+  .sup-next li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 7.5px;
+    top: 24px;
+    bottom: -6px;
+    width: 1px;
+    background: #e6e5df;
+  }
+  .sup-next b {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .sup-next em {
+    display: block;
+    font-style: normal;
+    font-size: 11px;
+    color: var(--hp-mute);
+  }
+  .sup-next-mark {
+    width: 16px;
+    height: 16px;
+    margin-top: 1px;
+    border-radius: 50%;
+  }
+  .sup-next li.is-done .sup-next-mark {
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2 7 10.5l4.5-5' fill='none' stroke='white' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+        center / 12px no-repeat,
+      var(--hp-purple);
+  }
+  .sup-next li.is-active .sup-next-mark {
+    border: 2px solid var(--hp-purple);
+    border-right-color: transparent;
+    animation: sup-spin 1.1s linear infinite;
+  }
+  .sup-next li.is-next .sup-next-mark {
+    border: 1.5px dashed #c9c8c1;
+  }
+  .sup-next li.is-next b,
+  .sup-next li.is-next em {
+    color: #9a9a93;
+  }
+  @keyframes sup-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sup-next li.is-active .sup-next-mark {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .sup-body {
+      grid-template-columns: 270px minmax(0, 1fr);
+    }
+    .sup-ctx {
+      display: none;
+    }
+  }
+
+  /* Phones: the open ticket alone, like the app on a phone. */
+  @media (max-width: 760px) {
+    .sup-body {
+      grid-template-columns: minmax(0, 1fr);
+      min-height: 0;
+    }
+    .sup-list {
+      display: none;
+    }
+    .sup-head {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+      padding: 14px;
+    }
+    .sup-sla {
+      grid-template-columns: auto auto 1fr;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      padding: 8px 12px;
+    }
+    .sup-sla-label {
+      font-size: 11px;
+    }
+    .sup-sla b {
+      font-size: 13.5px;
+    }
+    .sup-sla-bar {
+      margin-top: 0;
+    }
+    .sup-head-meta {
+      align-items: flex-start;
+    }
+    .sup-thread {
+      padding: 14px;
+    }
+    .sup-msg {
+      max-width: 88%;
+    }
+    .sup-by {
+      font-size: 11px;
+      letter-spacing: 0.06em;
+    }
+    .sup-note {
+      max-width: 92%;
+    }
+    .sup-composer {
+      margin: 0 14px 14px;
+    }
+    .sup-composer-hint {
+      display: none;
+    }
+    .sup-pill,
+    .sup-tk-id,
+    .sup-note-by {
+      font-size: 11px;
+    }
+    .sup-composer-hint + .sup-btn {
+      margin-left: auto;
+    }
+  }
+</style>
