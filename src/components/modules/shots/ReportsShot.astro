@@ -1,0 +1,607 @@
+---
+// Product shot for /modulo-reportes: the general dashboard (net sales,
+// margin, average ticket, orders, sales by week and by channel, advisors'
+// response times) with the Co-CEO reading the month and proposing an action
+// to approve. Same numbers as the home's Co-CEO ($412 M, +18 %, 36 %, $214
+// mil, recompra to 312 clients). Decorative and illustrative: the figure has
+// a text alternative.
+import CoCeoAvatar from "../../binah/mascot/CoCeoAvatar.tsx";
+import AppWindow from "../AppWindow.astro";
+
+const boards = [
+  { label: "Vista general", active: true },
+  { label: "Ventas por canal" },
+  { label: "Asesores" },
+  { label: "Bodegas y productos" },
+  { label: "Atención al cliente" },
+  { label: "Cartera y pagos" },
+];
+
+const kpis = [
+  { label: "Ventas netas", value: "$412 M", delta: "+18 %" },
+  { label: "Margen", value: "36 %", delta: "−2 pts", down: true },
+  { label: "Ticket promedio", value: "$214 mil", delta: "+6 %" },
+  { label: "Pedidos", value: "1.925", delta: "+11 %" },
+];
+
+const weeks = [46, 52, 49, 58, 55, 61, 57, 66, 63, 72, 78, 92];
+
+const channels = [
+  { label: "Tienda online", value: "$148 M", w: 100 },
+  { label: "WhatsApp", value: "$103 M", w: 70 },
+  { label: "Instagram", value: "$74 M", w: 50 },
+  { label: "Asesores", value: "$62 M", w: 42 },
+  { label: "Chat web", value: "$25 M", w: 17 },
+];
+
+const advisors = [
+  { name: "Agente de ventas", ai: true, first: "3 s", orders: "612", conv: "34 %" },
+  { name: "Ana Restrepo", first: "2 min", orders: "284", conv: "29 %" },
+  { name: "Juan Mejía", first: "6 min", orders: "231", conv: "24 %" },
+];
+---
+
+<AppWindow
+  url="app.binah.co/reportes"
+  label="Ejemplo ilustrativo del módulo de Reportes de Binah: un tablero con ventas netas, margen, ticket promedio y pedidos del mes, ventas por semana y por canal, y tiempos de respuesta por asesor, junto al Co-CEO que explica el cierre del mes y propone una campaña de recompra para aprobar."
+>
+  <div class="rpt-body">
+    <aside class="rpt-nav">
+      <span class="rpt-nav-label">Tableros</span>
+      <ul>
+        {boards.map((b) => <li class:list={[b.active && "is-active"]}>{b.label}</li>)}
+      </ul>
+      <span class="rpt-nav-label">Programados</span>
+      <div class="rpt-sched">
+        <b>Cierre semanal</b>
+        <span>Lunes 7:00 · por correo</span>
+        <span class="rpt-sched-tags"><i>Excel</i><i>PDF</i></span>
+      </div>
+    </aside>
+
+    <div class="rpt-main">
+      <div class="rpt-head">
+        <strong>Vista general</strong>
+        <span class="rpt-export">Exportar</span>
+      </div>
+      <div class="rpt-filters">
+        <span class="is-set">Noviembre 2026</span>
+        <span>Todos los canales</span>
+        <span>Todas las bodegas</span>
+        <span>Todos los asesores</span>
+      </div>
+
+      <div class="rpt-kpis">
+        {
+          kpis.map((k) => (
+            <div class="rpt-kpi">
+              <span>{k.label}</span>
+              <strong>{k.value}</strong>
+              <em class:list={[k.down && "is-down"]}>{k.delta}</em>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="rpt-charts">
+        <div class="rpt-card">
+          <span class="rpt-card-title">Ventas netas por semana</span>
+          <span class="rpt-bars">
+            {weeks.map((h, i) => <i style={`--h: ${h}%`} class:list={[i === weeks.length - 1 && "is-last"]} />)}
+          </span>
+        </div>
+        <div class="rpt-card">
+          <span class="rpt-card-title">Ventas por canal</span>
+          <ul class="rpt-channels">
+            {
+              channels.map((c) => (
+                <li>
+                  <span>{c.label}</span>
+                  <span class="rpt-track">
+                    <i style={`--w: ${c.w}%`} />
+                  </span>
+                  <b>{c.value}</b>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+      <div class="rpt-table">
+        <div class="rpt-row rpt-row-head">
+          <span>Asesor</span>
+          <span>1.ª respuesta</span>
+          <span>Pedidos</span>
+          <span class="rpt-col-conv">Conversión</span>
+        </div>
+        {
+          advisors.map((a) => (
+            <div class="rpt-row">
+              <span class="rpt-who">
+                {a.name}
+                {a.ai && <i>IA</i>}
+              </span>
+              <span class="rpt-num">{a.first}</span>
+              <span class="rpt-num">{a.orders}</span>
+              <span class="rpt-num rpt-col-conv">{a.conv}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <aside class="rpt-ai">
+      <span class="rpt-ai-tag"><CoCeoAvatar size={24} />Co-CEO</span>
+      <p class="rpt-ai-q">¿Cómo cerramos el mes frente al anterior?</p>
+      <p class="rpt-ai-a">
+        Las ventas netas subieron <b>18 %</b>, impulsadas por la tienda online y los pedidos del agente de ventas. El
+        margen bajó 2 puntos por el costo de envío en Medellín.
+      </p>
+      <div class="rpt-ai-sources">
+        <span>Revisó</span>
+        <ul>
+          <li>Ventas por canal y asesor</li>
+          <li>Costo de envío por ciudad</li>
+          <li>Clientes sin compra en 60 días</li>
+        </ul>
+      </div>
+      <div class="rpt-ai-action">
+        <span class="rpt-ai-label">Acción propuesta</span>
+        <p>Enviar campaña de recompra a 312 clientes que no compran hace 60 días.</p>
+        <span class="rpt-ai-buttons"><i class="is-primary">Aprobar</i><i>Ajustar</i></span>
+      </div>
+    </aside>
+  </div>
+</AppWindow>
+
+<style>
+  .rpt-body {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr) 260px;
+    min-height: 470px;
+  }
+
+  /* Saved and scheduled reports */
+  .rpt-nav {
+    border-right: 1px solid #eeede8;
+    background: #fbfbf9;
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+  }
+  .rpt-nav-label {
+    padding: 0 8px;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hp-mute);
+  }
+  .rpt-nav-label + ul + .rpt-nav-label {
+    margin-top: 12px;
+  }
+  .rpt-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 2px;
+  }
+  .rpt-nav li {
+    padding: 7px 8px;
+    border-radius: 8px;
+    color: var(--hp-body);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .rpt-nav li.is-active {
+    background: #fff;
+    color: var(--hp-ink);
+    font-weight: 500;
+    box-shadow: var(--hp-shadow-sm);
+    outline: 1px solid #e4e1fb;
+  }
+  .rpt-sched {
+    display: grid;
+    gap: 3px;
+    margin: 0 2px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ebeae4;
+    background: #fff;
+  }
+  .rpt-sched b {
+    font-weight: 500;
+  }
+  .rpt-sched > span {
+    font-size: 11px;
+    color: var(--hp-mute);
+  }
+  .rpt-sched-tags {
+    display: flex;
+    gap: 4px;
+    margin-top: 4px;
+  }
+  .rpt-sched-tags i {
+    font-style: normal;
+    font-size: 10px;
+    padding: 1px 7px;
+    border-radius: 999px;
+    background: var(--hp-lavender);
+    color: #3a25d6;
+  }
+
+  /* Dashboard */
+  .rpt-main {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+    padding: 16px 18px;
+  }
+  .rpt-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .rpt-head strong {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .rpt-export {
+    padding: 5px 11px;
+    border-radius: 8px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--hp-ink);
+    border: 1px solid #e3e2dc;
+  }
+  .rpt-export::before {
+    content: "↓ ";
+    color: var(--hp-purple);
+  }
+  .rpt-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: -2px;
+  }
+  .rpt-filters span {
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    color: var(--hp-body);
+    border: 1px solid #ebeae4;
+    white-space: nowrap;
+  }
+  .rpt-filters .is-set {
+    background: var(--hp-lavender);
+    border-color: var(--hp-lavender);
+    color: #3a25d6;
+    font-weight: 500;
+  }
+
+  .rpt-kpis {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .rpt-kpi {
+    display: grid;
+    gap: 2px;
+    padding: 9px 11px;
+    border-radius: 10px;
+    border: 1px solid #eeede8;
+    min-width: 0;
+  }
+  .rpt-kpi span {
+    font-size: 11px;
+    color: var(--hp-mute);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .rpt-kpi strong {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    white-space: nowrap;
+  }
+  .rpt-kpi em {
+    font-style: normal;
+    font-size: 11px;
+    color: #1f8a5c;
+  }
+  .rpt-kpi em.is-down {
+    color: #b5452f;
+  }
+
+  .rpt-charts {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: 8px;
+  }
+  .rpt-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 11px 12px 12px;
+    border-radius: 10px;
+    border: 1px solid #eeede8;
+    min-width: 0;
+  }
+  .rpt-card-title {
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--hp-body);
+  }
+  .rpt-bars {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+    min-height: 96px;
+  }
+  .rpt-bars i {
+    flex: 1;
+    height: var(--h);
+    border-radius: 3px 3px 0 0;
+    background: #dcd7ff;
+  }
+  .rpt-bars i.is-last {
+    background: var(--hp-purple);
+  }
+  .rpt-channels {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 7px;
+  }
+  .rpt-channels li {
+    display: grid;
+    grid-template-columns: 82px minmax(0, 1fr) 50px;
+    align-items: center;
+    gap: 8px;
+    font-size: 11.5px;
+  }
+  .rpt-channels li > span:first-child {
+    color: var(--hp-body);
+    white-space: nowrap;
+  }
+  .rpt-track {
+    height: 6px;
+    border-radius: 999px;
+    background: #f1f0eb;
+    overflow: hidden;
+  }
+  .rpt-track i {
+    display: block;
+    width: var(--w);
+    height: 100%;
+    border-radius: 999px;
+    background: #b9b0ff;
+  }
+  .rpt-channels li:first-child .rpt-track i {
+    background: var(--hp-purple);
+  }
+  .rpt-channels b {
+    text-align: right;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .rpt-table {
+    border: 1px solid #eeede8;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .rpt-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) 0.9fr 0.7fr 0.8fr;
+    gap: 10px;
+    align-items: center;
+    padding: 7px 12px;
+  }
+  .rpt-row + .rpt-row {
+    border-top: 1px solid #f1f0eb;
+  }
+  .rpt-row-head {
+    background: #fbfbf9;
+    font-size: 11px;
+    color: var(--hp-mute);
+  }
+  .rpt-row-head span:not(:first-child) {
+    text-align: right;
+  }
+  .rpt-who {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .rpt-who i {
+    font-style: normal;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 1px 6px;
+    border-radius: 999px;
+    background: var(--hp-lavender);
+    color: #3a25d6;
+  }
+  .rpt-num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Co-CEO */
+  .rpt-ai {
+    border-left: 1px solid #eeede8;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+    background:
+      radial-gradient(ellipse 90% 60% at 100% 0%, rgba(77, 55, 246, 0.07), transparent 70%),
+      #fff;
+  }
+  .rpt-ai-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--hp-purple);
+  }
+  .rpt-ai-q {
+    align-self: flex-end;
+    margin: 0;
+    max-width: 92%;
+    padding: 9px 12px;
+    border-radius: 13px 13px 4px 13px;
+    background: #f1f0eb;
+    line-height: 1.45;
+  }
+  .rpt-ai-a {
+    margin: 0;
+    line-height: 1.55;
+    color: var(--hp-body);
+  }
+  .rpt-ai-a b {
+    font-weight: 600;
+    color: #17734b;
+  }
+  .rpt-ai-sources {
+    display: grid;
+    gap: 6px;
+    padding-top: 12px;
+    border-top: 1px solid #f1f0eb;
+  }
+  .rpt-ai-sources > span {
+    font-size: 11px;
+    color: var(--hp-mute);
+  }
+  .rpt-ai-sources ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 5px;
+  }
+  .rpt-ai-sources li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--hp-body);
+  }
+  .rpt-ai-sources li::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #b9b0ff;
+  }
+  .rpt-ai-action {
+    display: grid;
+    gap: 6px;
+    margin-top: auto;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(77, 55, 246, 0.22);
+    background: linear-gradient(160deg, rgba(77, 55, 246, 0.09), rgba(77, 55, 246, 0.02));
+  }
+  .rpt-ai-label {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hp-purple);
+  }
+  .rpt-ai-action p {
+    margin: 0;
+    line-height: 1.5;
+    color: var(--hp-ink);
+  }
+  .rpt-ai-buttons {
+    display: flex;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .rpt-ai-buttons i {
+    font-style: normal;
+    padding: 5px 11px;
+    border-radius: 7px;
+    border: 1px solid rgba(77, 55, 246, 0.3);
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--hp-purple);
+  }
+  .rpt-ai-buttons .is-primary {
+    background: var(--hp-purple);
+    border-color: var(--hp-purple);
+    color: #fff;
+  }
+
+  /* Tablets: the dashboard and the Co-CEO; the list of boards goes away. */
+  @media (max-width: 1100px) {
+    .rpt-body {
+      grid-template-columns: minmax(0, 1fr) 240px;
+    }
+    .rpt-nav {
+      display: none;
+    }
+    .rpt-filters span:nth-child(n + 4) {
+      display: none;
+    }
+  }
+
+  /* Phones: the dashboard alone, like the app on a phone. */
+  @media (max-width: 760px) {
+    .rpt-body {
+      grid-template-columns: minmax(0, 1fr);
+      min-height: 0;
+    }
+    .rpt-ai {
+      display: none;
+    }
+    .rpt-main {
+      padding: 14px;
+    }
+    .rpt-filters span:nth-child(n + 3) {
+      display: none;
+    }
+    .rpt-kpis {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .rpt-charts {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .rpt-card + .rpt-card {
+      display: none;
+    }
+    .rpt-bars {
+      min-height: 72px;
+    }
+    .rpt-col-conv {
+      display: none;
+    }
+    .rpt-row {
+      grid-template-columns: minmax(0, 1.4fr) 0.9fr 0.7fr;
+    }
+    .rpt-channels li,
+    .rpt-filters span,
+    .rpt-row-head {
+      font-size: 11px;
+    }
+  }
+</style>

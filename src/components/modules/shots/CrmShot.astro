@@ -1,0 +1,691 @@
+---
+// Product shot for /modulo-crm: the CRM inbox with the sales agent closing a
+// sale inside the conversation. Same window chrome and the same story as the
+// home hero (Laura Gómez, pedido #4821, $289.900), so the pages read as one
+// product. Decorative and illustrative: the figure has a text alternative.
+import ChannelIcon from "../../binah/ChannelIcon.astro";
+import AppWindow from "../AppWindow.astro";
+
+type Channel = "whatsapp" | "instagram" | "email" | "web" | "call";
+
+const conversations: Array<{
+  initials: string;
+  name: string;
+  channel: Channel;
+  channelLabel: string;
+  preview: string;
+  time: string;
+  owner: string;
+  ai?: boolean;
+  selected?: boolean;
+  unread?: boolean;
+}> = [
+  { initials: "LG", name: "Laura Gómez", channel: "instagram", channelLabel: "Instagram", preview: "Listo, ya pagué 🙌", time: "ahora", owner: "IA", ai: true, selected: true },
+  { initials: "CS", name: "Compras · Clínica Sol", channel: "email", channelLabel: "Email", preview: "Adjunto la orden de compra de marzo", time: "2 min", owner: "Ana", unread: true },
+  { initials: "AP", name: "Andrés Pérez", channel: "whatsapp", channelLabel: "WhatsApp", preview: "¿Cuándo llega mi pedido?", time: "5 min", owner: "IA", ai: true },
+  { initials: "V", name: "Visitante", channel: "web", channelLabel: "Chat web", preview: "Quiero agendar una cita el sábado", time: "9 min", owner: "IA", ai: true },
+  { initials: "JM", name: "+57 300 ··· 4821", channel: "call", channelLabel: "Llamada", preview: "Llamada saliente · 3:42 min", time: "12 min", owner: "Juan" },
+];
+
+const stages = [
+  { label: "Nuevo", state: "done" },
+  { label: "Calificado", state: "done" },
+  { label: "Propuesta", state: "done" },
+  { label: "Ganada", state: "active" },
+];
+---
+
+<AppWindow
+  url="app.binah.co/crm/inbox"
+  label="Ejemplo ilustrativo del CRM de Binah: un inbox con conversaciones de Instagram, email, WhatsApp, chat web y llamadas, donde el agente de ventas recomienda productos, envía un link de pago y la oportunidad queda ganada."
+>
+  <div class="cis-body">
+      <aside class="cis-list">
+        <div class="cis-list-head">
+          <strong>Inbox</strong>
+          <span class="cis-count">12</span>
+        </div>
+        <div class="cis-filters">
+          <span class="is-active">Todos</span>
+          <span>Míos</span>
+          <span>Agentes IA</span>
+        </div>
+        <ul>
+          {
+            conversations.map((c) => (
+              <li class:list={["cis-conv", c.selected && "is-selected"]}>
+                <span class="cis-avatar">
+                  {c.initials}
+                  <span class={`cis-ch cis-ch--${c.channel}`} title={c.channelLabel}>
+                    {c.channel === "whatsapp" || c.channel === "instagram" ? (
+                      <ChannelIcon name={c.channel} size={15} />
+                    ) : c.channel === "email" ? (
+                      <svg viewBox="0 0 16 16"><path d="M2.5 4h11v8h-11z" /><path d="m2.5 4.5 5.5 4 5.5-4" /></svg>
+                    ) : c.channel === "web" ? (
+                      <svg viewBox="0 0 16 16"><path d="M3 3.5h10v7H7l-3 2.5v-2.5H3z" /></svg>
+                    ) : (
+                      <svg viewBox="0 0 16 16"><path d="M5.2 2.8 3.8 4.2c-.4.4-.5 1-.2 1.5 1.5 3.4 3.3 5.2 6.7 6.7.5.2 1.1.1 1.5-.3l1.4-1.4-2.6-2.6-1.3 1.3c-1.2-.7-2.1-1.6-2.8-2.8l1.3-1.3z" /></svg>
+                    )}
+                  </span>
+                </span>
+                <span class="cis-conv-main">
+                  <span class="cis-conv-top">
+                    <b>{c.name}</b>
+                    <time>{c.time}</time>
+                  </span>
+                  <span class="cis-conv-preview">{c.preview}</span>
+                </span>
+                <span class:list={["cis-owner", c.ai && "is-ai", c.unread && "is-unread"]}>{c.owner}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </aside>
+
+      <div class="cis-chat">
+        <div class="cis-chat-head">
+          <span class="cis-avatar cis-avatar--lg">
+            LG
+            <span class="cis-ch cis-ch--instagram"><ChannelIcon name="instagram" size={15} /></span>
+          </span>
+          <span class="cis-chat-who">
+            <b>Laura Gómez</b>
+            <span>Instagram · Cliente desde 2025</span>
+          </span>
+          <span class="cis-agent"><span class="cis-pulse"></span>Agente de ventas</span>
+        </div>
+
+        <div class="cis-msgs">
+          <p class="cis-msg is-in">Hola, ¿tienen la proteína de vainilla de 2 lb?</p>
+          <div class="cis-msg is-out">
+            <span class="cis-by">Agente de ventas · IA</span>
+            Sí, quedan 72 en la bodega de Barranquilla. Con la creatina de 300 g te queda en $289.900 y el envío es gratis.
+            ¿Te envío el link de pago?
+          </div>
+          <p class="cis-msg is-in">Dale, de una</p>
+          <div class="cis-msg is-out is-card">
+            <span class="cis-by">Agente de ventas · IA</span>
+            <span class="cis-pay">
+              <span class="cis-pay-label">Link de pago · Pedido #4821</span>
+              <strong>$289.900</strong>
+              <span class="cis-pay-methods"><i>PSE</i><i>Tarjeta</i><i>Nequi</i></span>
+            </span>
+          </div>
+          <p class="cis-event"><span aria-hidden="true">✓</span> Pago confirmado · Pedido #4821 creado</p>
+        </div>
+
+        <div class="cis-composer">
+          <span>Escribe una respuesta o deja que el agente siga…</span>
+          <span class="cis-take">Tomar conversación</span>
+        </div>
+      </div>
+
+      <aside class="cis-contact">
+        <div class="cis-section">
+          <span class="cis-label">Oportunidad</span>
+          <div class="cis-deal">
+            <strong>Suplementos · recompra</strong>
+            <span class="cis-won">Ganada</span>
+          </div>
+          <span class="cis-amount">$289.900</span>
+          <ol class="cis-stages">
+            {stages.map((s) => <li class={`is-${s.state}`}>{s.label}</li>)}
+          </ol>
+        </div>
+        <div class="cis-section">
+          <span class="cis-label">Asignación</span>
+          <div class="cis-assign">
+            <span class="cis-assign-row"><span class="cis-assign-icon"><span class="cis-pulse"></span></span>Agente de ventas</span>
+            <span class="cis-assign-row is-muted"><span class="cis-assign-icon is-person">AN</span>Ana · respaldo humano</span>
+          </div>
+        </div>
+        <div class="cis-section">
+          <span class="cis-label">Siguiente en Binah</span>
+          <ul class="cis-next">
+            <li class="is-done">Inventario reservado</li>
+            <li class="is-done">Factura electrónica emitida</li>
+            <li>Guía de despacho</li>
+          </ul>
+        </div>
+      </aside>
+  </div>
+</AppWindow>
+
+<style>
+  .cis-body {
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr) 250px;
+    min-height: 480px;
+  }
+
+  /* Conversation list */
+  .cis-list {
+    border-right: 1px solid #eeede8;
+    background: #fbfbf9;
+    padding: 16px 12px;
+    min-width: 0;
+  }
+  .cis-list-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 6px;
+  }
+  .cis-list-head strong {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .cis-count {
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 1px 7px;
+    border-radius: 999px;
+    background: var(--hp-purple);
+    color: #fff;
+  }
+  .cis-filters {
+    display: flex;
+    gap: 4px;
+    margin: 12px 0 10px;
+    padding: 0 2px;
+  }
+  .cis-filters span {
+    padding: 4px 10px;
+    border-radius: 7px;
+    font-size: 11.5px;
+    color: var(--hp-mute);
+  }
+  .cis-filters .is-active {
+    background: #fff;
+    color: var(--hp-ink);
+    font-weight: 500;
+    box-shadow: var(--hp-shadow-sm);
+    outline: 1px solid #ecebe6;
+  }
+  .cis-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 2px;
+  }
+  .cis-conv {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr) auto;
+    gap: 10px;
+    align-items: center;
+    padding: 9px 8px;
+    border-radius: 10px;
+  }
+  .cis-conv.is-selected {
+    background: #fff;
+    box-shadow: var(--hp-shadow-sm);
+    outline: 1px solid #e4e1fb;
+  }
+  .cis-conv-main {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+  }
+  .cis-conv-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .cis-conv-top b {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .cis-conv-top time {
+    flex-shrink: 0;
+    font-size: 10.5px;
+    color: var(--hp-mute);
+  }
+  .cis-conv-preview {
+    color: var(--hp-mute);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .cis-owner {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: #efeee9;
+    color: #5c5c56;
+  }
+  .cis-owner.is-ai {
+    background: var(--hp-lavender);
+    color: #3a25d6;
+  }
+  .cis-owner.is-unread {
+    background: var(--hp-ink);
+    color: #fff;
+  }
+
+  /* Avatar with a channel badge */
+  .cis-avatar {
+    position: relative;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: #45453f;
+    background: #ecebe5;
+  }
+  .cis-avatar--lg {
+    width: 38px;
+    height: 38px;
+  }
+  .cis-ch {
+    position: absolute;
+    right: -3px;
+    bottom: -3px;
+    width: 17px;
+    height: 17px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background: #fff;
+  }
+  .cis-ch svg {
+    width: 11px;
+    height: 11px;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 1.6;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+  .cis-ch--email {
+    background: #5c5c56;
+  }
+  .cis-ch--web {
+    background: var(--hp-purple);
+  }
+  .cis-ch--call {
+    background: #1f7a5a;
+  }
+
+  /* Open conversation */
+  .cis-chat {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 100%, rgba(77, 55, 246, 0.05), transparent 70%),
+      #fff;
+  }
+  .cis-chat-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border-bottom: 1px solid #eeede8;
+  }
+  .cis-chat-who {
+    display: grid;
+    gap: 1px;
+    min-width: 0;
+  }
+  .cis-chat-who b {
+    font-size: 13.5px;
+    font-weight: 600;
+  }
+  .cis-chat-who span {
+    font-size: 11.5px;
+    color: var(--hp-mute);
+  }
+  .cis-agent {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 11px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: #17734b;
+    background: #e3f5ec;
+    white-space: nowrap;
+  }
+  .cis-pulse {
+    position: relative;
+    width: 7px;
+    height: 7px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #22a06b;
+  }
+  .cis-pulse::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 1.5px solid #22a06b;
+    animation: cis-pulse 2.2s ease-out infinite;
+  }
+  @keyframes cis-pulse {
+    0% {
+      transform: scale(0.6);
+      opacity: 0.9;
+    }
+    80%,
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+
+  .cis-msgs {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 18px;
+  }
+  .cis-msg {
+    margin: 0;
+    max-width: 78%;
+    padding: 10px 13px;
+    line-height: 1.5;
+    font-size: 12.5px;
+  }
+  .cis-msg.is-in {
+    align-self: flex-start;
+    border-radius: 14px 14px 14px 4px;
+    background: #f1f0eb;
+    color: var(--hp-ink);
+  }
+  .cis-msg.is-out {
+    align-self: flex-end;
+    border-radius: 14px 14px 4px 14px;
+    background: var(--hp-purple);
+    color: #fff;
+    box-shadow: 0 10px 24px -14px rgba(77, 55, 246, 0.9);
+  }
+  .cis-by {
+    display: block;
+    margin-bottom: 4px;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.72);
+  }
+  .cis-msg.is-card {
+    padding: 10px 10px 10px 13px;
+  }
+  .cis-pay {
+    display: grid;
+    gap: 4px;
+    min-width: 210px;
+    padding: 12px;
+    border-radius: 10px;
+    background: #fff;
+    color: var(--hp-ink);
+  }
+  .cis-pay-label {
+    font-size: 11px;
+    color: var(--hp-mute);
+  }
+  .cis-pay strong {
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .cis-pay-methods {
+    display: flex;
+    gap: 4px;
+    margin-top: 2px;
+  }
+  .cis-pay-methods i {
+    font-style: normal;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 999px;
+    border: 1px solid #ebeae4;
+    color: #5c5c56;
+  }
+  .cis-event {
+    align-self: center;
+    margin: 4px 0 0;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #17734b;
+    background: #e3f5ec;
+  }
+
+  .cis-composer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 0 18px 16px;
+    padding: 8px 8px 8px 14px;
+    border-radius: 12px;
+    border: 1px solid #ebeae4;
+    background: #fff;
+    color: var(--hp-mute);
+  }
+  .cis-composer > span:first-child {
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .cis-take {
+    flex-shrink: 0;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--hp-ink);
+    border: 1px solid #e3e2dc;
+  }
+
+  /* Contact and deal */
+  .cis-contact {
+    border-left: 1px solid #eeede8;
+    padding: 16px;
+    display: grid;
+    align-content: start;
+    gap: 14px;
+  }
+  .cis-section {
+    display: grid;
+    gap: 8px;
+  }
+  .cis-section + .cis-section {
+    padding-top: 14px;
+    border-top: 1px solid #f1f0eb;
+  }
+  .cis-label {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hp-purple);
+  }
+  .cis-deal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .cis-deal strong {
+    font-weight: 500;
+  }
+  .cis-won {
+    font-size: 10.5px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: #e3f5ec;
+    color: #17734b;
+  }
+  .cis-amount {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .cis-stages {
+    list-style: none;
+    margin: 2px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 4px;
+  }
+  .cis-stages li {
+    display: grid;
+    gap: 5px;
+    font-size: 9.5px;
+    color: var(--hp-mute);
+  }
+  .cis-stages li::before {
+    content: "";
+    height: 4px;
+    border-radius: 999px;
+    background: #ecebe5;
+  }
+  .cis-stages li.is-done::before {
+    background: #b9b0ff;
+  }
+  .cis-stages li.is-active {
+    color: var(--hp-ink);
+    font-weight: 500;
+  }
+  .cis-stages li.is-active::before {
+    background: var(--hp-purple);
+  }
+  .cis-assign {
+    display: grid;
+    gap: 6px;
+  }
+  .cis-assign-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-weight: 500;
+  }
+  .cis-assign-row.is-muted {
+    font-weight: 400;
+    color: var(--hp-mute);
+  }
+  .cis-assign-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+  }
+  .cis-assign-icon.is-person {
+    font-size: 8px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--hp-purple);
+  }
+  .cis-next {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 7px;
+  }
+  .cis-next li {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--hp-mute);
+  }
+  .cis-next li::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1.5px dashed #c9c8c1;
+  }
+  .cis-next li.is-done {
+    color: var(--hp-ink);
+  }
+  .cis-next li.is-done::before {
+    border: 0;
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2 7 10.5l4.5-5' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+        center / 12px no-repeat,
+      var(--hp-purple);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cis-pulse::after {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .cis-body {
+      grid-template-columns: 280px minmax(0, 1fr);
+    }
+    .cis-contact {
+      display: none;
+    }
+  }
+
+  /* Phones: the open conversation alone, like the app on a phone. */
+  @media (max-width: 760px) {
+    .cis-body {
+      grid-template-columns: minmax(0, 1fr);
+      min-height: 0;
+    }
+    .cis-list {
+      display: none;
+    }
+    .cis-chat-head {
+      padding: 12px 14px;
+    }
+    .cis-chat-who span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .cis-msgs {
+      padding: 14px;
+    }
+    .cis-msg {
+      max-width: 88%;
+    }
+    .cis-composer {
+      margin: 0 14px 14px;
+    }
+    .cis-composer > span:first-child {
+      display: none;
+    }
+    .cis-take {
+      margin-left: auto;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .cis-agent {
+      padding: 4px 9px;
+      font-size: 10.5px;
+    }
+    .cis-chat-who span {
+      display: none;
+    }
+  }
+</style>

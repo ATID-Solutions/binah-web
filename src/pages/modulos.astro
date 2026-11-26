@@ -146,6 +146,7 @@ const modules = BINAH_MODULES.map((m) => ({ ...m, title: displayName[m.id] ?? m.
   }
   .mod {
     flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     padding: 26px;
@@ -195,6 +196,7 @@ const modules = BINAH_MODULES.map((m) => ({ ...m, title: displayName[m.id] ?? m.
     margin-top: auto;
     padding-top: 22px;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     gap: 12px;

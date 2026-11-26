@@ -317,9 +317,9 @@ function MockTasks() {
     { name: "Hecho", items: ["Promo abril", "Fotos producto"] },
   ];
   return (
-    <div className="mock" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
+    <div className="mock mock-kanban">
       {cols.map((c, i) => (
-        <div key={i} style={{ background: "var(--bg)", border: "1px solid var(--line)", borderRadius: 6, padding: 12, display: "flex", flexDirection: "column", gap: 8 }}>
+        <div key={i} className="mock-kanban-col">
           <div className="mono" style={{ fontSize: 10, color: "var(--mute)", letterSpacing: "0.08em" }}>{c.name.toUpperCase()}</div>
           {c.items.map((it, j) => (
             <div
@@ -373,7 +373,7 @@ function MockReports() {
           <div style={{ border: "1px solid var(--line)", borderRadius: 4, padding: 12 }}>
             <div className="mono" style={{ fontSize: 10, color: "var(--mute)" }}>VENTAS MES</div>
             <div style={{ fontFamily: "var(--font-display)", fontSize: 24, fontWeight: 500, letterSpacing: "-0.02em" }}>$48.2M</div>
-            <div style={{ height: 40, display: "flex", gap: 2, alignItems: "flex-end", marginTop: 6 }}>
+            <div style={{ height: 80, display: "flex", gap: 2, alignItems: "flex-end", marginTop: 6 }}>
               {[20, 35, 28, 48, 40, 55, 70, 60, 65, 80].map((h, i) => (
                 <div key={i} style={{ flex: 1, height: h, background: "var(--ink)", opacity: i / 10 + 0.3 }} />
               ))}

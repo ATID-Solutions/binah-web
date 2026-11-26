@@ -248,6 +248,9 @@
 }
 .nav-menu-actions .btn { justify-content: center; min-height: 48px; }
 .nav-menu-open { overflow: hidden; }
+/* The chat launcher (BinahChat) floats above everything and would cover the
+   open menu's buttons. */
+.nav-menu-open [data-binah-chat] { display: none; }
 
 .btn {
   display: inline-flex; align-items: center; gap: 8px;
@@ -474,6 +477,34 @@
 .mock-bar::after { content: ""; position: absolute; inset: 0; background: var(--ink); width: var(--w, 50%); }
 .mock-pill { font-family: var(--font-mono); font-size: 10px; padding: 2px 8px; border-radius: var(--radius-sm); border: 1px solid var(--line); color: var(--mute); }
 .mock-pill.ink { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+.mock-kanban {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.mock-kanban-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+/* Grid-paper frame around a module mock (ModuleMockFrame). */
+.module-mock-frame {
+  aspect-ratio: 4 / 3;
+  position: relative;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 40px 40px,
+    linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 40px 40px,
+    var(--bg-alt);
+}
 
 /* Section */
 .binah-section { padding: 96px 0; border-top: 1px solid var(--line); }
@@ -1576,13 +1607,18 @@ body[data-page="index"] .binah-section { border-top: 0; }
   letter-spacing: 0;
   font-weight: 500;
   list-style: none;
+  position: relative;
+  padding-right: 32px;
 }
 .faq-editorial summary::-webkit-details-marker {
   display: none;
 }
+/* Pinned to the first line, so it stays put when the question wraps. */
 .faq-editorial summary::after {
   content: "+";
-  float: right;
+  position: absolute;
+  top: 0;
+  right: 0;
   color: var(--mute);
   font-family: var(--font-mono);
 }
@@ -1869,9 +1905,9 @@ body[data-page="index"] .binah-section { border-top: 0; }
     margin-bottom: 34px;
     letter-spacing: 0.1em;
   }
+  /* Wrapped onto its own line, the rule doubled the label's bottom border. */
   .section-num .rule {
-    order: 5;
-    flex-basis: 100%;
+    display: none;
   }
   .section-head { gap: 22px; margin-bottom: 34px; }
 
@@ -2088,14 +2124,42 @@ body[data-page="index"] .binah-section { border-top: 0; }
     max-width: none;
   }
   .marketing-detail-visual {
-    min-height: 380px;
+    min-height: 0;
     border-radius: var(--radius-md);
   }
-  .detail-mock-frame {
-    inset: 70px 16px 16px;
+  .marketing-detail-visual::before {
+    inset: 8px;
   }
-  .detail-mock-frame .mock {
-    inset: 18px;
+  .detail-mock-frame {
+    position: relative;
+    inset: auto;
+    margin: 70px 16px 16px;
+  }
+  .detail-mock-frame > div {
+    height: auto;
+  }
+  /* A mock's windows are placed absolutely for a ~600px frame and overlap on
+     a phone, so the phone shows only the main window, in normal flow. */
+  .module-mock-frame {
+    aspect-ratio: auto;
+    padding: 16px;
+  }
+  .module-mock-frame .mock {
+    position: static;
+  }
+  .module-mock-frame .mock > .mock-window {
+    position: static;
+    width: auto !important;
+    height: auto !important;
+  }
+  .module-mock-frame .mock > .mock-window ~ .mock-window {
+    display: none;
+  }
+  .module-mock-frame .mock-kanban {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .module-mock-frame .mock-kanban > :nth-child(n + 3) {
+    display: none;
   }
   .detail-visual-meta {
     top: 14px;
@@ -2126,13 +2190,25 @@ body[data-page="index"] .binah-section { border-top: 0; }
   .editorial-row p {
     font-size: 17px;
   }
+  /* Stacked one per row, the cards no longer need equal heights. */
   .workflow-node {
-    min-height: 220px;
+    min-height: 0;
+    gap: 14px;
     padding: 26px 22px;
   }
   .capability-item {
-    min-height: 136px;
-    padding: 22px;
+    min-height: 0;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 20px 22px;
+  }
+  .capability-item span {
+    flex: none;
+    margin-top: 2px;
+  }
+  .capability-item p {
+    margin-top: 0;
   }
   .faq-editorial details {
     padding: 24px 20px;
@@ -2472,7 +2548,7 @@ body[data-page="index"] .binah-section { border-top: 0; }
   .legal-document article + article { padding-left: 0; border-left: 0; border-top: 1px solid var(--line-strong); padding-top: 72px; }
   .sms-header-grid,
   .sms-enrollment,
-  .sms-disclosure { grid-template-columns: 1fr; }
+  .sms-disclosure { grid-template-columns: minmax(0, 1fr); }
   .sms-header-grid { align-items: start; }
   .sms-success { grid-column: 1; }
 }
@@ -2483,7 +2559,8 @@ body[data-page="index"] .binah-section { border-top: 0; }
   .legal-document { gap: 64px; }
   .legal-document article + article { padding-top: 64px; }
   .legal-definition-list div { grid-template-columns: 1fr; gap: 5px; }
-  .sms-header h1 { font-size: clamp(46px, 14vw, 68px); }
+  /* "Actualizaciones" is 6.6em wide: 13vw keeps it inside the page gutter. */
+  .sms-header h1 { font-size: clamp(34px, 13vw, 68px); }
   .sms-header-grid,
   .sms-enrollment,
   .sms-disclosure { gap: 44px; }

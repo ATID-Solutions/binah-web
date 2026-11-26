@@ -1,0 +1,1245 @@
+---
+// Shared layout of the module pages (/modulo-*), in the home's design system:
+// dark PageHero with the module's product shot, 01 capabilities, 02 dark panel
+// (agents, automations or AI), 03 flow to the rest of Binah, solutions, FAQ
+// and the closing CTA. Pages pass a ModuleContent object and their product
+// shot in the `shot` slot:
+//
+//   <ModulePage content={content}><CrmShot slot="shot" /></ModulePage>
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../binah/Nav.astro";
+import Footer from "../binah/Footer.astro";
+import PageHero from "../marketing/PageHero.astro";
+import Reveal from "../marketing/Reveal.astro";
+import HomeCta from "../home/HomeCta.astro";
+import ChannelIcon from "../binah/ChannelIcon.astro";
+import { ModuleGlyph } from "../binah/brands";
+import { BINAH_MODULES, type ModuleId } from "../binah/modules";
+import { waUrl } from "../binah/whatsapp";
+import { ALL_SEO_FEATURE_PAGES } from "../../lib/marketing-pages";
+import { absoluteUrl } from "../../lib/seo";
+import { ICONS } from "./icons";
+import type { ModuleContent } from "./types";
+import "../../styles/marketing.css";
+
+interface Props {
+  content: ModuleContent;
+}
+
+const { content: c } = Astro.props;
+const demoHref = waUrl(c.demoMessage);
+
+// Short names for the module chips in the flow.
+const shortName: Record<ModuleId, string> = {
+  crm: "CRM",
+  soporte: "Soporte",
+  retail: "Ventas",
+  facturacion: "Facturación",
+  contabilidad: "Contabilidad",
+  chat: "Chat interno",
+  operaciones: "Operaciones",
+  tareas: "Tareas",
+  invoice: "Pagos",
+  reportes: "Reportes",
+};
+const moduleHref = (id: ModuleId) => BINAH_MODULES.find((m) => m.id === id)?.href ?? "/modulos";
+
+const solutions = c.solutions.slugs
+  ? c.solutions.slugs
+      .map((slug) => ALL_SEO_FEATURE_PAGES.find((page) => page.slug === slug))
+      .filter((page): page is (typeof ALL_SEO_FEATURE_PAGES)[number] => Boolean(page))
+  : ALL_SEO_FEATURE_PAGES.filter((page) => page.moduleId === c.id);
+
+// Desktop: up to five cards in one row, otherwise rows of three. Tablets:
+// rows of three, or two when that leaves no card alone on its row.
+const featureCount = c.features.items.length;
+const featureCols = featureCount <= 5 ? featureCount : featureCount % 3 === 1 ? 4 : 3;
+const featureColsMd = featureCount % 3 === 1 ? 2 : Math.min(featureCols, 3);
+const cardCols = Math.min(Math.max(c.highlight.cards.length, 2), 4);
+// Two or four solutions read better as rows of two than as 3 + gap / 3 + 1.
+const solutionCols = solutions.length === 2 || solutions.length === 4 ? 2 : 3;
+const pad = (n: number) => String(n).padStart(2, "0");
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: `Binah - ${c.seo.title.replace(" — Binah", "")}`,
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    description: c.seo.description,
+    url: absoluteUrl(c.path),
+    areaServed: { "@type": "Country", name: "Colombia" },
+    offers: { "@type": "Offer", url: absoluteUrl("/precios") },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: c.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: { "@type": "Answer", text: faq.a },
+    })),
+  },
+];
+---
+
+<Layout
+  title={c.seo.title}
+  description={c.seo.description}
+  page="modulos"
+  canonicalPath={c.path}
+  navVariant="overlay"
+  structuredData={structuredData}
+>
+  <Nav />
+  <main class="hp">
+    <PageHero
+      crumb={c.hero.crumb}
+      parent={{ label: "Módulos", href: "/modulos" }}
+      eyebrow={c.hero.eyebrow}
+      title={c.hero.title}
+      accent={c.hero.accent}
+      lead={c.hero.lead}
+      primaryLabel="Agendar demo"
+      primaryHref={demoHref}
+      secondaryLabel="Ver precios"
+      secondaryHref="/precios"
+      straddle={240}
+    >
+      <slot name="shot" slot="straddle" />
+    </PageHero>
+
+    <!-- 01 · Capabilities -->
+    <section class="hp-section" aria-labelledby="mp-features-title">
+      <div class="container-binah">
+        <div class="hp-head hp-reveal">
+          <div>
+            <span class="hp-eyebrow"><span class="n">01</span>·<span>{c.features.label}</span></span>
+            <h2 class="hp-h2" id="mp-features-title">
+              {c.features.title}
+              {c.features.soft && <span class="soft">{c.features.soft}</span>}
+            </h2>
+          </div>
+          <p class="hp-lead">{c.features.lead}</p>
+        </div>
+
+        <ul class:list={["mp-features", c.features.compact && "is-compact"]} style={`--cols: ${featureCols}; --cols-md: ${featureColsMd}`}>
+          {
+            c.features.items.map((item, index) => (
+              <li class="hp-reveal" style={`--d: ${(index % 5) * 60}ms`}>
+                <div class="mp-feature hp-card">
+                  {"channel" in item.icon ? (
+                    <span class={`mp-icon mp-icon--round mp-icon--${item.icon.channel}`}>
+                      {item.icon.channel === "whatsapp" || item.icon.channel === "instagram" ? (
+                        <ChannelIcon name={item.icon.channel} size={40} />
+                      ) : item.icon.channel === "email" ? (
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M4 6h16v12H4z" />
+                          <path d="m4 7 8 6 8-6" />
+                        </svg>
+                      ) : item.icon.channel === "web" ? (
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M4.5 5h15v10.5h-8L7 19v-3.5H4.5z" />
+                        </svg>
+                      ) : (
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M7.8 4.2 5.7 6.3c-.6.6-.8 1.5-.4 2.3 2.3 5.1 5 7.8 10.1 10.1.8.3 1.7.2 2.3-.4l2.1-2.1-3.9-3.9-2 2c-1.9-1.1-3.2-2.4-4.3-4.3l2-2z" />
+                        </svg>
+                      )}
+                    </span>
+                  ) : "module" in item.icon ? (
+                    <span class="mp-icon mp-icon--tile">
+                      <ModuleGlyph id={item.icon.module} size={22} />
+                    </span>
+                  ) : (
+                    <span class="mp-icon mp-icon--tile">
+                      <svg viewBox="0 0 24 24" aria-hidden="true" set:html={ICONS[item.icon.icon]} />
+                    </span>
+                  )}
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
+                  {item.link && (
+                    <a href={item.link.href} class="hp-link mp-feature-link">
+                      {item.link.label} <span class="hp-arrow" aria-hidden="true">→</span>
+                    </a>
+                  )}
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+
+        {
+          c.features.notes && c.features.notes.length > 0 && (
+            <ul class="mp-notes">
+              {c.features.notes.map((note, index) => (
+                <li class="hp-reveal" style={`--d: ${index * 80}ms`}>
+                  <strong>{note.title}</strong>
+                  <span>{note.body}</span>
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </div>
+    </section>
+
+    <!-- 02 · Dark panel -->
+    <section class="mp-dark" aria-labelledby="mp-highlight-title">
+      <div class="hp-panel-dark mp-dark-panel" data-nav-dark>
+        <div class="hp-glow mp-glow-a" aria-hidden="true"></div>
+        <div class="hp-glow mp-glow-b" aria-hidden="true"></div>
+
+        <div class="container-binah">
+          <div class="hp-head hp-reveal">
+            <div>
+              <span class="hp-eyebrow hp-eyebrow--dark"><span class="n">02</span>·<span>{c.highlight.label}</span></span>
+              <h2 class="hp-h2 hp-h2--dark" id="mp-highlight-title">{c.highlight.title}</h2>
+            </div>
+            <p class="hp-lead hp-lead--dark">{c.highlight.lead}</p>
+          </div>
+
+          <ul class="mp-cards" style={`--cols: ${cardCols}`}>
+            {
+              c.highlight.cards.map((card, index) => (
+                <li class="hp-reveal" style={`--d: ${index * 90}ms`}>
+                  <article class="mp-card">
+                    <div class="mp-visual" aria-hidden="true" data-nosnippet>
+                      {card.visual.type === "chat" && (
+                        <>
+                          <span class="mv-bubble is-in">{card.visual.in}</span>
+                          <span class="mv-bubble is-out">{card.visual.out}</span>
+                          <span class="mv-result">
+                            <span class="mv-check">✓</span>
+                            {card.visual.result}
+                          </span>
+                        </>
+                      )}
+                      {card.visual.type === "rows" && (
+                        <>
+                          <span class="mv-list">
+                            {card.visual.title && <span class="mv-title">{card.visual.title}</span>}
+                            {card.visual.rows.map((row) => (
+                              <span class="mv-row">
+                                <span class="mv-row-label">{row.label}</span>
+                                <span class={`mv-pill tone-${row.tone ?? "gray"}`}>{row.value}</span>
+                              </span>
+                            ))}
+                          </span>
+                          {card.visual.result && (
+                            <span class="mv-result">
+                              <span class="mv-check">✓</span>
+                              {card.visual.result}
+                            </span>
+                          )}
+                        </>
+                      )}
+                      {card.visual.type === "stat" && (
+                        <>
+                          <span class="mv-stat">
+                            <span class="mv-stat-head">
+                              <span class="mv-title">{card.visual.label}</span>
+                              {card.visual.delta && <em>{card.visual.delta}</em>}
+                            </span>
+                            <strong>{card.visual.value}</strong>
+                            <span class="mv-bars">
+                              {card.visual.bars.map((h, i, all) => (
+                                <i style={`--h: ${h}%`} class:list={[i === all.length - 1 && "is-last"]} />
+                              ))}
+                            </span>
+                          </span>
+                          {card.visual.result && (
+                            <span class="mv-result">
+                              <span class="mv-check">✓</span>
+                              {card.visual.result}
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </div>
+                    <div class="mp-card-copy">
+                      <div class="mp-card-top">
+                        <span class="mp-card-kicker">{card.kicker}</span>
+                        {card.status && (
+                          <span class="mp-card-status">
+                            <span class="mp-dot" />
+                            {card.status}
+                          </span>
+                        )}
+                      </div>
+                      <h3>{card.name}</h3>
+                      <p>{card.body}</p>
+                      {card.points.length > 0 && (
+                        <ul class="mp-card-points">
+                          {card.points.map((point) => (
+                            <li>{point}</li>
+                          ))}
+                        </ul>
+                      )}
+                      {card.link && (
+                        <a href={card.link.href} class="mp-card-link">
+                          {card.link.label} <span class="hp-arrow" aria-hidden="true">→</span>
+                        </a>
+                      )}
+                    </div>
+                  </article>
+                </li>
+              ))
+            }
+          </ul>
+
+          {
+            c.highlight.guardrails && (
+              <div class="mp-guard">
+                <div class="mp-guard-head hp-reveal">
+                  <span class="hp-eyebrow hp-eyebrow--dark">{c.highlight.guardrails.label}</span>
+                  <h3>{c.highlight.guardrails.title}</h3>
+                </div>
+                <ul class="mp-guard-grid">
+                  {c.highlight.guardrails.items.map((item, index) => (
+                    <li class="hp-reveal" style={`--d: ${index * 80}ms`}>
+                      <strong>{item.title}</strong>
+                      <span>{item.body}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 · Flow -->
+    <section class="hp-section" aria-labelledby="mp-flow-title">
+      <div class="container-binah">
+        <div class="hp-head hp-reveal">
+          <div>
+            <span class="hp-eyebrow"><span class="n">03</span>·<span>{c.flow.label}</span></span>
+            <h2 class="hp-h2" id="mp-flow-title">
+              {c.flow.title}
+              {c.flow.soft && <span class="soft">{c.flow.soft}</span>}
+            </h2>
+          </div>
+          <p class="hp-lead">{c.flow.lead}</p>
+        </div>
+
+        <ol class="mp-flow">
+          {
+            c.flow.steps.map((step, index) => (
+              <li class="mp-step hp-card hp-reveal" style={`--d: ${index * 80}ms`}>
+                <span class="mp-step-n">{pad(index + 1)}</span>
+                <h3>{step.title}</h3>
+                <p>{step.body}</p>
+                {step.modules && step.modules.length > 0 && (
+                  <span class="mp-step-modules">
+                    {step.modules.map((id) => (
+                      <a href={moduleHref(id)}>
+                        <ModuleGlyph id={id} size={14} />
+                        {shortName[id]}
+                      </a>
+                    ))}
+                  </span>
+                )}
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    {
+      solutions.length > 0 && (
+        <section class="hp-section hp-section--alt" aria-labelledby="mp-solutions-title">
+          <div class="container-binah">
+            <div class="hp-head hp-reveal">
+              <div>
+                <span class="hp-eyebrow">Soluciones</span>
+                <h2 class="hp-h2" id="mp-solutions-title">
+                  {c.solutions.title}
+                </h2>
+              </div>
+              <p class="hp-lead">{c.solutions.lead}</p>
+            </div>
+            <ul class="mp-solutions" style={`--cols: ${solutionCols}`}>
+              {solutions.map((page, index) => (
+                <li class="hp-reveal" style={`--d: ${(index % 3) * 80}ms`}>
+                  <a href={page.path} class="mp-solution hp-card">
+                    <h3>{page.title.replace(" — Binah", "")}</h3>
+                    <p>{page.h1}</p>
+                    <span class="mp-solution-arrow" aria-hidden="true">
+                      ↗
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )
+    }
+
+    <section class:list={["hp-section", solutions.length === 0 && "hp-section--alt"]} aria-labelledby="mp-faq-title">
+      <div class="container-binah mp-faq">
+        <div class="mp-faq-head hp-reveal">
+          <span class="hp-eyebrow">FAQ</span>
+          <h2 class="hp-h2" id="mp-faq-title">Preguntas frecuentes.</h2>
+          <p class="hp-lead">Lo que más nos preguntan sobre {shortName[c.id] === "CRM" ? "el CRM y los agentes" : `el módulo de ${shortName[c.id]}`}.</p>
+        </div>
+        <div class="mp-faq-list hp-reveal">
+          {
+            c.faqs.map((faq, index) => (
+              <details class="mp-faq-item" open={index === 0}>
+                <summary>
+                  <h3>{faq.q}</h3>
+                  <span class="mp-faq-icon" aria-hidden="true" />
+                </summary>
+                <p>{faq.a}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <HomeCta demoHref={demoHref} eyebrow={c.cta.eyebrow} heading={c.cta.heading} lead={c.cta.lead} />
+  </main>
+  <Footer />
+  <Reveal />
+</Layout>
+
+<style>
+  /* The grey second part of an H2 starts its own line, so balanced
+     wrapping never splits it mid-phrase. */
+  .hp-h2 .soft {
+    display: block;
+  }
+
+  /* 01 · Capabilities --------------------------------------------- */
+  .mp-features {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+    gap: 16px;
+  }
+  .mp-features > li {
+    display: flex;
+  }
+  .mp-feature {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+  }
+  .mp-icon {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+  }
+  .mp-icon--tile {
+    border-radius: 13px;
+    background: var(--hp-lavender);
+    color: var(--hp-purple);
+  }
+  .mp-icon--tile svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .mp-icon--round {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  .mp-icon--round svg {
+    width: 21px;
+    height: 21px;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 1.7;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+  .mp-icon--email {
+    background: #45453f;
+  }
+  .mp-icon--web {
+    background: var(--hp-purple);
+  }
+  .mp-icon--call {
+    background: #1f7a5a;
+  }
+  .mp-feature h3 {
+    margin: 20px 0 0;
+    font-size: 18px;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+    color: var(--hp-ink);
+  }
+  .mp-feature p {
+    margin: 6px 0 0;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--hp-mute);
+  }
+  .mp-feature-link {
+    margin-top: auto;
+    padding-top: 14px;
+    font-size: 14px;
+  }
+
+  .mp-notes {
+    list-style: none;
+    margin: 16px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border: 1px solid var(--hp-line);
+    border-radius: var(--hp-radius);
+    background: var(--hp-surface);
+    box-shadow: var(--hp-shadow-sm);
+    overflow: hidden;
+  }
+  .mp-notes li {
+    display: grid;
+    align-content: start;
+    gap: 6px;
+    padding: 22px 24px 24px;
+  }
+  .mp-notes li + li {
+    border-left: 1px solid var(--hp-line);
+  }
+  .mp-notes strong {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15.5px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--hp-ink);
+  }
+  .mp-notes strong::before {
+    content: "";
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2 7 10.5l4.5-5' fill='none' stroke='%234d37f6' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+        center / 14px no-repeat,
+      var(--hp-lavender);
+  }
+  .mp-notes span {
+    padding-left: 28px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--hp-mute);
+  }
+
+  /* 02 · Dark panel ----------------------------------------------- */
+  .mp-dark {
+    padding: 12px 0;
+  }
+  .mp-dark-panel {
+    padding: clamp(80px, 9vw, 128px) 0 clamp(64px, 7vw, 96px);
+  }
+  .mp-glow-a {
+    width: 760px;
+    height: 560px;
+    right: -200px;
+    top: -120px;
+    opacity: 0.6;
+  }
+  .mp-glow-b {
+    width: 620px;
+    height: 420px;
+    left: -240px;
+    bottom: -220px;
+    opacity: 0.35;
+  }
+
+  .mp-cards {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+    gap: 16px;
+  }
+  .mp-cards > li {
+    display: flex;
+  }
+  .mp-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 18px;
+    border: 1px solid var(--hp-on-dark-line);
+    background: var(--hp-on-dark-raised);
+  }
+  .mp-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 168px;
+    padding: 22px 22px 20px;
+    border-bottom: 1px solid var(--hp-on-dark-line);
+    background:
+      radial-gradient(ellipse 90% 80% at 100% 100%, rgba(77, 55, 246, 0.22), transparent 70%),
+      rgba(255, 255, 255, 0.02);
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  /* Mini visual: chat */
+  .mv-bubble {
+    max-width: 86%;
+    padding: 9px 12px;
+  }
+  .mv-bubble.is-in {
+    align-self: flex-start;
+    border-radius: 13px 13px 13px 4px;
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(245, 245, 241, 0.9);
+  }
+  .mv-bubble.is-out {
+    align-self: flex-end;
+    border-radius: 13px 13px 4px 13px;
+    background: var(--hp-purple);
+    color: #fff;
+    box-shadow: 0 12px 28px -14px rgba(77, 55, 246, 0.9);
+  }
+  .mv-result {
+    align-self: flex-end;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: auto;
+    padding: 4px 10px 4px 5px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: #8ee6bd;
+    background: rgba(62, 207, 142, 0.12);
+    border: 1px solid rgba(62, 207, 142, 0.25);
+  }
+  .mv-check {
+    width: 16px;
+    height: 16px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 10px;
+    color: #0f2a1d;
+    background: #3ecf8e;
+  }
+
+  /* Mini visual: rows */
+  .mv-list {
+    display: grid;
+    gap: 6px;
+  }
+  .mv-title {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hp-on-dark-mute);
+  }
+  .mv-list .mv-title {
+    margin-bottom: 2px;
+  }
+  .mv-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .mv-row-label {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: rgba(245, 245, 241, 0.9);
+  }
+  .mv-pill {
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 9px;
+    border-radius: 999px;
+  }
+  .tone-green {
+    background: rgba(62, 207, 142, 0.14);
+    color: #8ee6bd;
+  }
+  .tone-purple {
+    background: rgba(156, 143, 255, 0.2);
+    color: #d2ccff;
+  }
+  .tone-amber {
+    background: rgba(240, 163, 91, 0.16);
+    color: #f5c48f;
+  }
+  .tone-blue {
+    background: rgba(91, 163, 240, 0.16);
+    color: #a9d0f8;
+  }
+  .tone-gray {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--hp-on-dark-mute);
+  }
+
+  /* Mini visual: stat */
+  .mv-stat {
+    display: grid;
+    gap: 4px;
+  }
+  .mv-stat-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .mv-stat-head em {
+    font-style: normal;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: #8ee6bd;
+  }
+  .mv-stat strong {
+    font-family: var(--font-display);
+    font-size: 30px;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    font-weight: 600;
+    color: #fff;
+  }
+  .mv-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 46px;
+    margin-top: 6px;
+  }
+  .mv-bars i {
+    flex: 1;
+    height: var(--h);
+    border-radius: 3px 3px 0 0;
+    background: rgba(156, 143, 255, 0.3);
+  }
+  .mv-bars i.is-last {
+    background: var(--hp-purple-light);
+  }
+
+  .mp-card-copy {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 22px 24px 24px;
+  }
+  .mp-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .mp-card-kicker {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hp-purple-light);
+  }
+  .mp-card-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--hp-on-dark-mute);
+  }
+  .mp-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #3ecf8e;
+    box-shadow: 0 0 0 3px rgba(62, 207, 142, 0.18);
+  }
+  .mp-card h3 {
+    margin: 12px 0 0;
+    font-family: var(--font-display);
+    font-size: 28px;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    font-weight: 600;
+    color: #fff;
+  }
+  .mp-card p {
+    margin: 10px 0 0;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--hp-on-dark-mute);
+  }
+  .mp-card-points {
+    list-style: none;
+    margin: 18px 0 0;
+    padding: 16px 0 0;
+    display: grid;
+    gap: 9px;
+    border-top: 1px solid var(--hp-on-dark-line);
+  }
+  .mp-card-points li {
+    display: grid;
+    grid-template-columns: 18px 1fr;
+    gap: 10px;
+    align-items: start;
+    font-size: 14px;
+    line-height: 1.45;
+    color: rgba(245, 245, 241, 0.86);
+  }
+  .mp-card-points li::before {
+    content: "";
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+    border-radius: 50%;
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2 7 10.5l4.5-5' fill='none' stroke='%23c9c2ff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+        center / 14px no-repeat,
+      rgba(156, 143, 255, 0.18);
+  }
+  .mp-card-link {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 22px;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--hp-purple-light);
+  }
+  .mp-card-link .hp-arrow {
+    transition: transform 0.2s var(--hp-ease);
+  }
+  .mp-card-link:hover .hp-arrow {
+    transform: translateX(3px);
+  }
+  .mp-card-link:focus-visible {
+    outline-color: var(--hp-purple-light);
+  }
+
+  .mp-guard {
+    margin-top: clamp(64px, 7vw, 96px);
+    padding-top: clamp(40px, 4vw, 56px);
+    border-top: 1px solid var(--hp-on-dark-line);
+  }
+  .mp-guard-head h3 {
+    margin: 16px 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(26px, 2.8vw, 36px);
+    line-height: 1.12;
+    letter-spacing: -0.035em;
+    font-weight: 600;
+    color: #fff;
+  }
+  .mp-guard-grid {
+    list-style: none;
+    margin: 32px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-radius: 18px;
+    border: 1px solid var(--hp-on-dark-line);
+    overflow: hidden;
+  }
+  .mp-guard-grid li {
+    display: grid;
+    align-content: start;
+    gap: 8px;
+    padding: 24px 26px;
+    background: rgba(255, 255, 255, 0.015);
+  }
+  .mp-guard-grid li + li {
+    border-left: 1px solid var(--hp-on-dark-line);
+  }
+  .mp-guard-grid strong {
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+  }
+  .mp-guard-grid span {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--hp-on-dark-mute);
+  }
+
+  /* 03 · Flow ----------------------------------------------------- */
+  .mp-flow {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .mp-step {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 26px 24px;
+  }
+  /* Connector between steps */
+  .mp-step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 42px;
+    right: -17px;
+    width: 18px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--hp-line), var(--hp-purple));
+  }
+  .mp-step-n {
+    display: inline-grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: var(--hp-lavender);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--hp-purple);
+  }
+  .mp-step h3 {
+    margin: 22px 0 10px;
+    font-size: 18px;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+    color: var(--hp-ink);
+  }
+  .mp-step p {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--hp-mute);
+  }
+  .mp-step-modules {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 18px;
+  }
+  .mp-step-modules a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--hp-body);
+    background: var(--hp-alt);
+    border: 1px solid var(--hp-line);
+    transition:
+      border-color 0.2s ease,
+      color 0.2s ease;
+  }
+  .mp-step-modules a :global(svg) {
+    color: var(--hp-purple);
+  }
+  .mp-step-modules a:hover {
+    color: var(--hp-purple);
+    border-color: #cfc8fb;
+  }
+
+  /* Solutions ----------------------------------------------------- */
+  .mp-solutions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+    gap: 16px;
+  }
+  .mp-solutions > li {
+    display: flex;
+  }
+  .mp-solution {
+    position: relative;
+    flex: 1;
+    padding: 22px 64px 24px 24px;
+  }
+  .mp-solution h3 {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+    font-weight: 600;
+    color: var(--hp-ink);
+  }
+  .mp-solution p {
+    margin: 8px 0 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--hp-mute);
+  }
+  .mp-solution-arrow {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid var(--hp-line);
+    font-size: 14px;
+    color: var(--hp-purple);
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease,
+      border-color 0.25s ease;
+  }
+  .mp-solution:hover .mp-solution-arrow {
+    background: var(--hp-purple);
+    border-color: var(--hp-purple);
+    color: #fff;
+  }
+
+  /* FAQ (same accordion as /precios) ------------------------------ */
+  .mp-faq {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+    gap: 40px 72px;
+    align-items: start;
+  }
+  .mp-faq-head {
+    position: sticky;
+    top: 120px;
+  }
+  .mp-faq-head .hp-lead {
+    margin-top: 18px;
+  }
+  .mp-faq-list {
+    display: grid;
+    gap: 10px;
+  }
+  .mp-faq-item {
+    border-radius: 16px;
+    background: #fff;
+    border: 1px solid var(--hp-line);
+    box-shadow: var(--hp-shadow-sm);
+    transition: border-color 0.2s ease;
+  }
+  .mp-faq-item[open] {
+    border-color: #d6d1ff;
+  }
+  .mp-faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px 22px;
+    cursor: pointer;
+    list-style: none;
+  }
+  .mp-faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .mp-faq-item summary:focus-visible {
+    outline: 2px solid var(--hp-purple);
+    outline-offset: 2px;
+    border-radius: 14px;
+  }
+  .mp-faq-item h3 {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+    font-weight: 600;
+    color: var(--hp-ink);
+  }
+  .mp-faq-icon {
+    position: relative;
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--hp-lavender);
+    transition:
+      transform 0.3s var(--hp-ease),
+      background-color 0.2s ease;
+  }
+  .mp-faq-icon::before,
+  .mp-faq-icon::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 12px;
+    height: 1.8px;
+    margin: -0.9px 0 0 -6px;
+    border-radius: 2px;
+    background: var(--hp-purple);
+  }
+  .mp-faq-icon::after {
+    transform: rotate(90deg);
+  }
+  .mp-faq-item[open] .mp-faq-icon {
+    transform: rotate(45deg);
+    background: var(--hp-purple);
+  }
+  .mp-faq-item[open] .mp-faq-icon::before,
+  .mp-faq-item[open] .mp-faq-icon::after {
+    background: #fff;
+  }
+  .mp-faq-item p {
+    margin: 0;
+    padding: 0 22px 22px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--hp-mute);
+  }
+
+  /* Responsive ---------------------------------------------------- */
+  @media (prefers-reduced-motion: reduce) {
+    .mp-faq-icon {
+      transition: none;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .mp-features {
+      grid-template-columns: repeat(var(--cols-md, 3), minmax(0, 1fr));
+    }
+    .mp-flow {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .mp-step:nth-child(2)::after {
+      display: none;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    .mp-cards {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .mp-solutions {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .mp-faq {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .mp-faq-head {
+      position: static;
+    }
+  }
+  /* Tablets: one card per row in the dark panel, visual beside the copy. */
+  @media (max-width: 1000px) and (min-width: 641px) {
+    .mp-card {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    }
+    .mp-visual {
+      justify-content: center;
+      border-bottom: 0;
+      border-right: 1px solid var(--hp-on-dark-line);
+    }
+    /* Centred visual: keep the outcome right under the content. */
+    .mv-result {
+      margin-top: 4px;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .mp-notes,
+    .mp-guard-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .mp-notes li + li {
+      border-left: 0;
+      border-top: 1px solid var(--hp-line);
+    }
+    .mp-guard-grid li + li {
+      border-left: 0;
+      border-top: 1px solid var(--hp-on-dark-line);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .mp-dark {
+      padding: 8px 0;
+    }
+    .mp-features {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 12px;
+    }
+    .mp-features.is-compact {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .mp-features.is-compact > li:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
+    .mp-feature {
+      padding: 20px;
+    }
+    .mp-features.is-compact .mp-feature {
+      padding: 18px;
+    }
+    .mp-feature h3 {
+      margin-top: 16px;
+      font-size: 17px;
+    }
+    .mp-features.is-compact .mp-feature h3 {
+      font-size: 16.5px;
+    }
+    .mp-feature p {
+      font-size: 13.5px;
+    }
+    .mp-flow,
+    .mp-solutions {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 12px;
+    }
+    .mp-step::after {
+      display: none;
+    }
+    .mp-visual {
+      min-height: 0;
+      padding: 18px 18px 16px;
+    }
+    .mp-card-copy {
+      padding: 20px 20px 22px;
+    }
+    .mp-card h3 {
+      font-size: 25px;
+    }
+    .mp-faq-item summary {
+      padding: 18px;
+    }
+    .mp-faq-item h3 {
+      font-size: 16px;
+    }
+    .mp-faq-item p {
+      padding: 0 18px 18px;
+    }
+  }
+</style>

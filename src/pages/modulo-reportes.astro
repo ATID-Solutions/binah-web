@@ -1,0 +1,175 @@
+---
+import ModulePage from "../components/modules/ModulePage.astro";
+import ReportsShot from "../components/modules/shots/ReportsShot.astro";
+import type { ModuleContent } from "../components/modules/types";
+import { WA_MESSAGES } from "../components/binah/whatsapp";
+
+const content: ModuleContent = {
+  id: "reportes",
+  path: "/modulo-reportes",
+  seo: {
+    title: "Reportes — Binah",
+    description:
+      "Dashboards que combinan ventas, operaciones, finanzas y soporte — porque todo vive en la misma base de datos.",
+  },
+  demoMessage: WA_MESSAGES.moduleReportes,
+  hero: {
+    crumb: "Reportes",
+    eyebrow: "Módulo 10 · Reportes",
+    title: "Reportes en vivo",
+    accent: "de todo tu negocio.",
+    lead: "Ventas, atención, inventario, pagos y facturación en dashboards con datos en tiempo real. Todo sale de la misma base de datos, así que nadie arma cortes a mano. Exporta a Excel o PDF, o recibe tus reportes por correo.",
+  },
+  features: {
+    label: "Dashboards y exportes",
+    title: "Dashboards en vivo.",
+    soft: "Sin armar un Excel.",
+    lead: "Gerencia, contabilidad y operación ven los mismos números, con los filtros que cada uno necesita, sin pedirle cortes a cada área.",
+    items: [
+      {
+        icon: { icon: "chart" },
+        title: "Dashboards personalizables",
+        body: "Arma tus tableros con los indicadores que tu equipo revisa cada día, con datos en tiempo real.",
+      },
+      {
+        icon: { icon: "download" },
+        title: "Exportes a Excel y PDF",
+        body: "Descarga tus reportes en Excel o PDF para tu contador, tus socios o tu equipo.",
+        link: { label: "Ver reportes en Excel y PDF", href: "/reportes-excel-pdf-negocio-colombia" },
+      },
+      {
+        icon: { icon: "mail" },
+        title: "Reportes programados",
+        body: "Programa tus reportes y recíbelos por correo, sin tener que pedírselos a nadie.",
+      },
+      {
+        icon: { icon: "filter" },
+        title: "Filtros que cruzan todo",
+        body: "Periodo, canal, vendedor, bodega, estado y módulo en el mismo reporte.",
+      },
+      {
+        icon: { icon: "users" },
+        title: "Asesores y atención",
+        body: "Tiempos de respuesta por asesor, pedidos cerrados por asesor y canal, y reportes de atención al cliente.",
+        link: { label: "Ver reportes de ventas y asesores", href: "/reportes-ecommerce-ventas-asesores-bodegas" },
+      },
+      {
+        icon: { icon: "history" },
+        title: "Trazabilidad",
+        body: "Quién hizo qué, cuándo y en qué pedido, sea una persona o la IA.",
+      },
+    ],
+    notes: [
+      { title: "Una sola base de datos", body: "Ventas, operación, finanzas y soporte salen del mismo lugar, con los mismos números." },
+      { title: "Ventas por bodega y producto", body: "Qué bodega vende más, qué productos se mueven y cuáles se quedan quietos." },
+      { title: "Sin cortes manuales", body: "Gerencia actúa sin esperar a que cada área arme su propio archivo." },
+    ],
+  },
+  highlight: {
+    label: "Co-CEO",
+    title: "Un Co-CEO que lee tus números.",
+    lead: "El Co-CEO de Binah lee ventas, costos e inventario, te explica qué cambió y deja la siguiente acción en tu bandeja de aprobaciones para que tú decidas.",
+    cards: [
+      {
+        kicker: "Co-CEO",
+        name: "Cierre del mes",
+        status: "En línea",
+        body: "Pregúntale cómo va el negocio. Responde con tus datos, explica qué movió el resultado y propone la siguiente acción para que tú la apruebes.",
+        visual: {
+          type: "chat",
+          in: "¿Cómo cerramos el mes frente al anterior?",
+          out: "Ventas netas +18 %. El margen bajó 2 puntos por el envío en Medellín.",
+          result: "Campaña de recompra lista para aprobar",
+        },
+        points: ["Lee ventas, costos e inventario", "Explica qué cambió", "Propone y espera tu aprobación"],
+      },
+      {
+        kicker: "Ventas",
+        name: "Ventas netas",
+        body: "Ventas por canal, asesor, bodega y producto en un solo tablero, con el mismo número para gerencia, ventas y contabilidad.",
+        visual: {
+          type: "stat",
+          label: "Ventas netas · noviembre",
+          value: "$412 M",
+          delta: "+18 %",
+          bars: [46, 52, 49, 58, 55, 61, 57, 66, 63, 72, 78, 92],
+          result: "Ticket promedio $214 mil · +6 %",
+        },
+        points: ["Ventas por bodega y producto", "Pedidos cerrados por asesor y canal", "Exportes a Excel y PDF"],
+        link: { label: "Reportes de ventas y bodegas", href: "/reportes-ecommerce-ventas-asesores-bodegas" },
+      },
+      {
+        kicker: "Atención",
+        name: "Tiempos de respuesta",
+        body: "Mide cuánto tarda cada asesor en responder y cuántas conversaciones terminan en venta, en cada canal.",
+        visual: {
+          type: "rows",
+          title: "Primera respuesta · hoy",
+          rows: [
+            { label: "Agente de ventas · IA", value: "3 s", tone: "purple" },
+            { label: "Ana Restrepo", value: "2 min", tone: "green" },
+            { label: "Juan Mejía", value: "6 min", tone: "amber" },
+          ],
+        },
+        points: ["Tiempos de respuesta por asesor", "Reportes de atención al cliente", "Trazabilidad de cada acción"],
+      },
+    ],
+  },
+  flow: {
+    label: "Del dato a la decisión",
+    title: "Del dato a la decisión,",
+    soft: "sin pedir un reporte.",
+    lead: "Cada módulo alimenta los reportes mientras tu equipo trabaja. No hay que exportar de un sistema para pegar en otro.",
+    steps: [
+      {
+        title: "Dato",
+        body: "Pedidos, conversaciones, pagos, facturas y bodegas generan datos mientras el equipo trabaja.",
+        modules: ["crm", "retail", "invoice", "facturacion"],
+      },
+      {
+        title: "Cruce",
+        body: "Binah conecta cliente, asesor, producto, canal y estado en la misma base de datos.",
+      },
+      {
+        title: "Vista",
+        body: "Cada equipo filtra por periodo, canal, vendedor, bodega o estado, y exporta a Excel o PDF.",
+      },
+      {
+        title: "Decisión",
+        body: "Gerencia actúa con números consistentes, y el Co-CEO propone la siguiente acción.",
+      },
+    ],
+  },
+  solutions: {
+    title: "Soluciones de reportes y datos.",
+    lead: "Reportes por asesor y bodega, exportes a Excel y PDF, migración de tus datos y una calculadora de ahorro operativo.",
+  },
+  faqs: [
+    {
+      q: "¿De dónde salen los datos de los reportes de Binah?",
+      a: "De la misma base de datos donde trabajan el CRM, ventas, pagos, facturación, soporte y operación. Por eso los números coinciden para gerencia, contabilidad y cada equipo, sin pedir cortes manuales a cada área.",
+    },
+    {
+      q: "¿Puedo exportar a Excel o recibir los reportes por correo?",
+      a: "Sí. Los reportes se exportan a Excel o PDF, y puedes programar reportes que llegan por correo.",
+    },
+    {
+      q: "¿Cuánto tiempo puede ahorrar mi operación?",
+      a: "Depende de tu volumen. La calculadora de ahorro operativo compara el tiempo que hoy toma cada pedido con lo que estima Binah: unos 2 minutos por pedido o despacho y unos 10 segundos por factura. Es una estimación, no un resultado garantizado.",
+    },
+    {
+      q: "¿Puedo traer mis datos desde Excel?",
+      a: "Sí. El equipo de Binah revisa tus fuentes, limpia duplicados, importa clientes, productos e historial operativo, y tu equipo valida los flujos antes de operar.",
+    },
+  ],
+  cta: {
+    eyebrow: "Reportes · Módulo 10",
+    heading: "Todo tu negocio en una pantalla.",
+    lead: "Te mostramos tus ventas, tu atención y tu operación en un solo tablero, y te ayudamos a traer tus datos desde Excel.",
+  },
+};
+---
+
+<ModulePage content={content}>
+  <ReportsShot slot="shot" />
+</ModulePage>

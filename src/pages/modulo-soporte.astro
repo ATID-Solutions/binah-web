@@ -1,153 +1,208 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Nav from "../components/binah/Nav.astro";
-import Footer from "../components/binah/Footer.astro";
-import CtaBand from "../components/binah/CtaBand.astro";
-import ModuleMockFrame from "../components/binah/ModuleMockFrame.tsx";
-import { waUrl, WA_MESSAGES } from "../components/binah/whatsapp";
-import { ALL_SEO_FEATURE_PAGES } from "../lib/marketing-pages";
+import ModulePage from "../components/modules/ModulePage.astro";
+import SupportShot from "../components/modules/shots/SupportShot.astro";
+import type { ModuleContent } from "../components/modules/types";
+import { WA_MESSAGES } from "../components/binah/whatsapp";
 
-const supportHref = waUrl(WA_MESSAGES.moduleSupport);
-const supportRelatedSlugs = new Set([
-  "agente-ia-soporte-clientes-whatsapp",
-  "tracking-pedidos-whatsapp-colombia",
-  "notas-credito-devoluciones-dian-retail",
-  "base-conocimiento-agente-ia-soporte",
-]);
-const supportSolutions = ALL_SEO_FEATURE_PAGES.filter((page) => supportRelatedSlugs.has(page.slug));
+const content: ModuleContent = {
+  id: "soporte",
+  path: "/modulo-soporte",
+  seo: {
+    title: "Soporte al cliente y tickets — Binah",
+    description:
+      "Gestiona tickets de soporte, responsables, prioridades, SLA, historial de cliente y reportes de atención desde Binah.",
+  },
+  demoMessage: WA_MESSAGES.moduleSupport,
+  hero: {
+    crumb: "Tickets de soporte",
+    eyebrow: "Módulo 02 · Soporte",
+    title: "Soporte al cliente",
+    accent: "sin casos perdidos.",
+    lead: "Cada solicitud queda como ticket con responsable, prioridad, tiempo límite e historial. Quien atiende ve el pedido, el tracking y la factura del cliente antes de responder.",
+  },
+  features: {
+    label: "Tickets y SLA",
+    title: "Tickets de soporte con dueño.",
+    soft: "Y con fecha límite.",
+    lead: "Soporte deja de ser una bandeja de chats. Cada caso tiene responsable, prioridad, estado y contexto, y nadie tiene que preguntar en qué va.",
+    items: [
+      {
+        icon: { icon: "ticket" },
+        title: "Tickets por cliente y pedido",
+        body: "Cada caso queda ligado al cliente y al pedido que lo originó, con su número y su motivo.",
+      },
+      {
+        icon: { icon: "users" },
+        title: "Responsables y prioridades",
+        body: "Asigna cada ticket a una persona del equipo y define qué se atiende primero.",
+      },
+      {
+        icon: { icon: "clock" },
+        title: "SLA y tiempos límite",
+        body: "Cada ticket muestra su tiempo límite y cuánto le queda antes de vencer.",
+      },
+      {
+        icon: { icon: "tag" },
+        title: "Estados y etiquetas",
+        body: "Abierto, esperando al cliente o resuelto, con etiquetas por motivo para ordenar la cola.",
+      },
+      {
+        icon: { icon: "history" },
+        title: "Historial completo",
+        body: "Conversaciones y acciones anteriores del cliente, en orden, dentro del mismo ticket.",
+      },
+      {
+        icon: { icon: "chart" },
+        title: "Reportes de atención",
+        body: "Qué motivos se repiten, quién responde, cuánto tarda y qué casos maneja cada persona.",
+      },
+    ],
+    notes: [
+      {
+        title: "Nace en cualquier canal",
+        body: "Un caso puede abrirse desde WhatsApp u otro canal del inbox, un pedido, una devolución, una llamada o una tarea interna.",
+      },
+      {
+        title: "Contexto antes de responder",
+        body: "Cliente, pedido, tracking, factura, conversación y acciones anteriores en la misma pantalla.",
+      },
+      {
+        title: "Cierre medible",
+        body: "Motivo, tiempo de respuesta, responsable y resultado quedan listos para los reportes.",
+      },
+    ],
+  },
+  highlight: {
+    label: "IA y seguimiento",
+    title: "Un agente de IA para soporte, con tu equipo a cargo.",
+    lead: "El agente de soporte del módulo CRM atiende lo repetitivo con tu base de conocimiento aprobada. Lo que necesita criterio pasa a una persona, con el ticket y el historial listos.",
+    cards: [
+      {
+        kicker: "Agente de IA",
+        name: "Responde",
+        status: "En línea",
+        body: "Contesta con tus preguntas frecuentes, tus políticas y el tono de tu marca. Consulta el pedido y el tracking antes de responder.",
+        visual: {
+          type: "chat",
+          in: "¿Ya salió mi pedido #4819?",
+          out: "Sí, salió ayer con Coordinadora y va en ruta.",
+          result: "Resuelto por el agente",
+        },
+        points: ["Base de conocimiento aprobada", "Consulta pedidos y tracking", "Responde con el tono de tu marca"],
+        link: { label: "Agente de soporte", href: "/agente-ia-soporte-clientes-whatsapp" },
+      },
+      {
+        kicker: "Agente de IA",
+        name: "Escala",
+        status: "En línea",
+        body: "Pide los datos que faltan y, cuando el caso es una excepción, se lo pasa a tu equipo con todo lo que el cliente ya contó.",
+        visual: {
+          type: "chat",
+          in: "La creatina llegó con el sello roto.",
+          out: "Lo siento. ¿Me envías una foto del empaque?",
+          result: "Escalado a Ana · prioridad alta",
+        },
+        points: ["Pide los datos que faltan", "Escala cuando hay una excepción", "El caso llega con el historial"],
+        link: { label: "Base de conocimiento", href: "/base-conocimiento-agente-ia-soporte" },
+      },
+      {
+        kicker: "Gerencia",
+        name: "Mide",
+        body: "Casos abiertos, vencidos, resueltos o esperando al cliente; quién responde y cuánto tarda; y qué motivos se repiten.",
+        visual: {
+          type: "rows",
+          rows: [
+            { label: "Tracking de pedidos", value: "41 casos", tone: "purple" },
+            { label: "Cambios de talla", value: "23 casos", tone: "blue" },
+            { label: "Garantías", value: "9 casos", tone: "amber" },
+          ],
+        },
+        points: ["Abiertos, vencidos y resueltos", "Quién responde y cuánto tarda", "Motivos recurrentes medidos"],
+        link: { label: "Ver Reportes", href: "/modulo-reportes" },
+      },
+    ],
+    guardrails: {
+      label: "Control y confianza",
+      title: "La IA atiende. Tu equipo decide lo que tiene impacto.",
+      items: [
+        {
+          title: "Conocimiento aprobado",
+          body: "El agente responde con las preguntas frecuentes, las políticas y el tono que tu empresa aprobó.",
+        },
+        {
+          title: "Escalación a personas",
+          body: "Cuando hay una excepción, el caso pasa a tu equipo con el ticket y el historial completos.",
+        },
+        {
+          title: "Aprobación humana",
+          body: "Las acciones con impacto pueden esperar a que una persona las apruebe antes de ejecutarse.",
+        },
+      ],
+    },
+  },
+  flow: {
+    label: "Conectado con la operación",
+    title: "Del mensaje al cierre,",
+    soft: "con toda la operación.",
+    lead: "Soporte no vive aislado: se alimenta del CRM, de los pedidos y de la facturación, y cada cierre termina en tus reportes.",
+    steps: [
+      {
+        title: "Entra la solicitud",
+        body: "El caso nace desde WhatsApp u otro canal del inbox, un pedido, una devolución, una llamada o una tarea interna.",
+        modules: ["crm"],
+      },
+      {
+        title: "Ticket con dueño",
+        body: "Responsable, prioridad, estado, etiquetas y tiempo límite quedan visibles para todo el equipo.",
+      },
+      {
+        title: "Se resuelve con contexto",
+        body: "Quien atiende ve pedido, tracking y factura. En una devolución, inventario decide si el producto vuelve a stock y facturación emite la nota crédito.",
+        modules: ["retail", "facturacion"],
+      },
+      {
+        title: "Cierre medible",
+        body: "Motivo, tiempo de respuesta, responsable y resultado quedan listos para los reportes de gerencia.",
+        modules: ["reportes"],
+      },
+    ],
+  },
+  solutions: {
+    title: "Soluciones para soporte al cliente.",
+    lead: "Casos concretos para atender pedidos, tracking, devoluciones y preguntas frecuentes en Colombia.",
+    slugs: [
+      "agente-ia-soporte-clientes-whatsapp",
+      "tracking-pedidos-whatsapp-colombia",
+      "notas-credito-devoluciones-dian-retail",
+      "base-conocimiento-agente-ia-soporte",
+    ],
+  },
+  faqs: [
+    {
+      q: "¿De dónde puede nacer un ticket de soporte?",
+      a: "De una conversación de WhatsApp u otro canal del inbox, de un pedido, una devolución, una llamada o una tarea interna. El ticket queda ligado al cliente y al pedido, con responsable, prioridad y tiempo límite.",
+    },
+    {
+      q: "¿El agente de IA puede atender soporte?",
+      a: "Sí. El agente de soporte del módulo CRM responde con tu base de conocimiento aprobada, consulta pedidos y tracking, pide los datos que faltan y escala al equipo cuando hay una excepción. Las acciones con impacto pueden esperar a que una persona las apruebe.",
+    },
+    {
+      q: "¿Qué puede ver la gerencia del módulo de Soporte?",
+      a: "Cuántos casos están abiertos, vencidos, resueltos o esperando al cliente; quién responde y cuánto tarda; y qué se repite: tracking, cambios, garantías, pagos, facturas o tallas.",
+    },
+    {
+      q: "¿El equipo de Binah ayuda con la configuración?",
+      a: "Sí. Te ayudamos a definir estados, prioridades y tiempos límite, a migrar tu historial y a preparar la base de conocimiento del agente con tus políticas y preguntas frecuentes.",
+    },
+  ],
+  cta: {
+    eyebrow: "Soporte · Módulo 02",
+    heading: "Ningún caso sin dueño.",
+    lead: "Organiza tickets, responsables, SLA e historial para atender mejor sin perder contexto.",
+  },
+};
 ---
 
-<Layout
-  title="Soporte al cliente y tickets — Binah"
-  description="Gestiona tickets de soporte, responsables, prioridades, SLA, historial de cliente y reportes de atención desde Binah."
-  page="modulos"
-  canonicalPath="/modulo-soporte"
->
-  <Nav />
-  <main>
-    <div class="container-binah">
-      <div class="crumb">
-        <a href="/">Binah</a> <span class="sep">/</span> <a href="/modulos">Módulos</a>
-        <span class="sep">/</span> Soporte
-      </div>
-
-      <section class="binah-section no-border" style="padding: 40px 0 56px;">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">
-          <div>
-            <div class="eyebrow">Módulo 02 / Soporte</div>
-            <h1 class="display display-lg" style="margin-top: 20px;">
-              Tickets claros.<br />Clientes atendidos.<br />Nada perdido.
-            </h1>
-            <p class="lead" style="margin-top: 28px; font-size: 18px;">
-              Cada solicitud queda como ticket con responsable, prioridad, tiempos límite, historial del cliente y estado de cierre.
-            </p>
-            <div class="hero-cta">
-              <a href={supportHref} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                Ver Soporte <span class="arrow">→</span>
-              </a>
-              <a href="/modulos" class="btn btn-outline">Ver otros módulos</a>
-            </div>
-          </div>
-          <ModuleMockFrame id="soporte" client:load />
-        </div>
-      </section>
-
-      <section class="binah-section">
-        <div class="section-head">
-          <h2 class="display display-md title">Del mensaje al cierre.</h2>
-          <p>Soporte deja de depender de chats sueltos. Cada caso tiene dueño, contexto y siguiente paso.</p>
-        </div>
-        <div
-          style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden;"
-        >
-          <div style="background: var(--bg); padding: 36px 28px; min-height: 280px; display: flex; flex-direction: column; gap: 14px;">
-            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">01 / ENTRA</div>
-            <h3 style="font-family: var(--font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">
-              Solicitud recibida
-            </h3>
-            <p style="color: var(--ink-soft); font-size: 14px;">
-              El caso puede nacer desde WhatsApp, un pedido, una devolución, una llamada o una tarea interna.
-            </p>
-          </div>
-          <div style="background: var(--bg); padding: 36px 28px; min-height: 280px; display: flex; flex-direction: column; gap: 14px;">
-            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">02 / ASIGNA</div>
-            <h3 style="font-family: var(--font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">
-              Ticket con dueño
-            </h3>
-            <p style="color: var(--ink-soft); font-size: 14px;">
-              Responsable, prioridad, estado, etiquetas y tiempos límite quedan visibles para el equipo.
-            </p>
-          </div>
-          <div style="background: var(--bg); padding: 36px 28px; min-height: 280px; display: flex; flex-direction: column; gap: 14px;">
-            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">03 / RESUELVE</div>
-            <h3 style="font-family: var(--font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">
-              Contexto completo
-            </h3>
-            <p style="color: var(--ink-soft); font-size: 14px;">
-              Soporte ve cliente, pedido, tracking, factura, conversación y acciones anteriores antes de responder.
-            </p>
-          </div>
-          <div style="background: var(--bg); padding: 36px 28px; min-height: 280px; display: flex; flex-direction: column; gap: 14px;">
-            <div class="mono" style="font-size: 11px; color: var(--mute); letter-spacing: 0.1em;">04 / MIDE</div>
-            <h3 style="font-family: var(--font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">
-              Cierre medible
-            </h3>
-            <p style="color: var(--ink-soft); font-size: 14px;">
-              Motivo, tiempo de respuesta, responsable y resultado quedan listos para reportes.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="binah-section">
-        <div class="section-head">
-          <h2 class="display display-md title">Lo que gerencia puede ver.</h2>
-          <p>Preguntas de soporte que deberían estar disponibles sin pedir un corte manual.</p>
-        </div>
-        <div class="editorial-list">
-          <div class="editorial-row">
-            <span class="mono">Tickets</span>
-            <p>Cuántos casos están abiertos, vencidos, resueltos o esperando respuesta del cliente.</p>
-          </div>
-          <div class="editorial-row">
-            <span class="mono">Equipo</span>
-            <p>Quién responde, cuánto tarda y qué tipo de casos maneja cada persona.</p>
-          </div>
-          <div class="editorial-row">
-            <span class="mono">Motivos</span>
-            <p>Qué se repite: tracking, cambios, garantías, pagos, facturas, tallas o preguntas frecuentes.</p>
-          </div>
-          <div class="editorial-row">
-            <span class="mono">Cliente</span>
-            <p>Todo queda en el historial: conversación, compra, pedido, factura, devolución y cierre.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="binah-section">
-        <div class="section-head">
-          <h2 class="display display-md title">Conectado con la operación.</h2>
-          <p>Soporte no vive aislado: se alimenta de CRM, ventas, facturación, tareas y reportes.</p>
-        </div>
-        <div class="related-links-grid">
-          {
-            supportSolutions.map((page) => (
-              <a href={page.path}>
-                <span>{page.title.replace(" — Binah", "")}</span>
-                <strong>→</strong>
-              </a>
-            ))
-          }
-        </div>
-      </section>
-
-      <CtaBand
-        eyebrow="Soporte · Módulo 02"
-        heading="Soporte deja de ser una bandeja de chats."
-        body="Organiza tickets, responsables, SLA e historial para atender mejor sin perder contexto."
-        primaryHref={supportHref}
-      />
-    </div>
-  </main>
-  <Footer />
-</Layout>
+<ModulePage content={content}>
+  <SupportShot slot="shot" />
+</ModulePage>

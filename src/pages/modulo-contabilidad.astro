@@ -1,0 +1,185 @@
+---
+import ModulePage from "../components/modules/ModulePage.astro";
+import AccountingShot from "../components/modules/shots/AccountingShot.astro";
+import type { ModuleContent } from "../components/modules/types";
+import { WA_MESSAGES } from "../components/binah/whatsapp";
+
+const content: ModuleContent = {
+  id: "contabilidad",
+  path: "/modulo-contabilidad",
+  seo: {
+    title: "Contabilidad — Binah",
+    description:
+      "Seguimiento de costos, órdenes de compra, proveedores y conciliaciones — todo conectado con ventas y facturación.",
+  },
+  demoMessage: WA_MESSAGES.moduleContabilidad,
+  hero: {
+    crumb: "Contabilidad",
+    eyebrow: "Módulo 05 · Contabilidad",
+    title: "Contabilidad que",
+    accent: "cuadra con cada venta.",
+    lead: "Órdenes de compra, proveedores, cuentas por pagar, gastos y bancos en el mismo sistema donde vendes y facturas. Cada compra actualiza el inventario y el costo del producto, y cada venta muestra su margen.",
+  },
+  features: {
+    label: "Compras y costos",
+    title: "Compras y proveedores.",
+    soft: "Junto a tus ventas.",
+    lead: "Lo que compras, lo que debes y lo que pagas vive junto a tus ventas y tu facturación. Nadie tiene que cuadrar cifras entre hojas sueltas.",
+    items: [
+      {
+        icon: { icon: "cart" },
+        title: "Órdenes de compra",
+        body: "De la solicitud a la recepción: proveedor, precio, condiciones y aprobación. La mercancía y el costo entran al inventario.",
+        link: { label: "Ver órdenes de compra", href: "/ordenes-compra-proveedores-colombia" },
+      },
+      {
+        icon: { icon: "users" },
+        title: "Proveedores",
+        body: "Datos, condiciones y órdenes de cada proveedor en una sola ficha, a la mano de quien compra.",
+      },
+      {
+        icon: { icon: "calendar" },
+        title: "Cuentas por pagar",
+        body: "Registra lo que debes, programa los pagos a proveedores y registra cada pago cuando sale.",
+      },
+      {
+        icon: { icon: "paperclip" },
+        title: "Gastos con soporte",
+        body: "Registra gastos y adjunta la factura o el recibo, en PDF o imagen, al gasto, a la cuenta por pagar o al pago.",
+      },
+      {
+        icon: { icon: "calculator" },
+        title: "Costeo y margen",
+        body: "El costo queda en cada referencia o variante. En cada venta, Binah cruza precio, descuento y costo.",
+        link: { label: "Ver costeo por producto", href: "/costeo-productos-inventario-colombia" },
+      },
+      {
+        icon: { icon: "bank" },
+        title: "Bancos, cajas y centros de costo",
+        body: "Organiza el dinero de la empresa por banco, caja y centro de costo, sin llevarlo en otra herramienta.",
+      },
+    ],
+    notes: [
+      { title: "Plan de cuentas y balance de prueba", body: "La estructura contable de tu empresa, alimentada por la operación de todos los días." },
+      { title: "Conciliaciones", body: "Cobros, pagos y facturas se cruzan con las ventas y las compras que los originaron." },
+      { title: "Reportes financieros en vivo", body: "Costos, márgenes y cuentas por pagar al día, con los mismos datos de ventas." },
+    ],
+  },
+  highlight: {
+    label: "Co-CEO y control",
+    title: "El Co-CEO propone. Tu equipo aprueba.",
+    lead: "El Co-CEO de Binah lee ventas, costos e inventario y propone la siguiente acción, como la orden de compra de un producto que se agota. Las acciones que cambian datos pueden esperar la aprobación de una persona.",
+    cards: [
+      {
+        kicker: "Co-CEO",
+        name: "Reposición",
+        status: "En línea",
+        body: "Cuando un producto se vende más rápido de lo normal, el Co-CEO lo detecta en tus ventas y tu inventario y prepara la orden de compra al proveedor para que tú la apruebes.",
+        visual: {
+          type: "chat",
+          in: "La proteína de vainilla se agota 2× más rápido. ¿Preparo la orden de compra?",
+          out: "Sí, prepárala con Nutrimax.",
+          result: "OC-0318 lista para aprobar",
+        },
+        points: ["Lee ventas, costos e inventario", "Propone la siguiente acción", "Tú apruebas antes de que pase"],
+        link: { label: "Órdenes de compra", href: "/ordenes-compra-proveedores-colombia" },
+      },
+      {
+        kicker: "Pagos a proveedores",
+        name: "Cuentas por pagar",
+        body: "Registra cuentas por pagar y gastos, programa los pagos a proveedores y registra cada pago con su factura o recibo adjunto.",
+        visual: {
+          type: "rows",
+          title: "Próximos pagos",
+          rows: [
+            { label: "Empaques del Caribe", value: "Programado", tone: "blue" },
+            { label: "Laboratorio Vital", value: "Pagado", tone: "green" },
+          ],
+          result: "Recibo adjunto al pago",
+        },
+        points: ["Pagos programados", "Soportes en PDF o imagen", "Bancos, cajas y centros de costo"],
+      },
+      {
+        kicker: "Costeo",
+        name: "Margen por venta",
+        body: "El costo de cada compra queda en la referencia o variante. Binah cruza precio, descuento y costo en cada venta, y los reportes muestran la rentabilidad.",
+        visual: {
+          type: "stat",
+          label: "Margen · Proteína vainilla 2 lb",
+          value: "37,7 %",
+          bars: [44, 52, 48, 58, 55, 63, 60, 70, 66, 74, 71, 82],
+          result: "Costo actualizado con la última compra",
+        },
+        points: ["Costo por producto y servicio", "Margen en cada venta", "Reportes financieros en vivo"],
+        link: { label: "Costeo por producto", href: "/costeo-productos-inventario-colombia" },
+      },
+    ],
+    guardrails: {
+      label: "Control y confianza",
+      title: "Cada movimiento con soporte y responsable.",
+      items: [
+        { title: "Aprobaciones", body: "Una orden de compra o un pago pueden esperar el visto bueno de una persona antes de ejecutarse." },
+        { title: "Soportes adjuntos", body: "La factura o el recibo queda en el gasto, la cuenta por pagar o el pago al que corresponde." },
+        { title: "Roles y permisos", body: "Cada persona ve solo lo que le corresponde, incluida la información financiera." },
+      ],
+    },
+  },
+  flow: {
+    label: "De la compra al margen",
+    title: "De la orden de compra",
+    soft: "al margen de la venta.",
+    lead: "La compra no se queda en contabilidad: llega al inventario, al costo del producto y a los reportes, y se cruza con lo que vendes.",
+    steps: [
+      {
+        title: "Solicitud",
+        body: "Tu equipo pide una reposición, o el Co-CEO la propone cuando un producto se agota más rápido.",
+      },
+      {
+        title: "Orden al proveedor",
+        body: "Se registran el precio y las condiciones del proveedor, y la orden se aprueba antes de seguir.",
+      },
+      {
+        title: "Recepción",
+        body: "La mercancía entra al inventario y el costo queda en la referencia o variante del producto.",
+        modules: ["retail"],
+      },
+      {
+        title: "Venta y margen",
+        body: "En cada venta, Binah cruza precio, descuento y costo. La factura y los reportes muestran la rentabilidad.",
+        modules: ["facturacion", "reportes"],
+      },
+    ],
+  },
+  solutions: {
+    title: "Soluciones de compras y costeo.",
+    lead: "Casos concretos para controlar proveedores, órdenes de compra y márgenes en empresas colombianas.",
+  },
+  faqs: [
+    {
+      q: "¿Qué cubre el módulo de Contabilidad de Binah?",
+      a: "Órdenes de compra, proveedores, cuentas por pagar, gastos y pagos a proveedores, bancos, cajas y centros de costo, plan de cuentas y balance de prueba, costeo por producto y servicio, conciliaciones y reportes financieros en vivo. Todo conectado con ventas y facturación.",
+    },
+    {
+      q: "¿Cómo calcula Binah el margen de cada venta?",
+      a: "Cuando registras una compra, el costo queda en la referencia o variante del producto. En cada venta, Binah cruza el precio, el descuento y ese costo, y los reportes muestran la rentabilidad.",
+    },
+    {
+      q: "¿Puedo adjuntar la factura o el recibo de un gasto?",
+      a: "Sí. Puedes adjuntar la factura o el recibo, en PDF o imagen, a un gasto, a una cuenta por pagar o a un pago, para que el soporte quede junto al movimiento.",
+    },
+    {
+      q: "¿El equipo de Binah ayuda con la configuración?",
+      a: "Sí. Revisamos tus proveedores, productos y costos actuales, te ayudamos a migrarlos y dejamos el módulo listo con tus datos reales.",
+    },
+  ],
+  cta: {
+    eyebrow: "Contabilidad · Módulo 05",
+    heading: "Compras, costos y márgenes al día.",
+    lead: "Te mostramos el módulo con tus proveedores, productos y costos reales, y te ayudamos a migrarlos. Tú solo revisas y apruebas.",
+  },
+};
+---
+
+<ModulePage content={content}>
+  <AccountingShot slot="shot" />
+</ModulePage>

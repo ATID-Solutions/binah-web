@@ -1,0 +1,214 @@
+---
+import ModulePage from "../components/modules/ModulePage.astro";
+import InvoicingShot from "../components/modules/shots/InvoicingShot.astro";
+import type { ModuleContent } from "../components/modules/types";
+import { WA_MESSAGES } from "../components/binah/whatsapp";
+
+const content: ModuleContent = {
+  id: "facturacion",
+  path: "/modulo-facturacion-electronica",
+  seo: {
+    title: "Facturación Electrónica — Binah",
+    description:
+      "Cumplimiento total con la regulación colombiana. Genera, firma y envía cada documento electrónico requerido automáticamente.",
+  },
+  demoMessage: WA_MESSAGES.moduleFacturacion,
+  hero: {
+    crumb: "Facturación",
+    eyebrow: "Módulo 04 · Facturación electrónica",
+    title: "Factura electrónica",
+    accent: "desde cada venta.",
+    lead: "Facturas, notas crédito y débito, documento soporte y documento equivalente POS emitidos a la DIAN con los datos de la operación. Firma digital incluida. Nadie vuelve a digitar lo que ya está en el pedido.",
+  },
+  features: {
+    label: "Documentos DIAN",
+    title: "Cada documento DIAN",
+    soft: "nace de la operación.",
+    lead: "Cliente, productos, impuestos, envío y medio de pago ya vienen de la venta. Facturación deja de ser una digitación posterior y cada documento queda ligado a lo que lo originó.",
+    items: [
+      {
+        icon: { icon: "documentCheck" },
+        title: "Factura electrónica DIAN",
+        body: "Emitida desde la venta o el pedido, con los datos de la operación y sin copiarlos a mano.",
+      },
+      {
+        icon: { icon: "documentMinus" },
+        title: "Notas crédito y débito",
+        body: "Ajustes por devoluciones, cambios o correcciones, asociados al pedido original y al cliente.",
+      },
+      {
+        icon: { icon: "document" },
+        title: "Documento soporte",
+        body: "El documento soporte sale de tus flujos de compras, en el mismo lugar que tus facturas.",
+      },
+      {
+        icon: { icon: "store" },
+        title: "Documento equivalente POS",
+        body: "Ventas de mostrador con un catálogo de códigos internos o EAN, conectadas al inventario.",
+        link: { label: "POS electrónico", href: "/pos-documento-equivalente-electronico-dian" },
+      },
+      {
+        icon: { icon: "signature" },
+        title: "Firma digital incluida",
+        body: "Cada documento se genera, se firma y se envía a la DIAN desde Binah.",
+      },
+      {
+        icon: { icon: "chart" },
+        title: "Reportes de facturación",
+        body: "Por cliente, vendedor, canal y estado, sin esperar un cierre manual.",
+      },
+    ],
+    notes: [
+      {
+        title: "Sin doble digitación",
+        body: "Cliente, productos, impuestos, envío y medio de pago salen del pedido.",
+      },
+      {
+        title: "Trazabilidad del documento",
+        body: "Cada documento queda asociado al pedido, al cliente y a los reportes.",
+      },
+      {
+        title: "Paquete de documentos",
+        body: "El plan Business incluye 20.000 documentos electrónicos al año.",
+      },
+    ],
+  },
+  highlight: {
+    label: "Automático",
+    title: "Documentos que salen solos de la operación.",
+    lead: "La venta, la devolución y la venta de mostrador generan su propio documento. Y si tu contabilidad vive en Siigo, Binah le entrega las facturas y los pagos listos para conciliar.",
+    cards: [
+      {
+        kicker: "Desde la venta",
+        name: "Factura",
+        status: "Automático",
+        body: "Cuando la venta se cierra, la factura sale con el cliente, los productos, los impuestos y el medio de pago del pedido, firmada y enviada a la DIAN.",
+        visual: {
+          type: "rows",
+          title: "FE-10293 · Pedido #4821",
+          rows: [
+            { label: "Subtotal", value: "$243.613", tone: "gray" },
+            { label: "IVA 19 %", value: "$46.287", tone: "gray" },
+            { label: "Total", value: "$289.900", tone: "purple" },
+          ],
+          result: "Aceptada por la DIAN",
+        },
+        points: ["Sin copiar datos del pedido", "Firma digital incluida", "Asociada al pedido y al cliente"],
+        link: { label: "Facturación DIAN", href: "/facturacion-electronica-dian" },
+      },
+      {
+        kicker: "Desde la devolución",
+        name: "Nota crédito",
+        status: "Automático",
+        body: "Soporte registra el motivo, inventario decide si el producto vuelve a stock y la nota crédito queda ligada al pedido original.",
+        visual: {
+          type: "rows",
+          title: "Devolución · Pedido #4817",
+          rows: [
+            { label: "Motivo: cambio de talla", value: "Registrado", tone: "gray" },
+            { label: "Inventario", value: "Vuelve a stock", tone: "blue" },
+            { label: "Nota crédito NC-0412", value: "Emitida", tone: "purple" },
+          ],
+          result: "Aceptada por la DIAN",
+        },
+        points: ["Motivo registrado por soporte", "Inventario ajustado", "Ligada al pedido original"],
+        link: { label: "Notas crédito y devoluciones", href: "/notas-credito-devoluciones-dian-retail" },
+      },
+      {
+        kicker: "Contabilidad",
+        name: "Siigo",
+        status: "Conectado",
+        body: "Mapeamos tus datos con Siigo, las facturas se generan desde los pedidos y un panel deja facturas, pagos, anulaciones y recibos de caja listos para revisar.",
+        visual: {
+          type: "rows",
+          title: "Conciliación · hoy",
+          rows: [
+            { label: "FE-10293 · $289.900", value: "Pagada", tone: "green" },
+            { label: "FE-10292 · $1.240.000", value: "Pagada", tone: "green" },
+            { label: "FE-10291 · $3.480.000", value: "Por revisar", tone: "amber" },
+          ],
+          result: "Facturas y pagos cruzados",
+        },
+        points: ["Mapeo de datos con Siigo", "Facturas generadas desde pedidos", "Anulaciones y recibos de caja"],
+        link: { label: "Integración con Siigo", href: "/integracion-siigo-facturacion-automatica" },
+      },
+    ],
+    guardrails: {
+      label: "Control y trazabilidad",
+      title: "Cada documento, con su origen y su estado.",
+      items: [
+        {
+          title: "Ligado a la operación",
+          body: "Factura, nota o documento equivalente quedan asociados al pedido, al cliente y a los reportes.",
+        },
+        {
+          title: "Reportes por estado",
+          body: "Ve lo facturado por cliente, vendedor, canal y estado sin pedir un corte manual.",
+        },
+        {
+          title: "Conciliación revisada",
+          body: "Facturas, pagos, anulaciones y recibos de caja se revisan en un mismo panel.",
+        },
+      ],
+    },
+  },
+  flow: {
+    label: "De la venta a la DIAN",
+    title: "De la venta al documento,",
+    soft: "sin digitar dos veces.",
+    lead: "Facturación se alimenta de ventas, pagos e inventario, y cada documento termina en tus reportes.",
+    steps: [
+      {
+        title: "La venta se cierra",
+        body: "El pedido nace en el CRM, la tienda online, un asesor o el POS.",
+        modules: ["crm", "retail"],
+      },
+      {
+        title: "Binah trae los datos",
+        body: "Cliente, productos, impuestos, envío y medio de pago salen del pedido y del cobro.",
+        modules: ["invoice"],
+      },
+      {
+        title: "Se emite el documento",
+        body: "Factura, nota crédito o débito, o documento equivalente POS, firmado y enviado a la DIAN.",
+      },
+      {
+        title: "Queda trazado",
+        body: "El documento queda asociado al pedido, al cliente y a los reportes, y se concilia con el pago.",
+        modules: ["reportes", "contabilidad"],
+      },
+    ],
+  },
+  solutions: {
+    title: "Soluciones de facturación electrónica.",
+    lead: "Casos concretos para facturar ventas, devoluciones, POS y Siigo con la DIAN en Colombia.",
+  },
+  faqs: [
+    {
+      q: "¿Qué documentos electrónicos emite Binah?",
+      a: "Factura electrónica, notas crédito y débito, documento soporte y documento equivalente electrónico POS, con firma digital incluida. Cada documento queda asociado al pedido, al cliente y a los reportes.",
+    },
+    {
+      q: "¿Tengo que volver a digitar la venta para facturar?",
+      a: "No. La factura sale de la venta o el pedido: cliente, productos, impuestos, envío y medio de pago vienen de la operación. Una devolución genera la nota crédito y ajusta el inventario.",
+    },
+    {
+      q: "¿Binah se conecta con Siigo?",
+      a: "Sí. Configuramos el mapeo de datos, las facturas se generan desde los pedidos y un panel permite conciliar facturas y pagos y revisar anulaciones y recibos de caja. El alcance depende de los accesos, permisos y reglas contables de cada empresa.",
+    },
+    {
+      q: "¿Cuántos documentos electrónicos incluye mi plan?",
+      a: "El plan Business incluye un paquete de 20.000 documentos electrónicos al año directamente con nosotros. En la página de precios ves qué incluye cada plan, y si tu operación necesita otra cosa, lo revisamos contigo.",
+    },
+  ],
+  cta: {
+    eyebrow: "Facturación electrónica · Módulo 04",
+    heading: "Factura sin volver a digitar.",
+    lead: "Conectamos tus ventas, devoluciones y POS con la DIAN, y con Siigo si ya lo usas. Tú revisas y apruebas.",
+  },
+};
+---
+
+<ModulePage content={content}>
+  <InvoicingShot slot="shot" />
+</ModulePage>

@@ -1,0 +1,662 @@
+---
+// Product shot for /modulo-contabilidad: a purchase order proposed by the
+// Co-CEO waiting for approval, with the supplier's terms, the order lines,
+// the product's cost and margin, and what happens next in Binah. Same story
+// as the home (the vanilla protein selling 2× faster, 8 units left in
+// Medellín). Decorative and illustrative: the figure has a text alternative.
+import CoCeoAvatar from "../../binah/mascot/CoCeoAvatar.tsx";
+import AppWindow from "../AppWindow.astro";
+
+type Tone = "green" | "purple" | "amber" | "blue" | "gray";
+
+const orders: Array<{ id: string; supplier: string; meta: string; total: string; status: string; tone: Tone; selected?: boolean }> = [
+  { id: "OC-0318", supplier: "Nutrimax S.A.S.", meta: "Hoy", total: "$21.048.720", status: "Por aprobar", tone: "amber", selected: true },
+  { id: "OC-0317", supplier: "Empaques del Caribe", meta: "24 nov", total: "$2.380.000", status: "En recepción", tone: "blue" },
+  { id: "OC-0316", supplier: "Laboratorio Vital", meta: "21 nov", total: "$6.912.000", status: "Recibida", tone: "green" },
+  { id: "OC-0315", supplier: "Cartón & Co.", meta: "18 nov", total: "$1.100.000", status: "Pagada", tone: "gray" },
+  { id: "OC-0314", supplier: "Etiquetas Andinas", meta: "15 nov", total: "$845.000", status: "Pagada", tone: "gray" },
+];
+
+const steps = [
+  { label: "Solicitud", state: "done" },
+  { label: "Aprobación", state: "active" },
+  { label: "Recepción", state: "todo" },
+  { label: "Pago", state: "todo" },
+];
+
+const lines = [
+  { name: "Proteína vainilla 2 lb", sku: "PV-2LB", qty: "120", unit: "$118.400", total: "$14.208.000" },
+  { name: "Creatina 300 g", sku: "CR-300", qty: "60", unit: "$58.000", total: "$3.480.000" },
+];
+
+const next = [
+  { label: "Cotización del proveedor adjunta", done: true },
+  { label: "Recepción en bodega Medellín" },
+  { label: "Costo actualizado en el producto" },
+  { label: "Pago programado · 26 dic" },
+];
+---
+
+<AppWindow
+  url="app.binah.co/contabilidad/compras"
+  label="Ejemplo ilustrativo del módulo de Contabilidad de Binah: una orden de compra a un proveedor, propuesta por el Co-CEO porque un producto se agota más rápido, espera aprobación con sus condiciones, el costo y el margen del producto y los pasos siguientes."
+>
+  <div class="cnt-body">
+    <aside class="cnt-list">
+      <div class="cnt-list-head">
+        <strong>Órdenes de compra</strong>
+        <span class="cnt-count">1</span>
+      </div>
+      <div class="cnt-filters">
+        <span class="is-active">Todas</span>
+        <span>Por aprobar</span>
+        <span>Recibidas</span>
+      </div>
+      <ul>
+        {
+          orders.map((o) => (
+            <li class:list={["cnt-order", o.selected && "is-selected"]}>
+              <span class="cnt-order-top">
+                <b>{o.supplier}</b>
+                <span class="cnt-order-total">{o.total}</span>
+              </span>
+              <span class="cnt-order-bottom">
+                <span class="cnt-order-meta">
+                  <i>{o.id}</i> · {o.meta}
+                </span>
+                <span class={`cnt-pill is-${o.tone}`}>{o.status}</span>
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </aside>
+
+    <div class="cnt-main">
+      <div class="cnt-head">
+        <span class="cnt-head-who">
+          <b>OC-0318 · Nutrimax S.A.S.</b>
+          <span>NIT 901.284.556-3 · Crédito 30 días</span>
+        </span>
+        <span class="cnt-pill is-amber cnt-pill--lg">Por aprobar</span>
+      </div>
+
+      <div class="cnt-insight">
+        <span class="cnt-insight-tag"><CoCeoAvatar size={24} />Propuesta del Co-CEO</span>
+        <p>La proteína de vainilla se agota 2× más rápido que la semana pasada. Quedan 8 en Medellín.</p>
+      </div>
+
+      <ol class="cnt-steps">
+        {steps.map((s) => <li class={`is-${s.state}`}>{s.label}</li>)}
+      </ol>
+
+      <div class="cnt-table">
+        <div class="cnt-row cnt-row-head">
+          <span>Producto</span>
+          <span>Cant.</span>
+          <span class="cnt-col-unit">Costo unit.</span>
+          <span>Total</span>
+        </div>
+        {
+          lines.map((l) => (
+            <div class="cnt-row">
+              <span class="cnt-product">
+                <b>{l.name}</b>
+                <i>{l.sku}</i>
+              </span>
+              <span class="cnt-num">{l.qty}</span>
+              <span class="cnt-num cnt-col-unit">{l.unit}</span>
+              <span class="cnt-num">{l.total}</span>
+            </div>
+          ))
+        }
+        <div class="cnt-totals">
+          <span><em>Subtotal</em><b>$17.688.000</b></span>
+          <span><em>IVA 19 %</em><b>$3.360.720</b></span>
+          <span class="is-total"><em>Total</em><b>$21.048.720</b></span>
+        </div>
+      </div>
+
+      <div class="cnt-actions">
+        <span class="cnt-actions-note">Entrega en bodega Medellín</span>
+        <span class="cnt-btn">Ajustar</span>
+        <span class="cnt-btn is-primary">Aprobar orden</span>
+      </div>
+    </div>
+
+    <aside class="cnt-side">
+      <div class="cnt-section">
+        <span class="cnt-label">Costo y margen · PV-2LB</span>
+        <div class="cnt-kv"><span>Precio de venta</span><b>$189.900</b></div>
+        <div class="cnt-kv"><span>Costo</span><b>$118.400</b></div>
+        <div class="cnt-kv is-margin"><span>Margen por venta</span><b>37,7 %</b></div>
+        <span class="cnt-bar" aria-hidden="true"><i style="--w: 37.7%"></i></span>
+      </div>
+      <div class="cnt-section">
+        <span class="cnt-label">Proveedor</span>
+        <div class="cnt-supplier">
+          <span class="cnt-supplier-mark">NM</span>
+          <span>
+            <b>Nutrimax S.A.S.</b>
+            <em>12 órdenes en 2026</em>
+          </span>
+        </div>
+      </div>
+      <div class="cnt-section">
+        <span class="cnt-label">Siguiente en Binah</span>
+        <ul class="cnt-next">
+          {next.map((n) => <li class:list={[n.done && "is-done"]}>{n.label}</li>)}
+        </ul>
+      </div>
+    </aside>
+  </div>
+</AppWindow>
+
+<style>
+  .cnt-body {
+    display: grid;
+    grid-template-columns: 290px minmax(0, 1fr) 250px;
+    min-height: 470px;
+  }
+
+  /* Purchase orders list */
+  .cnt-list {
+    border-right: 1px solid #eeede8;
+    background: #fbfbf9;
+    padding: 16px 12px;
+    min-width: 0;
+  }
+  .cnt-list-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 6px;
+  }
+  .cnt-list-head strong {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .cnt-count {
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 1px 7px;
+    border-radius: 999px;
+    background: var(--hp-purple);
+    color: #fff;
+  }
+  .cnt-filters {
+    display: flex;
+    gap: 4px;
+    margin: 12px 0 10px;
+    padding: 0 2px;
+  }
+  .cnt-filters span {
+    padding: 4px 10px;
+    border-radius: 7px;
+    font-size: 11.5px;
+    color: var(--hp-mute);
+    white-space: nowrap;
+  }
+  .cnt-filters .is-active {
+    background: #fff;
+    color: var(--hp-ink);
+    font-weight: 500;
+    box-shadow: var(--hp-shadow-sm);
+    outline: 1px solid #ecebe6;
+  }
+  .cnt-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 2px;
+  }
+  .cnt-order {
+    display: grid;
+    gap: 5px;
+    padding: 10px 10px;
+    border-radius: 10px;
+  }
+  .cnt-order.is-selected {
+    background: #fff;
+    box-shadow: var(--hp-shadow-sm);
+    outline: 1px solid #e4e1fb;
+  }
+  .cnt-order-top,
+  .cnt-order-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-width: 0;
+  }
+  .cnt-order-top b {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .cnt-order-total {
+    flex-shrink: 0;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+  .cnt-order-meta {
+    min-width: 0;
+    font-size: 11.5px;
+    color: var(--hp-mute);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .cnt-order-meta i {
+    font-style: normal;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+  }
+
+  /* Status pills */
+  .cnt-pill {
+    flex-shrink: 0;
+    font-size: 10.5px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .cnt-pill--lg {
+    padding: 4px 11px;
+    font-size: 11.5px;
+  }
+  .cnt-pill.is-purple {
+    background: var(--hp-lavender);
+    color: #3a25d6;
+  }
+  .cnt-pill.is-green {
+    background: #e3f5ec;
+    color: #17734b;
+  }
+  .cnt-pill.is-blue {
+    background: #e5f0fb;
+    color: #1d5fa6;
+  }
+  .cnt-pill.is-amber {
+    background: #fbf0dc;
+    color: #8a5a0c;
+  }
+  .cnt-pill.is-gray {
+    background: #efeee9;
+    color: #5c5c56;
+  }
+
+  /* Purchase order */
+  .cnt-main {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+    padding: 16px 20px;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 100%, rgba(77, 55, 246, 0.04), transparent 70%),
+      #fff;
+  }
+  .cnt-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .cnt-head-who {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+  }
+  .cnt-head-who b {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .cnt-head-who span {
+    font-size: 11.5px;
+    color: var(--hp-mute);
+  }
+
+  .cnt-insight {
+    display: grid;
+    gap: 5px;
+    padding: 10px 13px;
+    border-radius: 10px;
+    border: 1px solid rgba(77, 55, 246, 0.2);
+    background: linear-gradient(90deg, rgba(77, 55, 246, 0.09), rgba(77, 55, 246, 0.02));
+  }
+  .cnt-insight-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--hp-purple);
+  }
+  .cnt-insight p {
+    margin: 0;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--hp-body);
+  }
+
+  .cnt-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+  }
+  .cnt-steps li {
+    display: grid;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--hp-mute);
+  }
+  .cnt-steps li::before {
+    content: "";
+    height: 4px;
+    border-radius: 999px;
+    background: #ecebe5;
+  }
+  .cnt-steps li.is-done::before {
+    background: #b9b0ff;
+  }
+  .cnt-steps li.is-active {
+    color: var(--hp-ink);
+    font-weight: 500;
+  }
+  .cnt-steps li.is-active::before {
+    background: var(--hp-purple);
+  }
+
+  .cnt-table {
+    border: 1px solid #eeede8;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .cnt-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) 0.5fr 0.9fr 1fr;
+    gap: 12px;
+    align-items: center;
+    padding: 8px 14px;
+  }
+  .cnt-row + .cnt-row {
+    border-top: 1px solid #f1f0eb;
+  }
+  .cnt-row-head {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background: #fbfbf9;
+    font-size: 11px;
+    color: var(--hp-mute);
+  }
+  .cnt-row-head span:not(:first-child) {
+    text-align: right;
+  }
+  .cnt-product {
+    display: grid;
+    gap: 1px;
+    min-width: 0;
+  }
+  .cnt-product b {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .cnt-product i {
+    font-style: normal;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--hp-mute);
+  }
+  .cnt-num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .cnt-totals {
+    display: grid;
+    gap: 4px;
+    padding: 9px 14px 10px;
+    border-top: 1px solid #eeede8;
+    background: #fbfbf9;
+  }
+  .cnt-totals span {
+    display: flex;
+    justify-content: flex-end;
+    gap: 24px;
+    color: var(--hp-mute);
+  }
+  .cnt-totals em {
+    font-style: normal;
+  }
+  .cnt-totals b {
+    min-width: 96px;
+    text-align: right;
+    font-weight: 500;
+    color: var(--hp-ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .cnt-totals .is-total {
+    color: var(--hp-ink);
+    font-weight: 600;
+  }
+  .cnt-totals .is-total b {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .cnt-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+  }
+  .cnt-actions-note {
+    margin-right: auto;
+    font-size: 11.5px;
+    color: var(--hp-mute);
+  }
+  .cnt-btn {
+    padding: 7px 13px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--hp-ink);
+    border: 1px solid #e3e2dc;
+    white-space: nowrap;
+  }
+  .cnt-btn.is-primary {
+    background: var(--hp-purple);
+    border-color: var(--hp-purple);
+    color: #fff;
+    box-shadow: 0 8px 20px -12px rgba(77, 55, 246, 0.9);
+  }
+
+  /* Cost, supplier and next steps */
+  .cnt-side {
+    border-left: 1px solid #eeede8;
+    padding: 16px;
+    display: grid;
+    align-content: start;
+    gap: 14px;
+    min-width: 0;
+  }
+  .cnt-section {
+    display: grid;
+    gap: 8px;
+  }
+  .cnt-section + .cnt-section {
+    padding-top: 14px;
+    border-top: 1px solid #f1f0eb;
+  }
+  .cnt-label {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hp-purple);
+  }
+  .cnt-kv {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    color: var(--hp-mute);
+  }
+  .cnt-kv b {
+    font-weight: 500;
+    color: var(--hp-ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .cnt-kv.is-margin {
+    color: var(--hp-ink);
+  }
+  .cnt-kv.is-margin b {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #17734b;
+  }
+  .cnt-bar {
+    display: block;
+    height: 6px;
+    border-radius: 999px;
+    background: #efeee9;
+    overflow: hidden;
+  }
+  .cnt-bar i {
+    display: block;
+    width: var(--w);
+    height: 100%;
+    border-radius: 999px;
+    background: #3fb37f;
+  }
+  .cnt-supplier {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .cnt-supplier-mark {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: 600;
+    color: #45453f;
+    background: #ecebe5;
+  }
+  .cnt-supplier > span:last-child {
+    display: grid;
+    gap: 1px;
+  }
+  .cnt-supplier b {
+    font-weight: 500;
+  }
+  .cnt-supplier em {
+    font-style: normal;
+    font-size: 11.5px;
+    color: var(--hp-mute);
+  }
+  .cnt-next {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 7px;
+  }
+  .cnt-next li {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--hp-mute);
+  }
+  .cnt-next li::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1.5px dashed #c9c8c1;
+  }
+  .cnt-next li.is-done {
+    color: var(--hp-ink);
+  }
+  .cnt-next li.is-done::before {
+    border: 0;
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2 7 10.5l4.5-5' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+        center / 12px no-repeat,
+      var(--hp-purple);
+  }
+
+  @media (max-width: 1100px) {
+    .cnt-body {
+      grid-template-columns: 270px minmax(0, 1fr);
+    }
+    .cnt-side {
+      display: none;
+    }
+  }
+
+  /* Phones: the purchase order alone, like the app on a phone. */
+  @media (max-width: 760px) {
+    .cnt-body {
+      grid-template-columns: minmax(0, 1fr);
+      min-height: 0;
+    }
+    .cnt-list {
+      display: none;
+    }
+    .cnt-main {
+      gap: 12px;
+      padding: 14px;
+    }
+    .cnt-head-who b {
+      font-size: 14px;
+    }
+    .cnt-head-who span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .cnt-col-unit {
+      display: none;
+    }
+    .cnt-row {
+      grid-template-columns: minmax(0, 1fr) 40px auto;
+      gap: 10px;
+      padding: 10px 12px;
+    }
+    .cnt-product i {
+      font-size: 11px;
+    }
+    .cnt-totals {
+      padding: 10px 12px 12px;
+    }
+    .cnt-totals span {
+      gap: 16px;
+    }
+    .cnt-actions-note {
+      display: none;
+    }
+    .cnt-actions {
+      justify-content: flex-end;
+    }
+    .cnt-pill,
+    .cnt-steps li {
+      font-size: 11px;
+    }
+  }
+</style>

@@ -1,0 +1,649 @@
+---
+// Product shot for /modulo-pagos: the payments list, one payment link paid
+// and reconciled with its order and electronic invoice, and the day's
+// collections by method. Same story as the home (Laura Gómez, pedido #4821,
+// $289.900, FE-10293). Decorative and illustrative: the figure has a text
+// alternative.
+import AppWindow from "../AppWindow.astro";
+
+type Tone = "green" | "purple" | "amber" | "blue" | "gray";
+
+const payments: Array<{ who: string; meta: string; total: string; status: string; tone: Tone; selected?: boolean }> = [
+  { who: "Laura Gómez", meta: "#4821 · Instagram · PSE", total: "$289.900", status: "Pagado", tone: "green", selected: true },
+  { who: "Clínica Sol", meta: "#4818 · Asesor · Link enviado", total: "$3.480.000", status: "Pendiente", tone: "amber" },
+  { who: "Juan Rendón", meta: "#4822 · WhatsApp · PSE", total: "$214.000", status: "En revisión", tone: "blue" },
+  { who: "Tienda Norte", meta: "#4820 · Tienda online · Tarjeta", total: "$1.240.000", status: "Pagado", tone: "green" },
+  { who: "Café Altura", meta: "Cobro recurrente · Nequi", total: "$450.000", status: "Pagado", tone: "green" },
+  { who: "Andrés Pérez", meta: "#4819 · WhatsApp · Nequi", total: "$96.500", status: "Pagado", tone: "green" },
+];
+
+const events = [
+  { title: "Link enviado por Instagram", meta: "Agente de ventas · 10:42" },
+  { title: "Pago recibido con PSE", meta: "10:44" },
+  { title: "Pedido #4821 pagado", meta: "10:44" },
+  { title: "FE-10293 aceptada por la DIAN", meta: "10:45" },
+];
+
+const methods = [
+  { label: "PSE", value: "42 %", w: 42 },
+  { label: "Nequi", value: "31 %", w: 31 },
+  { label: "Tarjeta", value: "27 %", w: 27 },
+];
+---
+
+<AppWindow
+  url="app.binah.co/pagos"
+  label="Ejemplo ilustrativo del módulo de Pagos de Binah: una lista de cobros pagados, pendientes y en revisión, un link de pago de $289.900 pagado con PSE y conciliado con su pedido y su factura electrónica, y los cobros del día por método de pago."
+>
+  <div class="pgs-body">
+    <aside class="pgs-list">
+      <div class="pgs-list-head">
+        <strong>Cobros</strong>
+        <span class="pgs-count">2</span>
+      </div>
+      <div class="pgs-filters">
+        <span class="is-active">Todos</span>
+        <span>Pendientes</span>
+        <span>En revisión</span>
+      </div>
+      <ul>
+        {
+          payments.map((p) => (
+            <li class:list={["pgs-item", p.selected && "is-selected"]}>
+              <span class="pgs-item-top">
+                <b>{p.who}</b>
+                <span class="pgs-item-total">{p.total}</span>
+              </span>
+              <span class="pgs-item-bottom">
+                <span class="pgs-item-meta">{p.meta}</span>
+                <span class={`pgs-pill is-${p.tone}`}>{p.status}</span>
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </aside>
+
+    <div class="pgs-main">
+      <div class="pgs-head">
+        <span class="pgs-head-who">
+          <b>Cobro · Pedido #4821</b>
+          <span>Laura Gómez · Instagram · Agente de ventas</span>
+        </span>
+        <span class="pgs-pill is-green pgs-pill--lg">Pagado</span>
+      </div>
+
+      <div class="pgs-link">
+        <div class="pgs-link-col">
+        <div class="pgs-link-card">
+          <span class="pgs-link-label">Link de pago · #4821</span>
+          <strong>$289.900</strong>
+          <span class="pgs-methods">
+            <i class="is-used">PSE</i>
+            <i>Tarjeta</i>
+            <i>Nequi</i>
+          </span>
+        </div>
+        <div class="pgs-history">
+          <span class="pgs-history-label">Historial de Laura Gómez</span>
+          <span class="pgs-history-row"><b>4 pagos</b><b>$1.046.500</b></span>
+          <span class="pgs-history-meta">Cliente desde 2025</span>
+        </div>
+        </div>
+        <ol class="pgs-events">
+          {
+            events.map((e) => (
+              <li>
+                <span class="pgs-event-mark" />
+                <span class="pgs-event-copy">
+                  <b>{e.title}</b>
+                  <em>{e.meta}</em>
+                </span>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+
+      <div class="pgs-match">
+        <span class="pgs-match-label">Conciliación automática</span>
+        <div class="pgs-match-row">
+          <span class="pgs-doc">
+            <em>Pago</em>
+            <b>$289.900</b>
+          </span>
+          <span class="pgs-link-icon" aria-hidden="true"></span>
+          <span class="pgs-doc">
+            <em>Pedido</em>
+            <b>#4821</b>
+          </span>
+          <span class="pgs-link-icon" aria-hidden="true"></span>
+          <span class="pgs-doc">
+            <em>Factura</em>
+            <b>FE-10293</b>
+          </span>
+        </div>
+        <span class="pgs-match-ok">✓ Conciliado</span>
+      </div>
+    </div>
+
+    <aside class="pgs-side">
+      <div class="pgs-section">
+        <span class="pgs-label">Cobrado hoy</span>
+        <span class="pgs-big">$12.418.500</span>
+        <span class="pgs-sub">84 cobros</span>
+      </div>
+      <div class="pgs-section">
+        <span class="pgs-label">Por método de pago</span>
+        <ul class="pgs-bars">
+          {
+            methods.map((m) => (
+              <li>
+                <span class="pgs-bar-top">
+                  <span>{m.label}</span>
+                  <b>{m.value}</b>
+                </span>
+                <span class="pgs-bar">
+                  <i style={`--w: ${m.w * 2}%`} />
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="pgs-section">
+        <span class="pgs-label">Cartera</span>
+        <div class="pgs-kv"><span>Pendiente</span><b>$3.480.000</b></div>
+        <div class="pgs-kv"><span>En revisión</span><b>$214.000</b></div>
+      </div>
+    </aside>
+  </div>
+</AppWindow>
+
+<style>
+  .pgs-body {
+    display: grid;
+    grid-template-columns: 290px minmax(0, 1fr) 240px;
+    min-height: 470px;
+  }
+
+  /* Payments list */
+  .pgs-list {
+    border-right: 1px solid #eeede8;
+    background: #fbfbf9;
+    padding: 16px 12px;
+    min-width: 0;
+  }
+  .pgs-list-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 6px;
+  }
+  .pgs-list-head strong {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .pgs-count {
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 1px 7px;
+    border-radius: 999px;
+    background: var(--hp-purple);
+    color: #fff;
+  }
+  .pgs-filters {
+    display: flex;
+    gap: 4px;
+    margin: 12px 0 10px;
+    padding: 0 2px;
+  }
+  .pgs-filters span {
+    padding: 4px 10px;
+    border-radius: 7px;
+    font-size: 11.5px;
+    color: var(--hp-mute);
+    white-space: nowrap;
+  }
+  .pgs-filters .is-active {
+    background: #fff;
+    color: var(--hp-ink);
+    font-weight: 500;
+    box-shadow: var(--hp-shadow-sm);
+    outline: 1px solid #ecebe6;
+  }
+  .pgs-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 2px;
+  }
+  .pgs-item {
+    display: grid;
+    gap: 4px;
+    padding: 9px 10px;
+    border-radius: 10px;
+  }
+  .pgs-item.is-selected {
+    background: #fff;
+    box-shadow: var(--hp-shadow-sm);
+    outline: 1px solid #e4e1fb;
+  }
+  .pgs-item-top,
+  .pgs-item-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-width: 0;
+  }
+  .pgs-item-top b {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .pgs-item-total {
+    flex-shrink: 0;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+  .pgs-item-meta {
+    min-width: 0;
+    font-size: 11.5px;
+    color: var(--hp-mute);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Status pills */
+  .pgs-pill {
+    flex-shrink: 0;
+    font-size: 10.5px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .pgs-pill--lg {
+    padding: 4px 11px;
+    font-size: 11.5px;
+  }
+  .pgs-pill.is-green {
+    background: #e3f5ec;
+    color: #17734b;
+  }
+  .pgs-pill.is-blue {
+    background: #e5f0fb;
+    color: #1d5fa6;
+  }
+  .pgs-pill.is-amber {
+    background: #fbf0dc;
+    color: #8a5a0c;
+  }
+  .pgs-pill.is-purple {
+    background: var(--hp-lavender);
+    color: #3a25d6;
+  }
+  .pgs-pill.is-gray {
+    background: #efeee9;
+    color: #5c5c56;
+  }
+
+  /* Payment detail */
+  .pgs-main {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+    padding: 16px 20px 18px;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 100%, rgba(77, 55, 246, 0.05), transparent 70%),
+      #fff;
+  }
+  .pgs-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .pgs-head-who {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+  }
+  .pgs-head-who b {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .pgs-head-who span {
+    font-size: 11.5px;
+    color: var(--hp-mute);
+  }
+
+  .pgs-link {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 18px;
+    align-items: start;
+  }
+  .pgs-link-col {
+    display: grid;
+    gap: 10px;
+    min-width: 0;
+  }
+  .pgs-history {
+    display: grid;
+    gap: 3px;
+    padding: 11px 14px;
+    border-radius: 12px;
+    border: 1px solid #eeede8;
+  }
+  .pgs-history-label {
+    font-size: 11px;
+    color: var(--hp-mute);
+  }
+  .pgs-history-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .pgs-history-row b {
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  .pgs-history-meta {
+    font-size: 11px;
+    color: var(--hp-mute);
+  }
+  .pgs-link-card {
+    display: grid;
+    gap: 6px;
+    padding: 16px;
+    border-radius: 14px;
+    background: var(--hp-purple);
+    color: #fff;
+    box-shadow: 0 16px 32px -18px rgba(77, 55, 246, 0.9);
+  }
+  .pgs-link-label {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.74);
+  }
+  .pgs-link-card strong {
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+  }
+  .pgs-methods {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 2px;
+  }
+  .pgs-methods i {
+    font-style: normal;
+    font-size: 10.5px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .pgs-methods i.is-used {
+    background: #fff;
+    border-color: #fff;
+    color: var(--hp-purple);
+    font-weight: 600;
+  }
+
+  .pgs-events {
+    list-style: none;
+    margin: 0;
+    padding: 2px 0 0;
+    display: grid;
+    gap: 0;
+  }
+  .pgs-events li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 16px minmax(0, 1fr);
+    gap: 10px;
+    padding-bottom: 12px;
+  }
+  .pgs-events li:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    left: 7px;
+    top: 17px;
+    bottom: 1px;
+    width: 1.5px;
+    background: #e4e1fb;
+  }
+  .pgs-event-mark {
+    width: 16px;
+    height: 16px;
+    margin-top: 1px;
+    border-radius: 50%;
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2 7 10.5l4.5-5' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+        center / 12px no-repeat,
+      var(--hp-purple);
+  }
+  .pgs-event-copy {
+    display: grid;
+    gap: 1px;
+    min-width: 0;
+  }
+  .pgs-event-copy b {
+    font-weight: 500;
+  }
+  .pgs-event-copy em {
+    font-style: normal;
+    font-size: 11.5px;
+    color: var(--hp-mute);
+  }
+
+  .pgs-match {
+    display: grid;
+    gap: 10px;
+    margin-top: auto;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid #eeede8;
+    background: #fbfbf9;
+  }
+  .pgs-match-label {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hp-purple);
+  }
+  .pgs-match-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 22px minmax(0, 1fr) 22px minmax(0, 1fr);
+    align-items: center;
+    gap: 6px;
+  }
+  .pgs-doc {
+    display: grid;
+    gap: 1px;
+    min-width: 0;
+    padding: 8px 10px;
+    border-radius: 9px;
+    background: #fff;
+    border: 1px solid #ebeae4;
+  }
+  .pgs-doc em {
+    font-style: normal;
+    font-size: 11px;
+    color: var(--hp-mute);
+  }
+  .pgs-doc b {
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-variant-numeric: tabular-nums;
+  }
+  .pgs-link-icon {
+    height: 1.5px;
+    background: linear-gradient(90deg, #b9b0ff, var(--hp-purple));
+  }
+  .pgs-match-ok {
+    justify-self: start;
+    padding: 4px 11px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #17734b;
+    background: #e3f5ec;
+  }
+
+  /* Day summary */
+  .pgs-side {
+    border-left: 1px solid #eeede8;
+    padding: 16px;
+    display: grid;
+    align-content: start;
+    gap: 14px;
+    min-width: 0;
+  }
+  .pgs-section {
+    display: grid;
+    gap: 8px;
+  }
+  .pgs-section + .pgs-section {
+    padding-top: 14px;
+    border-top: 1px solid #f1f0eb;
+  }
+  .pgs-label {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hp-purple);
+  }
+  .pgs-big {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+  }
+  .pgs-sub {
+    margin-top: -4px;
+    font-size: 11.5px;
+    color: var(--hp-mute);
+  }
+  .pgs-bars {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 9px;
+  }
+  .pgs-bars li {
+    display: grid;
+    gap: 5px;
+  }
+  .pgs-bar-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    color: var(--hp-body);
+  }
+  .pgs-bar-top b {
+    font-weight: 500;
+    color: var(--hp-ink);
+  }
+  .pgs-bar {
+    display: block;
+    height: 6px;
+    border-radius: 999px;
+    background: #f1f0eb;
+    overflow: hidden;
+  }
+  .pgs-bar i {
+    display: block;
+    width: var(--w);
+    height: 100%;
+    border-radius: 999px;
+    background: #b9b0ff;
+  }
+  .pgs-bars li:first-child .pgs-bar i {
+    background: var(--hp-purple);
+  }
+  .pgs-kv {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    color: var(--hp-mute);
+  }
+  .pgs-kv b {
+    font-weight: 500;
+    color: var(--hp-ink);
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (max-width: 1100px) {
+    .pgs-body {
+      grid-template-columns: 270px minmax(0, 1fr);
+    }
+    .pgs-side {
+      display: none;
+    }
+  }
+
+  /* Phones: the payment alone, like the app on a phone. */
+  @media (max-width: 760px) {
+    .pgs-body {
+      grid-template-columns: minmax(0, 1fr);
+      min-height: 0;
+    }
+    .pgs-list {
+      display: none;
+    }
+    .pgs-main {
+      gap: 14px;
+      padding: 14px;
+    }
+    .pgs-head-who b {
+      font-size: 14px;
+    }
+    .pgs-head-who span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pgs-link {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 14px;
+    }
+    .pgs-events li {
+      padding-bottom: 10px;
+    }
+    .pgs-history {
+      display: none;
+    }
+    .pgs-match {
+      padding: 12px;
+    }
+    .pgs-match-row {
+      grid-template-columns: minmax(0, 1fr) 10px minmax(0, 1fr) 10px minmax(0, 1fr);
+      gap: 4px;
+    }
+    .pgs-doc {
+      padding: 7px 8px;
+    }
+    .pgs-pill {
+      font-size: 11px;
+    }
+  }
+</style>

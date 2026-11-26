@@ -1,0 +1,759 @@
+---
+// Product shot for /modulo-retail: the order list from every channel and one
+// order on its way out: units reserved in the Barranquilla warehouse, packed,
+// the Coordinadora label created and the customer notified. The side panel
+// shows stock per warehouse and who did what (a person, the AI or the
+// system). Same story as the home hero (Laura Gómez, pedido #4821, SKU
+// PV-2LB). Decorative and illustrative: the figure has a text alternative.
+import AppWindow from "../AppWindow.astro";
+
+type Tone = "purple" | "green" | "blue" | "amber" | "gray";
+
+const orders: Array<{
+  id: string;
+  customer: string;
+  channel: string;
+  total: string;
+  status: string;
+  tone: Tone;
+  selected?: boolean;
+}> = [
+  { id: "#4821", customer: "Laura Gómez", channel: "Instagram", total: "$289.900", status: "Empacado", tone: "purple", selected: true },
+  { id: "#4820", customer: "Tienda Norte", channel: "Tienda online", total: "$1.240.000", status: "Pagado", tone: "green" },
+  { id: "#4819", customer: "Andrés Pérez", channel: "WhatsApp", total: "$96.500", status: "En ruta", tone: "blue" },
+  { id: "#4818", customer: "Clínica Sol", channel: "Asesor", total: "$3.480.000", status: "Preparando", tone: "amber" },
+  { id: "#4817", customer: "Mariana Ruiz", channel: "Chat web", total: "$158.000", status: "Entregado", tone: "gray" },
+  { id: "#4816", customer: "Venta de mostrador", channel: "POS", total: "$64.000", status: "Entregado", tone: "gray" },
+];
+
+const steps = [
+  { label: "Recibido", time: "10:42", state: "done" },
+  { label: "Empacado", time: "11:05", state: "done" },
+  { label: "En ruta", time: "Coordinadora", state: "next" },
+  { label: "Entregado", time: "", state: "next" },
+];
+
+const lines = [
+  { name: "Proteína vainilla 2 lb", sku: "PV-2LB", qty: 1, total: "$189.900" },
+  { name: "Creatina 300 g", sku: "CR-300", qty: 1, total: "$100.000" },
+];
+
+const stock = [
+  { city: "Barranquilla", units: 72, width: 72 },
+  { city: "Bogotá", units: 45, width: 45 },
+  { city: "Medellín", units: 8, width: 12, low: true },
+];
+
+const history: Array<{ time: string; text: string; by: string; kind: "ai" | "system" | "person" }> = [
+  { time: "10:42", text: "Creó el pedido", by: "IA", kind: "ai" },
+  { time: "10:43", text: "Reservó inventario", by: "Sistema", kind: "system" },
+  { time: "11:05", text: "Marcó empacado", by: "Carlos", kind: "person" },
+  { time: "11:06", text: "Creó la guía", by: "Sistema", kind: "system" },
+];
+---
+
+<AppWindow
+  url="app.binah.co/ventas/pedidos"
+  label="Ejemplo ilustrativo del módulo de Ventas de Binah: pedidos de Instagram, tienda online, WhatsApp, asesores, chat web y POS, y un pedido con inventario reservado en bodega, empacado, guía de Coordinadora creada y cliente notificado, junto al stock por bodega y el historial de quién hizo cada paso."
+>
+  <div class="ven-body">
+    <aside class="ven-list">
+      <div class="ven-list-head">
+        <strong>Pedidos</strong>
+        <span class="ven-count">86</span>
+      </div>
+      <div class="ven-filters">
+        <span class="is-active">Todos</span>
+        <span>Por despachar</span>
+        <span>En ruta</span>
+      </div>
+      <ul>
+        {
+          orders.map((o) => (
+            <li class:list={["ven-ord", o.selected && "is-selected"]}>
+              <span class="ven-ord-top">
+                <b>{o.customer}</b>
+                <span class="ven-ord-total">{o.total}</span>
+              </span>
+              <span class="ven-ord-bottom">
+                <span class="ven-ord-id">{o.id}</span>
+                <span class="ven-ord-channel">{o.channel}</span>
+                <span class={`ven-pill is-${o.tone}`}>{o.status}</span>
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </aside>
+
+    <div class="ven-main">
+      <div class="ven-head">
+        <div class="ven-head-copy">
+          <span class="ven-crumb">Ventas · Pedidos</span>
+          <span class="ven-title">
+            <strong>Pedido #4821</strong>
+            <span class="ven-pill is-purple">Empacado</span>
+          </span>
+          <span class="ven-head-meta">Laura Gómez · Instagram · Agente de ventas</span>
+        </div>
+        <span class="ven-btn">Imprimir rótulo</span>
+      </div>
+
+      <ol class="ven-steps">
+        {
+          steps.map((s) => (
+            <li class={`is-${s.state}`}>
+              <span class="ven-step-mark" />
+              <b>{s.label}</b>
+              {s.time && <em>{s.time}</em>}
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="ven-lines">
+        <div class="ven-line ven-line-head">
+          <span>Producto</span>
+          <span>Inventario</span>
+          <span>Cant.</span>
+          <span>Valor</span>
+        </div>
+        {
+          lines.map((l) => (
+            <div class="ven-line">
+              <span class="ven-line-product">
+                <b>{l.name}</b>
+                <em>
+                  SKU {l.sku}<span class="ven-line-store"> · Barranquilla</span>
+                </em>
+              </span>
+              <span>
+                <span class="ven-pill is-green">Reservado</span>
+              </span>
+              <span class="ven-line-qty">{l.qty}</span>
+              <span class="ven-line-total">{l.total}</span>
+            </div>
+          ))
+        }
+        <div class="ven-line ven-line-sum">
+          <span>Total</span>
+          <span class="ven-line-total">$289.900</span>
+        </div>
+      </div>
+
+      <div class="ven-cards">
+        <div class="ven-card">
+          <span class="ven-card-label">Despacho</span>
+          <span class="ven-card-row">
+            <b>Coordinadora</b>
+            <span class="ven-pill is-purple">Guía creada</span>
+          </span>
+          <span class="ven-mono">Guía 7340 2219 885</span>
+        </div>
+        <div class="ven-card">
+          <span class="ven-card-label">Aviso al cliente</span>
+          <span class="ven-card-row">
+            <b>«Tu pedido #4821 ya está empacado»</b>
+          </span>
+          <span class="ven-sent"><span aria-hidden="true">✓</span> Enviado por WhatsApp · 11:06</span>
+        </div>
+      </div>
+    </div>
+
+    <aside class="ven-side">
+      <div class="ven-section">
+        <span class="ven-label">Inventario · PV-2LB</span>
+        <ul class="ven-stock">
+          {
+            stock.map((s) => (
+              <li class:list={[s.low && "is-low"]}>
+                <span>{s.city}</span>
+                <i style={`--w: ${s.width}%`} />
+                <b>{s.units}</b>
+              </li>
+            ))
+          }
+        </ul>
+        <span class="ven-note">1 unidad reservada para el pedido #4821</span>
+      </div>
+      <div class="ven-section">
+        <span class="ven-label">Historial del pedido</span>
+        <ul class="ven-history">
+          {
+            history.map((h) => (
+              <li>
+                <time>{h.time}</time>
+                <span>{h.text}</span>
+                <span class={`ven-by is-${h.kind}`}>{h.by}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="ven-section">
+        <span class="ven-label">Siguiente en Binah</span>
+        <ul class="ven-next">
+          <li class="is-done">Factura electrónica emitida</li>
+          <li class="is-done">Cobro confirmado · PSE</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</AppWindow>
+
+<style>
+  .ven-body {
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr) 250px;
+    min-height: 488px;
+  }
+
+  /* Status pills (same tones as the home mock) */
+  .ven-pill {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    font-size: 10.5px;
+    font-weight: 500;
+    line-height: 1.4;
+    padding: 2px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .is-purple {
+    background: var(--hp-lavender);
+    color: #3a25d6;
+  }
+  .is-green {
+    background: #e3f5ec;
+    color: #17734b;
+  }
+  .is-blue {
+    background: #e5f0fb;
+    color: #1d5fa6;
+  }
+  .is-amber {
+    background: #fbf0dc;
+    color: #8a5a0c;
+  }
+  .is-gray {
+    background: #efeee9;
+    color: #5c5c56;
+  }
+
+  /* Order list */
+  .ven-list {
+    border-right: 1px solid #eeede8;
+    background: #fbfbf9;
+    padding: 16px 12px;
+    min-width: 0;
+  }
+  .ven-list-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 6px;
+  }
+  .ven-list-head strong {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .ven-count {
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 1px 7px;
+    border-radius: 999px;
+    background: var(--hp-purple);
+    color: #fff;
+  }
+  .ven-filters {
+    display: flex;
+    gap: 4px;
+    margin: 12px 0 10px;
+    padding: 0 2px;
+  }
+  .ven-filters span {
+    padding: 4px 10px;
+    border-radius: 7px;
+    font-size: 11.5px;
+    color: var(--hp-mute);
+    white-space: nowrap;
+  }
+  .ven-filters .is-active {
+    background: #fff;
+    color: var(--hp-ink);
+    font-weight: 500;
+    box-shadow: var(--hp-shadow-sm);
+    outline: 1px solid #ecebe6;
+  }
+  .ven-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 2px;
+  }
+  .ven-ord {
+    display: grid;
+    gap: 5px;
+    padding: 9px 10px;
+    border-radius: 10px;
+    min-width: 0;
+  }
+  .ven-ord.is-selected {
+    background: #fff;
+    box-shadow: var(--hp-shadow-sm);
+    outline: 1px solid #e4e1fb;
+  }
+  .ven-ord-top,
+  .ven-ord-bottom {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+  .ven-ord-top {
+    justify-content: space-between;
+  }
+  .ven-ord-top b {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ven-ord-total {
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .ven-ord-id {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--hp-mute);
+  }
+  .ven-ord-channel {
+    min-width: 0;
+    font-size: 11.5px;
+    color: var(--hp-mute);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ven-ord-bottom .ven-pill {
+    margin-left: auto;
+  }
+
+  /* Open order */
+  .ven-main {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+    padding: 16px 20px 18px;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 100%, rgba(77, 55, 246, 0.05), transparent 70%),
+      #fff;
+  }
+  .ven-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .ven-head-copy {
+    display: grid;
+    gap: 3px;
+    min-width: 0;
+  }
+  .ven-crumb {
+    font-size: 11px;
+    color: var(--hp-mute);
+  }
+  .ven-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ven-title strong {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .ven-head-meta {
+    font-size: 11.5px;
+    color: var(--hp-mute);
+  }
+  .ven-btn {
+    flex-shrink: 0;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--hp-ink);
+    border: 1px solid #e3e2dc;
+    white-space: nowrap;
+  }
+
+  /* Order status stepper */
+  .ven-steps {
+    list-style: none;
+    margin: 0;
+    padding: 12px 14px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-radius: 10px;
+    border: 1px solid #eeede8;
+    background: #fbfbf9;
+  }
+  .ven-steps li {
+    position: relative;
+    display: grid;
+    align-content: start;
+    justify-items: start;
+    gap: 2px;
+    min-width: 0;
+  }
+  .ven-steps li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 24px;
+    right: 8px;
+    top: 8px;
+    height: 2px;
+    border-radius: 2px;
+    background: repeating-linear-gradient(90deg, #d6d5ce 0 4px, transparent 4px 8px);
+  }
+  .ven-steps li.is-done:has(+ li.is-done)::after {
+    background: #b9b0ff;
+  }
+  .ven-step-mark {
+    width: 18px;
+    height: 18px;
+    margin-bottom: 6px;
+    border-radius: 50%;
+  }
+  .ven-steps li.is-done .ven-step-mark {
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2 7 10.5l4.5-5' fill='none' stroke='white' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+        center / 13px no-repeat,
+      var(--hp-purple);
+  }
+  .ven-steps li.is-next .ven-step-mark {
+    border: 1.5px dashed #c9c8c1;
+    background: #fff;
+  }
+  .ven-steps b {
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .ven-steps em {
+    font-style: normal;
+    font-size: 11px;
+    color: var(--hp-mute);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+  .ven-steps li.is-next b {
+    color: #8a8a83;
+  }
+
+  /* Order lines */
+  .ven-lines {
+    border: 1px solid #eeede8;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .ven-line {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 86px 40px 78px;
+    gap: 10px;
+    align-items: center;
+    padding: 8px 12px;
+    border-top: 1px solid #f1f0eb;
+  }
+  .ven-line-head {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border-top: 0;
+    background: #fbfbf9;
+    font-size: 10.5px;
+    color: var(--hp-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .ven-line-head > :nth-child(3),
+  .ven-line-head > :nth-child(4),
+  .ven-line-qty,
+  .ven-line-total {
+    text-align: right;
+  }
+  .ven-line-product {
+    display: grid;
+    gap: 1px;
+    min-width: 0;
+  }
+  .ven-line-product b {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ven-line-product em {
+    font-style: normal;
+    font-size: 11px;
+    color: var(--hp-mute);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ven-line-total,
+  .ven-line-qty {
+    font-variant-numeric: tabular-nums;
+  }
+  .ven-line-sum {
+    grid-template-columns: minmax(0, 1fr) auto;
+    font-weight: 600;
+    background: #fbfbf9;
+  }
+
+  /* Dispatch and customer notice */
+  .ven-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .ven-card {
+    display: grid;
+    align-content: start;
+    gap: 5px;
+    min-width: 0;
+    padding: 11px 12px;
+    border-radius: 10px;
+    border: 1px solid #eeede8;
+  }
+  .ven-card-label {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hp-purple);
+  }
+  .ven-card-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-width: 0;
+  }
+  .ven-card-row b {
+    font-weight: 500;
+    min-width: 0;
+  }
+  .ven-mono {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--hp-mute);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ven-sent {
+    font-size: 11px;
+    font-weight: 500;
+    color: #17734b;
+  }
+
+  /* Side panel: stock and history */
+  .ven-side {
+    border-left: 1px solid #eeede8;
+    padding: 16px;
+    display: grid;
+    align-content: start;
+    gap: 14px;
+    min-width: 0;
+  }
+  .ven-section {
+    display: grid;
+    gap: 9px;
+    min-width: 0;
+  }
+  .ven-section + .ven-section {
+    padding-top: 14px;
+    border-top: 1px solid #f1f0eb;
+  }
+  .ven-label {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hp-purple);
+  }
+  .ven-stock {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 7px;
+  }
+  .ven-stock li {
+    display: grid;
+    grid-template-columns: 78px minmax(0, 1fr) 22px;
+    align-items: center;
+    gap: 8px;
+    font-size: 11.5px;
+    color: var(--hp-body);
+  }
+  .ven-stock i {
+    height: 7px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--hp-purple) var(--w), #efeee9 var(--w));
+  }
+  .ven-stock b {
+    text-align: right;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+  .ven-stock li.is-low i {
+    background: linear-gradient(90deg, #d98a14 var(--w), #efeee9 var(--w));
+  }
+  .ven-stock li.is-low b {
+    color: #a3620a;
+  }
+  .ven-note {
+    font-size: 11px;
+    color: var(--hp-mute);
+  }
+  .ven-history {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 7px;
+  }
+  .ven-history li {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px;
+    font-size: 11.5px;
+  }
+  .ven-history time {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--hp-mute);
+  }
+  .ven-history li > span:not(.ven-by) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ven-by {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 1px 7px;
+    border-radius: 999px;
+  }
+  .ven-by.is-ai {
+    background: var(--hp-lavender);
+    color: #3a25d6;
+  }
+  .ven-by.is-system {
+    background: #efeee9;
+    color: #5c5c56;
+  }
+  .ven-by.is-person {
+    background: #e3f5ec;
+    color: #17734b;
+  }
+  .ven-next {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 7px;
+  }
+  .ven-next li {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 12px;
+  }
+  .ven-next li::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2 7 10.5l4.5-5' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+        center / 12px no-repeat,
+      var(--hp-purple);
+  }
+
+  @media (max-width: 1100px) {
+    .ven-body {
+      grid-template-columns: 270px minmax(0, 1fr);
+    }
+    .ven-side {
+      display: none;
+    }
+  }
+
+  /* Phones: the open order alone, like the app on a phone. */
+  @media (max-width: 760px) {
+    .ven-body {
+      grid-template-columns: minmax(0, 1fr);
+      min-height: 0;
+    }
+    .ven-list {
+      display: none;
+    }
+    .ven-main {
+      gap: 14px;
+      padding: 14px;
+    }
+    .ven-steps {
+      padding: 12px;
+    }
+    .ven-steps li:not(:last-child)::after {
+      left: 22px;
+      right: 4px;
+    }
+    .ven-line {
+      grid-template-columns: minmax(0, 1fr) auto 72px;
+    }
+    .ven-line > :nth-child(3),
+    .ven-line-store {
+      display: none;
+    }
+    .ven-line-product b {
+      white-space: normal;
+    }
+    .ven-line-sum {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+    .ven-cards {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .ven-pill,
+    .ven-line-head {
+      font-size: 11px;
+    }
+    .ven-card-label {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+    }
+    .ven-mono {
+      font-size: 11px;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .ven-btn,
+    .ven-steps li.is-next em {
+      display: none;
+    }
+  }
+</style>

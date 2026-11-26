@@ -1,0 +1,179 @@
+---
+import ModulePage from "../components/modules/ModulePage.astro";
+import PaymentsShot from "../components/modules/shots/PaymentsShot.astro";
+import type { ModuleContent } from "../components/modules/types";
+import { WA_MESSAGES } from "../components/binah/whatsapp";
+
+const content: ModuleContent = {
+  id: "invoice",
+  path: "/modulo-pagos",
+  seo: {
+    title: "Pagos — Binah",
+    description: "Links de pago, cobros recurrentes y conciliación automática con tu facturación electrónica.",
+  },
+  demoMessage: WA_MESSAGES.modulePagos,
+  hero: {
+    crumb: "Pagos",
+    eyebrow: "Módulo 09 · Pagos",
+    title: "Cobra en segundos",
+    accent: "por cualquier canal.",
+    lead: "Envía links de pago desde el CRM o la conversación, por WhatsApp, Instagram, correo o chat web. Tu cliente paga con PSE, tarjeta o Nequi, y el cobro se concilia con el pedido y la factura electrónica.",
+  },
+  features: {
+    label: "Cobros conectados",
+    title: "Links de pago.",
+    soft: "Cobros conciliados.",
+    lead: "El pago no queda como un pantallazo en un chat: queda asociado al cliente, el pedido, el canal, el vendedor y la factura.",
+    items: [
+      {
+        icon: { icon: "link" },
+        title: "Links de pago",
+        body: "Créalos desde el CRM o la conversación y envíalos por WhatsApp u otro canal. El agente de ventas también los envía.",
+        link: { label: "Ver links de pago", href: "/links-de-pago-whatsapp-colombia" },
+      },
+      {
+        icon: { icon: "card" },
+        title: "PSE, tarjetas y Nequi",
+        body: "Tu cliente paga con el método que prefiere, a través de pasarelas como Wompi y ePayco.",
+      },
+      {
+        icon: { icon: "repeat" },
+        title: "Cobros recurrentes",
+        body: "Cobra de forma recurrente a los clientes que pagan cada periodo, con el mismo seguimiento que un cobro único.",
+      },
+      {
+        icon: { icon: "bell" },
+        title: "Estado de cada pago",
+        body: "Pagado, pendiente o en revisión: el estado vuelve a la operación y todo el equipo lo ve.",
+      },
+      {
+        icon: { icon: "documentCheck" },
+        title: "Conciliación automática",
+        body: "Cada cobro se cruza con el cliente, el pedido y la factura electrónica que le corresponden.",
+        link: { label: "Ver conciliación", href: "/conciliacion-pagos-facturas-colombia" },
+      },
+      {
+        icon: { icon: "wallet" },
+        title: "Cartera e historial",
+        body: "Reporte de cartera e historial de pagos por cliente, sin buscar comprobantes en chats ni en hojas de cálculo.",
+      },
+    ],
+    notes: [
+      { title: "Reportes por canal, vendedor y método", body: "Sabes qué canal, qué vendedor y qué método de pago trae cada cobro." },
+      { title: "Visible para todo el equipo", body: "Ventas, bodega y finanzas ven el mismo estado, sin pedir confirmaciones por chat." },
+      { title: "Cierre sin descuadres", body: "Los reportes financieros reflejan lo que de verdad se cobró." },
+    ],
+  },
+  highlight: {
+    label: "Cobro automático",
+    title: "Cobra en el chat. Binah concilia.",
+    lead: "El agente de ventas envía el link en la misma conversación, el estado del pago vuelve a la operación y el cobro se cruza con el pedido y la factura electrónica.",
+    cards: [
+      {
+        kicker: "Agente de ventas",
+        name: "Cobra en el chat",
+        status: "En línea",
+        body: "Confirma producto, valor y datos del cliente, envía el link de pago en la misma conversación y registra el pedido.",
+        visual: {
+          type: "chat",
+          in: "Dale, ¿cómo te pago?",
+          out: "Te envío el link de pago por $289.900.",
+          result: "Pagado · Pedido #4821",
+        },
+        points: ["Link de pago en la misma conversación", "Pedido registrado con el cobro", "Escala a tu equipo cuando hace falta"],
+        link: { label: "Agente de ventas", href: "/agente-ia-ventas-whatsapp" },
+      },
+      {
+        kicker: "Estados",
+        name: "Pagos visibles",
+        body: "El estado de cada cobro vuelve al pedido. Ventas, bodega y finanzas ven lo mismo, sin pedir comprobantes por chat.",
+        visual: {
+          type: "rows",
+          title: "Cobros de hoy",
+          rows: [
+            { label: "#4821 · Laura Gómez", value: "Pagado", tone: "green" },
+            { label: "#4818 · Clínica Sol", value: "Pendiente", tone: "amber" },
+            { label: "#4822 · Juan Rendón", value: "En revisión", tone: "blue" },
+          ],
+        },
+        points: ["Pagado, pendiente o en revisión", "Historial de pagos por cliente", "Reporte de cartera"],
+        link: { label: "Links de pago", href: "/links-de-pago-whatsapp-colombia" },
+      },
+      {
+        kicker: "Conciliación",
+        name: "Cobro, pedido y factura",
+        body: "Binah cruza cada cobro con el cliente, el pedido y la factura electrónica. Los reportes financieros reflejan lo que de verdad entró.",
+        visual: {
+          type: "rows",
+          title: "Pedido #4821",
+          rows: [
+            { label: "Pago PSE · $289.900", value: "Recibido", tone: "green" },
+            { label: "Factura FE-10293", value: "Aceptada DIAN", tone: "purple" },
+          ],
+          result: "Conciliado automáticamente",
+        },
+        points: ["Conciliación automática", "Cruce con la factura electrónica", "Reportes por canal, vendedor y método"],
+        link: { label: "Conciliación de pagos", href: "/conciliacion-pagos-facturas-colombia" },
+      },
+    ],
+  },
+  flow: {
+    label: "Del chat al cierre",
+    title: "De la cotización",
+    soft: "a la conciliación.",
+    lead: "El cobro no es un paso suelto: nace en la conversación, actualiza el pedido y termina en la factura y el reporte.",
+    steps: [
+      {
+        title: "Cotización",
+        body: "El asesor o el agente de ventas confirma producto, valor y datos del cliente.",
+        modules: ["crm"],
+      },
+      {
+        title: "Link de pago",
+        body: "Se envía por el mismo canal y el cliente paga con PSE, tarjeta o Nequi.",
+      },
+      {
+        title: "Confirmación",
+        body: "El estado del pago vuelve a la operación y el pedido sigue su curso.",
+        modules: ["retail"],
+      },
+      {
+        title: "Conciliación",
+        body: "El cobro se cruza con el pedido, la factura electrónica y los reportes.",
+        modules: ["facturacion", "reportes"],
+      },
+    ],
+  },
+  solutions: {
+    title: "Soluciones de pagos y cobros.",
+    lead: "Casos concretos para cobrar en el chat y cuadrar pagos con pedidos y facturas en Colombia.",
+  },
+  faqs: [
+    {
+      q: "¿Con qué métodos pueden pagar mis clientes?",
+      a: "Con PSE, tarjetas y Nequi, desde el link de pago que reciben. Binah trabaja con pasarelas como Wompi y ePayco.",
+    },
+    {
+      q: "¿Puedo enviar links de pago por WhatsApp?",
+      a: "Sí, por WhatsApp o por cualquier otro canal conectado, desde el CRM o desde la misma conversación. El agente de ventas también puede enviarlos cuando el cliente está listo para pagar.",
+    },
+    {
+      q: "¿Cómo funciona la conciliación automática?",
+      a: "Cada cobro queda asociado al cliente, el pedido y la factura electrónica. El equipo ve si está pagado, pendiente o en revisión, y los reportes financieros reflejan lo que se cobró.",
+    },
+    {
+      q: "¿El equipo de Binah ayuda con la configuración?",
+      a: "Sí. Te ayudamos a conectar tus medios de pago y a migrar tus clientes y pedidos para que empieces a cobrar con tus datos reales.",
+    },
+  ],
+  cta: {
+    eyebrow: "Pagos · Módulo 09",
+    heading: "Cobra donde ya vendes.",
+    lead: "Te mostramos cómo se envía un link de pago y cómo cada cobro se concilia con el pedido y la factura electrónica.",
+  },
+};
+---
+
+<ModulePage content={content}>
+  <PaymentsShot slot="shot" />
+</ModulePage>
